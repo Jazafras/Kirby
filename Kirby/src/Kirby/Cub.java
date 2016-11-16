@@ -1,4 +1,4 @@
-package Tigress;
+package Kirby;
 
 import java.util.LinkedList;
 import java.util.Map;

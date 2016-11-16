@@ -1,4 +1,4 @@
-package Tigress;
+package Kirby;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,29 +23,29 @@ public class TigressGame extends StateBasedGame {
 	public static final int GAMEOVERSTATE = 2;
 	
 	// background
-	public static final String BACKGROUND_IMG_RSC = "Tigress/resources/background.png";
-	public static final String STARTUP_IMG_RSC = "Tigress/resources/startup.png";
+	public static final String BACKGROUND_IMG_RSC = "Kirby/resources/background.png";
+	public static final String STARTUP_IMG_RSC = "Kirby/resources/startup.png";
 	
 	// all entity images used in game
-	public static final String TIGRESS_LEFTIMG_RSC = "Tigress/resources/tigress-left.png";
-	public static final String TIGRESS_RIGHTIMG_RSC = "Tigress/resources/tigress-right.png";
-	public static final String TIGRESS_FRONTIMG_RSC = "Tigress/resources/tigress-front.png";
-	public static final String TIGRESS_BACKIMG_RSC = "Tigress/resources/tigress-back.png";
+	public static final String TIGRESS_LEFTIMG_RSC = "Kirby/resources/tigress-left.png";
+	public static final String TIGRESS_RIGHTIMG_RSC = "Kirby/resources/tigress-right.png";
+	public static final String TIGRESS_FRONTIMG_RSC = "Kirby/resources/tigress-front.png";
+	public static final String TIGRESS_BACKIMG_RSC = "Kirby/resources/tigress-back.png";
 	
-	public static final String TIGRESS_HOLDING_LEFTIMG_RSC = "Tigress/resources/tigress-holding-left.png";
-	public static final String TIGRESS_HOLDING_RIGHTIMG_RSC = "Tigress/resources/tigress-holding-right.png";
-	public static final String TIGRESS_HOLDING_FRONTIMG_RSC = "Tigress/resources/tigress-holding-front.png";
-	public static final String TIGRESS_HOLDING_BACKIMG_RSC = "Tigress/resources/tigress-holding-back.png";
+	public static final String TIGRESS_HOLDING_LEFTIMG_RSC = "Kirby/resources/tigress-holding-left.png";
+	public static final String TIGRESS_HOLDING_RIGHTIMG_RSC = "Kirby/resources/tigress-holding-right.png";
+	public static final String TIGRESS_HOLDING_FRONTIMG_RSC = "Kirby/resources/tigress-holding-front.png";
+	public static final String TIGRESS_HOLDING_BACKIMG_RSC = "Kirby/resources/tigress-holding-back.png";
 	
-	public static final String CUB_IMG_RSC = "Tigress/resources/cub.png";
+	public static final String CUB_IMG_RSC = "Kirby/resources/cub.png";
 	
-	public static final String POACHER_LEFTIMG_RSC = "Tigress/resources/poacher-left.png";
+	public static final String POACHER_LEFTIMG_RSC = "Kirby/resources/poacher-left.png";
 	
-	public static final String FLOWER_IMG_RSC = "Tigress/resources/flower.png";
-	public static final String MEAT_IMG_RSC = "Tigress/resources/meat.png";
-	public static final String UNDERBRUSH_IMG_RSC = "Tigress/resources/underbrush.png";
-	public static final String NEST_IMG_RSC = "Tigress/resources/nest.png";
-	public static final String VERTEX_IMG_RSC = "Tigress/resources/vertex-r.png";
+	public static final String FLOWER_IMG_RSC = "Kirby/resources/flower.png";
+	public static final String MEAT_IMG_RSC = "Kirby/resources/meat.png";
+	public static final String UNDERBRUSH_IMG_RSC = "Kirby/resources/underbrush.png";
+	public static final String NEST_IMG_RSC = "Kirby/resources/nest.png";
+	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
 	
 	//public static final String HITWALL_RSC = "bounce/resource/wall_hit.wav";
 

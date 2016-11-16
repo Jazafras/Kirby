@@ -1,4 +1,4 @@
-package Tigress;
+package Kirby;
 
 import jig.Collision;
 import jig.ResourceManager;

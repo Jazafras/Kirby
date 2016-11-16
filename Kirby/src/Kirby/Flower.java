@@ -1,4 +1,4 @@
-package Tigress;
+package Kirby;
 
 import jig.Entity;
 import jig.ResourceManager;

@@ -1,0 +1,20 @@
+## Resolved Issues ##
+- **[1]** Make all the skeletons for the game states, tigress, cubs, and poacher.
+- **[2]** Add sprites.
+- **[4]** Remake the tigress sprites and add all the sides of her.
+- **[3]** Flesh out the skeletons for the entities and states.
+- **[8]** Make the tigress collision with the cub working.
+- **[9]** Make collisions with poacher working.
+- **[10]** Make base class for Underbrush.
+- **[11]** Make poacher pathfinding work.
+- **[12]** Make cubs wander around.
+- **[13]** Fix poacher pathfinding after tigress moves.
+- **[14]** Debug poacher's pathfinding crashing when vertices aren't quite set.
+- **[15]** Make the nest functional.
+- **[16]** Add different level layouts and begin images.
+
+## Open Issues ##
+- **[5]** Remake the cub sprite.
+- **[6]** Make the poacher sprite.
+- **[7]** Make the map layout.
+- **[17]** Make startup screen images and game won/game over.
