@@ -1,3 +1,5 @@
 ## Resolved Issues ##
 
 ## Open Issues ##
+- **[1]** Skeleton for kirby
+- **[2]** Base skeleton for enemies
