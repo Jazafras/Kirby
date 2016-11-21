@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;jig.Entity.collision(...)&apos; to &apos;collides&apos;&#x0D;&#x0A;- Original project: &apos;jig&apos;&#x0D;&#x0A;- Original element: &apos;jig.Entity.collision(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;jig.Entity.collides(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;collision&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;jig{Entity.java[Entity~collision~QEntity;" name="collides" references="true" stamp="1479321984446" version="1.0"/>
+</session>
