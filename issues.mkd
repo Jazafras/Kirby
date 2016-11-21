@@ -4,6 +4,8 @@
 - **[1]** Skeleton for kirby
 - **[2]** Base skeleton for enemies
 - **[3]** sidescrolling map
-- **[4]** networking implementation
-- **[5]** implementing platformers
+- **[4]** implementing platformers
+- **[5]** networking implementation
+- **[6]** level 1 design
+- **[7]** level 2 design
 
