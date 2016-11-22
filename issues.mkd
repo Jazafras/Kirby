@@ -1,11 +1,19 @@
 ## Resolved Issues ##
 
 ## Open Issues ##
-- **[1]** Skeleton for kirby
-- **[2]** Base skeleton for enemies
-- **[3]** sidescrolling map
-- **[4]** implementing platformers
-- **[5]** networking implementation
-- **[6]** level 1 design
-- **[7]** level 2 design
 
+- Priya
+	- **[1]** networking implementation
+
+- Jasmine
+	- **[1]** Base skeleton for enemies
+
+- Audrey
+	- **[1]** Skeleton for kirby
+
+- Kelly
+	- **[1]** sidescrolling map
+	- **[2]** implementing platformers
+
+- Undecided
+	- **[6]** level 1 design
