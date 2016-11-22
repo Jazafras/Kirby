@@ -9,7 +9,7 @@ import jig.ResourceManager;
 import jig.Vector;
 
  class Cub extends MovingEntity {
-	//testest
+	
 	public static final String[] facingImages = 
 		{
 			TigressGame.CUB_IMG_RSC,
