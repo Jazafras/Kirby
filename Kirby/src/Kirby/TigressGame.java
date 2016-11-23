@@ -37,6 +37,12 @@ public class TigressGame extends StateBasedGame {
 	public static final String TIGRESS_HOLDING_FRONTIMG_RSC = "Kirby/resources/tigress-holding-front.png";
 	public static final String TIGRESS_HOLDING_BACKIMG_RSC = "Kirby/resources/tigress-holding-back.png";
 	
+	//Sword Knight images
+	public static final String SWORDKNIGHT_LEFT = "Kirby/resources/bladeknight_left.png";
+	public static final String SWORDKNIGHT_RIGHT = "Kirby/resources/bladeknight_right.png";
+	public static final String SWORDKNIGHT_ATTACK_R = "Kirby/resources/bladeknight_attack_right.png";
+	public static final String SWORDKNIGHT_ATTACK_L = "Kirby/resources/bladeknight_attack_left.png";
+	
 	public static final String CUB_IMG_RSC = "Kirby/resources/cub.png";
 	
 	public static final String POACHER_LEFTIMG_RSC = "Kirby/resources/poacher-left.png";
