@@ -8,13 +8,13 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class SwordKnight extends MovingEntity {
+ class Noddy extends MovingEntity {
 	public static final String[] facingImages = 
 		{
-			KirbyGame.SWORDKNIGHT_RIGHT,
-			KirbyGame.SWORDKNIGHT_LEFT,
-			KirbyGame.SWORDKNIGHT_ATTACK_R,
-			KirbyGame.SWORDKNIGHT_ATTACK_L
+			KirbyGame.NODDY_RIGHT,
+			KirbyGame.NODDY_LEFT,
+			//KirbyGame.SWORDKNIGHT_ATTACK_R,
+			//KirbyGame.SWORDKNIGHT_ATTACK_L
 		};
 	
 	private boolean inNest;
@@ -25,7 +25,7 @@ import jig.Vector;
 	private int waitTime;
 	Random rand = new Random();
 
-	public SwordKnight(final float x, final float y) {
+	public Noddy(final float x, final float y) {
 		super(x, y, facingImages, LEFT);
 		setVelocity(new Vector(0, 0));
 		inNest = false;

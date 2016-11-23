@@ -35,13 +35,13 @@ class StartUpState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game,
 			Graphics g) throws SlickException {
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 		
-		g.drawImage(ResourceManager.getImage(TigressGame.BACKGROUND_IMG_RSC),
+		g.drawImage(ResourceManager.getImage(KirbyGame.BACKGROUND_IMG_RSC),
 				0, 0);	
 		
 		if (bg.level == 1) {
-			g.drawImage(ResourceManager.getImage(TigressGame.STARTUP_IMG_RSC),
+			g.drawImage(ResourceManager.getImage(KirbyGame.STARTUP_IMG_RSC),
 					0, 0);	
 		}
 		
@@ -52,16 +52,16 @@ class StartUpState extends BasicGameState {
 			int delta) throws SlickException {
 
 		Input input = container.getInput();
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 
 		if (input.isKeyDown(Input.KEY_SPACE))
-			bg.enterState(TigressGame.PLAYINGSTATE);	
+			bg.enterState(KirbyGame.PLAYINGSTATE);	
 		
 	}
 
 	@Override
 	public int getID() {
-		return TigressGame.STARTUPSTATE;
+		return KirbyGame.STARTUPSTATE;
 	}
 	
 }

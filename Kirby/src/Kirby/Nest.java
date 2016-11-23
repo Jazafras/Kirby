@@ -15,7 +15,7 @@ public class Nest extends Entity {
 	public Nest(final float x, final float y) {
 		super(x, y);
 		addImageWithBoundingBox(ResourceManager
-				.getImage(TigressGame.NEST_IMG_RSC));
+				.getImage(KirbyGame.NEST_IMG_RSC));
 	}
 	
 }

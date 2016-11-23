@@ -15,7 +15,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class TigressGame extends StateBasedGame {
+public class KirbyGame extends StateBasedGame {
 	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
@@ -43,6 +43,10 @@ public class TigressGame extends StateBasedGame {
 	public static final String SWORDKNIGHT_ATTACK_R = "Kirby/resources/bladeknight_attack_right.png";
 	public static final String SWORDKNIGHT_ATTACK_L = "Kirby/resources/bladeknight_attack_left.png";
 	
+	//Noddy images
+	public static final String NODDY_LEFT = "Kirby/resources/noddy_left.png";
+	public static final String NODDY_RIGHT = "Kirby/resources/noddy_right.png";
+	
 	public static final String CUB_IMG_RSC = "Kirby/resources/cub.png";
 	
 	public static final String POACHER_LEFTIMG_RSC = "Kirby/resources/poacher-left.png";
@@ -62,8 +66,6 @@ public class TigressGame extends StateBasedGame {
 	Tigress tigress;
 	Poacher poacher;
 	ArrayList<Cub> cubs;
-	ArrayList<Flower> flowers;
-	ArrayList<Meat> meats;	
 	Set<Underbrush> underbrushes;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
@@ -75,7 +77,7 @@ public class TigressGame extends StateBasedGame {
 	 * @param width: the window's width
 	 * @param height: the window's height
 	 */
-	public TigressGame(String title, int width, int height) {
+	public KirbyGame(String title, int width, int height) {
 		super(title);
 		
 		ScreenHeight = height;
@@ -83,8 +85,6 @@ public class TigressGame extends StateBasedGame {
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		cubs = new ArrayList<Cub>();
-		flowers = new ArrayList<Flower>();
-		meats = new ArrayList<Meat>();
 		underbrushes = new HashSet<Underbrush>();
 		vertices = new HashSet<Vertex>();
 		vPos = new HashMap<String, Vertex>();
@@ -194,9 +194,7 @@ public class TigressGame extends StateBasedGame {
 		cubs.add(new Cub(50, 550));
 		cubs.add(new Cub(400, 50));
 		cubs.add(new Cub(250, 300));
-		
-		flowers.add(new Flower(500, 150));
-		meats.add(new Meat(150, 550));
+
 	}
 	
 	public void level2Setup() {
@@ -223,8 +221,6 @@ public class TigressGame extends StateBasedGame {
 		cubs.add(new Cub(400, 350));
 		cubs.add(new Cub(500, 550));
 		
-		flowers.add(new Flower(700, 300));
-		meats.add(new Meat(230, 500));
 	}
 	
 	public void level3Setup() {
@@ -254,15 +250,12 @@ public class TigressGame extends StateBasedGame {
 		cubs.add(new Cub(50, 300));
 		cubs.add(new Cub(600, 350));
 		cubs.add(new Cub(300, 400));
-		
-		flowers.add(new Flower(200, 550));
-		meats.add(new Meat(400, 150));
 	}
 	
 	public static void main(String[] args) {
 		AppGameContainer app;
 		try {
-			app = new AppGameContainer(new TigressGame("Tigress", 800, 600));
+			app = new AppGameContainer(new KirbyGame("Tigress", 800, 600));
 			app.setDisplayMode(800, 600, false);
 			app.setVSync(true);
 			app.start();

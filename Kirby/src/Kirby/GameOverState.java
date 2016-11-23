@@ -47,7 +47,7 @@ class GameOverState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game,
 			Graphics g) throws SlickException {
 
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 		g.drawString("Tigresss: " + lastKnownTigresss, 10, 30);
 		/*for (Bang b : bg.explosions)
 			b.render(g);
@@ -68,16 +68,16 @@ class GameOverState extends BasicGameState {
 		
 		timer -= delta;
 		if (timer <= 0 || input.isKeyDown(Input.KEY_SPACE)) {
-			TigressGame bg = (TigressGame)game;
+			KirbyGame bg = (KirbyGame)game;
 			bg.level = 1;
-			game.enterState(TigressGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+			game.enterState(KirbyGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
 		}
 
 	}
 
 	@Override
 	public int getID() {
-		return TigressGame.GAMEOVERSTATE;
+		return KirbyGame.GAMEOVERSTATE;
 	}
 	
 }
