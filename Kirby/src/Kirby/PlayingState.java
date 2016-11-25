@@ -34,11 +34,6 @@ class PlayingState extends BasicGameState {
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.setSoundOn(true);
 		TigressGame bg = (TigressGame)game;
-		
-		if (bg.level == 2)
-			bg.level2Setup();
-		else if (bg.level == 3)
-			bg.level3Setup();
 	}
 	
 	@Override
