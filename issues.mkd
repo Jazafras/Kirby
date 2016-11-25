@@ -2,6 +2,7 @@
 
 - Kelly
 	- **[1]** basic tiled map render
+	- **[2]** implement basic kirby movement for testing map
 
 - Priya
 
@@ -21,7 +22,7 @@
 	- **[1]** Skeleton for kirby
 
 - Kelly
-	- **[2]** implement basic kirby movement for testing map
+	- **[3]** make screen scroll along with kirby
 
 - Undecided
 	- **[6]** level 1 design
