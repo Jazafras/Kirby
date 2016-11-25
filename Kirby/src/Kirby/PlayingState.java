@@ -41,22 +41,9 @@ class PlayingState extends BasicGameState {
 			Graphics g) throws SlickException {
 		TigressGame bg = (TigressGame)game;
 		
-		g.drawImage(ResourceManager.getImage(TigressGame.BACKGROUND_IMG_RSC),
-				0, 0);
+		g.scale(bg.SCALE, bg.SCALE);
 		
-		for (Underbrush u : bg.underbrushes)
-			u.render(g);
-		bg.nest.render(g);
-		for (Vertex v : bg.vertices)
-			v.render(g);
-		bg.tigress.render(g);
-		bg.poacher.render(g);
-		for (Cub c : bg.cubs) 
-			c.render(g);
-		for (Flower f : bg.flowers) 
-			f.render(g);
-		for (Meat m : bg.meats) 
-			m.render(g);
+		bg.map.render(0, 0, 0, 0, 32, 18);
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
@@ -123,28 +110,28 @@ class PlayingState extends BasicGameState {
 		
 		if (poacherTigress != null) {
 			lives -= 1;
-			bg.tigress.setPosition(bg.ScreenWidth - 50, bg.ScreenHeight - 50);
-			bg.tigress.setvPos(bg.ScreenWidth - 50, bg.ScreenHeight - 50);
+			bg.tigress.setPosition(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
+			bg.tigress.setvPos(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
 			bg.poacher.setPosition(50, 50);
 			bg.poacher.setReset(bg);
 		}
 		
 		bg.tigress.update(delta);
 		bg.tigress.setVertex(bg);
-		bg.poacher.setMoving(bg);
+		//bg.poacher.setMoving(bg);
 		bg.poacher.update(delta);
 		
 		//ResourceManager.getSound(BounceGame.HITPADDLE_RSC).play();
 		
 		// Change levels
-		if (bg.cubs.size() == 0) {
+		/*if (bg.cubs.size() == 0) {
 			bg.level++;
 			if (bg.level == 4) {
 				game.enterState(TigressGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 			} else {
 				game.enterState(TigressGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 			}
-		}
+		}*/
 
 		checkLives(game, bg);
 		

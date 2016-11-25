@@ -49,11 +49,12 @@ public class TigressGame extends StateBasedGame {
 	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
 	
 	//public static final String HITWALL_RSC = "bounce/resource/wall_hit.wav";
-
-	public final int ScreenWidth;
-	public final int ScreenHeight;
 	
-	private TiledMap map;
+    public static final int SCREEN_WIDTH  = 1280;
+    public static final int SCREEN_HEIGHT = SCREEN_WIDTH / 16 * 9;
+    public static final float SCALE = (float) (1.25*((double)SCREEN_WIDTH/1280));
+	
+	TiledMap map;
 	
 	int level;
 	Tigress tigress;
@@ -72,11 +73,8 @@ public class TigressGame extends StateBasedGame {
 	 * @param width: the window's width
 	 * @param height: the window's height
 	 */
-	public TigressGame(String title, int width, int height) {
+	public TigressGame(String title) {
 		super(title);
-		
-		ScreenHeight = height;
-		ScreenWidth = width;
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		cubs = new ArrayList<Cub>();
@@ -99,9 +97,9 @@ public class TigressGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		tigress = new Tigress(ScreenWidth - 50, ScreenHeight - 50);
+		tigress = new Tigress(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50);
 		poacher = new Poacher(50, 50, vPos.get(new Vertex(50, 50).toString()));
-		nest = new Nest(ScreenWidth - 85, 60);
+		nest = new Nest(SCREEN_WIDTH - 85, 60);
 		
 	}
 	
@@ -133,14 +131,19 @@ public class TigressGame extends StateBasedGame {
 	}
 	
 	public void level1Setup() {
-
+		try {
+			map = new TiledMap("Kirby/resources/level_0.tmx","Kirby/resources/");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
 		AppGameContainer app;
 		try {
-			app = new AppGameContainer(new TigressGame("Tigress", 800, 600));
-			app.setDisplayMode(800, 600, false);
+			app = new AppGameContainer(new TigressGame("Tigress"));
+			app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
 			app.setVSync(true);
 			app.start();
 		} catch (SlickException e) {
