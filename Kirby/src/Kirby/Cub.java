@@ -11,10 +11,10 @@ import jig.Vector;
  class Cub extends MovingEntity {
 	public static final String[] facingImages = 
 		{
-			TigressGame.CUB_IMG_RSC,
-			TigressGame.CUB_IMG_RSC,
-			TigressGame.CUB_IMG_RSC,
-			TigressGame.CUB_IMG_RSC
+			KirbyGame.CUB_IMG_RSC,
+			KirbyGame.CUB_IMG_RSC,
+			KirbyGame.CUB_IMG_RSC,
+			KirbyGame.CUB_IMG_RSC
 		};
 	
 	private boolean held;
@@ -64,7 +64,7 @@ import jig.Vector;
 		inNest = val;
 	}
 	
-	public void setMoving(TigressGame bg) {
+	public void setMoving(KirbyGame bg) {
 		if ((hasPassed() || firstPath) && waitTime <= 0 && !isHeld()) {
 			if (firstPath)
 				firstPath = false;

@@ -14,6 +14,6 @@ import jig.Vector;
 	public Meat(final float x, final float y) {
 		super(x, y);
 		addImageWithBoundingBox(ResourceManager
-				.getImage(TigressGame.MEAT_IMG_RSC));
+				.getImage(KirbyGame.MEAT_IMG_RSC));
 	}
 }
