@@ -14,6 +14,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.tiled.TiledMap;
 
 public class TigressGame extends StateBasedGame {
 	
@@ -48,9 +49,12 @@ public class TigressGame extends StateBasedGame {
 	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
 	
 	//public static final String HITWALL_RSC = "bounce/resource/wall_hit.wav";
-
-	public final int ScreenWidth;
-	public final int ScreenHeight;
+	
+    public static final int SCREEN_WIDTH  = 1280;
+    public static final int SCREEN_HEIGHT = SCREEN_WIDTH / 16 * 9;
+    public static final float SCALE = (float) (1.25*((double)SCREEN_WIDTH/1280));
+	
+	TiledMap map;
 	
 	int level;
 	Tigress tigress;
@@ -69,11 +73,8 @@ public class TigressGame extends StateBasedGame {
 	 * @param width: the window's width
 	 * @param height: the window's height
 	 */
-	public TigressGame(String title, int width, int height) {
+	public TigressGame(String title) {
 		super(title);
-		
-		ScreenHeight = height;
-		ScreenWidth = width;
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		cubs = new ArrayList<Cub>();
@@ -96,9 +97,9 @@ public class TigressGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		tigress = new Tigress(ScreenWidth - 50, ScreenHeight - 50);
+		tigress = new Tigress(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50);
 		poacher = new Poacher(50, 50, vPos.get(new Vertex(50, 50).toString()));
-		nest = new Nest(ScreenWidth - 85, 60);
+		nest = new Nest(SCREEN_WIDTH - 85, 60);
 		
 	}
 	
@@ -129,135 +130,20 @@ public class TigressGame extends StateBasedGame {
 		ResourceManager.loadImage(VERTEX_IMG_RSC);
 	}
 	
-	private void createVertices() {
-		vPos.clear();
-		vertices.clear();
-		
-		// create vertices on graph for path finding
-		for (int i = 1; i < 16; i++) {
-			for (int j = 1; j < 12; j++) {
-				Vertex v = new Vertex(i * 50, j * 50);
-				
-				boolean collides = false;
-				for (Underbrush u : underbrushes) {
-					if (v.collides(u) != null)
-						collides = true;
-				}
-				if (!collides) {
-					vertices.add(v);
-					vPos.put(v.toString(), v);
-				}
-			}
-		}
-		
-		// adding the neighbor nodes to each vertex
-		for (Vertex v : vertices) {
-			Vertex left = new Vertex(v.getX() - 50, v.getY());
-			Vertex right = new Vertex(v.getX() + 50, v.getY());
-			Vertex above = new Vertex(v.getX(), v.getY() - 50);
-			Vertex below = new Vertex(v.getX(), v.getY() + 50);
-			if (vPos.containsKey(left.toString()))
-				v.addNeighbors(vPos.get(left.toString()), "left");
-			if (vPos.containsKey(right.toString()))
-				v.addNeighbors(vPos.get(right.toString()), "right");
-			if (vPos.containsKey(above.toString()))
-				v.addNeighbors(vPos.get(above.toString()), "above");
-			if (vPos.containsKey(below.toString()))
-				v.addNeighbors(vPos.get(below.toString()), "below");			
-		}
-	}
-	
 	public void level1Setup() {
-		for (int i = 0; i <= 4; i++)
-			underbrushes.add(new Underbrush(300, ScreenHeight - (i * 50)));
-		for (int i = 1; i <= 3; i++)
-			underbrushes.add(new Underbrush(300 - (i*50), ScreenHeight - (4*50)));
-		for (int i = 0; i <= 6; i++)
-			underbrushes.add(new Underbrush(600, i*50));
-		for (int i = 1; i <= 4; i++)
-			underbrushes.add(new Underbrush(600 - i * 50, 3*50));
-		for (int i = 0; i <= 4; i++)
-			underbrushes.add(new Underbrush(150, i * 50));
-		for (int i = 0; i <= 3; i++)
-			underbrushes.add(new Underbrush(450, ScreenHeight - i * 50));
-		for (int i = 1; i <= 4; i++)
-			underbrushes.add(new Underbrush(450 + i * 50, ScreenHeight - 3*50));
-		
-		createVertices();
-		
-		cubs.add(new Cub(50, 550));
-		cubs.add(new Cub(400, 50));
-		cubs.add(new Cub(250, 300));
-		
-		flowers.add(new Flower(500, 150));
-		meats.add(new Meat(150, 550));
-	}
-	
-	public void level2Setup() {
-		underbrushes.clear();
-		for (int i = 0; i <= 4; i++)
-			underbrushes.add(new Underbrush(i * 50, 200));
-		for (int i = 1; i <= 1; i++)
-			underbrushes.add(new Underbrush(4*50, 200 - (i*50)));
-		for (int i = 0; i <= 4; i++)
-			underbrushes.add(new Underbrush(150, ScreenHeight - i*50));
-		for (int i = 1; i <= 3; i++)
-			underbrushes.add(new Underbrush(150 + i * 50, ScreenHeight - 4*50));
-		for (int i = 0; i <= 4; i++)
-			underbrushes.add(new Underbrush(550, ScreenHeight - i*50));
-		for (int i = 2; i <= 7; i++)
-			underbrushes.add(new Underbrush(ScreenWidth - i * 50, 200));
-		for (int i = 0; i <= 1; i++)
-			underbrushes.add(new Underbrush(500, i*50));
-		
-		createVertices();
-		
-		cubs.add(new Cub(50, 400));
-		cubs.add(new Cub(450, 50));
-		cubs.add(new Cub(400, 350));
-		cubs.add(new Cub(500, 550));
-		
-		flowers.add(new Flower(700, 300));
-		meats.add(new Meat(230, 500));
-	}
-	
-	public void level3Setup() {
-		underbrushes.clear();
-		// create all underbrush
-		for (int i = 0; i <= 2; i++)
-			underbrushes.add(new Underbrush(i * 50, 200));
-		for (int i = 0; i <= 8; i++)
-			underbrushes.add(new Underbrush(i * 50, ScreenHeight - 3*50));
-		for (int i = 1; i <= 4; i++)
-			underbrushes.add(new Underbrush(5 * 50, ScreenHeight - 3*50 - i * 50));
-		for (int i = 0; i <= 1; i++)
-			underbrushes.add(new Underbrush(250, i * 50));
-		for (int i = 0; i <= 2; i++)
-			underbrushes.add(new Underbrush(i * 50, 200));
-		for (int i = 0; i <= 5; i++)
-			underbrushes.add(new Underbrush(ScreenWidth - 3 * 50, ScreenHeight - i * 50));
-		for (int i = 0; i <= 5; i++)
-			underbrushes.add(new Underbrush(450, i * 50));
-		for (int i = 0; i <= 2; i++)
-			underbrushes.add(new Underbrush(450 + i * 50, 200));
-		
-		createVertices();
-		
-		cubs.add(new Cub(400, 550));
-		cubs.add(new Cub(400, 50));
-		cubs.add(new Cub(50, 300));
-		cubs.add(new Cub(600, 350));
-		cubs.add(new Cub(300, 400));
-		
-		flowers.add(new Flower(200, 550));
-		meats.add(new Meat(400, 150));
+		try {
+			map = new TiledMap("Kirby/resources/level_0.tmx","Kirby/resources/");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
 		AppGameContainer app;
 		try {
-			app = new AppGameContainer(new TigressGame("Tigress", 800, 600));
-			app.setDisplayMode(800, 600, false);
+			app = new AppGameContainer(new TigressGame("Tigress"));
+			app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
 			app.setVSync(true);
 			app.start();
 		} catch (SlickException e) {
