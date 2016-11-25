@@ -15,7 +15,22 @@
 	- **[1]** networking implementation
 
 - Jasmine
-	- **[1]** Base skeleton for enemies
+	-**Base skeleton for enemies**
+	-**[1]** Blade knight
+	-**[2]** UFO
+	-**[3]** Cappy
+	-**[4]** Waddle Dee
+	-**[5]** Scarfy
+	-**[6]** Noddy
+	-**[7]** Bronto Burt
+	-**[8]** Twister
+	-**[9]** Poppy Bros
+	-**[10]** Sir Kibble
+	-**[11]** Knuckle Joe
+	-**[12]** Bonkers
+	-**[13]** Sparky
+	-**[14]** Hot Head
+	-**[15]** Waddle Doo
 
 - Audrey
 	- **[1]** Skeleton for kirby
