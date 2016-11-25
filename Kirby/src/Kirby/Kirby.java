@@ -4,22 +4,22 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Tigress extends MovingEntity {
+ class Kirby extends MovingEntity {
 	
 	public static final String[] facingImages = 
 		{
-			TigressGame.TIGRESS_LEFTIMG_RSC,
-			TigressGame.TIGRESS_RIGHTIMG_RSC,
-			TigressGame.TIGRESS_FRONTIMG_RSC,
-			TigressGame.TIGRESS_BACKIMG_RSC
+			KirbyGame.TIGRESS_LEFTIMG_RSC,
+			KirbyGame.TIGRESS_RIGHTIMG_RSC,
+			KirbyGame.TIGRESS_FRONTIMG_RSC,
+			KirbyGame.TIGRESS_BACKIMG_RSC
 		};
 	
 	public static final String[] facingHoldImages = 
 		{
-			TigressGame.TIGRESS_HOLDING_LEFTIMG_RSC,
-			TigressGame.TIGRESS_HOLDING_RIGHTIMG_RSC,
-			TigressGame.TIGRESS_HOLDING_FRONTIMG_RSC,
-			TigressGame.TIGRESS_HOLDING_BACKIMG_RSC
+			KirbyGame.TIGRESS_HOLDING_LEFTIMG_RSC,
+			KirbyGame.TIGRESS_HOLDING_RIGHTIMG_RSC,
+			KirbyGame.TIGRESS_HOLDING_FRONTIMG_RSC,
+			KirbyGame.TIGRESS_HOLDING_BACKIMG_RSC
 		};
 	
 	private boolean flowered;
@@ -27,7 +27,7 @@ import jig.Vector;
 	private int powerTime;
 	private Cub rescueCub;
 
-	public Tigress(final float x, final float y) {
+	public Kirby(final float x, final float y) {
 		super(x, y, facingImages, LEFT);
 		setVelocity(new Vector(0, 0));
 		flowered = false;
@@ -99,7 +99,7 @@ import jig.Vector;
 		c.setPosition(getPosition().getX() + xOffset, getPosition().getY() + yOffset);
 	}
 	
-	public void setVertex(TigressGame bg) {
+	public void setVertex(KirbyGame bg) {
 		int xRemain = (int)getX() % 50;
 		int yRemain = (int)getY() % 50;
 		int xDiff = xRemain > 25 ? 50 - xRemain : -1 * xRemain;

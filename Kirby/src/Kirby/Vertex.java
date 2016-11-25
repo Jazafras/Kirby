@@ -26,7 +26,7 @@ public class Vertex extends Entity {
 		this.x = x;
 		this.y = y;
 		addImageWithBoundingBox(ResourceManager
-				.getImage(TigressGame.VERTEX_IMG_RSC));
+				.getImage(KirbyGame.VERTEX_IMG_RSC));
 		neighbors = new HashMap<Vertex, String>();
 	}
 	

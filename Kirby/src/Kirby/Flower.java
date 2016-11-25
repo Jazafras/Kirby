@@ -14,6 +14,6 @@ import jig.Vector;
 	public Flower(final float x, final float y) {
 		super(x, y);
 		addImageWithBoundingBox(ResourceManager
-				.getImage(TigressGame.FLOWER_IMG_RSC));
+				.getImage(KirbyGame.FLOWER_IMG_RSC));
 	}
 }

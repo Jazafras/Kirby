@@ -15,7 +15,7 @@ public class Underbrush extends Entity {
 	public Underbrush(final float x, final float y) {
 		super(x, y);
 		addImageWithBoundingBox(ResourceManager
-				.getImage(TigressGame.UNDERBRUSH_IMG_RSC));
+				.getImage(KirbyGame.UNDERBRUSH_IMG_RSC));
 	}
 	
 }

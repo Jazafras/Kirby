@@ -33,13 +33,13 @@ class PlayingState extends BasicGameState {
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.setSoundOn(true);
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame game,
 			Graphics g) throws SlickException {
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 		
 		g.scale(bg.SCALE, bg.SCALE);
 		
@@ -55,7 +55,7 @@ class PlayingState extends BasicGameState {
 			int delta) throws SlickException {
 
 		Input input = container.getInput();
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 		
 		// tigress collision with cubs
 		Vector move = null;
@@ -137,7 +137,7 @@ class PlayingState extends BasicGameState {
 		
 	}
 	
-	private void keyPresses(Input input, TigressGame bg, int delta, Vector move) {		
+	private void keyPresses(Input input, KirbyGame bg, int delta, Vector move) {		
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && (move == null || move.getX() <= 0)) 
 			bg.tigress.setVelocity(new Vector(-.3f, 0));
@@ -156,19 +156,19 @@ class PlayingState extends BasicGameState {
 		
 	}
 	
-	private void checkLives(StateBasedGame game, TigressGame bg) {
+	private void checkLives(StateBasedGame game, KirbyGame bg) {
 		// Game over state if no lives left
 		if (lives <= 0) {
 			//((GameOverState)game.getState(TigressGame.GAMEOVERSTATE)).setUserScore(bounces);
 			bg.level = 1;
 			lives = 3;
-			game.enterState(TigressGame.GAMEOVERSTATE);
+			game.enterState(KirbyGame.GAMEOVERSTATE);
 		}
 	}
 
 	@Override
 	public int getID() {
-		return TigressGame.PLAYINGSTATE;
+		return KirbyGame.PLAYINGSTATE;
 	}
 	
 }
