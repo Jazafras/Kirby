@@ -42,8 +42,9 @@ class PlayingState extends BasicGameState {
 		KirbyGame bg = (KirbyGame)game;
 		
 		g.scale(bg.SCALE, bg.SCALE);
-		
 		bg.map.render(0, 0, 0, 0, 32, 18);
+		
+		bg.kirby.render(g);
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
@@ -57,24 +58,24 @@ class PlayingState extends BasicGameState {
 		Input input = container.getInput();
 		KirbyGame bg = (KirbyGame)game;
 		
-		// tigress collision with cubs
+		// kirby collision with cubs
 		Vector move = null;
 		for (Underbrush u : bg.underbrushes) {
-			Collision c = bg.tigress.collides(u);
-			if (bg.tigress.collides(u) != null) {
+			Collision c = bg.kirby.collides(u);
+			if (bg.kirby.collides(u) != null) {
 				move = c.getMinPenetration();
 				break;
 			}
 		}
 		
-		Collision tigressNest = bg.tigress.collides(bg.nest);
-		if (tigressNest != null) {
-			if (bg.tigress.holdingCub()) {
-				bg.cubs.remove(bg.tigress.getRescueCub());
-				bg.tigress.setRescueCub(null);
+		/*Collision kirbyNest = bg.kirby.collides(bg.nest);
+		if (kirbyNest != null) {
+			if (bg.kirby.holdingCub()) {
+				bg.cubs.remove(bg.kirby.getRescueCub());
+				bg.kirby.setRescueCub(null);
 			}
-			move = tigressNest.getMinPenetration();
-		}
+			move = kirbyNest.getMinPenetration();
+		}*/
 		
 		keyPresses(input, bg, delta, move);
 		
@@ -83,23 +84,23 @@ class PlayingState extends BasicGameState {
 			c.update(delta);
 		}
 		
-		// tigress collision with cubs
-		if (!bg.tigress.holdingCub()) {
+		// kirby collision with cubs
+		/*if (!bg.kirby.holdingCub()) {
 			for (Cub c : bg.cubs) {
-				if (bg.tigress.collides(c) != null) {
-					bg.tigress.setRescueCub(c);
+				if (bg.kirby.collides(c) != null) {
+					bg.kirby.setRescueCub(c);
 					break;
 				}
 			}
 		}
 		
-		// poacher collision with tigress or cubs
-		Collision poacherTigress = bg.tigress.collides(bg.poacher);
+		// poacher collision with kirby or cubs
+		Collision poacherkirby = bg.kirby.collides(bg.poacher);
 		Collision poacherCub = null;
 		for (Cub c : bg.cubs) {
 			Collision coll = bg.poacher.collides(c);
 			if (coll != null && !c.isHeld()) {
-				bg.tigress.setRescueCub(null);
+				bg.kirby.setRescueCub(null);
 				c.removeImage(ResourceManager.getImage(c.getCurImage()));
 				bg.cubs.remove(c);
 				poacherCub = coll;
@@ -108,16 +109,16 @@ class PlayingState extends BasicGameState {
 			}
 		}
 		
-		if (poacherTigress != null) {
+		if (poacherkirby != null) {
 			lives -= 1;
-			bg.tigress.setPosition(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
-			bg.tigress.setvPos(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
+			bg.kirby.setPosition(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
+			bg.kirby.setvPos(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
 			bg.poacher.setPosition(50, 50);
 			bg.poacher.setReset(bg);
-		}
+		}*/
 		
-		bg.tigress.update(delta);
-		bg.tigress.setVertex(bg);
+		bg.kirby.update(delta);
+		bg.kirby.setVertex(bg);
 		//bg.poacher.setMoving(bg);
 		bg.poacher.update(delta);
 		
@@ -127,9 +128,9 @@ class PlayingState extends BasicGameState {
 		/*if (bg.cubs.size() == 0) {
 			bg.level++;
 			if (bg.level == 4) {
-				game.enterState(TigressGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+				game.enterState(kirbyGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 			} else {
-				game.enterState(TigressGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+				game.enterState(kirbyGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 			}
 		}*/
 
@@ -140,26 +141,26 @@ class PlayingState extends BasicGameState {
 	private void keyPresses(Input input, KirbyGame bg, int delta, Vector move) {		
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && (move == null || move.getX() <= 0)) 
-			bg.tigress.setVelocity(new Vector(-.3f, 0));
+			bg.kirby.setVelocity(new Vector(-.3f, 0));
 		else if (input.isKeyDown(Input.KEY_RIGHT) && (move == null || move.getX() >= 0)) 
-			bg.tigress.setVelocity(new Vector(.3f, 0f));
-		else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
-			bg.tigress.setVelocity(new Vector(0f, -.3f));
+			bg.kirby.setVelocity(new Vector(.3f, 0f));
+		/*else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
+			bg.kirby.setVelocity(new Vector(0f, -.3f));
 		else if (input.isKeyDown(Input.KEY_DOWN) && (move == null || move.getY() >= 0)) 
-			bg.tigress.setVelocity(new Vector(0f, .3f));
+			bg.kirby.setVelocity(new Vector(0f, .3f));*/
 		else 
-			bg.tigress.setVelocity(new Vector(0f, 0f));
+			bg.kirby.setVelocity(new Vector(0f, 0f));
 		
-		// if space pressed, tigress drops cub
-		/*if (input.isKeyDown(Input.KEY_SPACE) && bg.tigress.holdingCub()) 
-			bg.tigress.dropCub();*/
+		// if space pressed, kirby drops cub
+		/*if (input.isKeyDown(Input.KEY_SPACE) && bg.kirby.holdingCub()) 
+			bg.kirby.dropCub();*/
 		
 	}
 	
 	private void checkLives(StateBasedGame game, KirbyGame bg) {
 		// Game over state if no lives left
 		if (lives <= 0) {
-			//((GameOverState)game.getState(TigressGame.GAMEOVERSTATE)).setUserScore(bounces);
+			//((GameOverState)game.getState(kirbyGame.GAMEOVERSTATE)).setUserScore(bounces);
 			bg.level = 1;
 			lives = 3;
 			game.enterState(KirbyGame.GAMEOVERSTATE);

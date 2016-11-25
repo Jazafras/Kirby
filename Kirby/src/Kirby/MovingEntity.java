@@ -33,6 +33,8 @@ import jig.Vector;
 		this.facingImages = facingImages;
 		setFacing(facing);
 		vPos = new Vertex(x, y);
+		addImageWithBoundingBox(ResourceManager
+				.getImage(facingImages[RIGHT]));
 	}
 	
 	/**
