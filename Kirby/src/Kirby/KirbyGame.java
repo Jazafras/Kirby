@@ -27,6 +27,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String BACKGROUND_IMG_RSC = "Kirby/resources/background.png";
 	public static final String STARTUP_IMG_RSC = "Kirby/resources/startup.png";
 	
+	public static final String KIRBY_LEFTIMG_RSC = "Kirby/resources/kirby-sprite.png";
+	
 	// all entity images used in game
 	public static final String TIGRESS_LEFTIMG_RSC = "Kirby/resources/tigress-left.png";
 	public static final String TIGRESS_RIGHTIMG_RSC = "Kirby/resources/tigress-right.png";
@@ -57,7 +59,7 @@ public class KirbyGame extends StateBasedGame {
 	TiledMap map;
 	
 	int level;
-	Kirby tigress;
+	Kirby kirby;
 	Poacher poacher;
 	ArrayList<Cub> cubs;
 	ArrayList<Flower> flowers;
@@ -97,7 +99,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		tigress = new Kirby(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50);
+		kirby = new Kirby(100, SCREEN_HEIGHT / 2 + 72);
 		poacher = new Poacher(50, 50, vPos.get(new Vertex(50, 50).toString()));
 		nest = new Nest(SCREEN_WIDTH - 85, 60);
 		
@@ -108,6 +110,8 @@ public class KirbyGame extends StateBasedGame {
 		
 		ResourceManager.loadImage(BACKGROUND_IMG_RSC);
 		ResourceManager.loadImage(STARTUP_IMG_RSC);
+		
+		ResourceManager.loadImage(KIRBY_LEFTIMG_RSC);
 		
 		ResourceManager.loadImage(TIGRESS_LEFTIMG_RSC);
 		ResourceManager.loadImage(TIGRESS_RIGHTIMG_RSC);

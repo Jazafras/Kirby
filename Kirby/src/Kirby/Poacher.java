@@ -14,9 +14,9 @@ import jig.Vector;
 			KirbyGame.POACHER_LEFTIMG_RSC,
 			KirbyGame.POACHER_LEFTIMG_RSC,
 			KirbyGame.POACHER_LEFTIMG_RSC/*,
-			TigressGame.TIGRESS_RIGHTIMG_RSC,
-			TigressGame.TIGRESS_FRONTIMG_RSC,
-			TigressGame.TIGRESS_BACKIMG_RSC*/
+			kirbyGame.kirby_RIGHTIMG_RSC,
+			kirbyGame.kirby_FRONTIMG_RSC,
+			kirbyGame.kirby_BACKIMG_RSC*/
 		};
 	
 	private boolean trapped;
@@ -50,12 +50,12 @@ import jig.Vector;
 					}
 				}
 			}
-			if (bg.tigress.getVertex() != null && 
-					bg.vPos.containsKey(bg.tigress.getVertex().toString()) &&
-					distances.get(bg.tigress.getVertex().toString()) != null &&
-					distances.get(bg.tigress.getVertex().toString()) < minDist) {
-				minDist = distances.get(bg.tigress.getVertex().toString());
-				closest = bg.tigress.getVertex();
+			if (bg.kirby.getVertex() != null && 
+					bg.vPos.containsKey(bg.kirby.getVertex().toString()) &&
+					distances.get(bg.kirby.getVertex().toString()) != null &&
+					distances.get(bg.kirby.getVertex().toString()) < minDist) {
+				minDist = distances.get(bg.kirby.getVertex().toString());
+				closest = bg.kirby.getVertex();
 			}
 			
 			LinkedList<Vertex> path;
