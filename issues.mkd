@@ -1,43 +1,27 @@
-## Resolved Issues ##
+####### Resolved Issues #######
 
-## Open Issues ##
-<<<<<<< HEAD
-=======
-- **[1]** Skeleton for kirby
-- **[2]** Base skeleton for enemies
-- **[3]** sidescrolling map
-- **[4]** implementing platformers
-- **[5]** networking implementation
-- **[6]** level 1 design
->>>>>>> 263ae39d984bd16d56808995d7f20f93ff520757
+- Kelly
+	- **[1]** basic tiled map render
+
+- Priya
+
+- Jasmine
+
+- Audrey
+
+####### Open Issues #######
 
 - Priya
 	- **[1]** networking implementation
 
 - Jasmine
-	-**Base skeleton for enemies**
-	-**[1]** Blade knight
-	-**[2]** UFO
-	-**[3]** Cappy
-	-**[4]** Waddle Dee
-	-**[5]** Scarfy
-	-**[6]** Noddy
-	-**[7]** Bronto Burt
-	-**[8]** Twister
-	-**[9]** Poppy Bros
-	-**[10]** Sir Kibble
-	-**[11]** Knuckle Joe
-	-**[12]** Bonkers
-	-**[13]** Sparky
-	-**[14]** Hot Head
-	-**[15]** Waddle Doo
+	- **[1]** Base skeleton for enemies
 
 - Audrey
 	- **[1]** Skeleton for kirby
 
 - Kelly
-	- **[1]** sidescrolling map
-	- **[2]** implementing platformers
+	- **[2]** implement basic kirby movement for testing map
 
 - Undecided
 	- **[6]** level 1 design
