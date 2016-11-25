@@ -16,7 +16,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-public class TigressGame extends StateBasedGame {
+public class KirbyGame extends StateBasedGame {
 	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
@@ -57,7 +57,7 @@ public class TigressGame extends StateBasedGame {
 	TiledMap map;
 	
 	int level;
-	Tigress tigress;
+	Kirby tigress;
 	Poacher poacher;
 	ArrayList<Cub> cubs;
 	ArrayList<Flower> flowers;
@@ -73,7 +73,7 @@ public class TigressGame extends StateBasedGame {
 	 * @param width: the window's width
 	 * @param height: the window's height
 	 */
-	public TigressGame(String title) {
+	public KirbyGame(String title) {
 		super(title);
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
@@ -97,7 +97,7 @@ public class TigressGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		tigress = new Tigress(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50);
+		tigress = new Kirby(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 50);
 		poacher = new Poacher(50, 50, vPos.get(new Vertex(50, 50).toString()));
 		nest = new Nest(SCREEN_WIDTH - 85, 60);
 		
@@ -142,7 +142,7 @@ public class TigressGame extends StateBasedGame {
 	public static void main(String[] args) {
 		AppGameContainer app;
 		try {
-			app = new AppGameContainer(new TigressGame("Tigress"));
+			app = new AppGameContainer(new KirbyGame("Kirby"));
 			app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
 			app.setVSync(true);
 			app.start();

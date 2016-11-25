@@ -10,10 +10,10 @@ import jig.Vector;
 	
 	public static final String[] facingImages = 
 		{
-			TigressGame.POACHER_LEFTIMG_RSC,
-			TigressGame.POACHER_LEFTIMG_RSC,
-			TigressGame.POACHER_LEFTIMG_RSC,
-			TigressGame.POACHER_LEFTIMG_RSC/*,
+			KirbyGame.POACHER_LEFTIMG_RSC,
+			KirbyGame.POACHER_LEFTIMG_RSC,
+			KirbyGame.POACHER_LEFTIMG_RSC,
+			KirbyGame.POACHER_LEFTIMG_RSC/*,
 			TigressGame.TIGRESS_RIGHTIMG_RSC,
 			TigressGame.TIGRESS_FRONTIMG_RSC,
 			TigressGame.TIGRESS_BACKIMG_RSC*/
@@ -34,7 +34,7 @@ import jig.Vector;
 		reset = false;
 	}
 	
-	public void setMoving(TigressGame bg) {
+	public void setMoving(KirbyGame bg) {
 		if (hasPassed() || firstPath || reset) {
 			Map<String, Integer> distances = getDistances(bg);
 			int minDist = Integer.MAX_VALUE;
@@ -131,7 +131,7 @@ import jig.Vector;
 		return nextPos;
 	}
 	
-	private Map<String, Integer> getDistances(TigressGame bg) {
+	private Map<String, Integer> getDistances(KirbyGame bg) {
 		Queue<Vertex> frontier = new LinkedList<Vertex>();
 		frontier.add(bg.poacher.getCurrentPos());
 		Map<String, Integer> distance = new HashMap<String, Integer>();
@@ -186,7 +186,7 @@ import jig.Vector;
 		return path;
 	}
 	
-	protected void setReset(TigressGame bg) {
+	protected void setReset(KirbyGame bg) {
 		reset = true;
 		Vertex v = new Vertex(50, 50);
 		vPos = bg.vPos.get(v.toString());
