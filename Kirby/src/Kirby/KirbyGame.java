@@ -99,7 +99,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(100, SCREEN_HEIGHT / 2 + 72);
+		kirby = new Kirby(128, 413);
 		poacher = new Poacher(50, 50, vPos.get(new Vertex(50, 50).toString()));
 		nest = new Nest(SCREEN_WIDTH - 85, 60);
 		
@@ -134,13 +134,8 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(VERTEX_IMG_RSC);
 	}
 	
-	public void level1Setup() {
-		try {
-			map = new TiledMap("Kirby/resources/level_0.tmx","Kirby/resources/");
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void level1Setup() throws SlickException {
+		map = new TiledMap("Kirby/resources/level_0.tmx","Kirby/resources/");
 	}
 	
 	public static void main(String[] args) {

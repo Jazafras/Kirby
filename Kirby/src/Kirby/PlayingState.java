@@ -47,7 +47,7 @@ class PlayingState extends BasicGameState {
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), 33, 19);
 		
-		bg.kirby.render(g);
+		bg.kirby.render(g, xOffset, yOffset);
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
@@ -146,6 +146,7 @@ class PlayingState extends BasicGameState {
 		}*/
 		
 		
+		bg.kirby.update(delta);
 		bg.kirby.setVertex(bg);
 		//bg.poacher.setMoving(bg);
 		bg.poacher.update(delta);
@@ -169,13 +170,13 @@ class PlayingState extends BasicGameState {
 	private void keyPresses(Input input, KirbyGame bg, int delta, Vector move) {		
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && (move == null || move.getX() <= 0)) 
-			bg.kirby.setVelocity(new Vector(-.2f, 0));
+			bg.kirby.moveLeft(delta); //bg.kirby.setVelocity(new Vector(-.2f, 0));
 		else if (input.isKeyDown(Input.KEY_RIGHT) && (move == null || move.getX() >= 0)) 
-			bg.kirby.setVelocity(new Vector(.2f, 0f));
-		else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
+			bg.kirby.moveRight(delta); //bg.kirby.setVelocity(new Vector(.2f, 0f));
+		/*else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
 			bg.kirby.setVelocity(new Vector(0f, -.2f));
 		else if (input.isKeyDown(Input.KEY_DOWN) && (move == null || move.getY() >= 0)) 
-			bg.kirby.setVelocity(new Vector(0f, .2f));
+			bg.kirby.setVelocity(new Vector(0f, .2f));*/
 		else 
 			bg.kirby.setVelocity(new Vector(0f, 0f));
 		

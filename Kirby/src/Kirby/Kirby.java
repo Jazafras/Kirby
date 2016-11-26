@@ -1,6 +1,8 @@
 package Kirby;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 import jig.Entity;
 import jig.ResourceManager;
@@ -44,12 +46,23 @@ import jig.Vector;
 		}
 	}
 	
-	public void render(Graphics g, float offsetX, float offsetY) {
-		super.render(g);
+	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
+		//super.render(g);
+		Image i = new Image(facingImages[LEFT]);
+		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
+		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);   
 	}
 	
 	public void update(final int delta, float xOffset, float yOffset) {
 		translate(getVelocity().scale(delta));
 	}
+	
+	public void moveLeft(int delta){
+		super.setPosition(super.getX() - (.15f*delta), super.getY());
+    }
+ 
+    public void moveRight(int delta){
+    	super.setPosition(super.getX() + (.15f*delta), super.getY());
+    }
 	
 }
