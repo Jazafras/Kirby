@@ -12,6 +12,7 @@ import jig.Vector;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
@@ -99,7 +100,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(128, 413);
+		kirby = new Kirby(128, 418);
 		poacher = new Poacher(50, 50, vPos.get(new Vertex(50, 50).toString()));
 		nest = new Nest(SCREEN_WIDTH - 85, 60);
 		
