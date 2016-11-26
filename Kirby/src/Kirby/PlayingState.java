@@ -6,6 +6,7 @@ import jig.Vector;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -23,11 +24,14 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  */
 class PlayingState extends BasicGameState {
 	int lives;
+	Image background;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		KirbyGame bg = (KirbyGame)game;
 		lives = 3;
+		background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
 	}
 
 	@Override
@@ -43,6 +47,11 @@ class PlayingState extends BasicGameState {
 		
 		float xOffset = getXOffset(bg);
 		float yOffset = getYOffset(bg);
+		
+        background.draw(xOffset * (background.getWidth() - KirbyGame.SCREEN_WIDTH) / 
+        		(bg.map.getWidth() * 32 - KirbyGame.SCREEN_WIDTH) * -1.f, 
+        		yOffset * (background.getHeight() - KirbyGame.SCREEN_HEIGHT) / 
+        		(bg.map.getHeight() * 32 - KirbyGame.SCREEN_HEIGHT) * -1.f);
 		
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), 33, 19);
