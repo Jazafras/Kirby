@@ -41,14 +41,37 @@ class PlayingState extends BasicGameState {
 			Graphics g) throws SlickException {
 		KirbyGame bg = (KirbyGame)game;
 		
-		g.scale(bg.SCALE, bg.SCALE);
-		bg.map.render(0, 0, 0, 0, 32, 18);
+		float xOffset = getXOffset(bg);
+		float yOffset = getYOffset(bg);
 		
-		bg.kirby.render(g);
+		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
+				(int)(xOffset / 32), (int)(yOffset / 32), 33, 19);
+		
+		bg.kirby.render(g, xOffset, yOffset);
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
 		
+	}
+	
+	private float getXOffset(KirbyGame bg) {
+		float kXOffset = 0;
+		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2.f);
+		if (bg.kirby.getX() > maxXOffset)
+			kXOffset = maxXOffset - (bg.SCREEN_WIDTH / 2.f);
+		else if (bg.kirby.getX() <= bg.SCREEN_WIDTH / 2.f)
+			kXOffset = bg.kirby.getX() - (bg.SCREEN_WIDTH / 2.f);
+		return kXOffset;
+	}
+	
+	private float getYOffset(KirbyGame bg) {
+		float kYOffset = 0;
+		float maxYOffset = (bg.map.getHeight() * 32) - (bg.SCREEN_HEIGHT / 2.f);
+		if (bg.kirby.getY() > maxYOffset)
+			kYOffset = maxYOffset - (bg.SCREEN_HEIGHT / 2.f);
+		else if (bg.kirby.getY() <= bg.SCREEN_HEIGHT / 2.f)
+			kYOffset = bg.kirby.getY() - (bg.SCREEN_HEIGHT / 2.f);
+		return kYOffset;
 	}
 
 	@Override
@@ -57,6 +80,11 @@ class PlayingState extends BasicGameState {
 
 		Input input = container.getInput();
 		KirbyGame bg = (KirbyGame)game;
+		
+		float kXOffset = getXOffset(bg);
+		float kYOffset = getYOffset(bg);
+		
+		System.out.println(kXOffset);
 		
 		// kirby collision with cubs
 		Vector move = null;
@@ -117,6 +145,7 @@ class PlayingState extends BasicGameState {
 			bg.poacher.setReset(bg);
 		}*/
 		
+		
 		bg.kirby.update(delta);
 		bg.kirby.setVertex(bg);
 		//bg.poacher.setMoving(bg);
@@ -141,13 +170,13 @@ class PlayingState extends BasicGameState {
 	private void keyPresses(Input input, KirbyGame bg, int delta, Vector move) {		
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && (move == null || move.getX() <= 0)) 
-			bg.kirby.setVelocity(new Vector(-.3f, 0));
+			bg.kirby.moveLeft(delta); //bg.kirby.setVelocity(new Vector(-.2f, 0));
 		else if (input.isKeyDown(Input.KEY_RIGHT) && (move == null || move.getX() >= 0)) 
-			bg.kirby.setVelocity(new Vector(.3f, 0f));
+			bg.kirby.moveRight(delta); //bg.kirby.setVelocity(new Vector(.2f, 0f));
 		/*else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
-			bg.kirby.setVelocity(new Vector(0f, -.3f));
+			bg.kirby.setVelocity(new Vector(0f, -.2f));
 		else if (input.isKeyDown(Input.KEY_DOWN) && (move == null || move.getY() >= 0)) 
-			bg.kirby.setVelocity(new Vector(0f, .3f));*/
+			bg.kirby.setVelocity(new Vector(0f, .2f));*/
 		else 
 			bg.kirby.setVelocity(new Vector(0f, 0f));
 		
