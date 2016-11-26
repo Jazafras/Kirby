@@ -48,4 +48,8 @@ import jig.Vector;
 		super.render(g);
 	}
 	
+	public void update(final int delta, float xOffset, float yOffset) {
+		translate(getVelocity().scale(delta));
+	}
+	
 }
