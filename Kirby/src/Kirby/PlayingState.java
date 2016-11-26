@@ -23,6 +23,8 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  */
 class PlayingState extends BasicGameState {
 	int lives;
+	float xOffset;
+	float yOffset;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -41,8 +43,24 @@ class PlayingState extends BasicGameState {
 			Graphics g) throws SlickException {
 		KirbyGame bg = (KirbyGame)game;
 		
-		g.scale(bg.SCALE, bg.SCALE);
-		bg.map.render(0, 0, 0, 0, 32, 18);
+		float kXOffset = 0;
+		float kYOffset = 0;
+		
+		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2.f);
+		float maxYOffset = (bg.map.getHeight() * 32) - (bg.SCREEN_HEIGHT / 2.f);
+ 
+		if (bg.kirby.getX() > maxXOffset)
+			kXOffset = maxXOffset - (bg.SCREEN_WIDTH / 2.f);
+		else if (bg.kirby.getX() <= bg.SCREEN_WIDTH / 2.f)
+			kXOffset = bg.kirby.getX() - (bg.SCREEN_WIDTH / 2.f);
+		
+		if (bg.kirby.getY() > maxYOffset)
+			kYOffset = maxYOffset - (bg.SCREEN_HEIGHT / 2.f);
+		else if (bg.kirby.getY() <= bg.SCREEN_HEIGHT / 2.f)
+			kYOffset = bg.kirby.getY() - (bg.SCREEN_HEIGHT / 2.f);
+		
+		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
+				(int)(xOffset / 32), (int)(yOffset / 32), 33, 19);
 		
 		bg.kirby.render(g);
 		
@@ -57,6 +75,9 @@ class PlayingState extends BasicGameState {
 
 		Input input = container.getInput();
 		KirbyGame bg = (KirbyGame)game;
+		
+		xOffset = bg.kirby.getX() - bg.SCREEN_WIDTH / 2.f;
+		yOffset = bg.kirby.getY() - bg.SCREEN_HEIGHT / 2.f;
 		
 		// kirby collision with cubs
 		Vector move = null;

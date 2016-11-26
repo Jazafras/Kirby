@@ -1,5 +1,7 @@
 package Kirby;
 
+import org.newdawn.slick.Graphics;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -40,6 +42,10 @@ import jig.Vector;
 		if (bg.vPos.containsKey(v.toString())){
 			setvPos((int)getX() + xDiff, (int)getY() + yDiff);
 		}
+	}
+	
+	public void render(Graphics g, float offsetX, float offsetY) {
+		super.render(g);
 	}
 	
 }

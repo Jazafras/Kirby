@@ -54,7 +54,7 @@ public class KirbyGame extends StateBasedGame {
 	
     public static final int SCREEN_WIDTH  = 1280;
     public static final int SCREEN_HEIGHT = SCREEN_WIDTH / 16 * 9;
-    public static final float SCALE = (float) (1.25*((double)SCREEN_WIDTH/1280));
+    //public static final float SCALE = (float) (1.25*((double)SCREEN_WIDTH/1280));
 	
 	TiledMap map;
 	
