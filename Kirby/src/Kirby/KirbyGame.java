@@ -136,7 +136,7 @@ public class KirbyGame extends StateBasedGame {
 	}
 	
 	public void level1Setup() throws SlickException {
-		map = new TiledMap("Kirby/resources/level_0.tmx","Kirby/resources/");
+		map = new TiledMap("Kirby/resources/kirbymap.tmx","Kirby/resources/");
 	}
 	
 	public static void main(String[] args) {

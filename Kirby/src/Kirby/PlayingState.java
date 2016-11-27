@@ -54,7 +54,16 @@ class PlayingState extends BasicGameState {
         		(bg.map.getHeight() * 32 - KirbyGame.SCREEN_HEIGHT) * -1.f);
 		
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
-				(int)(xOffset / 32), (int)(yOffset / 32), 33, 19);
+				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
+		
+		
+		System.out.println("xOffset: " + xOffset);
+		System.out.println("yOffset: " + yOffset);
+		System.out.println("x coord: " + (int)(-1 * (xOffset % 32)));
+		System.out.println("y coord: " + (int)(-1 * (yOffset % 32)));
+		System.out.println("x tile: " + (int)(xOffset / 32));
+		System.out.println("y tile: " + (int)(yOffset / 32));
+		System.out.println();
 		
 		bg.kirby.render(g, xOffset, yOffset);
 		
@@ -65,10 +74,10 @@ class PlayingState extends BasicGameState {
 	
 	private float getXOffset(KirbyGame bg) {
 		float kXOffset = 0;
-		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2.f);
+		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2);
 		if (bg.kirby.getX() > maxXOffset)
 			kXOffset = maxXOffset - (bg.SCREEN_WIDTH / 2.f);
-		else if (bg.kirby.getX() <= bg.SCREEN_WIDTH / 2.f)
+		else if (bg.kirby.getX() >= bg.SCREEN_WIDTH / 2.f)
 			kXOffset = bg.kirby.getX() - (bg.SCREEN_WIDTH / 2.f);
 		return kXOffset;
 	}
@@ -78,7 +87,7 @@ class PlayingState extends BasicGameState {
 		float maxYOffset = (bg.map.getHeight() * 32) - (bg.SCREEN_HEIGHT / 2.f);
 		if (bg.kirby.getY() > maxYOffset)
 			kYOffset = maxYOffset - (bg.SCREEN_HEIGHT / 2.f);
-		else if (bg.kirby.getY() <= bg.SCREEN_HEIGHT / 2.f)
+		else if (bg.kirby.getY() >= bg.SCREEN_HEIGHT / 2.f)
 			kYOffset = bg.kirby.getY() - (bg.SCREEN_HEIGHT / 2.f);
 		return kYOffset;
 	}
@@ -92,8 +101,6 @@ class PlayingState extends BasicGameState {
 		
 		float kXOffset = getXOffset(bg);
 		float kYOffset = getYOffset(bg);
-		
-		System.out.println(kXOffset);
 		
 		// kirby collision with cubs
 		Vector move = null;
