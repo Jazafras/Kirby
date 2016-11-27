@@ -5,6 +5,7 @@
 	- **[2]** implement basic kirby movement for testing map
 	- **[3]** make screen scroll along with kirby
 	- **[4]** paralax scrolling for the background
+	- **[5]** create actual maps
 
 - Priya
 
@@ -27,7 +28,8 @@
 	- **[1]** Skeleton for kirby
 
 - Kelly
-	- - **[5]** create actual maps
+	- **[6]** - finish drawing level, make tunnels ?
+	
 
 - Undecided
 	- **[6]** level 1 design
