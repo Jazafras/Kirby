@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="kirby" tilewidth="32" tileheight="32" tilecount="507" columns="39">
-  <image source="kirby-tileset.png" trans="f82bfb" width="1252" height="440"/>
- </tileset>
- <tileset firstgid="508" name="kirby2" tilewidth="32" tileheight="32" tilecount="630" columns="63">
+ <tileset firstgid="1" name="kirby2" tilewidth="32" tileheight="32" tilecount="630" columns="63">
   <image source="kirbyterrain.png" width="2016" height="336"/>
  </tileset>
- <tileset firstgid="1138" source="kirby3.tsx"/>
+ <tileset firstgid="631" name="kirby3" tilewidth="32" tileheight="32" tilecount="630" columns="63">
+  <image source="kirbyterrain.png" trans="3daaff" width="2016" height="336"/>
+ </tileset>
  <layer name="Tile Layer 1" width="75" height="20" offsetx="16" offsety="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2TS07DMBCGo8bJPRASqVi1kSLuwQ268aIrBIdCArEAiQsVWPDYtEhZ01/JqOOp3TiPhkX9S79cm/E8vpgoCgoKCgoKOl3dqii6U7t9qdyx/6GrxC9ujL6ftzVe1K7eazxMXt8Zm1R65snTYepx/YraYJXXZzfJcKzmde9dmdG9Jlb0nvqyklygQuQEq6ekqnkMVvOOM4AReNHqEjHqy0pyATt5tqlZgRGx2gzwvw9GmLHpfX1NouhjW/N7Yp6XiWmXwAjfeShW9L6wl6zAhlj91CucO/rjbxVzyhlJYETmzLhw/0xVvhTvuQ0rso9cPRMXvtpYcUbc68Q0OKEn2t/H1Ywybp2YrMgyBveJFbxkuSQrnGHOz9jtdw/Td5G9FOn+WoiebYzIs9Q0fT/a06xLS6yNFd7XzHKf+xALGdvHb3F7r3rYd8YxZh/DFxZnjnPX37FfNNyxxfvcWbSI7ZK/ja/ZSgw0q0dnvGctmGnWly0+E+da7c+SWX5nIo8vW55/KvyYmnvqbSpWWfe8ZkTWlt9axLjim84O5elS28c+/WlLvWP0cmp+SIN9/Qds71bucBcAAA==
+   H4sIAAAAAAAAA+2TS07DMBCGEztnQUikYtVGirgHN+jGi64QHAoJxAIkLkRhwWPTImVDfiWjTqZ24zwaFvUv/XJtxvP4YqIoKCgoKCjodHWrouhO7faFcsf+h660X9wUfT+XNV7Urt5rPE5e3xnbVHjmyZJx6nH9itpgldVnN3o8Vou6977M6F4bK3pPQ1lJLlAucoLVk65qHoPVoucMYARetLpEjIayklzATp5ta1ZgRKy2I/zvgxFmbHtfX6U/yprf4rzQTbsERvjOY7Gi94W9ZAU2xOqnXuHM0R9/q5hTzkgCIzJnxoX7Z6rypXjPXViRfeTqmbjw1caKM+Le6KbBCT3R/j6uZpRxG91kRZYxuE+s4BXLJVnhDHN+xm6/e5i+i+wlT/bXXPRsY0SeJ03T96M9zbqyxNpY4X3NLfe5D7GQsUO8jrv7bYB9Z5xi9il8YXHqOHf9Hftlyx1bvM+dZYfYPvm7+JqtxMCwenTGezaCmWF92eJTcW7U/iyp5Xcq8viy5flnwo9Jc0+9zcQq657XjMjG8tuIGFd829mhPH1q+9inP2Opd4xeTs0PSbCv/wBRziC5cBcAAA==
   </data>
  </layer>
 </map>
