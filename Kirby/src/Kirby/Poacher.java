@@ -13,10 +13,7 @@ import jig.Vector;
 			KirbyGame.POACHER_LEFTIMG_RSC,
 			KirbyGame.POACHER_LEFTIMG_RSC,
 			KirbyGame.POACHER_LEFTIMG_RSC,
-			KirbyGame.POACHER_LEFTIMG_RSC/*,
-			kirbyGame.kirby_RIGHTIMG_RSC,
-			kirbyGame.kirby_FRONTIMG_RSC,
-			kirbyGame.kirby_BACKIMG_RSC*/
+			KirbyGame.POACHER_LEFTIMG_RSC,
 		};
 	
 	private boolean trapped;

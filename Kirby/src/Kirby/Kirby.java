@@ -1,5 +1,9 @@
 package Kirby;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -14,21 +18,19 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTIMG_RSC
 		};
 	
-	private boolean flowered;
-	private boolean eaten;
+	private boolean startState;
+	private boolean swordState;
+	private boolean state2;
+	private boolean state3;
+	
 
 	public Kirby(final float x, final float y) {
 		super(x, y, facingImages, LEFT);
 		setVelocity(new Vector(0, 0));
-		flowered = false;
-		eaten = false;
-	}
-	
-	/**
-	 * @return true if powered up with meat, false if not
-	 */
-	public boolean poweredUp() {
-		return flowered || eaten;
+		startState = true;
+		swordState = false;
+		state2 = false;
+		state3 = false;
 	}
 	
 	public void setVertex(KirbyGame bg) {
@@ -42,4 +44,40 @@ import jig.Vector;
 		}
 	}
 	
+	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
+		//super.render(g);
+		Image i = new Image(facingImages[LEFT]);
+		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
+		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);   
+	}
+	
+	public void update(final int delta, float xOffset, float yOffset) {
+		translate(getVelocity().scale(delta));
+	}
+	
+	public void moveLeft(int delta){
+		super.setPosition(super.getX() - (.15f*delta), super.getY());
+    }
+ 
+    public void moveRight(int delta){
+    	super.setPosition(super.getX() + (.15f*delta), super.getY());
+    }
+	
+	public void succ(){
+		//return succ;
+		
+	}
+	
+	public void swallow(){
+		//return swallow;
+		//if entity = sword
+		//switch to sword state
+		
+	}
+	
+	public void spit(){
+		//return spit;
+		
+	}
+
 }

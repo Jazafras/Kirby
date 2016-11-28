@@ -1,8 +1,0 @@
-## Resolved Issues ##
-
-## Open Issues ##
-**[1]** Socket base program
-**[2]** Client
-**[3]** Server
-**[4]** Coordination from Client to Server
-
