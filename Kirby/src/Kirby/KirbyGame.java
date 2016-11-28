@@ -40,13 +40,89 @@ public class KirbyGame extends StateBasedGame {
 	public static final String TIGRESS_HOLDING_RIGHTIMG_RSC = "Kirby/resources/tigress-holding-right.png";
 	public static final String TIGRESS_HOLDING_FRONTIMG_RSC = "Kirby/resources/tigress-holding-front.png";
 	public static final String TIGRESS_HOLDING_BACKIMG_RSC = "Kirby/resources/tigress-holding-back.png";
+
+	//Brontoburt images
+	public static final String BRONTOBURT_LEFT = "Kirby/resources/brontoburt_left.png";
+	public static final String BRONTOBURT_RIGHT = "Kirby/resources/brontoburt_right.png";
+	
+	//Bonkers images
+	public static final String BONKERS_LEFT = "Kirby/resources/bonkers_left.png";
+	public static final String BONKERS_RIGHT = "Kirby/resources/bonkers_right.png";
+	public static final String BONKERS_ATTACK_R = "Kirby/resources/bonkers_attackR.png";
+	public static final String BONKERS_ATTACK_L = "Kirby/resources/bonkers_attackL.png";
+	
+	//Cappy images
+	public static final String CAPPY_LEFT = "Kirby/resources/cappy_left.png";
+	public static final String CAPPY_RIGHT = "Kirby/resources/cappy_right.png";
+	
+	//Hot Head images
+	public static final String HOTHEAD_LEFT = "Kirby/resources/hothead_left.png";
+	public static final String HOTHEAD_RIGHT = "Kirby/resources/hothead_right.png";
+	public static final String HOTHEAD_ATTACK_R = "Kirby/resources/hothead_attackR.png";
+	public static final String HOTHEAD_ATTACK_L = "Kirby/resources/hothead_attackL.png";
+
+	//Kibble images
+	public static final String KIBBLE_LEFT = "Kirby/resources/kibble_left.png";
+	public static final String KIBBLE_RIGHT = "Kirby/resources/kibble_right.png";
+	public static final String KIBBLE_ATTACK_R = "Kirby/resources/kibble_attackR.png";
+	public static final String KIBBLE_ATTACK_L = "Kirby/resources/kibble_attackL.png";
+	
+	//Knuckle Joe images
+	public static final String KNUCKLE_LEFT = "Kirby/resources/knuckle_left.png";
+	public static final String KNUCKLE_RIGHT = "Kirby/resources/knuckle_right.png";
+	public static final String KNUCKLE_ATTACK_R = "Kirby/resources/knuckle_attackR.png";
+	public static final String KNUCKLE_ATTACK_L = "Kirby/resources/knuckle_attackL.png";
+	
+	//Noddy images
+	public static final String NODDY_LEFT = "Kirby/resources/noddy_left.png";
+	public static final String NODDY_RIGHT = "Kirby/resources/noddy_right.png";
+	
+	//Poppy images
+	public static final String POPPY_LEFT = "Kirby/resources/poppy_left.png";
+	public static final String POPPY_RIGHT = "Kirby/resources/poppy_right.png";
+	public static final String POPPY_ATTACK_R = "Kirby/resources/poppy_attackR.png";
+	public static final String POPPY_ATTACK_L = "Kirby/resources/poppy_attackL.png";
+	
+	//Scarfy images
+	public static final String SCARFY_LEFT = "Kirby/resources/scarfy_left.png";
+	public static final String SCARFY_RIGHT = "Kirby/resources/scarfy_right.png";
+	
+	//Sparky images
+	public static final String SPARKY_LEFT = "Kirby/resources/sparky_left.png";
+	public static final String SPARKY_RIGHT = "Kirby/resources/sparky_right.png";
+	public static final String SPARKY_ATTACK_R = "Kirby/resources/sparky_attackR.png";
+	public static final String SPARKY_ATTACK_L = "Kirby/resources/sparky_attackL.png";
+	
+	//Sword Knight images
+	public static final String SWORDKNIGHT_LEFT = "Kirby/resources/bladeknight_left.png";
+	public static final String SWORDKNIGHT_RIGHT = "Kirby/resources/bladeknight_right.png";
+	public static final String SWORDKNIGHT_ATTACK_R = "Kirby/resources/bladeknight_attack_right.png";
+	public static final String SWORDKNIGHT_ATTACK_L = "Kirby/resources/bladeknight_attack_left.png";
+	
+	//Twister images
+	public static final String TWISTER_LEFT = "Kirby/resources/twister_left.png";
+	public static final String TWISTER_RIGHT = "Kirby/resources/twister_right.png";
+	
+	//UFO images
+	public static final String UFO_LEFT = "Kirby/resources/ufo_left.png";
+	public static final String UFO_RIGHT = "Kirby/resources/ufo_right.png";
+	public static final String UFO_ATTACK_R = "Kirby/resources/ufo_attackRight.png";
+	public static final String UFO_ATTACK_L = "Kirby/resources/ufo_attackLeft.png";
+	
+	//WaddleDee images
+	public static final String WADDLEDEE_LEFT = "Kirby/resources/waddledee_left.png";
+	public static final String WADDLEDEE_RIGHT = "Kirby/resources/waddledee_right.png";
+		
+	//WaddleDoo images
+	public static final String WADDLEDOO_LEFT = "Kirby/resources/waddledoo_left.png";
+	public static final String WADDLEDOO_RIGHT = "Kirby/resources/waddledoo_right.png";
+	public static final String WADDLEDOO_ATTACK_R = "Kirby/resources/waddledoo_attackR.png";
+	public static final String WADDLEDOO_ATTACK_L = "Kirby/resources/waddledoo_attackL.png";	
 	
 	public static final String CUB_IMG_RSC = "Kirby/resources/cub.png";
 	
 	public static final String POACHER_LEFTIMG_RSC = "Kirby/resources/poacher-left.png";
 	
-	public static final String FLOWER_IMG_RSC = "Kirby/resources/flower.png";
-	public static final String MEAT_IMG_RSC = "Kirby/resources/meat.png";
 	public static final String UNDERBRUSH_IMG_RSC = "Kirby/resources/underbrush.png";
 	public static final String NEST_IMG_RSC = "Kirby/resources/nest.png";
 	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
@@ -63,8 +139,6 @@ public class KirbyGame extends StateBasedGame {
 	Kirby kirby;
 	Poacher poacher;
 	ArrayList<Cub> cubs;
-	ArrayList<Flower> flowers;
-	ArrayList<Meat> meats;	
 	Set<Underbrush> underbrushes;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
@@ -81,8 +155,6 @@ public class KirbyGame extends StateBasedGame {
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		cubs = new ArrayList<Cub>();
-		flowers = new ArrayList<Flower>();
-		meats = new ArrayList<Meat>();
 		underbrushes = new HashSet<Underbrush>();
 		vertices = new HashSet<Vertex>();
 		vPos = new HashMap<String, Vertex>();
@@ -128,8 +200,6 @@ public class KirbyGame extends StateBasedGame {
 		
 		ResourceManager.loadImage(POACHER_LEFTIMG_RSC);
 		
-		ResourceManager.loadImage(FLOWER_IMG_RSC);
-		ResourceManager.loadImage(MEAT_IMG_RSC);
 		ResourceManager.loadImage(UNDERBRUSH_IMG_RSC);
 		ResourceManager.loadImage(NEST_IMG_RSC);
 		ResourceManager.loadImage(VERTEX_IMG_RSC);
