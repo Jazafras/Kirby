@@ -18,14 +18,18 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTIMG_RSC
 		};
 	
-	private boolean flowered;
-	private boolean eaten;
+	private boolean startState;
+	private boolean swordState;
+	private boolean state2;
+	private boolean state3;
 
 	public Kirby(final float x, final float y) {
 		super(x, y, facingImages, LEFT);
 		setVelocity(new Vector(0, 0));
-		flowered = false;
-		eaten = false;
+		private boolean startState;
+		private boolean swordState;
+		private boolean state2;
+		private boolean state3;
 	}
 	
 	/**
@@ -65,4 +69,21 @@ import jig.Vector;
     	super.setPosition(super.getX() + (.15f*delta), super.getY());
     }
 	
+	public Kirby succ(){
+		return succ;
+		
+	}
+	
+	public void swallow(){
+		return swallow;
+		//if entity = sword
+		//switch to sword state
+		
+	}
+	
+	public void spit(){
+		return spit;
+		
+	}
+
 }
