@@ -7,7 +7,7 @@ import jig.Vector;
 class Kirby extends MovingEntity {
 	
 	private boolean startState;
-	private boolean state1;
+	private boolean swordState;
 	private boolean state2;
 	private boolean state3;
 	
@@ -16,21 +16,26 @@ class Kirby extends MovingEntity {
 		super(x,y);
 		setVelocity(new Vector(0,0));
 		startState = true;
-		state1 = false;
+		swordState = false;
 		state2 = false;
 		state3 = false;
 		
 	}
 	
-	public void succ(){
+	public Kirby succ(){
+		return succ;
 		
 	}
 	
 	public void swallow(){
+		return swallow;
+		//if entity = sword
+		//switch to sword state
 		
 	}
 	
 	public void spit(){
+		return spit;
 		
 	}
 
