@@ -7,7 +7,6 @@ INDEX VERSION 1.129+C:\Users\jasmine\Documents\college\senior\CS447_Computer_gam
 2715941635.index
 3417200662.index
 2637943071.index
-2330248317.index
 2855899100.index
 2478937133.index
 2809250744.index
