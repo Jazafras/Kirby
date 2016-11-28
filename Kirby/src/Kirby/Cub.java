@@ -43,7 +43,7 @@ import jig.Vector;
 		if (!val) {
 			setFacing(LEFT);
 		} else if (getCurImage() != null) {
-			removeImage(ResourceManager.getImage(getCurImage()));
+			//removeImage(ResourceManager.getImage(getCurImage()));
 			setCurImage(null);
 			setFacing(-1);
 			setvPos(-1, -1);

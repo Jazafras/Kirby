@@ -22,21 +22,15 @@ import jig.Vector;
 	private boolean swordState;
 	private boolean state2;
 	private boolean state3;
+	
 
 	public Kirby(final float x, final float y) {
 		super(x, y, facingImages, LEFT);
 		setVelocity(new Vector(0, 0));
-		private boolean startState;
-		private boolean swordState;
-		private boolean state2;
-		private boolean state3;
-	}
-	
-	/**
-	 * @return true if powered up with meat, false if not
-	 */
-	public boolean poweredUp() {
-		return flowered || eaten;
+		startState = true;
+		swordState = false;
+		state2 = false;
+		state3 = false;
 	}
 	
 	public void setVertex(KirbyGame bg) {
@@ -69,20 +63,20 @@ import jig.Vector;
     	super.setPosition(super.getX() + (.15f*delta), super.getY());
     }
 	
-	public Kirby succ(){
-		return succ;
+	public void succ(){
+		//return succ;
 		
 	}
 	
 	public void swallow(){
-		return swallow;
+		//return swallow;
 		//if entity = sword
 		//switch to sword state
 		
 	}
 	
 	public void spit(){
-		return spit;
+		//return spit;
 		
 	}
 
