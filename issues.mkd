@@ -15,7 +15,9 @@
 	- **[1]** networking implementation
 
 - Jasmine
-	-**Base skeleton for enemies**
+	-**[1]** Base skeleton for enemies
+	
+	(Enemy List)
 	-**[1]** Blade knight
 	-**[2]** UFO
 	-**[3]** Cappy
