@@ -8,13 +8,13 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Noddy extends MovingEntity {
+ class Brontoburt extends MovingEntity {
 	public static final String[] facingImages = 
 		{
-			KirbyGame.NODDY_RIGHT,
-			KirbyGame.NODDY_LEFT,
-			//KirbyGame.SWORDKNIGHT_ATTACK_R,
-			//KirbyGame.SWORDKNIGHT_ATTACK_L
+			KirbyGame.BRONTOBURT_RIGHT,
+			KirbyGame.BRONTOBURT_LEFT,
+			//KirbyGame.BRONTOBURT_ATTACK_R,
+			//KirbyGame.BRONTOBURT_ATTACK_L
 		};
 	
 	private Vertex nextPos;
@@ -24,7 +24,7 @@ import jig.Vector;
 	private int waitTime;
 	Random rand = new Random();
 
-	public Noddy(final float x, final float y) {
+	public Brontoburt(final float x, final float y) {
 		super(x, y, facingImages, LEFT);
 		setVelocity(new Vector(0, 0));
 		firstPath = true;
