@@ -6,6 +6,7 @@ import jig.Vector;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -23,49 +24,72 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  */
 class PlayingState extends BasicGameState {
 	int lives;
+	Image background;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		KirbyGame bg = (KirbyGame)game;
 		lives = 3;
+		background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
 	}
 
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.setSoundOn(true);
-		TigressGame bg = (TigressGame)game;
-		
-		if (bg.level == 2)
-			bg.level2Setup();
-		else if (bg.level == 3)
-			bg.level3Setup();
+		KirbyGame bg = (KirbyGame)game;
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame game,
 			Graphics g) throws SlickException {
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 		
-		g.drawImage(ResourceManager.getImage(TigressGame.BACKGROUND_IMG_RSC),
-				0, 0);
+		float xOffset = getXOffset(bg);
+		float yOffset = getYOffset(bg);
 		
-		for (Underbrush u : bg.underbrushes)
-			u.render(g);
-		bg.nest.render(g);
-		for (Vertex v : bg.vertices)
-			v.render(g);
-		bg.tigress.render(g);
-		bg.poacher.render(g);
-		for (Cub c : bg.cubs) 
-			c.render(g);
-		for (Flower f : bg.flowers) 
-			f.render(g);
-		for (Meat m : bg.meats) 
-			m.render(g);
+        background.draw(xOffset * (background.getWidth() - KirbyGame.SCREEN_WIDTH) / 
+        		(bg.map.getWidth() * 32 - KirbyGame.SCREEN_WIDTH) * -1.f, 
+        		yOffset * (background.getHeight() - KirbyGame.SCREEN_HEIGHT) / 
+        		(bg.map.getHeight() * 32 - KirbyGame.SCREEN_HEIGHT) * -1.f);
+		
+		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
+				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
+		
+		
+		System.out.println("xOffset: " + xOffset);
+		System.out.println("yOffset: " + yOffset);
+		System.out.println("x coord: " + (int)(-1 * (xOffset % 32)));
+		System.out.println("y coord: " + (int)(-1 * (yOffset % 32)));
+		System.out.println("x tile: " + (int)(xOffset / 32));
+		System.out.println("y tile: " + (int)(yOffset / 32));
+		System.out.println();
+		
+		bg.kirby.render(g, xOffset, yOffset);
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
 		
+	}
+	
+	private float getXOffset(KirbyGame bg) {
+		float kXOffset = 0;
+		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2);
+		if (bg.kirby.getX() > maxXOffset)
+			kXOffset = maxXOffset - (bg.SCREEN_WIDTH / 2.f);
+		else if (bg.kirby.getX() >= bg.SCREEN_WIDTH / 2.f)
+			kXOffset = bg.kirby.getX() - (bg.SCREEN_WIDTH / 2.f);
+		return kXOffset;
+	}
+	
+	private float getYOffset(KirbyGame bg) {
+		float kYOffset = 0;
+		float maxYOffset = (bg.map.getHeight() * 32) - (bg.SCREEN_HEIGHT / 2.f);
+		if (bg.kirby.getY() > maxYOffset)
+			kYOffset = maxYOffset - (bg.SCREEN_HEIGHT / 2.f);
+		else if (bg.kirby.getY() >= bg.SCREEN_HEIGHT / 2.f)
+			kYOffset = bg.kirby.getY() - (bg.SCREEN_HEIGHT / 2.f);
+		return kYOffset;
 	}
 
 	@Override
@@ -73,26 +97,29 @@ class PlayingState extends BasicGameState {
 			int delta) throws SlickException {
 
 		Input input = container.getInput();
-		TigressGame bg = (TigressGame)game;
+		KirbyGame bg = (KirbyGame)game;
 		
-		// tigress collision with cubs
+		float kXOffset = getXOffset(bg);
+		float kYOffset = getYOffset(bg);
+		
+		// kirby collision with cubs
 		Vector move = null;
 		for (Underbrush u : bg.underbrushes) {
-			Collision c = bg.tigress.collides(u);
-			if (bg.tigress.collides(u) != null) {
+			Collision c = bg.kirby.collides(u);
+			if (bg.kirby.collides(u) != null) {
 				move = c.getMinPenetration();
 				break;
 			}
 		}
 		
-		Collision tigressNest = bg.tigress.collides(bg.nest);
-		if (tigressNest != null) {
-			if (bg.tigress.holdingCub()) {
-				bg.cubs.remove(bg.tigress.getRescueCub());
-				bg.tigress.setRescueCub(null);
+		/*Collision kirbyNest = bg.kirby.collides(bg.nest);
+		if (kirbyNest != null) {
+			if (bg.kirby.holdingCub()) {
+				bg.cubs.remove(bg.kirby.getRescueCub());
+				bg.kirby.setRescueCub(null);
 			}
-			move = tigressNest.getMinPenetration();
-		}
+			move = kirbyNest.getMinPenetration();
+		}*/
 		
 		keyPresses(input, bg, delta, move);
 		
@@ -101,23 +128,23 @@ class PlayingState extends BasicGameState {
 			c.update(delta);
 		}
 		
-		// tigress collision with cubs
-		if (!bg.tigress.holdingCub()) {
+		// kirby collision with cubs
+		/*if (!bg.kirby.holdingCub()) {
 			for (Cub c : bg.cubs) {
-				if (bg.tigress.collides(c) != null) {
-					bg.tigress.setRescueCub(c);
+				if (bg.kirby.collides(c) != null) {
+					bg.kirby.setRescueCub(c);
 					break;
 				}
 			}
 		}
 		
-		// poacher collision with tigress or cubs
-		Collision poacherTigress = bg.tigress.collides(bg.poacher);
+		// poacher collision with kirby or cubs
+		Collision poacherkirby = bg.kirby.collides(bg.poacher);
 		Collision poacherCub = null;
 		for (Cub c : bg.cubs) {
 			Collision coll = bg.poacher.collides(c);
 			if (coll != null && !c.isHeld()) {
-				bg.tigress.setRescueCub(null);
+				bg.kirby.setRescueCub(null);
 				c.removeImage(ResourceManager.getImage(c.getCurImage()));
 				bg.cubs.remove(c);
 				poacherCub = coll;
@@ -126,67 +153,68 @@ class PlayingState extends BasicGameState {
 			}
 		}
 		
-		if (poacherTigress != null) {
+		if (poacherkirby != null) {
 			lives -= 1;
-			bg.tigress.setPosition(bg.ScreenWidth - 50, bg.ScreenHeight - 50);
-			bg.tigress.setvPos(bg.ScreenWidth - 50, bg.ScreenHeight - 50);
+			bg.kirby.setPosition(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
+			bg.kirby.setvPos(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
 			bg.poacher.setPosition(50, 50);
 			bg.poacher.setReset(bg);
-		}
+		}*/
 		
-		bg.tigress.update(delta);
-		bg.tigress.setVertex(bg);
-		bg.poacher.setMoving(bg);
+		
+		bg.kirby.update(delta);
+		bg.kirby.setVertex(bg);
+		//bg.poacher.setMoving(bg);
 		bg.poacher.update(delta);
 		
 		//ResourceManager.getSound(BounceGame.HITPADDLE_RSC).play();
 		
 		// Change levels
-		if (bg.cubs.size() == 0) {
+		/*if (bg.cubs.size() == 0) {
 			bg.level++;
 			if (bg.level == 4) {
-				game.enterState(TigressGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+				game.enterState(kirbyGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 			} else {
-				game.enterState(TigressGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+				game.enterState(kirbyGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 			}
-		}
+		}*/
 
 		checkLives(game, bg);
 		
 	}
 	
-	private void keyPresses(Input input, TigressGame bg, int delta, Vector move) {		
+	private void keyPresses(Input input, KirbyGame bg, int delta, Vector move) {		
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && (move == null || move.getX() <= 0)) 
-			bg.tigress.setVelocity(new Vector(-.3f, 0));
+			bg.kirby.moveLeft(delta); //bg.kirby.setVelocity(new Vector(-.2f, 0));
 		else if (input.isKeyDown(Input.KEY_RIGHT) && (move == null || move.getX() >= 0)) 
-			bg.tigress.setVelocity(new Vector(.3f, 0f));
-		else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
-			bg.tigress.setVelocity(new Vector(0f, -.3f));
+			bg.kirby.moveRight(delta); //bg.kirby.setVelocity(new Vector(.2f, 0f));
+		/*else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
+			bg.kirby.setVelocity(new Vector(0f, -.2f));
 		else if (input.isKeyDown(Input.KEY_DOWN) && (move == null || move.getY() >= 0)) 
-			bg.tigress.setVelocity(new Vector(0f, .3f));
+			bg.kirby.setVelocity(new Vector(0f, .2f));*/
 		else 
-			bg.tigress.setVelocity(new Vector(0f, 0f));
+			bg.kirby.setVelocity(new Vector(0f, 0f));
 		
-		// if space pressed, tigress drops cub
-		/*if (input.isKeyDown(Input.KEY_SPACE) && bg.tigress.holdingCub()) 
-			bg.tigress.dropCub();*/
+		// if space pressed, kirby drops cub
+		/*if (input.isKeyDown(Input.KEY_SPACE) && bg.kirby.holdingCub()) 
+			bg.kirby.dropCub();*/
 		
 	}
 	
-	private void checkLives(StateBasedGame game, TigressGame bg) {
+	private void checkLives(StateBasedGame game, KirbyGame bg) {
 		// Game over state if no lives left
 		if (lives <= 0) {
-			//((GameOverState)game.getState(TigressGame.GAMEOVERSTATE)).setUserScore(bounces);
+			//((GameOverState)game.getState(kirbyGame.GAMEOVERSTATE)).setUserScore(bounces);
 			bg.level = 1;
 			lives = 3;
-			game.enterState(TigressGame.GAMEOVERSTATE);
+			game.enterState(KirbyGame.GAMEOVERSTATE);
 		}
 	}
 
 	@Override
 	public int getID() {
-		return TigressGame.PLAYINGSTATE;
+		return KirbyGame.PLAYINGSTATE;
 	}
 	
 }

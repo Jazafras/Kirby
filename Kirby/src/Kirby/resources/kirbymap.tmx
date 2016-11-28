@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="kirby2" tilewidth="32" tileheight="32" tilecount="630" columns="63">
+  <image source="kirbyterrain.png" width="2016" height="336"/>
+ </tileset>
+ <tileset firstgid="631" name="kirby3" tilewidth="32" tileheight="32" tilecount="630" columns="63">
+  <image source="kirbyterrain.png" trans="3daaff" width="2016" height="336"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="75" height="20" offsetx="16" offsety="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2TS07DMBCGEztnQUikYtVGirgHN+jGi64QHAoJxAIkLkRhwWPTImVDfiWjTqZ24zwaFvUv/XJtxvP4YqIoKCgoKCjodHWrouhO7faFcsf+h660X9wUfT+XNV7Urt5rPE5e3xnbVHjmyZJx6nH9itpgldVnN3o8Vou6977M6F4bK3pPQ1lJLlAucoLVk65qHoPVoucMYARetLpEjIayklzATp5ta1ZgRKy2I/zvgxFmbHtfX6U/yprf4rzQTbsERvjOY7Gi94W9ZAU2xOqnXuHM0R9/q5hTzkgCIzJnxoX7Z6rypXjPXViRfeTqmbjw1caKM+Le6KbBCT3R/j6uZpRxG91kRZYxuE+s4BXLJVnhDHN+xm6/e5i+i+wlT/bXXPRsY0SeJ03T96M9zbqyxNpY4X3NLfe5D7GQsUO8jrv7bYB9Z5xi9il8YXHqOHf9Hftlyx1bvM+dZYfYPvm7+JqtxMCwenTGezaCmWF92eJTcW7U/iyp5Xcq8viy5flnwo9Jc0+9zcQq657XjMjG8tuIGFd829mhPH1q+9inP2Opd4xeTs0PSbCv/wBRziC5cBcAAA==
+  </data>
+ </layer>
+</map>
