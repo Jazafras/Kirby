@@ -10,6 +10,7 @@
 - Priya
 
 - Jasmine
+	- **[1]** Base skeleton for enemies
 
 - Audrey
 
@@ -22,7 +23,7 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[1]** Base skeleton for enemies
+	- **[2]** Basic movement in paralax map
 
 - Audrey
 	- **[1]** Skeleton for kirby
