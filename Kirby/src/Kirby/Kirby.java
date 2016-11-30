@@ -12,7 +12,7 @@ import jig.Vector;
 	
 	public static final String[] facingImages = 
 		{
-			KirbyGame.KIRBY_LEFTIMG_RSC,
+			KirbyGame.KIRBY_RIGHTIMG_RSC,
 			KirbyGame.KIRBY_LEFTIMG_RSC,
 			KirbyGame.KIRBY_LEFTIMG_RSC,
 			KirbyGame.KIRBY_LEFTIMG_RSC
@@ -25,7 +25,7 @@ import jig.Vector;
 	
 
 	public Kirby(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, RIGHT);
 		setVelocity(new Vector(0, 0));
 		startState = true;
 		swordState = false;
@@ -46,7 +46,7 @@ import jig.Vector;
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		//super.render(g);
-		Image i = new Image(facingImages[LEFT]);
+		Image i = new Image(facingImages[RIGHT]);
 		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
 		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);   
 	}

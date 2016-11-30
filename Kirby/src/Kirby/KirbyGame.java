@@ -28,19 +28,13 @@ public class KirbyGame extends StateBasedGame {
 	public static final String BACKGROUND_IMG_RSC = "Kirby/resources/background.png";
 	public static final String STARTUP_IMG_RSC = "Kirby/resources/startup.png";
 	
-	public static final String KIRBY_LEFTIMG_RSC = "Kirby/resources/kirby-sprite.png";
+	/***Kirby images***/
+	//default
+	public static final String KIRBY_LEFTIMG_RSC = "Kirby/resources/kirby_regular_left.png";
+	public static final String KIRBY_RIGHTIMG_RSC = "Kirby/resources/kirby_regular_right.png";
 	
-	// all entity images used in game
-	public static final String TIGRESS_LEFTIMG_RSC = "Kirby/resources/tigress-left.png";
-	public static final String TIGRESS_RIGHTIMG_RSC = "Kirby/resources/tigress-right.png";
-	public static final String TIGRESS_FRONTIMG_RSC = "Kirby/resources/tigress-front.png";
-	public static final String TIGRESS_BACKIMG_RSC = "Kirby/resources/tigress-back.png";
 	
-	public static final String TIGRESS_HOLDING_LEFTIMG_RSC = "Kirby/resources/tigress-holding-left.png";
-	public static final String TIGRESS_HOLDING_RIGHTIMG_RSC = "Kirby/resources/tigress-holding-right.png";
-	public static final String TIGRESS_HOLDING_FRONTIMG_RSC = "Kirby/resources/tigress-holding-front.png";
-	public static final String TIGRESS_HOLDING_BACKIMG_RSC = "Kirby/resources/tigress-holding-back.png";
-
+	/***Enemy images***/
 	//Brontoburt images
 	public static final String BRONTOBURT_LEFT = "Kirby/resources/brontoburt_left.png";
 	public static final String BRONTOBURT_RIGHT = "Kirby/resources/brontoburt_right.png";
@@ -173,28 +167,30 @@ public class KirbyGame extends StateBasedGame {
 		level1Setup();
 		
 		kirby = new Kirby(128, 418);
-		poacher = new Poacher(50, 50, vPos.get(new Vertex(50, 50).toString()));
-		nest = new Nest(SCREEN_WIDTH - 85, 60);
-		
+		poacher = new Poacher(128, 418, vPos.get(new Vertex(50, 50).toString()));
+		//bonkers = new Bonkers();
+		//brontoburt = new Brontoburt();
+		//cappy = new Cappy();
+		//hothead = new HotHead();
+		//knucklejoe = new KnuckleJoe();
+		//Noddy = new noddy();
+		//poppyjr = new PoppyJr();
+		//sirkibble = new SirKibble();
+		//sparky = new Sparky();
+		//swordknight = new SwordKnight();
+		//twister = new Twister();
+		//ufo = new UFO();
+		//waddledee = new WaddleDee();
 	}
 	
 	private void loadImages() {
-		//ResourceManager.loadSound(HITWALL_RSC);	
-		
 		ResourceManager.loadImage(BACKGROUND_IMG_RSC);
 		ResourceManager.loadImage(STARTUP_IMG_RSC);
 		
 		ResourceManager.loadImage(KIRBY_LEFTIMG_RSC);
+		ResourceManager.loadImage(KIRBY_RIGHTIMG_RSC);
 		
-		ResourceManager.loadImage(TIGRESS_LEFTIMG_RSC);
-		ResourceManager.loadImage(TIGRESS_RIGHTIMG_RSC);
-		ResourceManager.loadImage(TIGRESS_FRONTIMG_RSC);
-		ResourceManager.loadImage(TIGRESS_BACKIMG_RSC);
-		
-		ResourceManager.loadImage(TIGRESS_HOLDING_LEFTIMG_RSC);
-		ResourceManager.loadImage(TIGRESS_HOLDING_RIGHTIMG_RSC);
-		ResourceManager.loadImage(TIGRESS_HOLDING_FRONTIMG_RSC);
-		ResourceManager.loadImage(TIGRESS_HOLDING_BACKIMG_RSC);
+
 		
 		ResourceManager.loadImage(CUB_IMG_RSC);
 		

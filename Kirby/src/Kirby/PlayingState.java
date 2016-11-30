@@ -15,10 +15,7 @@ import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.HorizontalSplitTransition;
 
 /**
- * This state is active when the Game is being played. In this state, sound is
- * turned on, the bounce counter begins at 0 and increases until 10 at which
- * point a transition to the Game Over state is initiated. The user can also
- * control the ball using the WAS & D keys.
+ * This state is active when the Game is being played. 
  * Transitions From StartUpState
  * Transitions To GameOverState
  */
@@ -166,8 +163,6 @@ class PlayingState extends BasicGameState {
 		bg.kirby.setVertex(bg);
 		//bg.poacher.setMoving(bg);
 		bg.poacher.update(delta);
-		
-		//ResourceManager.getSound(BounceGame.HITPADDLE_RSC).play();
 		
 		// Change levels
 		/*if (bg.cubs.size() == 0) {
