@@ -4,6 +4,9 @@ import jig.Collision;
 import jig.ResourceManager;
 import jig.Vector;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -23,8 +26,14 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  * Transitions To GameOverState
  */
 class PlayingState extends BasicGameState {
+	
+	public static final int GROUND = 0;
+	public static final int AIR = 1;
+	
 	int lives;
 	Image background;
+	Tile[][] tileMap;
+	Set<Tile> groundTiles;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -32,6 +41,8 @@ class PlayingState extends BasicGameState {
 		KirbyGame bg = (KirbyGame)game;
 		lives = 3;
 		background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
+		groundTiles = new HashSet<Tile>();
+		loadTiles(bg);
 	}
 
 	@Override
@@ -138,30 +149,6 @@ class PlayingState extends BasicGameState {
 			}
 		}
 		
-		// poacher collision with kirby or cubs
-		Collision poacherkirby = bg.kirby.collides(bg.poacher);
-		Collision poacherCub = null;
-		for (Cub c : bg.cubs) {
-			Collision coll = bg.poacher.collides(c);
-			if (coll != null && !c.isHeld()) {
-				bg.kirby.setRescueCub(null);
-				c.removeImage(ResourceManager.getImage(c.getCurImage()));
-				bg.cubs.remove(c);
-				poacherCub = coll;
-				lives -= 1;
-				break;
-			}
-		}
-		
-		if (poacherkirby != null) {
-			lives -= 1;
-			bg.kirby.setPosition(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
-			bg.kirby.setvPos(bg.SCREEN_WIDTH - 50, bg.SCREEN_HEIGHT - 50);
-			bg.poacher.setPosition(50, 50);
-			bg.poacher.setReset(bg);
-		}*/
-		
-		
 		bg.kirby.update(delta);
 		bg.kirby.setVertex(bg);
 		//bg.poacher.setMoving(bg);
@@ -209,6 +196,25 @@ class PlayingState extends BasicGameState {
 			bg.level = 1;
 			lives = 3;
 			game.enterState(KirbyGame.GAMEOVERSTATE);
+		}
+	}
+	
+	private void loadTiles(KirbyGame bg) {
+		tileMap = new Tile[bg.map.getWidth()][bg.map.getHeight()];
+		int collisions = bg.map.getLayerIndex("TileMap");
+		
+		for (int i = 0; i < bg.map.getWidth(); i++) {
+			for (int j = 0; j < bg.map.getHeight(); j++) {
+				int type = bg.map.getTileId(i, j, collisions);
+				Tile t = null;
+				if (bg.map.getTileProperty(type, "tileType", "solid").equals("air")) {
+					t = new Tile(i, j, AIR);
+				} else {
+					t = new Tile(i, j, GROUND);
+					groundTiles.add(t);
+				}
+				tileMap[i][j] = t;
+			}
 		}
 	}
 

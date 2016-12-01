@@ -1,5 +1,8 @@
 package Kirby;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -18,6 +21,8 @@ import jig.Vector;
 	private int facing;
 	private String curImage;
 	protected Vertex vPos;
+	private boolean onGround;
+	protected float maximumFallSpeed = 1;
 
 	/**
 	 * Constructs the moving entity.
@@ -33,6 +38,7 @@ import jig.Vector;
 		this.facingImages = facingImages;
 		setFacing(facing);
 		vPos = new Vertex(x, y);
+		onGround = true;
 		addImageWithBoundingBox(ResourceManager
 				.getImage(facingImages[RIGHT]));
 	}
@@ -59,6 +65,26 @@ import jig.Vector;
 	protected String getCurImage() {
 		return curImage;
 	}
+	
+	public void applyGravity(float gravity){
+      //if we aren't already moving at maximum speed
+        if(velocity.getY() < maximumFallSpeed){
+            //accelerate
+            setVelocity(new Vector(velocity.getX(), velocity.getY() + gravity));
+            if(velocity.getY() > maximumFallSpeed){
+                //and if we exceed maximum speed, set it to maximum speed
+            	setVelocity(new Vector(velocity.getX(), maximumFallSpeed));
+            }
+        }
+    }
+	
+	public boolean isOnGround(){
+        return onGround;
+    }
+ 
+    public void setOnGround(boolean b){
+        onGround = b;
+    }
 
 	/**
 	 * Sets the velocity of the entity and updates what direction it's facing
@@ -125,4 +151,29 @@ import jig.Vector;
 	public void update(final int delta) {
 		translate(velocity.scale(delta));
 	}
+	
+	public Set<Tile> surroundingTiles(Tile[][] tiles) {
+        Set<Tile> surTiles = new HashSet<Tile>();
+
+        for (int i = (int)super.getCoarseGrainedMinX(); 
+        		i <= super.getCoarseGrainedMaxX(); i += 32) {
+            for (int j = (int)super.getCoarseGrainedMinY(); 
+            		j <= super.getCoarseGrainedMaxY(); j += 32){
+                surTiles.add(tiles[i/32][j/32]);
+            }
+        }
+        return surTiles;
+    }
+	
+	public Set<Tile> getGroundTiles(Tile[][] tiles) {
+        Set<Tile> groundTiles = new HashSet<Tile>();
+        int j = (int) super.getCoarseGrainedMinY() + 1;
+ 
+        for(int i = (int)super.getCoarseGrainedMinX(); 
+        		i <= super.getCoarseGrainedMaxX(); i += 32){
+            groundTiles.add(tiles[i/32][j/32]);
+        }
+ 
+        return groundTiles;
+    }
 }
