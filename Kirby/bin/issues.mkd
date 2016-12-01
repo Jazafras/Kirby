@@ -1,8 +1,35 @@
-## Resolved Issues ##
+####### Resolved Issues #######
 
-## Open Issues ##
-**[1]** Socket base program
-**[2]** Client
-**[3]** Server
-**[4]** Coordination from Client to Server
+- Kelly
+	- **[1]** basic tiled map render
+	- **[2]** implement basic kirby movement for testing map
+	- **[3]** make screen scroll along with kirby
+	- **[4]** paralax scrolling for the background
+	- **[5]** create actual maps
 
+- Priya
+
+- Jasmine
+
+- Audrey
+
+####### Open Issues #######
+
+- Priya
+	- **[1]** Socket base program
+	- **[2]** Client
+	- **[3]** Server
+	- **[4]** Coordination from Client to Server
+
+- Jasmine
+	- **[1]** Base skeleton for enemies
+
+- Audrey
+	- **[1]** Skeleton for kirby
+
+- Kelly
+	- **[6]** - finish drawing level, make tunnels ?
+	
+
+- Undecided
+	- **[6]** level 1 design
