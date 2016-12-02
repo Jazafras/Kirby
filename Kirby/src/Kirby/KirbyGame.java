@@ -32,6 +32,29 @@ public class KirbyGame extends StateBasedGame {
 	//default
 	public static final String KIRBY_LEFTIMG_RSC = "Kirby/resources/kirby_regular_left.png";
 	public static final String KIRBY_RIGHTIMG_RSC = "Kirby/resources/kirby_regular_right.png";
+	public static final String KIRBY_RIGHT_SUCC = "Kirby/resources/kirby_right_succ.png";
+	public static final String KIRBY_LEFT_SUCC = "Kirby/resources/kirby_left_succ.png";
+	public static final String KIRBY_RIGHT_FLY = "Kirby/resources/kirby_right_fly.png";
+	public static final String KIRBY_LEFT_FLY = "Kirby/resources/kirby_left_fly.png";
+	
+	//sword kirby
+	public static final String KIRBY_LEFTSWORD = "Kirby/resources/swordkirby/kirby_left.png";
+	public static final String KIRBY_RIGHTSWORD = "Kirby/resources/swordkirby/kirby_right.png";
+	public static final String KIRBY_RIGHTSWORD_SUCC = "Kirby/resources/swordkirby/kirby_right_succ.png";
+	public static final String KIRBY_LEFTSWORD_SUCC = "Kirby/resources/swordkirby/kirby_left_succ.png";
+	public static final String KIRBY_RIGHTSWORD_FLY = "Kirby/resources/swordkirby/kirby_right_fly.png";
+	public static final String KIRBY_LEFTSWORD_FLY = "Kirby/resources/swordkirby/kirby_left_fly.png";
+	public static final String KIRBY_RIGHTSWORD_ATTACK = "Kirby/resources/swordkirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTSWORD_ATTACK = "Kirby/resources/swordkirby/kirby_left_attack.png";
+	
+	//twister kirby
+	public static final String KIRBYTWIST_LEFT = "Kirby/resources/twisterkirby/kirby_left.png";
+	public static final String KIRBYTWIST_RIGHT = "Kirby/resources/twisterkirby/kirby_right.png";
+	public static final String KIRBYTWIST_RIGHT_SUCC = "Kirby/resources/twisterkirby/kirby_right_succ.png";
+	public static final String KIRBYTWIST_LEFT_SUCC = "Kirby/resources/twisterkirby/kirby_left_succ.png";
+	public static final String KIRBYTWIST_RIGHT_FLY = "Kirby/resources/twisterkirby/kirby_right_fly.png";
+	public static final String KIRBYTWIST_LEFT_FLY = "Kirby/resources/twisterkirby/kirby_left_fly.png";
+	public static final String KIRBYTWIST_ATTACK = "Kirby/resources/twisterkirby/kirby_attack.png";
 	
 	
 	/***Enemy images***/
