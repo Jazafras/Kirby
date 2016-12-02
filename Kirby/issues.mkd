@@ -23,7 +23,7 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[2]** Basic movement in paralax map
+	- **[2]** Base skeleton for Kirby states
 
 - Audrey
 	- **[1]** Skeleton for kirby

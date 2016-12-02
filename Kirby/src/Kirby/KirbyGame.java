@@ -37,6 +37,60 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_RIGHT_FLY = "Kirby/resources/kirby_right_fly.png";
 	public static final String KIRBY_LEFT_FLY = "Kirby/resources/kirby_left_fly.png";
 	
+	//boomerang kirby
+	public static final String KIRBY_LEFTBOOMERANG = "Kirby/resources/boomerangkirby/kirby_left.png";
+	public static final String KIRBY_RIGHTBOOMERANG = "Kirby/resources/boomerangkirby/kirby_right.png";
+	public static final String KIRBY_RIGHTBOOMERANG_SUCC = "Kirby/resources/boomerangkirby/kirby_right_succ.png";
+	public static final String KIRBY_LEFTBOOMERANG_SUCC = "Kirby/resources/boomerangkirby/kirby_left_succ.png";
+	public static final String KIRBY_RIGHTBOOMERANG_FLY = "Kirby/resources/boomerangkirby/kirby_right_fly.png";
+	public static final String KIRBY_LEFTBOOMERANG_FLY = "Kirby/resources/boomerangkirby/kirby_left_fly.png";
+	public static final String KIRBY_RIGHTBOOMERANG_ATTACK = "Kirby/resources/boomerangkirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTBOOMERANG_ATTACK = "Kirby/resources/boomerangkirby/kirby_left_attack.png";
+	//boomerang attack
+	public static final String BOOMERANG_RSC = "Kirby/resources/boomerang.png";
+	
+	//fighter kirby
+	public static final String KIRBY_LEFTFIGHT = "Kirby/resources/fighterkirby/kirby_left.png";
+	public static final String KIRBY_RIGHTFIGHT = "Kirby/resources/fighterkirby/kirby_right.png";
+	public static final String KIRBY_RIGHTFIGHT_SUCC = "Kirby/resources/fighterkirby/kirby_right_succ.png";
+	public static final String KIRBY_LEFTFIGHT_SUCC = "Kirby/resources/fighterkirby/kirby_left_succ.png";
+	public static final String KIRBY_RIGHTFIGHT_FLY = "Kirby/resources/fighterkirby/kirby_right_fly.png";
+	public static final String KIRBY_LEFTFIGHT_FLY = "Kirby/resources/fighterkirby/kirby_left_fly.png";
+	public static final String KIRBY_RIGHTFIGHT_ATTACK = "Kirby/resources/fighterkirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTFIGHT_ATTACK = "Kirby/resources/fighterkirby/kirby_left_attack.png";
+	
+	//hammer kirby
+	public static final String KIRBY_LEFTHAMMER = "Kirby/resources/hammerkirby/kirby_left.png";
+	public static final String KIRBY_RIGHTHAMMER = "Kirby/resources/hammerkirby/kirby_right.png";
+	public static final String KIRBY_RIGHTHAMMER_SUCC = "Kirby/resources/hammerkirby/kirby_right_succ.png";
+	public static final String KIRBY_LEFTHAMMER_SUCC = "Kirby/resources/hammerkirby/kirby_left_succ.png";
+	public static final String KIRBY_RIGHTHAMMER_FLY = "Kirby/resources/hammerkirby/kirby_right_fly.png";
+	public static final String KIRBY_LEFTHAMMER_FLY = "Kirby/resources/hammerkirby/kirby_left_fly.png";
+	public static final String KIRBY_RIGHTHAMMER_ATTACK = "Kirby/resources/hammerkirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTHAMMER_ATTACK = "Kirby/resources/hammerkirby/kirby_left_attack.png";
+
+	//poppy kirby
+	public static final String KIRBY_LEFTPOPPY = "Kirby/resources/poppykirby/kirby_left.png";
+	public static final String KIRBY_RIGHTPOPPY = "Kirby/resources/poppykirby/kirby_right.png";
+	public static final String KIRBY_RIGHTPOPPY_SUCC = "Kirby/resources/poppykirby/kirby_right_succ.png";
+	public static final String KIRBY_LEFTPOPPY_SUCC = "Kirby/resources/poppykirby/kirby_left_succ.png";
+	public static final String KIRBY_RIGHTPOPPY_FLY = "Kirby/resources/poppykirby/kirby_right_fly.png";
+	public static final String KIRBY_LEFTPOPPY_FLY = "Kirby/resources/poppykirby/kirby_left_fly.png";
+	public static final String KIRBY_RIGHTPOPPY_ATTACK = "Kirby/resources/poppykirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTSPOPPY_ATTACK = "Kirby/resources/poppykirby/kirby_left_attack.png";
+	//bomb
+	public static final String BOMB_RSC = "Kirby/resources/bomb.png";
+	
+	//sparky kirby
+	public static final String KIRBY_LEFTSPARKY = "Kirby/resources/sparkykirby/kirby_left.png";
+	public static final String KIRBY_RIGHTSPARKY = "Kirby/resources/sparkykirby/kirby_right.png";
+	public static final String KIRBY_RIGHTSPARKY_SUCC = "Kirby/resources/sparkykirby/kirby_right_succ.png";
+	public static final String KIRBY_LEFTSPARKY_SUCC = "Kirby/resources/sparkykirby/kirby_left_succ.png";
+	public static final String KIRBY_RIGHTSPARKY_FLY = "Kirby/resources/sparkykirby/kirby_right_fly.png";
+	public static final String KIRBY_LEFTSPARKY_FLY = "Kirby/resources/sparkykirby/kirby_left_fly.png";
+	public static final String KIRBY_RIGHTSPARKY_ATTACK = "Kirby/resources/sparkykirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTSPARKY_ATTACK = "Kirby/resources/sparkykirby/kirby_left_attack.png";
+	
 	//sword kirby
 	public static final String KIRBY_LEFTSWORD = "Kirby/resources/swordkirby/kirby_left.png";
 	public static final String KIRBY_RIGHTSWORD = "Kirby/resources/swordkirby/kirby_right.png";
@@ -56,6 +110,14 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBYTWIST_LEFT_FLY = "Kirby/resources/twisterkirby/kirby_left_fly.png";
 	public static final String KIRBYTWIST_ATTACK = "Kirby/resources/twisterkirby/kirby_attack.png";
 	
+	
+	//ufo kirby
+	public static final String KIRBYUFO_LEFT = "Kirby/resources/ufokirby/kirby_left.png";
+	public static final String KIRBYUFO_RIGHT = "Kirby/resources/ufokirby/kirby_right.png";
+	public static final String KIRBY_RIGHTUFO_ATTACK = "Kirby/resources/ufokirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTUFO_ATTACK = "Kirby/resources/ufokirby/kirby_left_attack.png";
+	//ufo beam
+	public static final String UFO_BEAM_RSC = "Kirby/resources/beam.png";
 	
 	/***Enemy images***/
 	//Brontoburt images
@@ -154,6 +216,24 @@ public class KirbyGame extends StateBasedGame {
 	
 	int level;
 	Kirby kirby;
+	
+	ArrayList<Bonkers> bonkers; //hammer state
+	ArrayList<Brontoburt> brontoburt;
+	ArrayList<Cappy> cappy;
+	ArrayList<HotHead> hothead; //add fire kirby images
+	ArrayList<KnuckleJoe> knucklejoe; //fighter state
+	ArrayList<Noddy> noddy; //sleep state <-load image resource for this
+	ArrayList<PoppyJr> poppy; //bomb state
+	ArrayList<SirKibble> sirkibble; //boomerang state
+	///ADD SCARFY
+	ArrayList<Sparky> sparky; //spark state
+	ArrayList<SwordKnight> swordknight; //sword state
+	ArrayList<Twister> twister; //twister state
+	ArrayList<UFO> ufo; //ufo state
+	ArrayList<WaddleDee> waddledee;
+	ArrayList<WaddleDoo> waddledoo; //beam state
+	
+	
 	Poacher poacher;
 	ArrayList<Cub> cubs;
 	Set<Underbrush> underbrushes;
@@ -171,8 +251,8 @@ public class KirbyGame extends StateBasedGame {
 		super(title);
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
-		cubs = new ArrayList<Cub>();
-		underbrushes = new HashSet<Underbrush>();
+		//cubs = new ArrayList<Cub>();
+		//underbrushes = new HashSet<Underbrush>();
 		vertices = new HashSet<Vertex>();
 		vPos = new HashMap<String, Vertex>();
 	}
@@ -190,7 +270,9 @@ public class KirbyGame extends StateBasedGame {
 		level1Setup();
 		
 		kirby = new Kirby(128, 418);
-		poacher = new Poacher(128, 418, vPos.get(new Vertex(50, 50).toString()));
+		
+		
+		//poacher = new Poacher(128, 418, vPos.get(new Vertex(50, 50).toString()));
 		//bonkers = new Bonkers();
 		//brontoburt = new Brontoburt();
 		//cappy = new Cappy();

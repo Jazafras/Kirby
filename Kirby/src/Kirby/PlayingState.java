@@ -100,6 +100,7 @@ class PlayingState extends BasicGameState {
 		float kYOffset = getYOffset(bg);
 		
 		// kirby collision with cubs
+		
 		Vector move = null;
 		for (Underbrush u : bg.underbrushes) {
 			Collision c = bg.kirby.collides(u);
