@@ -10,8 +10,8 @@ import jig.Vector;
  class MovingEntity extends Entity {
 	 
 	// facing directions 
-	public static final int LEFT = 0;
-	public static final int RIGHT = 1;
+	public static final int RIGHT = 0;
+	public static final int LEFT = 1;
 	public static final int FRONT = 2;
 	public static final int BACK = 3;
 	
