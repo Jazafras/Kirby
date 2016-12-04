@@ -11,6 +11,7 @@
 
 - Jasmine
 	- **[1]** Base skeleton for enemies
+	- **[2]** Infrastructure for Kirby state images
 
 - Audrey
 
@@ -23,7 +24,7 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[2]** Base skeleton for Kirby states
+	- **[3]** Basic nemy movement
 
 - Audrey
 	- **[1]** Skeleton for kirby
