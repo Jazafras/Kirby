@@ -41,6 +41,7 @@ import jig.Vector;
 		onGround = true;
 		addImageWithBoundingBox(ResourceManager
 				.getImage(facingImages[RIGHT]));
+		onGround = true;
 	}
 	
 	/**
@@ -66,20 +67,15 @@ import jig.Vector;
 		return curImage;
 	}
 	
-	public void applyGravity(float gravity){
-      //if we aren't already moving at maximum speed
+	public void applyGravity(float gravity, Tile[][] tileMap){
         if(velocity.getY() < maximumFallSpeed){
-            //accelerate
             setVelocity(new Vector(velocity.getX(), velocity.getY() + gravity));
             if(velocity.getY() > maximumFallSpeed){
-                //and if we exceed maximum speed, set it to maximum speed
             	setVelocity(new Vector(velocity.getX(), maximumFallSpeed));
             }
         }
-    }
-	
-	public boolean isOnGround(){
-        return onGround;
+       // if (isOnGround(tileMap))
+       // 	setVelocity(new Vector(velocity.getX(), 0.f));
     }
  
     public void setOnGround(boolean b){
@@ -154,26 +150,60 @@ import jig.Vector;
 	
 	public Set<Tile> surroundingTiles(Tile[][] tiles) {
         Set<Tile> surTiles = new HashSet<Tile>();
-
-        for (int i = (int)super.getCoarseGrainedMinX(); 
-        		i <= super.getCoarseGrainedMaxX(); i += 32) {
-            for (int j = (int)super.getCoarseGrainedMinY(); 
-            		j <= super.getCoarseGrainedMaxY(); j += 32){
-                surTiles.add(tiles[i/32][j/32]);
-            }
+        
+        for (int i = 0; i < tiles.length; i++) {
+        	for (int j = 0; j < tiles[i].length; j++) {
+        		if (super.collides(tiles[i][j]) != null)
+        			surTiles.add(tiles[i][j]);
+        	}
         }
         return surTiles;
     }
 	
 	public Set<Tile> getGroundTiles(Tile[][] tiles) {
+        super.setPosition(super.getX(), super.getY() + 15);
         Set<Tile> groundTiles = new HashSet<Tile>();
-        int j = (int) super.getCoarseGrainedMinY() + 1;
- 
-        for(int i = (int)super.getCoarseGrainedMinX(); 
-        		i <= super.getCoarseGrainedMaxX(); i += 32){
-            groundTiles.add(tiles[i/32][j/32]);
+        Set<Tile> surTiles = surroundingTiles(tiles);;
+        for (Tile t : surTiles) {
+        	if (t.getType() == Tile.GROUND)
+        		groundTiles.add(t);
         }
- 
+        super.setPosition(super.getX(), super.getY() - 15);   
         return groundTiles;
+    }
+	
+	public boolean containsGround(Tile[][] tiles) {
+		Set<Tile> surTiles = surroundingTiles(tiles);
+		Set<Tile> groundTiles = getGroundTiles(tiles);
+		for (Tile t : surTiles) {
+			if (t.getType() == Tile.GROUND && !groundTiles.contains(t))
+				return true;
+		}
+		return false;	
+	}
+	
+	public boolean checkCollision(Tile[][] mapTiles){
+        //get only the tiles that matter
+        Set<Tile> tiles = surroundingTiles(mapTiles);
+        for (Tile t : tiles) {
+            if (this.collides(t) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	public boolean isOnGround(Tile[][] mapTiles) {
+		Set<Tile> tiles = getGroundTiles(mapTiles);
+		//for (Tile t : tiles)
+		super.setPosition(super.getX(), super.getY() + 15);
+		for (Tile t : tiles) {
+             if (t.collides(this) != null) {
+            	super.setPosition(super.getX(), super.getY() - 15);
+                return true;
+             }
+        }
+        super.setPosition(super.getX(), super.getY() - 15);    
+        return false;
     }
 }
