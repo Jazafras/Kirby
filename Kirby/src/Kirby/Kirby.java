@@ -48,21 +48,19 @@ import jig.Vector;
 		//super.render(g);
 		Image i = new Image(facingImages[RIGHT]);
 		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
-		//sprites.get(facing).draw(x-2-offsetx, y-2-offsety);   
+		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);
 	}
 	
 	public void update(final int delta, float xOffset, float yOffset) {
 		translate(getVelocity().scale(delta));
 	}
 	
-	public void moveLeft(int delta) throws SlickException{
-		//Image i = new Image(facingImages[LEFT]);
-		//i.draw(delta, delta);
-		super.setPosition(super.getX() - (.15f*delta), super.getY());
+	public void moveLeft(int delta, float speed){
+		super.setPosition(super.getX() - (speed*delta), super.getY());
     }
  
-    public void moveRight(int delta){
-    	super.setPosition(super.getX() + (.15f*delta), super.getY());
+    public void moveRight(int delta, float speed){
+    	super.setPosition(super.getX() + (speed*delta), super.getY());
     }
 	
 	public void succ(){
@@ -81,5 +79,15 @@ import jig.Vector;
 		//return spit;
 		
 	}
+	
+	public void jump(Tile[][] tileMap) {
+        if (super.isOnGround(tileMap))
+        	super.setVelocity(new Vector(super.getVelocity().getX(), -0.4f));
+    }
+	 
+	public String toString() {
+		return "Kirby ~ x: " + super.getX() + ", y: " + super.getY();
+	}
+	
 
 }
