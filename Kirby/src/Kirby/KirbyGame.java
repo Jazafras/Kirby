@@ -27,6 +27,7 @@ public class KirbyGame extends StateBasedGame {
 	// background
 	public static final String BACKGROUND_IMG_RSC = "Kirby/resources/background.png";
 	public static final String STARTUP_IMG_RSC = "Kirby/resources/startup.png";
+	public static final String GAMEOVER_IMG_RSC = "Kirby/resources/GAMEOVER.png";
 	
 	/***Kirby images***/
 	//default
@@ -59,6 +60,19 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_RIGHTFIGHT_ATTACK = "Kirby/resources/fighterkirby/kirby_right_attack.png";
 	public static final String KIRBY_LEFTFIGHT_ATTACK = "Kirby/resources/fighterkirby/kirby_left_attack.png";
 	
+	//fire kirby
+	public static final String KIRBY_LEFTFIRE = "Kirby/resources/firekirby/kirby_left.png";
+	public static final String KIRBY_RIGHTFIRE = "Kirby/resources/firekirby/kirby_right.png";
+	public static final String KIRBY_RIGHTFIRE_SUCC = "Kirby/resources/firekirby/kirby_right_succ.png";
+	public static final String KIRBY_LEFTFIRE_SUCC = "Kirby/resources/firekirby/kirby_left_succ.png";
+	public static final String KIRBY_RIGHTFIRE_FLY = "Kirby/resources/firekirby/kirby_right_fly.png";
+	public static final String KIRBY_LEFTFIRE_FLY = "Kirby/resources/firekirby/kirby_left_fly.png";
+	public static final String KIRBY_RIGHTFIRE_ATTACK = "Kirby/resources/firekirby/kirby_right_attack.png";
+	public static final String KIRBY_LEFTFIRE_ATTACK = "Kirby/resources/firekirby/kirby_left_attack.png";
+	//fire attack
+	public static final String LEFTFIRE_ATTACK = "Kirby/resources/firekirby/fire_left.png";
+	public static final String RIGHTFIRE_ATTACK = "Kirby/resources/firekirby/fire_right.png";
+	
 	//hammer kirby
 	public static final String KIRBY_LEFTHAMMER = "Kirby/resources/hammerkirby/kirby_left.png";
 	public static final String KIRBY_RIGHTHAMMER = "Kirby/resources/hammerkirby/kirby_right.png";
@@ -77,7 +91,7 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_RIGHTPOPPY_FLY = "Kirby/resources/poppykirby/kirby_right_fly.png";
 	public static final String KIRBY_LEFTPOPPY_FLY = "Kirby/resources/poppykirby/kirby_left_fly.png";
 	public static final String KIRBY_RIGHTPOPPY_ATTACK = "Kirby/resources/poppykirby/kirby_right_attack.png";
-	public static final String KIRBY_LEFTSPOPPY_ATTACK = "Kirby/resources/poppykirby/kirby_left_attack.png";
+	public static final String KIRBY_LEFTPOPPY_ATTACK = "Kirby/resources/poppykirby/kirby_left_attack.png";
 	//bomb
 	public static final String BOMB_RSC = "Kirby/resources/bomb.png";
 	
@@ -117,7 +131,7 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_RIGHTUFO_ATTACK = "Kirby/resources/ufokirby/kirby_right_attack.png";
 	public static final String KIRBY_LEFTUFO_ATTACK = "Kirby/resources/ufokirby/kirby_left_attack.png";
 	//ufo beam
-	public static final String UFO_BEAM_RSC = "Kirby/resources/beam.png";
+	public static final String KIRBY_BEAM_RSC = "Kirby/resources/kirbyBeam.png";
 	
 	/***Enemy images***/
 	//Brontoburt images
@@ -187,6 +201,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String UFO_RIGHT = "Kirby/resources/ufo_right.png";
 	public static final String UFO_ATTACK_R = "Kirby/resources/ufo_attackRight.png";
 	public static final String UFO_ATTACK_L = "Kirby/resources/ufo_attackLeft.png";
+	//ufo beam
+	public static final String UFO_BEAM_RSC = "Kirby/resources/beam.png";
 	
 	//WaddleDee images
 	public static final String WADDLEDEE_LEFT = "Kirby/resources/waddledee_left.png";
@@ -220,12 +236,12 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<Bonkers> bonkers; //hammer state
 	ArrayList<Brontoburt> brontoburt;
 	ArrayList<Cappy> cappy;
-	ArrayList<HotHead> hothead; //add fire kirby images
+	ArrayList<HotHead> hothead; //fire state
 	ArrayList<KnuckleJoe> knucklejoe; //fighter state
-	ArrayList<Noddy> noddy; //sleep state <-load image resource for this
+	ArrayList<Noddy> noddy; //sleep state
 	ArrayList<PoppyJr> poppy; //bomb state
 	ArrayList<SirKibble> sirkibble; //boomerang state
-	///ADD SCARFY
+	ArrayList<Scarfy> scarfy;
 	ArrayList<Sparky> sparky; //spark state
 	ArrayList<SwordKnight> swordknight; //sword state
 	ArrayList<Twister> twister; //twister state
@@ -242,7 +258,7 @@ public class KirbyGame extends StateBasedGame {
 	Nest nest;
 	
 	/**
-	 * Create the TigressGame frame, saving the width and height for later use.
+	 * Create the KirbyGame frame, saving the width and height for later use.
 	 * @param title: the window's title
 	 * @param width: the window's width
 	 * @param height: the window's height
@@ -273,6 +289,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		
 		//poacher = new Poacher(128, 418, vPos.get(new Vertex(50, 50).toString()));
+		
 		//bonkers = new Bonkers();
 		//brontoburt = new Brontoburt();
 		//cappy = new Cappy();
@@ -281,21 +298,175 @@ public class KirbyGame extends StateBasedGame {
 		//Noddy = new noddy();
 		//poppyjr = new PoppyJr();
 		//sirkibble = new SirKibble();
+		//scarfy = new Scarfy();
 		//sparky = new Sparky();
 		//swordknight = new SwordKnight();
 		//twister = new Twister();
 		//ufo = new UFO();
 		//waddledee = new WaddleDee();
+		//waddledoo = new WaddleDoo();
 	}
 	
 	private void loadImages() {
 		ResourceManager.loadImage(BACKGROUND_IMG_RSC);
 		ResourceManager.loadImage(STARTUP_IMG_RSC);
+		ResourceManager.loadImage(GAMEOVER_IMG_RSC);
 		
 		ResourceManager.loadImage(KIRBY_LEFTIMG_RSC);
 		ResourceManager.loadImage(KIRBY_RIGHTIMG_RSC);
+		ResourceManager.loadImage(KIRBY_RIGHT_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFT_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHT_FLY);
+		ResourceManager.loadImage(KIRBY_LEFT_FLY);
 		
+		ResourceManager.loadImage(KIRBY_LEFTBOOMERANG);
+		ResourceManager.loadImage(KIRBY_RIGHTBOOMERANG);
+		ResourceManager.loadImage(KIRBY_RIGHTBOOMERANG_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFTBOOMERANG_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHTBOOMERANG_FLY);
+		ResourceManager.loadImage(KIRBY_LEFTBOOMERANG_FLY);
+		ResourceManager.loadImage(KIRBY_RIGHTBOOMERANG_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTBOOMERANG_ATTACK);
+		
+		ResourceManager.loadImage(BOOMERANG_RSC);
+		
+		ResourceManager.loadImage(KIRBY_LEFTFIGHT);
+		ResourceManager.loadImage(KIRBY_RIGHTFIGHT);
+		ResourceManager.loadImage(KIRBY_RIGHTFIGHT_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFTFIGHT_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHTFIGHT_FLY);
+		ResourceManager.loadImage(KIRBY_LEFTFIGHT_FLY);
+		ResourceManager.loadImage(KIRBY_RIGHTFIGHT_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTFIGHT_ATTACK);
 
+		ResourceManager.loadImage(KIRBY_LEFTFIRE);
+		ResourceManager.loadImage(KIRBY_RIGHTFIRE);
+		ResourceManager.loadImage(KIRBY_RIGHTFIRE_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFTFIRE_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHTFIRE_FLY);
+		ResourceManager.loadImage(KIRBY_LEFTFIRE_FLY);
+		ResourceManager.loadImage(KIRBY_RIGHTFIRE_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTFIRE_ATTACK);
+		
+		ResourceManager.loadImage(LEFTFIRE_ATTACK);
+		ResourceManager.loadImage(RIGHTFIRE_ATTACK);
+
+		ResourceManager.loadImage(KIRBY_LEFTHAMMER);
+		ResourceManager.loadImage(KIRBY_RIGHTHAMMER);
+		ResourceManager.loadImage(KIRBY_RIGHTHAMMER_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFTHAMMER_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHTHAMMER_FLY);
+		ResourceManager.loadImage(KIRBY_LEFTHAMMER_FLY);
+		ResourceManager.loadImage(KIRBY_RIGHTHAMMER_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTHAMMER_ATTACK);
+		
+		ResourceManager.loadImage(KIRBY_LEFTPOPPY);
+		ResourceManager.loadImage(KIRBY_RIGHTPOPPY);
+		ResourceManager.loadImage(KIRBY_RIGHTPOPPY_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFTPOPPY_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHTPOPPY_FLY);
+		ResourceManager.loadImage(KIRBY_LEFTPOPPY_FLY);
+		ResourceManager.loadImage(KIRBY_RIGHTPOPPY_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTPOPPY_ATTACK);
+		
+		ResourceManager.loadImage(BOMB_RSC);
+		
+		ResourceManager.loadImage(KIRBY_LEFTSPARKY);
+		ResourceManager.loadImage(KIRBY_RIGHTSPARKY);
+		ResourceManager.loadImage(KIRBY_RIGHTSPARKY_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFTSPARKY_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHTSPARKY_FLY);
+		ResourceManager.loadImage(KIRBY_LEFTSPARKY_FLY);
+		ResourceManager.loadImage(KIRBY_RIGHTSPARKY_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTSPARKY_ATTACK);
+		
+		ResourceManager.loadImage(KIRBY_LEFTSWORD);
+		ResourceManager.loadImage(KIRBY_RIGHTSWORD);
+		ResourceManager.loadImage(KIRBY_RIGHTSWORD_SUCC);
+		ResourceManager.loadImage(KIRBY_LEFTSWORD_SUCC);
+		ResourceManager.loadImage(KIRBY_RIGHTSWORD_FLY);
+		ResourceManager.loadImage(KIRBY_LEFTSWORD_FLY);
+		ResourceManager.loadImage(KIRBY_RIGHTSWORD_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTSWORD_ATTACK);
+		
+		ResourceManager.loadImage(KIRBYTWIST_LEFT);
+		ResourceManager.loadImage(KIRBYTWIST_RIGHT);
+		ResourceManager.loadImage(KIRBYTWIST_RIGHT_SUCC);
+		ResourceManager.loadImage(KIRBYTWIST_LEFT_SUCC);
+		ResourceManager.loadImage(KIRBYTWIST_RIGHT_FLY);
+		ResourceManager.loadImage(KIRBYTWIST_LEFT_FLY);
+		ResourceManager.loadImage(KIRBYTWIST_ATTACK);
+		
+		ResourceManager.loadImage(KIRBYUFO_LEFT);
+		ResourceManager.loadImage(KIRBYUFO_RIGHT);
+		ResourceManager.loadImage(KIRBY_RIGHTUFO_ATTACK);
+		ResourceManager.loadImage(KIRBY_LEFTUFO_ATTACK);
+		ResourceManager.loadImage(KIRBY_BEAM_RSC);
+		
+		ResourceManager.loadImage(BRONTOBURT_LEFT);
+		ResourceManager.loadImage(BRONTOBURT_RIGHT);
+		
+		ResourceManager.loadImage(BONKERS_LEFT);
+		ResourceManager.loadImage(BONKERS_RIGHT);
+		ResourceManager.loadImage(BONKERS_ATTACK_R);
+		ResourceManager.loadImage(BONKERS_ATTACK_L);
+		
+		ResourceManager.loadImage(CAPPY_LEFT);
+		ResourceManager.loadImage(CAPPY_RIGHT);
+		
+		ResourceManager.loadImage(HOTHEAD_LEFT);
+		ResourceManager.loadImage(HOTHEAD_RIGHT);
+		ResourceManager.loadImage(HOTHEAD_ATTACK_R);
+		ResourceManager.loadImage(HOTHEAD_ATTACK_L);
+		
+		ResourceManager.loadImage(KIBBLE_LEFT);
+		ResourceManager.loadImage(KIBBLE_RIGHT);
+		ResourceManager.loadImage(KIBBLE_ATTACK_R);
+		ResourceManager.loadImage(KIBBLE_ATTACK_L);
+		
+		ResourceManager.loadImage(KNUCKLE_LEFT);
+		ResourceManager.loadImage(KNUCKLE_RIGHT);
+		ResourceManager.loadImage(KNUCKLE_ATTACK_R);
+		ResourceManager.loadImage(KNUCKLE_ATTACK_L);
+		
+		ResourceManager.loadImage(NODDY_LEFT);
+		ResourceManager.loadImage(NODDY_RIGHT);
+		
+		ResourceManager.loadImage(POPPY_LEFT);
+		ResourceManager.loadImage(POPPY_RIGHT);
+		ResourceManager.loadImage(POPPY_ATTACK_R);
+		ResourceManager.loadImage(POPPY_ATTACK_L);
+		
+		ResourceManager.loadImage(SCARFY_LEFT);
+		ResourceManager.loadImage(SCARFY_RIGHT);
+		
+		ResourceManager.loadImage(SPARKY_LEFT);
+		ResourceManager.loadImage(SPARKY_RIGHT);
+		ResourceManager.loadImage(SPARKY_ATTACK_R);
+		ResourceManager.loadImage(SPARKY_ATTACK_L);
+		
+		ResourceManager.loadImage(SWORDKNIGHT_LEFT);
+		ResourceManager.loadImage(SWORDKNIGHT_RIGHT);
+		ResourceManager.loadImage(SWORDKNIGHT_ATTACK_R);
+		ResourceManager.loadImage(SWORDKNIGHT_ATTACK_L);
+		
+		ResourceManager.loadImage(TWISTER_LEFT);
+		ResourceManager.loadImage(TWISTER_RIGHT);
+		
+		ResourceManager.loadImage(UFO_LEFT);
+		ResourceManager.loadImage(UFO_RIGHT);
+		ResourceManager.loadImage(UFO_ATTACK_R);
+		ResourceManager.loadImage(UFO_ATTACK_L);
+		
+		ResourceManager.loadImage(UFO_BEAM_RSC);
+		
+		ResourceManager.loadImage(WADDLEDEE_LEFT);
+		ResourceManager.loadImage(WADDLEDEE_RIGHT);
+		
+		ResourceManager.loadImage(WADDLEDOO_LEFT);
+		ResourceManager.loadImage(WADDLEDOO_RIGHT);
+		ResourceManager.loadImage(WADDLEDOO_ATTACK_R);
+		ResourceManager.loadImage(WADDLEDOO_ATTACK_L);
 		
 		ResourceManager.loadImage(CUB_IMG_RSC);
 		

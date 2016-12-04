@@ -102,13 +102,13 @@ class PlayingState extends BasicGameState {
 		// kirby collision with cubs
 		
 		Vector move = null;
-		for (Underbrush u : bg.underbrushes) {
+		/*for (Underbrush u : bg.underbrushes) {
 			Collision c = bg.kirby.collides(u);
 			if (bg.kirby.collides(u) != null) {
 				move = c.getMinPenetration();
 				break;
 			}
-		}
+		}*/
 		
 		/*Collision kirbyNest = bg.kirby.collides(bg.nest);
 		if (kirbyNest != null) {
@@ -121,10 +121,10 @@ class PlayingState extends BasicGameState {
 		
 		keyPresses(input, bg, delta, move);
 		
-		for (Cub c : bg.cubs) {
+		/*for (Cub c : bg.cubs) {
 			c.setMoving(bg);
 			c.update(delta);
-		}
+		}*/
 		
 		// kirby collision with cubs
 		/*if (!bg.kirby.holdingCub()) {
@@ -163,7 +163,7 @@ class PlayingState extends BasicGameState {
 		bg.kirby.update(delta);
 		bg.kirby.setVertex(bg);
 		//bg.poacher.setMoving(bg);
-		bg.poacher.update(delta);
+		//bg.poacher.update(delta);
 		
 		// Change levels
 		/*if (bg.cubs.size() == 0) {
