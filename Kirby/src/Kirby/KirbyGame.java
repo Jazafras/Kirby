@@ -222,6 +222,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String NEST_IMG_RSC = "Kirby/resources/nest.png";
 	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
 	
+	public static final String TILE_IMG_RSC = "Kirby/resources/tile.png";
+	
 	//public static final String HITWALL_RSC = "bounce/resource/wall_hit.wav";
 	
     public static final int SCREEN_WIDTH  = 1280;
@@ -471,6 +473,8 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(CUB_IMG_RSC);
 		
 		ResourceManager.loadImage(POACHER_LEFTIMG_RSC);
+		
+		ResourceManager.loadImage(TILE_IMG_RSC);
 		
 		ResourceManager.loadImage(UNDERBRUSH_IMG_RSC);
 		ResourceManager.loadImage(NEST_IMG_RSC);
