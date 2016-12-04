@@ -178,27 +178,18 @@ class PlayingState extends BasicGameState {
 				}
 			}
 		}
-		
+		*/
 		bg.kirby.update(delta);
-		bg.kirby.setVertex(bg);
+		/*bg.kirby.setVertex(bg);
 		//bg.poacher.setMoving(bg);
 		//bg.poacher.update(delta);
-		
-		// Change levels
-		/*if (bg.cubs.size() == 0) {
-			bg.level++;
-			if (bg.level == 4) {
-				game.enterState(kirbyGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
-			} else {
-				game.enterState(kirbyGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
-			}
-		}*/
+		 */
 
 		checkLives(game, bg);
 		
 	}
 	
-	private void keyPresses(Input input, KirbyGame bg, int delta, Vector move) {		
+	private void keyPresses(Input input, KirbyGame bg, int delta, Vector move) throws SlickException {		
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && (move == null || move.getX() <= 0)) 
 			bg.kirby.moveLeft(delta); //bg.kirby.setVelocity(new Vector(-.2f, 0));

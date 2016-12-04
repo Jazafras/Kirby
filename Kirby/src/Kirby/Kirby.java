@@ -48,14 +48,16 @@ import jig.Vector;
 		//super.render(g);
 		Image i = new Image(facingImages[RIGHT]);
 		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
-		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);   
+		//sprites.get(facing).draw(x-2-offsetx, y-2-offsety);   
 	}
 	
 	public void update(final int delta, float xOffset, float yOffset) {
 		translate(getVelocity().scale(delta));
 	}
 	
-	public void moveLeft(int delta){
+	public void moveLeft(int delta) throws SlickException{
+		//Image i = new Image(facingImages[LEFT]);
+		//i.draw(delta, delta);
 		super.setPosition(super.getX() - (.15f*delta), super.getY());
     }
  
