@@ -267,7 +267,23 @@ public class KirbyGame extends StateBasedGame {
 		super(title);
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
-		//cubs = new ArrayList<Cub>();
+		
+		bonkers = new ArrayList<Bonkers>();
+		brontoburt = new ArrayList<Brontoburt>();
+		cappy = new ArrayList<Cappy>();
+		hothead = new ArrayList<HotHead>();
+		knucklejoe = new ArrayList<KnuckleJoe>();
+		noddy = new ArrayList<Noddy>();
+		poppy = new ArrayList<PoppyJr>();
+		scarfy = new ArrayList<Scarfy>();
+		sirkibble = new ArrayList<SirKibble>();
+		sparky = new ArrayList<Sparky>();
+		swordknight = new ArrayList<SwordKnight>();
+		twister = new ArrayList<Twister>();
+		ufo = new ArrayList<UFO>();
+		waddledoo = new ArrayList<WaddleDoo>();
+		waddledee = new ArrayList<WaddleDee>();
+		
 		//underbrushes = new HashSet<Underbrush>();
 		vertices = new HashSet<Vertex>();
 		vPos = new HashMap<String, Vertex>();
@@ -287,24 +303,21 @@ public class KirbyGame extends StateBasedGame {
 		
 		kirby = new Kirby(128, 418);
 		
-		
-		//poacher = new Poacher(128, 418, vPos.get(new Vertex(50, 50).toString()));
-		
-		//bonkers = new Bonkers();
-		//brontoburt = new Brontoburt();
-		//cappy = new Cappy();
-		//hothead = new HotHead();
-		//knucklejoe = new KnuckleJoe();
-		//Noddy = new noddy();
-		//poppyjr = new PoppyJr();
-		//sirkibble = new SirKibble();
-		//scarfy = new Scarfy();
-		//sparky = new Sparky();
-		//swordknight = new SwordKnight();
-		//twister = new Twister();
-		//ufo = new UFO();
-		//waddledee = new WaddleDee();
-		//waddledoo = new WaddleDoo();
+		bonkers.add(new Bonkers(650, 520));
+		brontoburt.add(new Brontoburt(600, 420));
+		cappy.add(new Cappy(650, 520));
+		hothead.add(new HotHead(650, 520));
+		knucklejoe.add(new KnuckleJoe(650, 520));
+		noddy.add(new Noddy(650, 520));
+		poppy.add(new PoppyJr(628, 520));
+		sirkibble.add(new SirKibble(628, 520));
+		scarfy.add(new Scarfy(628, 520));
+		sparky.add(new Sparky(628, 520));
+		swordknight.add(new SwordKnight(628, 520));
+		twister.add(new Twister(628, 420));
+		ufo.add(new UFO(628, 420));
+		waddledee.add(new WaddleDee(628, 520));
+		waddledoo.add(new WaddleDoo(628, 520));
 	}
 	
 	private void loadImages() {

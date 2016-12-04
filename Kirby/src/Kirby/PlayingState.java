@@ -74,6 +74,38 @@ class PlayingState extends BasicGameState {
 		System.out.println();
 		
 		bg.kirby.render(g, xOffset, yOffset);
+
+		/*for (Bonkers bonk : bg.bonkers)
+			bonk.render(g);
+		for (Brontoburt bronto : bg.brontoburt)
+			bronto.render(g);
+		for (Cappy cap : bg.cappy)
+			cap.render(g);
+		for (HotHead hot : bg.hothead)
+			hot.render(g);
+		for (KnuckleJoe knuckj : bg.knucklejoe)
+			knuckj.render(g);
+		for (Noddy ndy : bg.noddy)
+			ndy.render(g);
+		for (Noddy ndy : bg.noddy)
+			ndy.render(g);
+		for (PoppyJr popjr : bg.poppy)
+			popjr.render(g);
+		for (Scarfy scarf : bg.scarfy)
+			scarf.render(g);
+		for (SirKibble sirkib : bg.sirkibble)
+			sirkib.render(g);
+		for (Sparky spark : bg.sparky)
+			spark.render(g);
+		for (SwordKnight swordk : bg.swordknight)
+			swordk.render(g);
+		for (Twister twist : bg.twister)
+			twist.render(g);*/
+		
+		for (WaddleDee wdee : bg.waddledee)
+			wdee.render(g);
+		/*for (WaddleDoo wdoo : bg.waddledoo)
+			wdoo.render(g);*/
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
