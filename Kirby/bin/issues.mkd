@@ -7,6 +7,7 @@
 	- **[4]** paralax scrolling for the background
 	- **[5]** create actual maps, prep for collision detection work
 	- **[6]** make kirby able to jump
+	- **[7]** basic collision detection between kirby and ground blocks
 
 - Priya
 
@@ -31,7 +32,8 @@
 	- **[1]** Skeleton for kirby
 
 - Kelly
-	- **[?]** - collision detection and physics
+	- **[8]** - kirby flying
+	- **[?]** - fine tune collisions
 	- **[?]** - finish drawing level, make tunnels ?
 	
 
