@@ -6,10 +6,14 @@
 	- **[3]** make screen scroll along with kirby
 	- **[4]** paralax scrolling for the background
 	- **[5]** create actual maps, prep for collision detection work
+	- **[6]** make kirby able to jump
+	- **[7]** basic collision detection between kirby and ground blocks
 
 - Priya
 
 - Jasmine
+	- **[1]** Base skeleton for enemies
+	- **[2]** Infrastructure for Kirby state images
 
 - Audrey
 
@@ -22,13 +26,14 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[1]** Base skeleton for enemies
+	- **[3]** Basic enemy movement
 
 - Audrey
 	- **[1]** Skeleton for kirby
 
 - Kelly
-	- **[?]** - collision detection and physics
+	- **[8]** - kirby flying
+	- **[?]** - fine tune collisions
 	- **[?]** - finish drawing level, make tunnels ?
 	
 

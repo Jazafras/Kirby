@@ -12,7 +12,7 @@ import jig.Vector;
 	
 	public static final String[] facingImages = 
 		{
-			KirbyGame.KIRBY_LEFTIMG_RSC,
+			KirbyGame.KIRBY_RIGHTIMG_RSC,
 			KirbyGame.KIRBY_LEFTIMG_RSC,
 			KirbyGame.KIRBY_LEFTIMG_RSC,
 			KirbyGame.KIRBY_LEFTIMG_RSC
@@ -25,7 +25,7 @@ import jig.Vector;
 	
 
 	public Kirby(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, RIGHT);
 		setVelocity(new Vector(0, 0));
 		startState = true;
 		swordState = false;
@@ -46,21 +46,21 @@ import jig.Vector;
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		//super.render(g);
-		Image i = new Image(facingImages[LEFT]);
+		Image i = new Image(facingImages[RIGHT]);
 		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
-		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);   
+		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);
 	}
 	
 	public void update(final int delta, float xOffset, float yOffset) {
 		translate(getVelocity().scale(delta));
 	}
 	
-	public void moveLeft(int delta){
-		super.setPosition(super.getX() - (.15f*delta), super.getY());
+	public void moveLeft(int delta, float speed){
+		super.setPosition(super.getX() - (speed*delta), super.getY());
     }
  
-    public void moveRight(int delta){
-    	super.setPosition(super.getX() + (.15f*delta), super.getY());
+    public void moveRight(int delta, float speed){
+    	super.setPosition(super.getX() + (speed*delta), super.getY());
     }
 	
 	public void succ(){
@@ -79,5 +79,15 @@ import jig.Vector;
 		//return spit;
 		
 	}
+	
+	public void jump(Tile[][] tileMap) {
+        if (super.isOnGround(tileMap))
+        	super.setVelocity(new Vector(super.getVelocity().getX(), -0.4f));
+    }
+	 
+	public String toString() {
+		return "Kirby ~ x: " + super.getX() + ", y: " + super.getY();
+	}
+	
 
 }

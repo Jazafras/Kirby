@@ -5,11 +5,22 @@
 	- **[2]** implement basic kirby movement for testing map
 	- **[3]** make screen scroll along with kirby
 	- **[4]** paralax scrolling for the background
+<<<<<<< HEAD
 	- **[5]** create actual maps
+=======
+	- **[5]** create actual maps, prep for collision detection work
+	- **[6]** make kirby able to jump
+	- **[7]** basic collision detection between kirby and ground blocks
+>>>>>>> b0ec099f0bbc648838fac3ad716d741760f6c8a4
 
 - Priya
 
 - Jasmine
+<<<<<<< HEAD
+=======
+	- **[1]** Base skeleton for enemies
+	- **[2]** Infrastructure for Kirby state images
+>>>>>>> b0ec099f0bbc648838fac3ad716d741760f6c8a4
 
 - Audrey
 
@@ -22,13 +33,23 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
+<<<<<<< HEAD
 	- **[1]** Base skeleton for enemies
+=======
+	- **[3]** Basic enemy movement
+>>>>>>> b0ec099f0bbc648838fac3ad716d741760f6c8a4
 
 - Audrey
 	- **[1]** Skeleton for kirby
 
 - Kelly
+<<<<<<< HEAD
 	- **[6]** - finish drawing level, make tunnels ?
+=======
+	- **[8]** - kirby flying
+	- **[?]** - fine tune collisions
+	- **[?]** - finish drawing level, make tunnels ?
+>>>>>>> b0ec099f0bbc648838fac3ad716d741760f6c8a4
 	
 
 - Undecided
