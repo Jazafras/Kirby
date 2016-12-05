@@ -36,7 +36,6 @@ public class KirbyServer extends Thread{
 	      }
 	   }
 	   public static void main(String[] args) {
-		   // TODO Auto-generated method stub
 		      int port = Integer.parseInt(args[0]);
 		      try {
 		         Thread t = new KirbyServer(port);
