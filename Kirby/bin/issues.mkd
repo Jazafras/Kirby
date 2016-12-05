@@ -6,12 +6,16 @@
 	- **[3]** make screen scroll along with kirby
 	- **[4]** paralax scrolling for the background
 <<<<<<< HEAD
+<<<<<<< HEAD
 	- **[5]** create actual maps
 =======
 	- **[5]** create actual maps, prep for collision detection work
 	- **[6]** make kirby able to jump
 	- **[7]** basic collision detection between kirby and ground blocks
 >>>>>>> b0ec099f0bbc648838fac3ad716d741760f6c8a4
+=======
+	- **[5]** create actual maps, prep for collision detection work
+>>>>>>> Pissue3
 
 - Priya
 
@@ -44,12 +48,17 @@
 
 - Kelly
 <<<<<<< HEAD
+<<<<<<< HEAD
 	- **[6]** - finish drawing level, make tunnels ?
 =======
 	- **[8]** - kirby flying
 	- **[?]** - fine tune collisions
 	- **[?]** - finish drawing level, make tunnels ?
 >>>>>>> b0ec099f0bbc648838fac3ad716d741760f6c8a4
+=======
+	- **[?]** - collision detection and physics
+	- **[?]** - finish drawing level, make tunnels ?
+>>>>>>> Pissue3
 	
 
 - Undecided

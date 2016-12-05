@@ -1,5 +1,7 @@
 package Kirby;
 
+import java.io.IOException;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -89,5 +91,10 @@ import jig.Vector;
 		return "Kirby ~ x: " + super.getX() + ", y: " + super.getY();
 	}
 	
+
+	public void run(IOException e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
