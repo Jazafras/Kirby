@@ -74,8 +74,6 @@ import jig.Vector;
             	setVelocity(new Vector(velocity.getX(), maximumFallSpeed));
             }
         }
-       // if (isOnGround(tileMap))
-       // 	setVelocity(new Vector(velocity.getX(), 0.f));
     }
  
     public void setOnGround(boolean b){
@@ -161,18 +159,23 @@ import jig.Vector;
     }
 	
 	public Set<Tile> getGroundTiles(Tile[][] tiles) {
+		Set<Tile> surTiles = surroundingTiles(tiles);
         super.setPosition(super.getX(), super.getY() + 15);
         Set<Tile> groundTiles = new HashSet<Tile>();
-        Set<Tile> surTiles = surroundingTiles(tiles);;
-        for (Tile t : surTiles) {
-        	if (t.getType() == Tile.GROUND)
+        Set<Tile> newSurTiles = surroundingTiles(tiles);
+        for (Tile t : newSurTiles) {
+        	if (t.getType() == Tile.GROUND && !surTiles.contains(t))
         		groundTiles.add(t);
         }
         super.setPosition(super.getX(), super.getY() - 15);   
         return groundTiles;
     }
 	
-	public boolean containsGround(Tile[][] tiles) {
+	public boolean inAirSideCollision(Tile[][] tiles) {
+		return sideCollision(tiles) && !isOnGround(tiles);
+	}
+	
+	public boolean sideCollision(Tile[][] tiles) {
 		Set<Tile> surTiles = surroundingTiles(tiles);
 		Set<Tile> groundTiles = getGroundTiles(tiles);
 		for (Tile t : surTiles) {
@@ -182,20 +185,8 @@ import jig.Vector;
 		return false;	
 	}
 	
-	public boolean checkCollision(Tile[][] mapTiles){
-        //get only the tiles that matter
-        Set<Tile> tiles = surroundingTiles(mapTiles);
-        for (Tile t : tiles) {
-            if (this.collides(t) != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-	
 	public boolean isOnGround(Tile[][] mapTiles) {
 		Set<Tile> tiles = getGroundTiles(mapTiles);
-		//for (Tile t : tiles)
 		super.setPosition(super.getX(), super.getY() + 15);
 		for (Tile t : tiles) {
              if (t.collides(this) != null) {
