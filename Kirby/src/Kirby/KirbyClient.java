@@ -76,4 +76,8 @@ public class KirbyClient extends Thread{
          e.printStackTrace();
       }
    }
+public void tellServer(int readInt) {
+	// TODO Auto-generated method stub
+	
+}
 }
