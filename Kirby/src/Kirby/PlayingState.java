@@ -4,6 +4,9 @@ import jig.Collision;
 import jig.ResourceManager;
 import jig.Vector;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -34,7 +37,7 @@ class PlayingState extends BasicGameState {
 	
 	public static final float gravity = 0.0015f;
 	
-	int lives;
+	static int lives;
 	Image background;
 	Tile[][] tileMap;
 	Set<Tile> groundTiles;
@@ -42,6 +45,8 @@ class PlayingState extends BasicGameState {
 	int topX;
 	int topY;
 	float yOffset;
+	private Socket socket;
+	int port = 7777;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -59,6 +64,14 @@ class PlayingState extends BasicGameState {
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.setSoundOn(true);
 		KirbyGame bg = (KirbyGame)game;
+		try {
+			socket = new Socket("localhost", port);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		KirbyClientThread client = new KirbyClientThread(null, socket);
 		float xOffset = getXOffset(bg);
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
@@ -173,6 +186,10 @@ class PlayingState extends BasicGameState {
 			bg.kirby.translate(new Vector(-.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		
 		// if space pressed, kirby drops cub
+	}
+	
+	public static int amountLives(){
+		return lives;
 	}
 	
 	private void checkLives(StateBasedGame game, KirbyGame bg) {

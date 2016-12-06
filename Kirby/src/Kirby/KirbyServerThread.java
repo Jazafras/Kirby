@@ -16,9 +16,9 @@ public class KirbyServerThread extends Thread{
 		this.socket = socket;
 		id = socket.getPort();
 	}
-	public void tellClient(String msg){
+	public void tellClient(int output){
 		try {
-			out.writeUTF(msg);
+			out.writeInt(output);
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -34,7 +34,7 @@ public class KirbyServerThread extends Thread{
 		System.out.println("Server Thread for Client " + id + " is running.");
 		while(true){
 			try {
-				server.clientHandler(id, in.readInt()); //edit this so it can handle ints as well
+				server.clientHandler(id, in.readUTF()); //edit this so it can handle ints as well
 			} catch (IOException e) {
 				e.printStackTrace();
 				server.remove(id);

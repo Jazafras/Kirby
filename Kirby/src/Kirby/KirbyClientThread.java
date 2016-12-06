@@ -20,6 +20,7 @@ public class KirbyClientThread extends Thread{
 	public void open() {
 		try {
 			in = new DataInputStream(socket.getInputStream());
+			out = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 			client.stop();
@@ -39,12 +40,16 @@ public class KirbyClientThread extends Thread{
 	public void run(){
 		while(true){
 			try {
-				client.tellServer(in.readInt());
+				tellServer(in.readUTF());
 			} catch (IOException e) {
 				e.printStackTrace();
 				client.stop();
 			}
 		}
+	}
+
+	public void tellServer(String msg) {
+		
 	}
 
 }

@@ -51,7 +51,7 @@ public class KirbyServer implements Runnable{
 		return -1;
 	}
 	
-	public synchronized void clientHandler(int ID, int input){
+	public synchronized void clientHandler(int ID, String input){
 		/* items to be synchronized:
 		amount of lives (int)
 		xOffset (float)
@@ -62,8 +62,31 @@ public class KirbyServer implements Runnable{
 		maxFallSpeed (float)
 		key pressed (int)
 		*/
-																	
 		
+		if(input.equals("lives")){
+			clients[findClient(ID)].tellClient(PlayingState.amountLives());
+		}
+		else if(input.equals("xOffset")){
+			
+		}
+		else if(input.equals("position")){
+			
+		}
+		else if(input.equals("velocity")){
+			
+		}
+		else if(input.equals("jumps")){
+			
+		}
+		else if(input.equals("floating")){
+			
+		}
+		else if(input.equals("fallSpeed")){
+			
+		}
+		else if(input.equals("keyPress")){
+			
+		}
 	}
 	
 	public synchronized void remove(int ID){
@@ -101,7 +124,7 @@ public class KirbyServer implements Runnable{
 			System.out.println("Client refused: maximum " + clients.length + " reached.");
 		}
 	}
-	
+	/*
 	public static void main(String args[]){
 		KirbyServer server = null;
 		if (args.length != 1){
@@ -111,5 +134,5 @@ public class KirbyServer implements Runnable{
 			server = new KirbyServer(Integer.parseInt(args[0]));
 		}
 	}
-
+	 */
 }
