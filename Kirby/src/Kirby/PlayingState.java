@@ -41,6 +41,7 @@ class PlayingState extends BasicGameState {
 	Map<String, Tile> tileFetch;
 	int topX;
 	int topY;
+	float yOffset;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -59,7 +60,7 @@ class PlayingState extends BasicGameState {
 		container.setSoundOn(true);
 		KirbyGame bg = (KirbyGame)game;
 		float xOffset = getXOffset(bg);
-		float yOffset = getYOffset(bg);
+		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
 	}
@@ -71,7 +72,6 @@ class PlayingState extends BasicGameState {
 		KirbyGame bg = (KirbyGame)game;
 		
 		float xOffset = getXOffset(bg);
-		float yOffset = getYOffset(bg);
 		
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
@@ -87,9 +87,9 @@ class PlayingState extends BasicGameState {
 		bg.kirby.render(g, xOffset, yOffset);
 		
 		for (Tile t : bg.kirby.surroundingTiles(tileMap))
-			t.render(g, xOffset, yOffset);
+			t.render(g, xOffset - 8, yOffset);
 		for (Tile t : bg.kirby.getGroundTiles(tileMap))
-			t.render(g, xOffset, yOffset);
+			t.render(g, xOffset - 8, yOffset);
 		
 		/*for (int i = 0; i < tileMap.length; i++) {
 			for (int j = 0; j < tileMap[i].length; j++) {
@@ -97,6 +97,7 @@ class PlayingState extends BasicGameState {
 					tileMap[i][j].render(g, 0, yOffset);
 				}
 			}
+
 		}*/
 		
 		bg.kirby.render(g, xOffset, yOffset);
@@ -132,11 +133,14 @@ class PlayingState extends BasicGameState {
 			wdee.render(g);
 		/*for (WaddleDoo wdoo : bg.waddledoo)
 			wdoo.render(g);*/
-		
-		g.drawString("Lives: " + lives, 10, 50);
-		g.drawString("Level: " + bg.level, 10, 30);
-		
+
 	}
+
+		
+		//g.drawString("Lives: " + lives, 10, 50);
+		//g.drawString("Level: " + bg.level, 10, 30);
+		
+	
 	
 	private float getXOffset(KirbyGame bg) {
 		float kXOffset = 0;
@@ -165,64 +169,28 @@ class PlayingState extends BasicGameState {
 		Input input = container.getInput();
 		KirbyGame bg = (KirbyGame)game;
 		
-		float kXOffset = getXOffset(bg);
-		float kYOffset = getYOffset(bg);
-		
-
-		/*for (int i = 0; i < tileMap.length; i++) {
-			for (int j = 0; j < tileMap[i].length; j++) {
-				tileMap[i][j].setPosition(tileMap[i][j].getX() + (kXOffset / 32), tileMap[i][j].getY());
-			}
-
-		}*/
-		
-		// kirby collision with cubs
-		Set<Tile> kirbyOccupying = bg.kirby.surroundingTiles(tileMap);
-		Set<Tile> kirbyGround = bg.kirby.getGroundTiles(tileMap);
-		
 		int move = -1;
-		for (Tile t : kirbyOccupying) {
-			if (t.getType() == GROUND && !kirbyGround.contains(t)) {
-				if (bg.kirby.getVelocity().getX() < 0) {
-					System.out.println("left collision");
-					move = LEFT;
-				} else if (bg.kirby.getVelocity().getX() > 0){
-					move = RIGHT;
-					System.out.println("right collision");
-				}
-				break;
+		if (bg.kirby.sideCollision(tileMap)) {
+			if (bg.kirby.getVelocity().getX() < 0) {
+				System.out.println("left collision");
+				move = LEFT;
+			} else if (bg.kirby.getVelocity().getX() > 0){
+				move = RIGHT;
+				System.out.println("right collision");
 			}
 		}
-		keyPresses(input, bg, delta, move);
-		checkLives(game, bg);
-		
-		/*System.out.println(bg.kirby.toString());
-		System.out.print("surrounding tiles ("+bg.kirby.surroundingTiles(tileMap).size()+") : ");
-		for (Tile t : bg.kirby.surroundingTiles(tileMap))
-			System.out.print(t.toString() + ", ");
-		System.out.println();
-		System.out.print("ground tiles ("+bg.kirby.getGroundTiles(tileMap).size()+"): ");
-		for (Tile t : bg.kirby.getGroundTiles(tileMap))
-			System.out.print(t.toString() + ", ");
-		System.out.println();
-		System.out.println();*/
 		
 		if (!bg.kirby.isOnGround(tileMap) || bg.kirby.getVelocity().getY() < 0) {
-			//System.out.println("gravity " + bg.kirby.getVelocity().getY() + " " + !bg.kirby.isOnGround(tileMap));
-			//System.out.println("kirby pos " + bg.kirby.getY());
-			//for (Tile t : bg.kirby.getGroundTiles(tileMap))
-			//	System.out.println(t.toString());
 	     	bg.kirby.applyGravity(gravity * delta, tileMap);
 		} else {
 			bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), 0.f));
 		}
 		
+
+		keyPresses(input, bg, delta, move);
+		checkLives(game, bg);
 		bg.kirby.update(delta);
-		/*bg.kirby.setVertex(bg);
-		//bg.poacher.setMoving(bg);
-		//bg.poacher.update(delta);
-		 */
-		//handleGameObject(bg.kirby, delta);
+
 	}
 	
 
@@ -231,27 +199,21 @@ class PlayingState extends BasicGameState {
 
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && move != LEFT) {
-			bg.kirby.setVelocity(new Vector(-.2f, 0));
+			bg.kirby.setVelocity(new Vector(-.2f, bg.kirby.getVelocity().getY()));
 		} else if (input.isKeyDown(Input.KEY_RIGHT) && move != RIGHT) { 
-			bg.kirby.setVelocity(new Vector(.2f, 0f));
-		/*else if (input.isKeyDown(Input.KEY_UP) && (move == null || move.getY() <= 0)) 
-			bg.kirby.setVelocity(new Vector(0f, -.2f));
-		else if (input.isKeyDown(Input.KEY_DOWN) && (move == null || move.getY() >= 0)) 
-			bg.kirby.setVelocity(new Vector(0f, .2f));*/
-		} else if (input.isKeyDown(Input.KEY_SPACE)) {
-			bg.kirby.jump(tileMap);
+			bg.kirby.setVelocity(new Vector(.2f, bg.kirby.getVelocity().getY()));
 		} else 
 			bg.kirby.setVelocity(new Vector(0.f, bg.kirby.getVelocity().getY()));
 		
+		if (input.isKeyDown(Input.KEY_SPACE))
+			bg.kirby.jump(tileMap);
 		
-		/*if (move == LEFT)
-			bg.kirby.moveRight(delta, .3f);
+		if (move == LEFT)
+			bg.kirby.translate(new Vector(.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		else if (move == RIGHT)
-			bg.kirby.moveLeft(delta, .3f);*/
+			bg.kirby.translate(new Vector(-.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		
 		// if space pressed, kirby drops cub
-		
-		
 	}
 	
 	private void checkLives(StateBasedGame game, KirbyGame bg) {
@@ -273,10 +235,10 @@ class PlayingState extends BasicGameState {
 				int type = bg.map.getTileId(i, j, collisions);
 				Tile t = null;
 				if (bg.map.getTileProperty(type, "tileType", "solid").equals("ground")) {
-					t = new Tile(topX + i*32 + 16, topY + j*32 + 16, GROUND);
+					t = new Tile(topX + i*32 + 8, topY + j*32 + 16, GROUND);
 					groundTiles.add(t);
 				} else {
-					t = new Tile(topX + 16 + i*32, topY + j*32 + 16, AIR);
+					t = new Tile(topX + 8 + i*32, topY + j*32 + 16, AIR);
 				}
 				tileFetch.put(t.toString(), t);
 				tileMap[i][j] = t;
@@ -287,98 +249,6 @@ class PlayingState extends BasicGameState {
 		for (String t : tileFetch.keySet())
 			System.out.println(t);
 	}
-	
-    /*private void handleGameObject(MovingEntity e, int delta){
-        
-        //first update the onGround of the object
-        e.setOnGround(e.isOnGround(tileMap));
-        
-        //now apply gravitational force if we are not on the ground or when we are about to jump
-        if(!e.isOnGround(tileMap) || e.getVelocity().getY() < 0)
-            e.applyGravity(gravity * delta);
-        else
-        	e.setVelocity(new Vector(e.getVelocity().getX(), 0.f));
-        
-        //calculate how much we actually have to move
-        float x_movement = e.getVelocity().getX()*delta;
-        float y_movement   = e.getVelocity().getY()*delta;
-        
-        //we have to calculate the step we have to take
-        float step_y = 0;
-        float step_x = 0;
-        
-        if(x_movement != 0){
-            step_y = Math.abs(y_movement)/Math.abs(x_movement);
-            if(y_movement < 0)
-                step_y = -step_y;
-            
-            if(x_movement > 0)
-                step_x = 1;
-            else
-                step_x = -1;
-            
-            if((step_y > 1 || step_y < -1) && step_y != 0){
-                step_x = Math.abs(step_x)/Math.abs(step_y);
-                if(x_movement < 0)
-                    step_x = -step_x;
-                if(y_movement < 0)
-                    step_y = -1;
-                else
-                    step_y = 1;
-            }
-        }else if(y_movement != 0){
-            //if we only have vertical movement, we can just use a step of 1
-            if(y_movement > 0)
-                step_y = 1;
-            else
-                step_y = -1;
-        }
-        
-        //and then do little steps until we are done moving
-        while(x_movement != 0 || y_movement != 0){
-            
-            //we first move in the x direction
-            if(x_movement != 0){
-                //when we do a step, we have to update the amount we have to move after this
-                if((x_movement > 0 && x_movement < step_x) || (x_movement > step_x  && x_movement < 0)){
-                    step_x = x_movement;
-                    x_movement = 0;
-                }else
-                    x_movement -= step_x;
-                
-                //then we move the object one step
-                e.setPosition(e.getX()+step_x,e.getY());
-                //obj.setX(obj.getX()+step_x);
-                
-                //if we collide with any of the bounding shapes of the tiles we have to revert to our original position
-                if(e.checkCollision(tileMap)){
-                    
-                   //undo our step, and set the velocity and amount we still have to move to 0, because we can't move in that direction
-                	e.setPosition(e.getX()-step_x,e.getY());
-                	e.setVelocity(new Vector(0.f, e.getVelocity().getY()));
-                    x_movement = 0;
-                }
-                
-            }
-            //same thing for the vertical, or y movement
-            if(y_movement != 0){
-                if((y_movement > 0 && y_movement < step_y) || (y_movement > step_y  && y_movement < 0)){
-                    step_y = y_movement;
-                    y_movement = 0;
-                }else
-                    y_movement -= step_y;
-                
-                e.setPosition(e.getX(), e.getY()+step_y);
-                
-                if(e.checkCollision(tileMap)){
-                	e.setPosition(e.getX(), e.getY()-step_y);
-                	e.setVelocity(new Vector(e.getVelocity().getX(), 0.f));
-                    y_movement = 0;
-                    break;
-                }
-            }
-        }
-    }*/
 
 	@Override
 	public int getID() {
