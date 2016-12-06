@@ -83,6 +83,9 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_RIGHTHAMMER_ATTACK = "Kirby/resources/hammerkirby/kirby_right_attack.png";
 	public static final String KIRBY_LEFTHAMMER_ATTACK = "Kirby/resources/hammerkirby/kirby_left_attack.png";
 
+	//noddy kirby
+	public static final String KIRBY_SLEEP = "Kirby/resources/sleepKirby.png";
+	
 	//poppy kirby
 	public static final String KIRBY_LEFTPOPPY = "Kirby/resources/poppykirby/kirby_left.png";
 	public static final String KIRBY_RIGHTPOPPY = "Kirby/resources/poppykirby/kirby_right.png";
@@ -124,7 +127,6 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBYTWIST_LEFT_FLY = "Kirby/resources/twisterkirby/kirby_left_fly.png";
 	public static final String KIRBYTWIST_ATTACK = "Kirby/resources/twisterkirby/kirby_attack.png";
 	
-	
 	//ufo kirby
 	public static final String KIRBYUFO_LEFT = "Kirby/resources/ufokirby/kirby_left.png";
 	public static final String KIRBYUFO_RIGHT = "Kirby/resources/ufokirby/kirby_right.png";
@@ -132,6 +134,16 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_LEFTUFO_ATTACK = "Kirby/resources/ufokirby/kirby_left_attack.png";
 	//ufo beam
 	public static final String KIRBY_BEAM_RSC = "Kirby/resources/kirbyBeam.png";
+	
+	//waddledoo kirby
+	public static final String KIRBYWADDLE_LEFT = "Kirby/resources/waddlekirby/kirby_left.png";
+	public static final String KIRBYWADDLE_RIGHT = "Kirby/resources/waddlekirby/kirby_right.png";
+	public static final String KIRBYWADDLE_RIGHT_SUCC = "Kirby/resources/waddlekirby/kirby_right_succ.png";
+	public static final String KIRBYWADDLE_LEFT_SUCC = "Kirby/resources/waddlekirby/kirby_left_succ.png";
+	public static final String KIRBYWADDLE_RIGHT_FLY = "Kirby/resources/waddlekirby/kirby_right_fly.png";
+	public static final String KIRBYWADDLE_LEFT_FLY = "Kirby/resources/waddlekirby/kirby_left_fly.png";
+	public static final String KIRBYWADDLE_LEFT_ATTACK = "Kirby/resources/waddlekirby/kirby_left_attack.png";
+	public static final String KIRBYWADDLE_RIGHT_ATTACK = "Kirby/resources/waddlekirby/kirby_right_attack.png";
 	
 	/***Enemy images***/
 	//Brontoburt images
@@ -223,6 +235,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
 	
 	public static final String TILE_IMG_RSC = "Kirby/resources/tile.png";
+	
+	public static final String STAR_IMG_RSC = "Kirby/resources/star.png";
 	
 	//public static final String HITWALL_RSC = "bounce/resource/wall_hit.wav";
 	
@@ -488,6 +502,8 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(POACHER_LEFTIMG_RSC);
 		
 		ResourceManager.loadImage(TILE_IMG_RSC);
+		
+		ResourceManager.loadImage(STAR_IMG_RSC);
 		
 		ResourceManager.loadImage(UNDERBRUSH_IMG_RSC);
 		ResourceManager.loadImage(NEST_IMG_RSC);
