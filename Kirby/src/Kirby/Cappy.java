@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Cappy extends MovingEntity {
+ class Cappy extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.CAPPY_RIGHT,

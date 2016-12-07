@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Twister extends MovingEntity {
+ class Twister extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.TWISTER_RIGHT,

@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Sparky extends MovingEntity {
+ class Sparky extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.SPARKY_RIGHT,

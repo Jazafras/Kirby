@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Noddy extends MovingEntity {
+ class Noddy extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.NODDY_RIGHT,

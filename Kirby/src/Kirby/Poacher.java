@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Queue;
 import jig.Vector;
 
- class Poacher extends MovingEntity {
+ class Poacher extends MovingEnemy {
 	
 	public static final String[] facingImages = 
 		{

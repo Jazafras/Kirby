@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class UFO extends MovingEntity {
+ class UFO extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.UFO_RIGHT,
