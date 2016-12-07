@@ -60,6 +60,13 @@ public class KirbyClient{
 	}
 	
 	public void update(){
+		try {
+			writer.writeUTF("update");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
 		
 	}
 	/*
