@@ -15,11 +15,11 @@ public class KirbyServerThread implements Runnable{
 	private Kirby kirby;
 	private CopyOnWriteArrayList<KirbyServerThread> clients;
 	
-	public KirbyServerThread(KirbyServer server, Socket socket){
+	public KirbyServerThread(Socket socket, CopyOnWriteArrayList<KirbyServerThread> clients, int id){
 		super();
-		this.server = server;
 		this.socketWriter = socket;
-		id = socket.getPort();
+		this.clients = clients;
+		this.id = id;
 
 	}
 	public void tellClient(int output){
@@ -31,6 +31,10 @@ public class KirbyServerThread implements Runnable{
 		}
 	}
 
+	int getID(){
+		return this.id;
+	}
+	
 	public void run(){
 		getSocket();
 		
@@ -41,6 +45,7 @@ public class KirbyServerThread implements Runnable{
 				String msg = in.readUTF();
 				
 				if(msg.equals("position")){
+					this.kirby = new Kirby(128, 418);
 					out.writeInt(clients.size());
 					out.writeFloat(this.kirby.getX());
 					out.writeFloat(this.kirby.getY());
@@ -55,7 +60,7 @@ public class KirbyServerThread implements Runnable{
 					}
 				}
 				else if(msg.equals("connect")){
-					kirby = new Kirby(418, 418);
+					this.kirby = new Kirby(128, 418);
 					out.writeFloat(kirby.getX());
 					out.writeFloat(kirby.getY());
 				}
@@ -79,11 +84,11 @@ public class KirbyServerThread implements Runnable{
 	}
 	
 	public Kirby player(){
-		return kirby;
+		return this.kirby;
 	}
 	
 	CopyOnWriteArrayList<KirbyServerThread> getClients() { 
-		return clients; 
+		return this.clients; 
 	}
 	
 	public void close() throws IOException{
@@ -102,6 +107,7 @@ public class KirbyServerThread implements Runnable{
 			this.socketReader = KirbyServer.addThread(serverSocketReader);
 		} catch (IOException e) {
 			e.printStackTrace();
+			this.socketReader = null;
 		}
 	}
 

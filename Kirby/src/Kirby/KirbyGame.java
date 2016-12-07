@@ -260,8 +260,6 @@ public class KirbyGame extends StateBasedGame {
 	Nest nest;
 	
 	static KirbyServer server;
-	KirbyClientThread client;
-	static int port;
 	
 	/**
 	 * Create the KirbyGame frame, saving the width and height for later use.
@@ -491,13 +489,15 @@ public class KirbyGame extends StateBasedGame {
 	
 	public static void main(String[] args) {
 		AppGameContainer app;
-		port = 7777;
+		int port = 7777;
 		try {
 			server = new KirbyServer(port);
+			
 			app = new AppGameContainer(new KirbyGame("Kirby"));
 			app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
 			app.setVSync(true);
 			app.start();
+			
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

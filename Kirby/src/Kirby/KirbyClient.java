@@ -14,20 +14,12 @@ public class KirbyClient{
 	private Socket socketWriter = null;
 	private DataInputStream reader = null;
 	private DataOutputStream writer = null;
+	int port;
+	String host;
 	
 	public KirbyClient(String servername, int port){
-		try {
-			socketReader = new Socket(servername, port);
-			reader = new DataInputStream(socketReader.getInputStream());
-			
-			int writePort = reader.readInt();
-			socketWriter = new Socket(servername, writePort);
-			writer = new DataOutputStream(socketWriter.getOutputStream());
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	
+		this.port = port;
+		this.host = servername;
 	}
 	
 	public ArrayList<Kirby> getKirbyPositions(){
@@ -47,6 +39,28 @@ public class KirbyClient{
 		}
 		
 		return players;
+	}
+	
+	public void connect(){
+		try {
+			System.out.println("host is " + this.host);
+			System.out.println("port is " + this.port);
+			socketReader = new Socket(this.host, this.port);
+			reader = new DataInputStream(socketReader.getInputStream());
+			
+			int writePort = reader.readInt();
+			System.out.println("writePort is " + writePort);
+			socketWriter = new Socket(host, writePort);
+			writer = new DataOutputStream(socketWriter.getOutputStream());
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void update(){
+		
 	}
 	/*
 	public static void main(String args[]){
