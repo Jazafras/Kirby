@@ -1,37 +1,55 @@
 package Kirby;
 
 import java.net.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.io.*;
 
 public class KirbyServer implements Runnable{
-	private KirbyServerThread clients[] = new KirbyServerThread[10];
+
+	private CopyOnWriteArrayList<KirbyServerThread> clients;
+	public int port;
 	private ServerSocket server = null;
+	private Socket socket = null;
 	private Thread thread = null;
-	private int clientCount = 0;
-   
+	static int clientCount = 0;
+
+	public static final int PORT = 7777;
+	
+	public int screenWidth = 1280;
+	public int screenHeight = screenWidth/16*9;
+	
 	public KirbyServer(int port){
-		try {
-			System.out.println("Binding port " + port + " to server.");
-			server = new ServerSocket(port);
-			start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.port = port;
+		this.clients = new CopyOnWriteArrayList<>();
+
 	}
 	
 	public void run(){
-		while(thread != null){
-			try {
-				addThread(server.accept());
-			} catch (IOException e) {
-				e.printStackTrace();
-				stop();
+		try {
+			System.out.println("Binding port " + port + " to server.");
+			server = new ServerSocket(port);
+			while(thread != null){
+				socket = addThread(server);
+				
+				clientCount = clients.size();
+				if(clientCount == 5){
+					System.out.println("Can't have more than 4 clients.");
+					socket.close();
+					continue;
+				}
+				KirbyServerThread player = new KirbyServerThread(this, socket);
+				clients.add(clientCount, player);
+				start();
 			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 	}
 	public void start() {
 		if(thread == null){
-			thread = new Thread(this);
+			thread = new Thread(clients.get(clientCount));
 			thread.start();
 		}
 	}
@@ -41,18 +59,9 @@ public class KirbyServer implements Runnable{
 			thread = null;
 		}
 	}
-
-	private int findClient(int ID){
-		for(int i = 0; i < clientCount; i++){
-			if(clients[i].getID() == ID){
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public synchronized void clientHandler(int ID, String input){
-		/* items to be synchronized:
+/*
+	public synchronized void clientHandler(String input){
+		 items to be synchronized:
 		amount of lives (int)
 		xOffset (float)
 		kirby's position (vector) (int, int)
@@ -61,15 +70,22 @@ public class KirbyServer implements Runnable{
 		floating (boolean)
 		maxFallSpeed (float)
 		key pressed (int)
-		*/
+		
 		
 		if(input.equals("lives")){
-			clients[findClient(ID)].tellClient(PlayingState.amountLives());
+			//clients[].tellClient(PlayingState.amountLives());
 		}
 		else if(input.equals("xOffset")){
 			
 		}
 		else if(input.equals("position")){
+			try {
+				out.writeInt(clientCount);
+				out.writeFloat(x);
+				out.writeFloat(y);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		else if(input.equals("velocity")){
@@ -88,51 +104,20 @@ public class KirbyServer implements Runnable{
 			
 		}
 	}
-	
+	*/
 	public synchronized void remove(int ID){
-		int pos = findClient(ID);
-		if(pos >= 0){
-			KirbyServerThread toTerminate = clients[pos];
-			System.out.println("Removing client thread " + ID + " at " + pos);
-	        if (pos < clientCount - 1){
-	        	for(int i = pos + 1; i < clientCount; i++){
-	        		clients[i-1] = clients[i];
-	        	}
-	        }
-	        clientCount--;
-	        try {
-				toTerminate.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	        toTerminate.stop();
-		}
+		clients.remove(ID);
 	}
 	
-	private void addThread(Socket socket) {
-		if(clientCount < clients.length){
-			clients[clientCount] = new KirbyServerThread(this, socket);
-			try {
-				clients[clientCount].open();
-				clients[clientCount].start();
-				clientCount++;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public static Socket addThread(ServerSocket server) {
+		Socket socketClient = null;
+		try {
+			socketClient = server.accept();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		else{
-			System.out.println("Client refused: maximum " + clients.length + " reached.");
-		}
+		return socketClient;
 	}
-	/*
-	public static void main(String args[]){
-		KirbyServer server = null;
-		if (args.length != 1){
-			System.out.println("Usage: java KirbyServer port");
-		}
-		else{
-			server = new KirbyServer(Integer.parseInt(args[0]));
-		}
-	}
-	 */
+
+	
 }

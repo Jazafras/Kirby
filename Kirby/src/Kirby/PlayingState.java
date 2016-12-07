@@ -4,9 +4,12 @@ import jig.Collision;
 import jig.ResourceManager;
 import jig.Vector;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -27,7 +30,7 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  * Transitions From StartUpState
  * Transitions To GameOverState
  */
-class PlayingState extends BasicGameState {
+class PlayingState extends BasicGameState{
 	
 	public static final int GROUND = 0;
 	public static final int AIR = 1;
@@ -46,11 +49,18 @@ class PlayingState extends BasicGameState {
 	int topY;
 	float yOffset;
 	private Socket socket;
-	int port = 7777;
+	private Thread thread;
+	private DataInputStream console = null;
+	private DataOutputStream out = null;
+	private KirbyClient client = null;
+	static int port;
+	
+	ArrayList<Kirby> players;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		client = new KirbyClient("localhost", 7777);
 		KirbyGame bg = (KirbyGame)game;
 		lives = 3;
 		background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
@@ -58,20 +68,16 @@ class PlayingState extends BasicGameState {
 		tileFetch = new HashMap<String, Tile>();
 		
 		loadTiles(bg);
+		
+		
+
 	}
 
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.setSoundOn(true);
 		KirbyGame bg = (KirbyGame)game;
-		try {
-			socket = new Socket("localhost", port);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		KirbyClientThread client = new KirbyClientThread(null, socket);
+		
 		float xOffset = getXOffset(bg);
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
@@ -85,6 +91,11 @@ class PlayingState extends BasicGameState {
 		KirbyGame bg = (KirbyGame)game;
 		
 		float xOffset = getXOffset(bg);
+
+		players = client.getKirbyPositions();
+		
+		System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
+		
 		
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
@@ -97,7 +108,7 @@ class PlayingState extends BasicGameState {
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
 		
-		bg.kirby.render(g, xOffset, yOffset);
+		
 		
 		for (Tile t : bg.kirby.surroundingTiles(tileMap))
 			t.render(g, xOffset - 8, yOffset);
@@ -112,6 +123,13 @@ class PlayingState extends BasicGameState {
 			}
 		}
 		*/
+		
+		for(int i = 0; i < players.size(); i++){
+			players.get(i).render(g, xOffset, yOffset);
+			//bg.kirby.render(g, xOffset, yOffset);
+		}
+		
+		//bg.kirby.render(g, xOffset, yOffset);
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);

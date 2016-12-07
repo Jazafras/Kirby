@@ -261,6 +261,7 @@ public class KirbyGame extends StateBasedGame {
 	
 	static KirbyServer server;
 	KirbyClientThread client;
+	static int port;
 	
 	/**
 	 * Create the KirbyGame frame, saving the width and height for later use.
@@ -490,7 +491,7 @@ public class KirbyGame extends StateBasedGame {
 	
 	public static void main(String[] args) {
 		AppGameContainer app;
-		int port = 7777;
+		port = 7777;
 		try {
 			server = new KirbyServer(port);
 			app = new AppGameContainer(new KirbyGame("Kirby"));
