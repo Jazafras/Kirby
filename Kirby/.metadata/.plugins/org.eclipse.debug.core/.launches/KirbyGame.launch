@@ -7,5 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="Kirby.KirbyGame"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="localhost 420"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Kirby"/>
 </launchConfiguration>

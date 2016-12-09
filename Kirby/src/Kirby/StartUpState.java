@@ -54,7 +54,7 @@ class StartUpState extends BasicGameState {
 		Input input = container.getInput();
 		KirbyGame bg = (KirbyGame)game;
 
-		if (input.isKeyDown(Input.KEY_SPACE))
+		if (input.isKeyDown(Input.KEY_ENTER))
 			bg.enterState(KirbyGame.PLAYINGSTATE);	
 		
 	}

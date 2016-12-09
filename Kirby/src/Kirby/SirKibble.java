@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class SirKibble extends MovingEntity {
+ class SirKibble extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.KIBBLE_RIGHT,

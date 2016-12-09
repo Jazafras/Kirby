@@ -97,13 +97,50 @@ class PlayingState extends BasicGameState {
 					tileMap[i][j].render(g, 0, yOffset);
 				}
 			}
-		}
-		*/
+
+		}*/
 		
-		g.drawString("Lives: " + lives, 10, 50);
-		g.drawString("Level: " + bg.level, 10, 30);
+		bg.kirby.render(g, xOffset, yOffset);
+
+		/*for (Bonkers bonk : bg.bonkers)
+			bonk.render(g);
+		for (Brontoburt bronto : bg.brontoburt)
+			bronto.render(g);
+		for (Cappy cap : bg.cappy)
+			cap.render(g);
+		for (HotHead hot : bg.hothead)
+			hot.render(g);
+		for (KnuckleJoe knuckj : bg.knucklejoe)
+			knuckj.render(g);
+		for (Noddy ndy : bg.noddy)
+			ndy.render(g);
+		for (Noddy ndy : bg.noddy)
+			ndy.render(g);
+		for (PoppyJr popjr : bg.poppy)
+			popjr.render(g);
+		for (Scarfy scarf : bg.scarfy)
+			scarf.render(g);
+		for (SirKibble sirkib : bg.sirkibble)
+			sirkib.render(g);
+		for (Sparky spark : bg.sparky)
+			spark.render(g);
+		for (SwordKnight swordk : bg.swordknight)
+			swordk.render(g);
+		for (Twister twist : bg.twister)
+			twist.render(g);*/
 		
+		for (WaddleDee wdee : bg.waddledee)
+			wdee.render(g);
+		/*for (WaddleDoo wdoo : bg.waddledoo)
+			wdoo.render(g);*/
+
 	}
+
+		
+		//g.drawString("Lives: " + lives, 10, 50);
+		//g.drawString("Level: " + bg.level, 10, 30);
+		
+	
 	
 	private float getXOffset(KirbyGame bg) {
 		float kXOffset = 0;
@@ -155,13 +192,17 @@ class PlayingState extends BasicGameState {
 			bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), 0.f));
 		}
 		
+
 		keyPresses(input, bg, delta, move);
 		checkLives(game, bg);
 		bg.kirby.update(delta);
+
 	}
 	
+
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	
 		// System.out.println(move);
+
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && move != LEFT) {
 			bg.kirby.setVelocity(new Vector(-.2f, bg.kirby.getVelocity().getY()));

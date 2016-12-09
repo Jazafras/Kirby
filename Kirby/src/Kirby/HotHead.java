@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class HotHead extends MovingEntity {
+ class HotHead extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.HOTHEAD_RIGHT,

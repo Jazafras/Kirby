@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Bonkers extends MovingEntity {
+ class Bonkers extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.BONKERS_RIGHT,
