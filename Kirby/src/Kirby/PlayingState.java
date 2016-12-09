@@ -143,6 +143,12 @@ class PlayingState extends BasicGameState {
 			}
 		}
 		
+		if (bg.kirby.isOnGround(tileMap)) {
+			bg.kirby.jumps = 0;
+			bg.kirby.floating = false;
+			bg.kirby.maximumFallSpeed = 1.f;
+		}
+		
 		if (!bg.kirby.isOnGround(tileMap) || bg.kirby.getVelocity().getY() < 0) {
 	     	bg.kirby.applyGravity(gravity * delta, tileMap);
 		} else {

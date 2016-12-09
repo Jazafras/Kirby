@@ -66,15 +66,6 @@ import jig.Vector;
 	protected String getCurImage() {
 		return curImage;
 	}
-	
-	public void applyGravity(float gravity, Tile[][] tileMap){
-        if(velocity.getY() < maximumFallSpeed){
-            setVelocity(new Vector(velocity.getX(), velocity.getY() + gravity));
-            if(velocity.getY() > maximumFallSpeed){
-            	setVelocity(new Vector(velocity.getX(), maximumFallSpeed));
-            }
-        }
-    }
  
     public void setOnGround(boolean b){
         onGround = b;

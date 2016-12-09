@@ -18,11 +18,15 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTIMG_RSC
 		};
 	
+	private static final int maxJump = 3;
+	
+	public boolean floating;
 	private boolean startState;
 	private boolean swordState;
 	private boolean state2;
 	private boolean state3;
-	
+	public int jumps;
+	public float maximumFallSpeed = 1;
 
 	public Kirby(final float x, final float y) {
 		super(x, y, facingImages, RIGHT);
@@ -31,6 +35,8 @@ import jig.Vector;
 		swordState = false;
 		state2 = false;
 		state3 = false;
+		floating = false;
+		jumps = 0;
 	}
 	
 	public void setVertex(KirbyGame bg) {
@@ -51,10 +57,6 @@ import jig.Vector;
 		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);
 	}
 	
-	public void update(final int delta, float xOffset, float yOffset) {
-		translate(getVelocity().scale(delta));
-	}
-	
 	public void moveLeft(int delta, float speed){
 		super.setPosition(super.getX() - (speed*delta), super.getY());
     }
@@ -72,22 +74,34 @@ import jig.Vector;
 		//return swallow;
 		//if entity = sword
 		//switch to sword state
-		
 	}
 	
 	public void spit(){
 		//return spit;
-		
 	}
 	
 	public void jump(Tile[][] tileMap) {
-        if (super.isOnGround(tileMap))
+        if (jumps < maxJump) {
+        	if (jumps == 1) {
+    			floating = true;
+    			maximumFallSpeed = .5f;
+    		}
+        	jumps++;
         	super.setVelocity(new Vector(super.getVelocity().getX(), -0.4f));
+        }
     }
 	 
 	public String toString() {
 		return "Kirby ~ x: " + super.getX() + ", y: " + super.getY();
 	}
 	
+	public void applyGravity(float gravity, Tile[][] tileMap){
+        if(super.getVelocity().getY() < maximumFallSpeed){
+            setVelocity(new Vector(super.getVelocity().getX(), super.getVelocity().getY() + gravity));
+            if(super.getVelocity().getY() > maximumFallSpeed){
+            	setVelocity(new Vector(super.getVelocity().getX(), maximumFallSpeed));
+            }
+        }
+    }
 
 }
