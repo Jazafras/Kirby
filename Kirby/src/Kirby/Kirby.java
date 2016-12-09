@@ -165,7 +165,8 @@ import jig.Vector;
 			KirbyGame.KIRBYWADDLE_LEFT_ATTACK,
 		};
 	
-	private static final int maxJump = 3;
+	private static final int MAX_JUMP = 5;
+	private static final int TIME_JUMP = 20;
 	
 	public boolean floating;
 	private boolean startState;
@@ -173,6 +174,7 @@ import jig.Vector;
 	private boolean state2;
 	private boolean state3;
 	public int jumps;
+	public int jumpTime;
 	public float maximumFallSpeed = 1;
 
 	public Kirby(final float x, final float y) {
@@ -184,6 +186,7 @@ import jig.Vector;
 		state3 = false;
 		floating = false;
 		jumps = 0;
+		jumpTime = 0;
 	}
 	
 	public void setVertex(KirbyGame bg) {
@@ -229,11 +232,8 @@ import jig.Vector;
 	}
 	
 	public void jump(Tile[][] tileMap) {
-        if (jumps < maxJump) {
-        	if (jumps == 1) {
-    			floating = true;
-    			maximumFallSpeed = .5f;
-    		}
+        if (jumps < MAX_JUMP && jumpTime <= 0) {
+        	jumpTime = TIME_JUMP;
         	jumps++;
         	super.setVelocity(new Vector(super.getVelocity().getX(), -0.4f));
         }
@@ -244,11 +244,11 @@ import jig.Vector;
 	}
 	
 	public void applyGravity(float gravity, Tile[][] tileMap){
-        if(super.getVelocity().getY() < maximumFallSpeed){
+        if(super.getVelocity().getY() < maximumFallSpeed) {
             setVelocity(new Vector(super.getVelocity().getX(), super.getVelocity().getY() + gravity));
-            if(super.getVelocity().getY() > maximumFallSpeed){
+            if (super.getVelocity().getY() > maximumFallSpeed) 
             	setVelocity(new Vector(super.getVelocity().getX(), maximumFallSpeed));
-            }
+            System.out.println(super.getVelocity().getY());
         }
     }
 
