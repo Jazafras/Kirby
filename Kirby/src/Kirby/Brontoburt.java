@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Brontoburt extends MovingEntity {
+ class Brontoburt extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.BRONTOBURT_RIGHT,

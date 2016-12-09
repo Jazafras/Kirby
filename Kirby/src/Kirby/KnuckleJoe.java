@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class KnuckleJoe extends MovingEntity {
+ class KnuckleJoe extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.KNUCKLE_RIGHT,

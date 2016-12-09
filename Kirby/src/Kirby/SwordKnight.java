@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class SwordKnight extends MovingEntity {
+ class SwordKnight extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.SWORDKNIGHT_RIGHT,

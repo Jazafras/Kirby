@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class PoppyJr extends MovingEntity {
+ class PoppyJr extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.POPPY_RIGHT,

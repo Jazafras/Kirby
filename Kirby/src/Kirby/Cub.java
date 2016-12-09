@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Cub extends MovingEntity {
+ class Cub extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.CUB_IMG_RSC,

@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Scarfy extends MovingEntity {
+ class Scarfy extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.SCARFY_RIGHT,

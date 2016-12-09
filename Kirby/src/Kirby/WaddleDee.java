@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class WaddleDee extends MovingEntity {
+ class WaddleDee extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.WADDLEDEE_RIGHT,
