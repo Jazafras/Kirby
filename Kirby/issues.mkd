@@ -8,6 +8,7 @@
 	- **[5]** create actual maps, prep for collision detection work
 	- **[6]** make kirby able to jump
 	- **[7]** basic collision detection between kirby and ground blocks
+	- **[8]** - kirby flying
 
 - Priya
 
@@ -32,7 +33,7 @@
 	- **[1]** Skeleton for kirby
 
 - Kelly
-	- **[8]** - kirby flying
+	- **[9]** - start kirby sucking enemies
 	- **[?]** - fine tune collisions
 	- **[?]** - finish drawing level, make tunnels ?
 	
