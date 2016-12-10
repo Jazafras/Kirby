@@ -203,7 +203,7 @@ import jig.Vector;
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		//super.render(g);
 		Image i = new Image(defaultKirbyImages[RIGHT_WALK]);
-		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
+		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
 		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);
 	}
 	
@@ -214,6 +214,10 @@ import jig.Vector;
  
     public void moveRight(int delta, float speed){
     	super.setPosition(super.getX() + (speed*delta), super.getY());
+    }
+    
+    public void startSucking() {
+    	
     }
 	
 	public void succ(){
@@ -248,7 +252,6 @@ import jig.Vector;
             setVelocity(new Vector(super.getVelocity().getX(), super.getVelocity().getY() + gravity));
             if (super.getVelocity().getY() > maximumFallSpeed) 
             	setVelocity(new Vector(super.getVelocity().getX(), maximumFallSpeed));
-            System.out.println(super.getVelocity().getY());
         }
     }
 

@@ -114,7 +114,7 @@ class PlayingState extends BasicGameState {
 			twist.render(g);*/
 		
 		for (WaddleDee wdee : bg.waddledee)
-			wdee.render(g);
+			wdee.render(g, xOffset, yOffset);
 		/*for (WaddleDoo wdoo : bg.waddledoo)
 			wdoo.render(g);*/
 
