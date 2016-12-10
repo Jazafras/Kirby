@@ -1,5 +1,9 @@
 package Kirby;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -33,6 +37,11 @@ import jig.Vector;
 		this.facingImages = facingImages;
 		setFacing(facing);
 		vPos = new Vertex(x, y);
+	}
+	
+	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
+		Image i = new Image(curImage);
+		i.draw(super.getX() - 8 - offsetX, super.getY() - 8);
 	}
 	
 	/**
