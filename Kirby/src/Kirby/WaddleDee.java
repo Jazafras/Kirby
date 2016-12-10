@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -31,6 +35,12 @@ import jig.Vector;
 		waitTime = rand.nextInt(200);
 	}
 
+	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
+		//super.render(g);
+		Image i = new Image(KirbyGame.WADDLEDEE_RIGHT);
+		i.draw(super.getX() - 8 - offsetX, super.getY() - 8);
+		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);
+	}
 	
 	public void setMoving(KirbyGame bg) {
 		if ((hasPassed() || firstPath) && waitTime <= 0) {
