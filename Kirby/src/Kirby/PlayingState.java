@@ -87,36 +87,36 @@ class PlayingState extends BasicGameState {
 		bg.kirby.render(g, xOffset, yOffset);
 
 		/*for (Bonkers bonk : bg.bonkers)
-			bonk.render(g);
+			bonk.render(g, xOffset, yOffset);
 		for (Brontoburt bronto : bg.brontoburt)
-			bronto.render(g);
+			bronto.render(g, xOffset, yOffset);
 		for (Cappy cap : bg.cappy)
-			cap.render(g);
+			cap.render(g, xOffset, yOffset);
 		for (HotHead hot : bg.hothead)
-			hot.render(g);
+			hot.render(g, xOffset, yOffset);
 		for (KnuckleJoe knuckj : bg.knucklejoe)
-			knuckj.render(g);
+			knuckj.render(g, xOffset, yOffset);
 		for (Noddy ndy : bg.noddy)
-			ndy.render(g);
+			ndy.render(g, xOffset, yOffset);
 		for (Noddy ndy : bg.noddy)
-			ndy.render(g);
+			ndy.render(g, xOffset, yOffset);
 		for (PoppyJr popjr : bg.poppy)
-			popjr.render(g);
+			popjr.render(g, xOffset, yOffset);
 		for (Scarfy scarf : bg.scarfy)
-			scarf.render(g);
+			scarf.render(g, xOffset, yOffset);
 		for (SirKibble sirkib : bg.sirkibble)
-			sirkib.render(g);
+			sirkib.render(g, xOffset, yOffset);
 		for (Sparky spark : bg.sparky)
-			spark.render(g);
+			spark.render(g, xOffset, yOffset);
 		for (SwordKnight swordk : bg.swordknight)
-			swordk.render(g);
+			swordk.render(g, xOffset, yOffset);
 		for (Twister twist : bg.twister)
-			twist.render(g);*/
+			twist.render(g, xOffset, yOffset);*/
 		
 		for (WaddleDee wdee : bg.waddledee)
 			wdee.render(g, xOffset, yOffset);
-		/*for (WaddleDoo wdoo : bg.waddledoo)
-			wdoo.render(g);*/
+		for (WaddleDoo wdoo : bg.waddledoo)
+			wdoo.render(g, xOffset, yOffset);
 
 	}
 
