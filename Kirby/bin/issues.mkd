@@ -10,6 +10,7 @@
 	- **[7]** basic collision detection between kirby and ground blocks
 	- **[8]** kirby flying
 	- **[9]** fixed rendering issue on waddle dee (need to implement for the rest of enemies)
+	- **[10]** fixed rendering issue on all enemies
 
 - Priya
 
