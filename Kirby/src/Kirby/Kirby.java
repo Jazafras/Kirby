@@ -249,10 +249,10 @@ import jig.Vector;
 	
 	public void spit(KirbyGame bg) {
 		if (enemySucking != null) {
-			float newX = (super.getFacing() % 2 == 0) ? 50.f : -50.f;
-			System.out.println(super.getY());
-			enemySucking.setPosition(super.getX() + newX, super.getY());
-			bg.enemies.add(enemySucking);
+			float xPos = 30;
+			if (super.getFacing() % 2 == 1) //left
+				xPos = -30;
+			bg.enemies.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY() + 100, super.getFacing()));
 			enemySucking = null;
 		}
 	}

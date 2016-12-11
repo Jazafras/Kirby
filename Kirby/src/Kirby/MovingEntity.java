@@ -24,6 +24,7 @@ import jig.Vector;
 	public static final int UFO = 12;
 	public static final int WADDLEDEE = 13;
 	public static final int WADDLEDOO = 14;
+	public static final int STAR = 15;
 	 
 	// facing directions 
 	public static final int RIGHT_WALK = 0;
@@ -34,6 +35,9 @@ import jig.Vector;
 	public static final int LEFT_FLY = 5;
 	public static final int RIGHT_ATTACK = 6;
 	public static final int LEFT_ATTACK = 7;
+	
+	public static final int LEFT = 1;
+	public static final int RIGHT = 0;
 	
 	private String[] facingImages;
 

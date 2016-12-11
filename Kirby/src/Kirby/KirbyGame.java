@@ -34,6 +34,7 @@ public class KirbyGame extends StateBasedGame {
 	public static final int UFO = 12;
 	public static final int WADDLEDEE = 13;
 	public static final int WADDLEDOO = 14;
+	public static final int STAR = 15;
 	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
