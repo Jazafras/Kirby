@@ -165,11 +165,17 @@ import jig.Vector;
 			KirbyGame.KIRBYWADDLE_LEFT_ATTACK,
 		};
 	
+	private static final int MAX_JUMP = 5;
+	private static final int TIME_JUMP = 20;
+	
+	public boolean floating;
 	private boolean startState;
 	private boolean swordState;
 	private boolean state2;
 	private boolean state3;
-	
+	public int jumps;
+	public int jumpTime;
+	public float maximumFallSpeed = 1;
 
 	public Kirby(final float x, final float y) {
 		super(x, y, defaultKirbyImages, RIGHT_WALK);
@@ -178,6 +184,9 @@ import jig.Vector;
 		swordState = false;
 		state2 = false;
 		state3 = false;
+		floating = false;
+		jumps = 0;
+		jumpTime = 0;
 	}
 	
 	public void setVertex(KirbyGame bg) {
@@ -194,12 +203,8 @@ import jig.Vector;
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		//super.render(g);
 		Image i = new Image(defaultKirbyImages[RIGHT_WALK]);
-		i.draw(super.getX() - 2 - offsetX, super.getY() - 2 - offsetY);
+		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
 		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);
-	}
-	
-	public void update(final int delta, float xOffset, float yOffset) {
-		translate(getVelocity().scale(delta));
 	}
 	
 	public void moveLeft(int delta, float speed){
@@ -209,6 +214,10 @@ import jig.Vector;
  
     public void moveRight(int delta, float speed){
     	super.setPosition(super.getX() + (speed*delta), super.getY());
+    }
+    
+    public void startSucking() {
+    	
     }
 	
 	public void succ(){
@@ -220,23 +229,31 @@ import jig.Vector;
 		//return swallow;
 		//if entity = sword
 		//switch to sword state
-		
 	}
 	
 	public void spit(){
 		//return spit;
-		
 	}
 	
 	public void jump(Tile[][] tileMap) {
-        if (super.isOnGround(tileMap))
+        if (jumps < MAX_JUMP && jumpTime <= 0) {
+        	jumpTime = TIME_JUMP;
+        	jumps++;
         	super.setVelocity(new Vector(super.getVelocity().getX(), -0.4f));
+        }
     }
 	 
 	public String toString() {
 		return "Kirby ~ x: " + super.getX() + ", y: " + super.getY();
 	}
 	
+	public void applyGravity(float gravity, Tile[][] tileMap){
+        if(super.getVelocity().getY() < maximumFallSpeed) {
+            setVelocity(new Vector(super.getVelocity().getX(), super.getVelocity().getY() + gravity));
+            if (super.getVelocity().getY() > maximumFallSpeed) 
+            	setVelocity(new Vector(super.getVelocity().getX(), maximumFallSpeed));
+        }
+    }
 
 	public void run(IOException e) {
 		// TODO Auto-generated method stub

@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -30,7 +34,6 @@ import jig.Vector;
 		firstPath = true;
 		waitTime = rand.nextInt(200);
 	}
-
 	
 	public void setMoving(KirbyGame bg) {
 		if ((hasPassed() || firstPath) && waitTime <= 0) {

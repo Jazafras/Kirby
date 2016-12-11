@@ -317,7 +317,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(128, 418);
+		kirby = new Kirby(128, 422);
 		
 		bonkers.add(new Bonkers(650, 520));
 		brontoburt.add(new Brontoburt(600, 420));
