@@ -16,6 +16,7 @@ public class KirbyClient{
 	private DataOutputStream writer = null;
 	int port;
 	String host;
+	ArrayList<Kirby> players;
 	
 	public KirbyClient(String servername, int port){
 		this.port = port;
@@ -23,7 +24,7 @@ public class KirbyClient{
 	}
 	
 	public ArrayList<Kirby> getKirbyPositions(){
-		ArrayList<Kirby> players = new ArrayList<>();
+		players = new ArrayList<>();
 		
 		try {
 			writer.writeUTF("position"); //send server request for number of players
@@ -62,6 +63,13 @@ public class KirbyClient{
 	public void update(){
 		try {
 			writer.writeUTF("update");
+			int kirbyCount = reader.readInt();
+			for(int i = 0; i < kirbyCount; i++){
+				float x1 = reader.readFloat();
+				float y1 = reader.readFloat();
+				players.get(i).setPosition(x1, y1);
+			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

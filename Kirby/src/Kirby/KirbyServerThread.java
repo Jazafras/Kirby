@@ -5,21 +5,21 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.io.*;
 
 public class KirbyServerThread implements Runnable{
-	private KirbyServer server = null;
-	private Socket socketReader = null;
+	private Socket socketReader;
 	private Socket socketWriter = null;
-	private int id;
+	private int ID;
 	private DataInputStream in = null;
 	private DataOutputStream out = null;
 	
 	private Kirby kirby;
 	private CopyOnWriteArrayList<KirbyServerThread> clients;
 	
-	public KirbyServerThread(Socket socket, CopyOnWriteArrayList<KirbyServerThread> clients, int id){
+	public KirbyServerThread(Socket socket, CopyOnWriteArrayList<KirbyServerThread> clientList, int id){
 		super();
-		this.socketWriter = socket;
-		this.clients = clients;
-		this.id = id;
+		socketWriter = socket;
+		clients = clientList;
+		ID = id;
+		socketReader = null;
 
 	}
 	public void tellClient(int output){
@@ -32,11 +32,19 @@ public class KirbyServerThread implements Runnable{
 	}
 
 	int getID(){
-		return this.id;
+		return ID;
 	}
 	
 	public void run(){
-		getSocket();
+		try {
+			@SuppressWarnings("resource")
+			ServerSocket serverSocketReader = new ServerSocket(0);
+			this.tellClient(serverSocketReader.getLocalPort());
+			this.socketReader = serverSocketReader.accept();
+		} catch (IOException e) {
+			e.printStackTrace();
+			this.socketReader = null;
+		}
 		
 		try {
 			in = new DataInputStream(socketReader.getInputStream());
@@ -45,37 +53,38 @@ public class KirbyServerThread implements Runnable{
 				String msg = in.readUTF();
 				
 				if(msg.equals("position")){
-					this.kirby = new Kirby(128, 418);
 					out.writeInt(clients.size());
-					out.writeFloat(this.kirby.getX());
-					out.writeFloat(this.kirby.getY());
+					out.writeFloat(this.player().getX());
+					out.writeFloat(this.player().getY());
 					
 					for(int i = 0; i < clients.size(); i++){
 						KirbyServerThread client = clients.get(i);
-						if(client.id == this.id){
+						
+						if(client.ID == this.ID){
 							continue;
 						}
+						clients.get(i).kirby = new Kirby(128, 418);
 						out.writeFloat(client.player().getX());
 						out.writeFloat(client.player().getY());
 					}
 				}
 				else if(msg.equals("connect")){
-					this.kirby = new Kirby(128, 418);
+					kirby = new Kirby(128, 418);
 					out.writeFloat(kirby.getX());
 					out.writeFloat(kirby.getY());
 				}
 				else if(msg.equals("update")){
-					float dX = in.readFloat();
-					float dY = in.readFloat();
+					out.writeInt(clients.size());
+					System.out.println("client size is " + clients.size());
 					for(int i = 0; i < clients.size(); i++){
-						Kirby k = clients.get(i).player();
-						if(k != this.player()){
-							k.translate(dX, dY);
-						}
+						System.out.println("client " + i + " is " + clients.get(i));
+						System.out.println("client " + i + "'s kirby is " + clients.get(i).kirby);
+						out.writeFloat(clients.get(i).kirby.getX());
+						out.writeFloat(clients.get(i).kirby.getY());
 					}
 				}
-			
 			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,7 +93,7 @@ public class KirbyServerThread implements Runnable{
 	}
 	
 	public Kirby player(){
-		return this.kirby;
+		return kirby;
 	}
 	
 	CopyOnWriteArrayList<KirbyServerThread> getClients() { 
@@ -100,15 +109,5 @@ public class KirbyServerThread implements Runnable{
 		}
 	}
 	
-	private void getSocket(){
-		try {
-			ServerSocket serverSocketReader = new ServerSocket(0);
-			this.tellClient(serverSocketReader.getLocalPort());
-			this.socketReader = KirbyServer.addThread(serverSocketReader);
-		} catch (IOException e) {
-			e.printStackTrace();
-			this.socketReader = null;
-		}
-	}
 
 }

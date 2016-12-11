@@ -60,8 +60,8 @@ class PlayingState extends BasicGameState{
 			throws SlickException {
 		KirbyGame bg = (KirbyGame)game;
 		
-		client = new KirbyClient("localhost", 7777);
-		client.connect();
+		//client = new KirbyClient("localhost", 7777);
+		//client.connect();
 		
 		lives = 3;
 		background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
@@ -93,9 +93,9 @@ class PlayingState extends BasicGameState{
 		
 		float xOffset = getXOffset(bg);
 		
-		players = client.getKirbyPositions();
+		//players = client.getKirbyPositions();
 		
-		System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
+		//System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
 		
 		
 		topX = (int)(-1 * (xOffset % 32));
@@ -125,12 +125,12 @@ class PlayingState extends BasicGameState{
 		}
 		*/
 		
-		for(int i = 0; i < players.size(); i++){
-			players.get(i).render(g, xOffset, yOffset);
+		//for(int i = 0; i < players.size(); i++){
+			//players.get(i).render(g, xOffset, yOffset);
 			//bg.kirby.render(g, xOffset, yOffset);
-		}
+		//}
 		
-		//bg.kirby.render(g, xOffset, yOffset);
+		bg.kirby.render(g, xOffset, yOffset);
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
@@ -190,28 +190,28 @@ class PlayingState extends BasicGameState{
 		// System.out.println(move);
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && move != LEFT) {
-			client.update();
+			//client.update();
 			bg.kirby.setVelocity(new Vector(-.2f, bg.kirby.getVelocity().getY()));
 		} else if (input.isKeyDown(Input.KEY_RIGHT) && move != RIGHT) { 
-			client.update();
+			//client.update();
 			bg.kirby.setVelocity(new Vector(.2f, bg.kirby.getVelocity().getY()));
 		} else {
-			client.update();
+			//client.update();
 			bg.kirby.setVelocity(new Vector(0.f, bg.kirby.getVelocity().getY()));
 		}
 		if (input.isKeyDown(Input.KEY_SPACE)){
-			client.update();
+			//client.update();
 			bg.kirby.jump(tileMap);
 		}
 			
 		
 		if (move == LEFT){
-			client.update();
+			//client.update();
 			bg.kirby.translate(new Vector(.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		}
 			
 		else if (move == RIGHT){
-			client.update();
+			//client.update();
 			bg.kirby.translate(new Vector(-.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		}
 		// if space pressed, kirby drops cub

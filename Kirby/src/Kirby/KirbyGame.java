@@ -491,7 +491,7 @@ public class KirbyGame extends StateBasedGame {
 		AppGameContainer app;
 		int port = 7777;
 		try {
-			server = new KirbyServer(port);
+			//server = new KirbyServer(port);
 			
 			app = new AppGameContainer(new KirbyGame("Kirby"));
 			app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
