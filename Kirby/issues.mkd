@@ -11,6 +11,8 @@
 	- **[8]** kirby flying
 	- **[9]** fixed rendering issue on waddle dee (need to implement for the rest of enemies)
 	- **[10]** fixed rendering issue on all enemies
+	- **[11]** got kirby to suck an enemy good
+	- **[12]** got kirby to spit a shining star after a good suck
 
 - Priya
 
