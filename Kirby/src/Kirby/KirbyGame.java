@@ -19,6 +19,22 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class KirbyGame extends StateBasedGame {
 	
+	public static final int BONKERS = 0;
+	public static final int BRONTOBURT = 1;
+	public static final int CAPPY = 2;
+	public static final int HOTHEAD = 3;
+	public static final int KNUCKLEJOE = 4;
+	public static final int NODDY = 5;
+	public static final int POPPYJR = 6;
+	public static final int SCARFY = 7;
+	public static final int SIRKIBBLE = 8;
+	public static final int SPARKY = 9;
+	public static final int SWORDKNIGHT = 10;
+	public static final int TWISTER = 11;
+	public static final int UFO = 12;
+	public static final int WADDLEDEE = 13;
+	public static final int WADDLEDOO = 14;
+	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
 	public static final int PLAYINGSTATE = 1;
@@ -249,6 +265,8 @@ public class KirbyGame extends StateBasedGame {
 	int level;
 	Kirby kirby;
 	
+	Set<MovingEnemy> enemies;
+	
 	ArrayList<Bonkers> bonkers; //hammer state
 	ArrayList<Brontoburt> brontoburt;
 	ArrayList<Cappy> cappy;
@@ -264,7 +282,6 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<UFO> ufo; //ufo state
 	ArrayList<WaddleDee> waddledee;
 	ArrayList<WaddleDoo> waddledoo; //beam state
-	
 	
 	Poacher poacher;
 	Set<Underbrush> underbrushes;
@@ -283,6 +300,7 @@ public class KirbyGame extends StateBasedGame {
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		
+		enemies = new HashSet<MovingEnemy>();
 		bonkers = new ArrayList<Bonkers>();
 		brontoburt = new ArrayList<Brontoburt>();
 		cappy = new ArrayList<Cappy>();
@@ -316,23 +334,54 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(128, 422);
+		kirby = new Kirby(/*128*/90, 422);
 		
-		bonkers.add(new Bonkers(650, 520));
-		brontoburt.add(new Brontoburt(600, 420));
-		cappy.add(new Cappy(650, 520));
-		hothead.add(new HotHead(650, 520));
-		knucklejoe.add(new KnuckleJoe(650, 520));
-		noddy.add(new Noddy(650, 520));
-		poppy.add(new PoppyJr(628, 520));
-		sirkibble.add(new SirKibble(628, 520));
-		scarfy.add(new Scarfy(628, 520));
-		sparky.add(new Sparky(628, 520));
-		swordknight.add(new SwordKnight(628, 520));
-		twister.add(new Twister(628, 420));
-		ufo.add(new UFO(628, 420));
-		waddledee.add(new WaddleDee(628, 520));
-		waddledoo.add(new WaddleDoo(628, 520));
+		/*Bonkers ebonkers = new Bonkers(650, 520);
+		enemies.add(ebonkers);
+		bonkers.add(ebonkers);
+		Brontoburt ebrontoburt = new Brontoburt(600, 420);
+		enemies.add(ebrontoburt);
+		brontoburt.add(ebrontoburt);
+		Cappy ecappy = new Cappy(650, 520);
+		cappy.add(ecappy);
+		enemies.add(ecappy);
+		HotHead ehothead = new HotHead(650, 520);
+		hothead.add(ehothead);
+		enemies.add(ehothead);
+		KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
+		knucklejoe.add(eknucklejoe);
+		enemies.add(ebonkers);
+		Noddy enoddy = new Noddy(650, 520);
+		noddy.add(enoddy);
+		enemies.add(ebonkers);
+		PoppyJr epoppyjr = new PoppyJr(628, 520);
+		poppy.add(epoppyjr);
+		enemies.add(epoppyjr);
+		SirKibble esirkibble = new SirKibble(628, 520);
+		sirkibble.add(esirkibble);
+		enemies.add(esirkibble);
+		Scarfy escarfy = new Scarfy(628, 520);
+		scarfy.add(escarfy);
+		enemies.add(escarfy);
+		Sparky esparky = new Sparky(628, 520);
+		sparky.add(esparky);
+		enemies.add(esparky);
+		SwordKnight eswordknight = new SwordKnight(628, 520);
+		swordknight.add(eswordknight);
+		enemies.add(eswordknight);
+		Twister etwister = new Twister(628, 420);
+		twister.add(etwister);
+		enemies.add(etwister);
+		UFO eufo = new UFO(628, 420);
+		ufo.add(eufo);
+		enemies.add(eufo);*/
+		WaddleDee ewaddledee = new WaddleDee(628, 520);
+		waddledee.add(ewaddledee);
+		enemies.add(ewaddledee);
+		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
+		waddledoo.add(ewaddledoo);
+		enemies.add(ewaddledoo);*/
+		
 	}
 	
 	private void loadImages() {

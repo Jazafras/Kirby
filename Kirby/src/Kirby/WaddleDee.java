@@ -85,4 +85,9 @@ import jig.Vector;
 		}
 		return false;
 	}
+	
+	@Override
+	public int getEnemyType() {
+		return WADDLEDEE;
+	}
 }

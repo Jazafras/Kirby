@@ -23,6 +23,14 @@ import jig.Vector;
 	 * left attack
 	 */
 	 
+	 public static final int NORMAL = 0;
+	 public static final int FLYING = 1;
+	 
+	 public static final int SUCKING = 2;
+	 public static final int MOUTHFUL = 3;
+	 public static final int SPITTING = 4;
+	 public static final int SWALLOWING = 5;
+	 
 	public static final String[] defaultKirbyImages = 
 		{
 			KirbyGame.KIRBY_RIGHTIMG_RSC,
@@ -169,6 +177,8 @@ import jig.Vector;
 	private static final int TIME_JUMP = 20;
 	
 	public boolean floating;
+	public boolean sucking;
+	public MovingEnemy enemySucking;
 	private boolean startState;
 	private boolean swordState;
 	private boolean state2;
@@ -176,10 +186,12 @@ import jig.Vector;
 	public int jumps;
 	public int jumpTime;
 	public float maximumFallSpeed = 1;
+	public int actionImage;
 
 	public Kirby(final float x, final float y) {
 		super(x, y, defaultKirbyImages, RIGHT_WALK);
 		setVelocity(new Vector(0, 0));
+		actionImage = NORMAL;
 		startState = true;
 		swordState = false;
 		state2 = false;
@@ -187,6 +199,8 @@ import jig.Vector;
 		floating = false;
 		jumps = 0;
 		jumpTime = 0;
+		sucking = false;
+		enemySucking = null;
 	}
 	
 	public void setVertex(KirbyGame bg) {
@@ -201,10 +215,8 @@ import jig.Vector;
 	}
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
-		//super.render(g);
 		Image i = new Image(defaultKirbyImages[RIGHT_WALK]);
 		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
-		//sprites.get(facing).draw(x-2-offset_x, y-2-offset_y);
 	}
 	
 	public void moveLeft(int delta, float speed){
@@ -216,23 +228,33 @@ import jig.Vector;
     	super.setPosition(super.getX() + (speed*delta), super.getY());
     }
     
-    public void startSucking() {
-    	
+    public void setSuck(boolean b) {
+    	actionImage = b ? SUCKING : NORMAL;
+    	sucking = b;
     }
 	
-	public void succ(){
-		//return succ;
-		
+	public void succ(MovingEnemy sucked, KirbyGame bg) {
+		if (sucked != null) {
+			enemySucking = sucked;
+			actionImage = MOUTHFUL;
+			bg.enemies.remove(enemySucking);
+		}
 	}
 	
-	public void swallow(){
-		//return swallow;
-		//if entity = sword
-		//switch to sword state
+	public void swallow() { 
+		if (enemySucking != null) {
+			// PUT KIRBY STATE CHANGE SHIT HERE
+		}
 	}
 	
-	public void spit(){
-		//return spit;
+	public void spit(KirbyGame bg) {
+		if (enemySucking != null) {
+			float newX = (super.getFacing() % 2 == 0) ? 50.f : -50.f;
+			System.out.println(super.getY());
+			enemySucking.setPosition(super.getX() + newX, super.getY());
+			bg.enemies.add(enemySucking);
+			enemySucking = null;
+		}
 	}
 	
 	public void jump(Tile[][] tileMap) {
@@ -254,10 +276,5 @@ import jig.Vector;
             	setVelocity(new Vector(super.getVelocity().getX(), maximumFallSpeed));
         }
     }
-
-	public void run(IOException e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
