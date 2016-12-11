@@ -1,115 +1,77 @@
 package Kirby;
 
 import java.net.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.io.*;
 
 public class KirbyServer implements Runnable{
-	private KirbyServerThread clients[] = new KirbyServerThread[10];
+
+	private CopyOnWriteArrayList<KirbyServerThread> clients;
+	private int port;
 	private ServerSocket server = null;
+	private Socket socket = null;
 	private Thread thread = null;
-	private int clientCount = 0;
-   
+	static int clientCount = 0;
+
+	
+	public int screenWidth = 1280;
+	public int screenHeight = screenWidth/16*9;
+	
+	
 	public KirbyServer(int port){
+		this.port = port;
+		this.clients = new CopyOnWriteArrayList<>();
 		try {
-			System.out.println("Binding port " + port + " to server.");
-			server = new ServerSocket(port);
-			start();
+			server = new ServerSocket(this.port);
+			if(thread == null){
+				thread = new Thread(this);
+				thread.start();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void run(){
-		while(thread != null){
-			try {
-				addThread(server.accept());
-			} catch (IOException e) {
-				e.printStackTrace();
-				stop();
+		
+		try {
+			System.out.println("Binding port " + port + " to server.");
+			System.out.println("server port is " + this.port);
+			
+			while(true){
+				socket = server.accept();
+				//socket = addThread(server);
+				
+				clientCount = clients.size();
+				if(clientCount == 5){
+					System.out.println("Can't have more than 4 clients.");
+					socket.close();
+					continue;
+				}
+				KirbyServerThread player = new KirbyServerThread(socket, clients, clientCount);
+				clients.add(clientCount, player);
+				new Thread(clients.get(clientCount)).start();
 			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-	}
-	public void start() {
-		if(thread == null){
-			thread = new Thread(this);
-			thread.start();
-		}
-	}
-	public void stop() {
-		if(thread != null){
-			thread.stop();
-			thread = null;
-		}
-	}
-
-	private int findClient(int ID){
-		for(int i = 0; i < clientCount; i++){
-			if(clients[i].getID() == ID){
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public synchronized void clientHandler(int ID, int input){
-		/* items to be synchronized:
-		amount of lives (int)
-		xOffset (float)
-		kirby's position (vector) (int, int)
-		kirby's velocity (vector) (int, int)
-		jumps (int)
-		floating (boolean)
-		maxFallSpeed (float)
-		key pressed (int)
-		*/
-																	
 		
 	}
 	
 	public synchronized void remove(int ID){
-		int pos = findClient(ID);
-		if(pos >= 0){
-			KirbyServerThread toTerminate = clients[pos];
-			System.out.println("Removing client thread " + ID + " at " + pos);
-	        if (pos < clientCount - 1){
-	        	for(int i = pos + 1; i < clientCount; i++){
-	        		clients[i-1] = clients[i];
-	        	}
-	        }
-	        clientCount--;
-	        try {
-				toTerminate.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	        toTerminate.stop();
-		}
+		clients.remove(ID);
 	}
 	
-	private void addThread(Socket socket) {
-		if(clientCount < clients.length){
-			clients[clientCount] = new KirbyServerThread(this, socket);
-			try {
-				clients[clientCount].open();
-				clients[clientCount].start();
-				clientCount++;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public static Socket addThread(ServerSocket server) {
+		Socket socketClient = null;
+		try {
+			socketClient = server.accept();
+		} catch (IOException e) {
+			System.err.println("Accept failed.");
+            System.exit(1);
 		}
-		else{
-			System.out.println("Client refused: maximum " + clients.length + " reached.");
-		}
-	}
-	
-	public static void main(String args[]){
-		KirbyServer server = null;
-		if (args.length != 1){
-			System.out.println("Usage: java KirbyServer port");
-		}
-		else{
-			server = new KirbyServer(Integer.parseInt(args[0]));
-		}
+		return socketClient;
 	}
 
 }
