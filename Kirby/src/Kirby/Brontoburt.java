@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Brontoburt extends MovingEntity {
+ class Brontoburt extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.BRONTOBURT_RIGHT,
@@ -25,7 +25,7 @@ import jig.Vector;
 	Random rand = new Random();
 
 	public Brontoburt(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		firstPath = true;
 		waitTime = rand.nextInt(200);
@@ -78,5 +78,10 @@ import jig.Vector;
 				return getPosition().getY() >= nextPos.getY();
 		}
 		return false;
+	}
+	
+	@Override
+	public int getEnemyType() {
+		return BRONTOBURT;
 	}
 }

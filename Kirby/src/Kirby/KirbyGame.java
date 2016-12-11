@@ -19,6 +19,22 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class KirbyGame extends StateBasedGame {
 	
+	public static final int BONKERS = 0;
+	public static final int BRONTOBURT = 1;
+	public static final int CAPPY = 2;
+	public static final int HOTHEAD = 3;
+	public static final int KNUCKLEJOE = 4;
+	public static final int NODDY = 5;
+	public static final int POPPYJR = 6;
+	public static final int SCARFY = 7;
+	public static final int SIRKIBBLE = 8;
+	public static final int SPARKY = 9;
+	public static final int SWORDKNIGHT = 10;
+	public static final int TWISTER = 11;
+	public static final int UFO = 12;
+	public static final int WADDLEDEE = 13;
+	public static final int WADDLEDOO = 14;
+	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
 	public static final int PLAYINGSTATE = 1;
@@ -83,6 +99,9 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_RIGHTHAMMER_ATTACK = "Kirby/resources/hammerkirby/kirby_right_attack.png";
 	public static final String KIRBY_LEFTHAMMER_ATTACK = "Kirby/resources/hammerkirby/kirby_left_attack.png";
 
+	//noddy kirby
+	public static final String KIRBY_SLEEP = "Kirby/resources/sleepKirby.png";
+	
 	//poppy kirby
 	public static final String KIRBY_LEFTPOPPY = "Kirby/resources/poppykirby/kirby_left.png";
 	public static final String KIRBY_RIGHTPOPPY = "Kirby/resources/poppykirby/kirby_right.png";
@@ -124,7 +143,6 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBYTWIST_LEFT_FLY = "Kirby/resources/twisterkirby/kirby_left_fly.png";
 	public static final String KIRBYTWIST_ATTACK = "Kirby/resources/twisterkirby/kirby_attack.png";
 	
-	
 	//ufo kirby
 	public static final String KIRBYUFO_LEFT = "Kirby/resources/ufokirby/kirby_left.png";
 	public static final String KIRBYUFO_RIGHT = "Kirby/resources/ufokirby/kirby_right.png";
@@ -132,6 +150,16 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_LEFTUFO_ATTACK = "Kirby/resources/ufokirby/kirby_left_attack.png";
 	//ufo beam
 	public static final String KIRBY_BEAM_RSC = "Kirby/resources/kirbyBeam.png";
+	
+	//waddledoo kirby
+	public static final String KIRBYWADDLE_LEFT = "Kirby/resources/waddlekirby/kirby_left.png";
+	public static final String KIRBYWADDLE_RIGHT = "Kirby/resources/waddlekirby/kirby_right.png";
+	public static final String KIRBYWADDLE_RIGHT_SUCC = "Kirby/resources/waddlekirby/kirby_right_succ.png";
+	public static final String KIRBYWADDLE_LEFT_SUCC = "Kirby/resources/waddlekirby/kirby_left_succ.png";
+	public static final String KIRBYWADDLE_RIGHT_FLY = "Kirby/resources/waddlekirby/kirby_right_fly.png";
+	public static final String KIRBYWADDLE_LEFT_FLY = "Kirby/resources/waddlekirby/kirby_left_fly.png";
+	public static final String KIRBYWADDLE_LEFT_ATTACK = "Kirby/resources/waddlekirby/kirby_left_attack.png";
+	public static final String KIRBYWADDLE_RIGHT_ATTACK = "Kirby/resources/waddlekirby/kirby_right_attack.png";
 	
 	/***Enemy images***/
 	//Brontoburt images
@@ -224,6 +252,8 @@ public class KirbyGame extends StateBasedGame {
 	
 	public static final String TILE_IMG_RSC = "Kirby/resources/tile.png";
 	
+	public static final String STAR_IMG_RSC = "Kirby/resources/star.png";
+	
 	//public static final String HITWALL_RSC = "bounce/resource/wall_hit.wav";
 	
     public static final int SCREEN_WIDTH  = 1280;
@@ -234,6 +264,8 @@ public class KirbyGame extends StateBasedGame {
 	
 	int level;
 	Kirby kirby;
+	
+	Set<MovingEnemy> enemies;
 	
 	ArrayList<Bonkers> bonkers; //hammer state
 	ArrayList<Brontoburt> brontoburt;
@@ -251,9 +283,7 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<WaddleDee> waddledee;
 	ArrayList<WaddleDoo> waddledoo; //beam state
 	
-	
 	Poacher poacher;
-	ArrayList<Cub> cubs;
 	Set<Underbrush> underbrushes;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
@@ -269,7 +299,24 @@ public class KirbyGame extends StateBasedGame {
 		super(title);
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
-		//cubs = new ArrayList<Cub>();
+		
+		enemies = new HashSet<MovingEnemy>();
+		bonkers = new ArrayList<Bonkers>();
+		brontoburt = new ArrayList<Brontoburt>();
+		cappy = new ArrayList<Cappy>();
+		hothead = new ArrayList<HotHead>();
+		knucklejoe = new ArrayList<KnuckleJoe>();
+		noddy = new ArrayList<Noddy>();
+		poppy = new ArrayList<PoppyJr>();
+		scarfy = new ArrayList<Scarfy>();
+		sirkibble = new ArrayList<SirKibble>();
+		sparky = new ArrayList<Sparky>();
+		swordknight = new ArrayList<SwordKnight>();
+		twister = new ArrayList<Twister>();
+		ufo = new ArrayList<UFO>();
+		waddledoo = new ArrayList<WaddleDoo>();
+		waddledee = new ArrayList<WaddleDee>();
+		
 		//underbrushes = new HashSet<Underbrush>();
 		vertices = new HashSet<Vertex>();
 		vPos = new HashMap<String, Vertex>();
@@ -287,26 +334,54 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(128, 418);
+		kirby = new Kirby(/*128*/90, 422);
 		
+		/*Bonkers ebonkers = new Bonkers(650, 520);
+		enemies.add(ebonkers);
+		bonkers.add(ebonkers);
+		Brontoburt ebrontoburt = new Brontoburt(600, 420);
+		enemies.add(ebrontoburt);
+		brontoburt.add(ebrontoburt);
+		Cappy ecappy = new Cappy(650, 520);
+		cappy.add(ecappy);
+		enemies.add(ecappy);
+		HotHead ehothead = new HotHead(650, 520);
+		hothead.add(ehothead);
+		enemies.add(ehothead);
+		KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
+		knucklejoe.add(eknucklejoe);
+		enemies.add(ebonkers);
+		Noddy enoddy = new Noddy(650, 520);
+		noddy.add(enoddy);
+		enemies.add(ebonkers);
+		PoppyJr epoppyjr = new PoppyJr(628, 520);
+		poppy.add(epoppyjr);
+		enemies.add(epoppyjr);
+		SirKibble esirkibble = new SirKibble(628, 520);
+		sirkibble.add(esirkibble);
+		enemies.add(esirkibble);
+		Scarfy escarfy = new Scarfy(628, 520);
+		scarfy.add(escarfy);
+		enemies.add(escarfy);
+		Sparky esparky = new Sparky(628, 520);
+		sparky.add(esparky);
+		enemies.add(esparky);
+		SwordKnight eswordknight = new SwordKnight(628, 520);
+		swordknight.add(eswordknight);
+		enemies.add(eswordknight);
+		Twister etwister = new Twister(628, 420);
+		twister.add(etwister);
+		enemies.add(etwister);
+		UFO eufo = new UFO(628, 420);
+		ufo.add(eufo);
+		enemies.add(eufo);*/
+		WaddleDee ewaddledee = new WaddleDee(628, 520);
+		waddledee.add(ewaddledee);
+		enemies.add(ewaddledee);
+		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
+		waddledoo.add(ewaddledoo);
+		enemies.add(ewaddledoo);*/
 		
-		//poacher = new Poacher(128, 418, vPos.get(new Vertex(50, 50).toString()));
-		
-		//bonkers = new Bonkers();
-		//brontoburt = new Brontoburt();
-		//cappy = new Cappy();
-		//hothead = new HotHead();
-		//knucklejoe = new KnuckleJoe();
-		//Noddy = new noddy();
-		//poppyjr = new PoppyJr();
-		//sirkibble = new SirKibble();
-		//scarfy = new Scarfy();
-		//sparky = new Sparky();
-		//swordknight = new SwordKnight();
-		//twister = new Twister();
-		//ufo = new UFO();
-		//waddledee = new WaddleDee();
-		//waddledoo = new WaddleDoo();
 	}
 	
 	private void loadImages() {
@@ -475,6 +550,8 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(POACHER_LEFTIMG_RSC);
 		
 		ResourceManager.loadImage(TILE_IMG_RSC);
+		
+		ResourceManager.loadImage(STAR_IMG_RSC);
 		
 		ResourceManager.loadImage(UNDERBRUSH_IMG_RSC);
 		ResourceManager.loadImage(NEST_IMG_RSC);

@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class SwordKnight extends MovingEntity {
+ class SwordKnight extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.SWORDKNIGHT_RIGHT,
@@ -26,7 +26,7 @@ import jig.Vector;
 	Random rand = new Random();
 
 	public SwordKnight(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		inNest = false;
 		firstPath = true;
@@ -80,5 +80,10 @@ import jig.Vector;
 				return getPosition().getY() >= nextPos.getY();
 		}
 		return false;
+	}
+	
+	@Override
+	public int getEnemyType() {
+		return SWORDKNIGHT;
 	}
 }

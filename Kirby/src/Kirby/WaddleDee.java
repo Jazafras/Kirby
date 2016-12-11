@@ -4,11 +4,15 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class WaddleDee extends MovingEntity {
+ class WaddleDee extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.WADDLEDEE_RIGHT,
@@ -25,12 +29,11 @@ import jig.Vector;
 	Random rand = new Random();
 
 	public WaddleDee(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		firstPath = true;
 		waitTime = rand.nextInt(200);
 	}
-
 	
 	public void setMoving(KirbyGame bg) {
 		if ((hasPassed() || firstPath) && waitTime <= 0) {
@@ -78,5 +81,10 @@ import jig.Vector;
 				return getPosition().getY() >= nextPos.getY();
 		}
 		return false;
+	}
+	
+	@Override
+	public int getEnemyType() {
+		return WADDLEDEE;
 	}
 }

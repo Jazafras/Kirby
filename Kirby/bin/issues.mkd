@@ -8,6 +8,9 @@
 	- **[5]** create actual maps, prep for collision detection work
 	- **[6]** make kirby able to jump
 	- **[7]** basic collision detection between kirby and ground blocks
+	- **[8]** kirby flying
+	- **[9]** fixed rendering issue on waddle dee (need to implement for the rest of enemies)
+	- **[10]** fixed rendering issue on all enemies
 
 - Priya
 
@@ -26,13 +29,13 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[3]** Basic enemy movement
+	- **[3]** Render enemies for a scrolling map
 
 - Audrey
 	- **[1]** Skeleton for kirby
 
 - Kelly
-	- **[8]** - kirby flying
+	- **[9]** - start kirby sucking enemies
 	- **[?]** - fine tune collisions
 	- **[?]** - finish drawing level, make tunnels ?
 	

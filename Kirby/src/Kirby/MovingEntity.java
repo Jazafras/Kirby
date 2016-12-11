@@ -9,11 +9,31 @@ import jig.Vector;
 
  class MovingEntity extends Entity {
 	 
+	public static final int BONKERS = 0;
+	public static final int BRONTOBURT = 1;
+	public static final int CAPPY = 2;
+	public static final int HOTHEAD = 3;
+	public static final int KNUCKLEJOE = 4;
+	public static final int NODDY = 5;
+	public static final int POPPYJR = 6;
+	public static final int SCARFY = 7;
+	public static final int SIRKIBBLE = 8;
+	public static final int SPARKY = 9;
+	public static final int SWORDKNIGHT = 10;
+	public static final int TWISTER = 11;
+	public static final int UFO = 12;
+	public static final int WADDLEDEE = 13;
+	public static final int WADDLEDOO = 14;
+	 
 	// facing directions 
-	public static final int RIGHT = 0;
-	public static final int LEFT = 1;
-	public static final int FRONT = 2;
-	public static final int BACK = 3;
+	public static final int RIGHT_WALK = 0;
+	public static final int LEFT_WALK = 1;
+	public static final int RIGHT_SUCC = 2;
+	public static final int LEFT_SUCC = 3;
+	public static final int RIGHT_FLY = 4;
+	public static final int LEFT_FLY = 5;
+	public static final int RIGHT_ATTACK = 6;
+	public static final int LEFT_ATTACK = 7;
 	
 	private String[] facingImages;
 
@@ -40,7 +60,7 @@ import jig.Vector;
 		vPos = new Vertex(x, y);
 		onGround = true;
 		addImageWithBoundingBox(ResourceManager
-				.getImage(facingImages[RIGHT]));
+				.getImage(facingImages[RIGHT_WALK]));
 		onGround = true;
 	}
 	
@@ -66,15 +86,6 @@ import jig.Vector;
 	protected String getCurImage() {
 		return curImage;
 	}
-	
-	public void applyGravity(float gravity, Tile[][] tileMap){
-        if(velocity.getY() < maximumFallSpeed){
-            setVelocity(new Vector(velocity.getX(), velocity.getY() + gravity));
-            if(velocity.getY() > maximumFallSpeed){
-            	setVelocity(new Vector(velocity.getX(), maximumFallSpeed));
-            }
-        }
-    }
  
     public void setOnGround(boolean b){
         onGround = b;
@@ -90,13 +101,13 @@ import jig.Vector;
 		
 		if (v.getX() != 0 || v.getY() != 0) {
 			if (v.getX() < 0) 
-				setFacing(LEFT);
+				setFacing(LEFT_WALK);
 			else if (v.getX() > 0) 
-				setFacing(RIGHT);
-			else if (v.getY() < 0) 
-				setFacing(BACK);
-			else 
-				setFacing(FRONT);
+				setFacing(RIGHT_WALK);
+			/*else if (v.getY() > 0 && v.getX() < 0) 
+				setFacing(LEFT_FLY);
+			else if (v.getY() > 0 && v.getX() > 0) 
+				setFacing(RIGHT_FLY);*/
 		}
 	}
 

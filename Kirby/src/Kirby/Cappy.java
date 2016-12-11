@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Cappy extends MovingEntity {
+ class Cappy extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.CAPPY_RIGHT,
@@ -25,7 +25,7 @@ import jig.Vector;
 	Random rand = new Random();
 
 	public Cappy(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		firstPath = true;
 		waitTime = rand.nextInt(200);
@@ -78,5 +78,10 @@ import jig.Vector;
 				return getPosition().getY() >= nextPos.getY();
 		}
 		return false;
+	}
+	
+	@Override
+	public int getEnemyType() {
+		return CAPPY;
 	}
 }
