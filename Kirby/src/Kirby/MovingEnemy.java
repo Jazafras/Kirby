@@ -10,6 +10,22 @@ import jig.Vector;
 
  class MovingEnemy extends Entity {
 	 
+	 public static final int BONKERS = 0;
+		public static final int BRONTOBURT = 1;
+		public static final int CAPPY = 2;
+		public static final int HOTHEAD = 3;
+		public static final int KNUCKLEJOE = 4;
+		public static final int NODDY = 5;
+		public static final int POPPYJR = 6;
+		public static final int SCARFY = 7;
+		public static final int SIRKIBBLE = 8;
+		public static final int SPARKY = 9;
+		public static final int SWORDKNIGHT = 10;
+		public static final int TWISTER = 11;
+		public static final int UFO = 12;
+		public static final int WADDLEDEE = 13;
+		public static final int WADDLEDOO = 14;
+	 
 	// facing directions 
 	public static final int LEFT = 0;
 	public static final int RIGHT = 1;
@@ -41,7 +57,7 @@ import jig.Vector;
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i = new Image(curImage);
-		i.draw(super.getX() - 8 - offsetX, super.getY() - 8);
+		i.draw(super.getX() - offsetX, super.getY() - 8);
 	}
 	
 	/**
@@ -131,6 +147,10 @@ import jig.Vector;
 	 */
 	public void update(final int delta) {
 		translate(velocity.scale(delta));
+	}
+	
+	public int getEnemyType() {
+		return -1;
 	}
 }
 
