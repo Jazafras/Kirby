@@ -223,6 +223,8 @@ class PlayingState extends BasicGameState{
 		keyPresses(input, bg, delta, move);
 		checkLives(game, bg);
 		bg.kirby.update(delta);
+		for (MovingEnemy e : bg.enemies)
+			e.update(delta);
 
 	}
 	
