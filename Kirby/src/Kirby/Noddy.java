@@ -25,7 +25,7 @@ import jig.Vector;
 	Random rand = new Random();
 
 	public Noddy(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		firstPath = true;
 		waitTime = rand.nextInt(200);

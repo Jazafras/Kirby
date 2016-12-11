@@ -23,7 +23,7 @@ import jig.Vector;
 	private boolean reset;
 
 	public Poacher(final float x, final float y, Vertex pos) { 
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		trapped = false;
 		vPos = pos;
@@ -36,17 +36,6 @@ import jig.Vector;
 			Map<String, Integer> distances = getDistances(bg);
 			int minDist = Integer.MAX_VALUE;
 			Vertex closest = null;
-			for (Cub c : bg.cubs) {
-				if (!c.isHeld()) {
-					Vertex pos = c.getVertex();
-					if (pos != null && bg.vPos.containsKey(pos.toString()) &&
-							distances.get(pos.toString()) != null &&
-							distances.get(pos.toString()) < minDist) {
-						minDist = distances.get(pos.toString());
-						closest = pos;
-					}
-				}
-			}
 			if (bg.kirby.getVertex() != null && 
 					bg.vPos.containsKey(bg.kirby.getVertex().toString()) &&
 					distances.get(bg.kirby.getVertex().toString()) != null &&

@@ -29,7 +29,7 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[3]** Basic enemy movement
+	- **[3]** Render enemies for a scrolling map
 
 - Audrey
 	- **[1]** Skeleton for kirby

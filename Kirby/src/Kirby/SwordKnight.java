@@ -26,7 +26,7 @@ import jig.Vector;
 	Random rand = new Random();
 
 	public SwordKnight(final float x, final float y) {
-		super(x, y, facingImages, LEFT);
+		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		inNest = false;
 		firstPath = true;
