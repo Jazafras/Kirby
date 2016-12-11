@@ -82,7 +82,7 @@ class PlayingState extends BasicGameState {
         		(bg.map.getHeight() * 32 - KirbyGame.SCREEN_HEIGHT) * -1.f);
 		
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
-				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
+				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
 		bg.kirby.render(g, xOffset, yOffset);
 
@@ -128,21 +128,21 @@ class PlayingState extends BasicGameState {
 	
 	private float getXOffset(KirbyGame bg) {
 		float kXOffset = 0;
-		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2);
+		float maxXOffset = (bg.map.getWidth() * 32) - (KirbyGame.SCREEN_WIDTH / 2);
 		if (bg.kirby.getX() > maxXOffset)
-			kXOffset = maxXOffset - (bg.SCREEN_WIDTH / 2.f);
-		else if (bg.kirby.getX() >= bg.SCREEN_WIDTH / 2.f)
-			kXOffset = bg.kirby.getX() - (bg.SCREEN_WIDTH / 2.f);
+			kXOffset = maxXOffset - (KirbyGame.SCREEN_WIDTH / 2.f);
+		else if (bg.kirby.getX() >= KirbyGame.SCREEN_WIDTH / 2.f)
+			kXOffset = bg.kirby.getX() - (KirbyGame.SCREEN_WIDTH / 2.f);
 		return kXOffset;
 	}
 	
 	private float getYOffset(KirbyGame bg) {
 		float kYOffset = 0;
-		float maxYOffset = (bg.map.getHeight() * 32) - (bg.SCREEN_HEIGHT / 2.f);
+		float maxYOffset = (bg.map.getHeight() * 32) - (KirbyGame.SCREEN_HEIGHT / 2.f);
 		if (bg.kirby.getY() > maxYOffset)
-			kYOffset = maxYOffset - (bg.SCREEN_HEIGHT / 2.f);
-		else if (bg.kirby.getY() >= bg.SCREEN_HEIGHT / 2.f)
-			kYOffset = bg.kirby.getY() - (bg.SCREEN_HEIGHT / 2.f);
+			kYOffset = maxYOffset - (KirbyGame.SCREEN_HEIGHT / 2.f);
+		else if (bg.kirby.getY() >= KirbyGame.SCREEN_HEIGHT / 2.f)
+			kYOffset = bg.kirby.getY() - (KirbyGame.SCREEN_HEIGHT / 2.f);
 		return kYOffset;
 	}
 
@@ -189,7 +189,10 @@ class PlayingState extends BasicGameState {
 		bg.kirby.update(delta);
 
 	}
-	
+	/*
+	private void waddledeeMovement(KirbyGame bg, int delta, int move){
+		bg.waddledee.setVelocity(new Vector(-.2f, bg.kirby.getVelocity().getY()));
+	}*/
 
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	
 		// System.out.println(move);

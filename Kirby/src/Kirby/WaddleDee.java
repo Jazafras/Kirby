@@ -21,6 +21,8 @@ import jig.Vector;
 			//KirbyGame.WADDLEDEE_ATTACK_L
 		};
 	
+	private boolean sucked;
+	
 	private Vertex nextPos;
 	private Vector movingDir;
 	private String direction;
@@ -31,6 +33,7 @@ import jig.Vector;
 	public WaddleDee(final float x, final float y) {
 		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
+		sucked = false;
 		firstPath = true;
 		waitTime = rand.nextInt(200);
 	}
@@ -52,12 +55,12 @@ import jig.Vector;
 			} else if (nextPos.getX() < vPos.getX()) {
 				setVelocity(new Vector(-.07f, 0f));
 				direction = "left";
-			} else if (nextPos.getY() > vPos.getY()) {
+			/*} else if (nextPos.getY() > vPos.getY()) {
 				setVelocity(new Vector(0f, .07f));
 				direction = "below";
 			} else {
 				setVelocity(new Vector(0f, -.07f));
-				direction = "above";
+				direction = "above";*/
 			}
 			waitTime = rand.nextInt(1);
 		}
