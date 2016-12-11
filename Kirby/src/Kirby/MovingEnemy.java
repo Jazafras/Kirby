@@ -11,10 +11,10 @@ import jig.Vector;
  class MovingEnemy extends Entity {
 	 
 	// facing directions 
-	public static final int LEFT = 0;
-	public static final int RIGHT = 1;
-	public static final int FRONT = 2;
-	public static final int BACK = 3;
+	public static final int LEFT_WALK = 0;
+	public static final int RIGHT_WALK = 1;
+	public static final int LEFT_ATTACK = 2;
+	public static final int RIGHT_ATTACK = 3;
 	
 	private String[] facingImages;
 
@@ -77,13 +77,13 @@ import jig.Vector;
 		
 		if (v.getX() != 0 || v.getY() != 0) {
 			if (v.getX() < 0) 
-				setFacing(LEFT);
+				setFacing(LEFT_WALK);
 			else if (v.getX() > 0) 
-				setFacing(RIGHT);
-			else if (v.getY() < 0) 
-				setFacing(BACK);
+				setFacing(RIGHT_WALK);
+			/*else if (v.getY() < 0) 
+				setFacing(LEFT_ATTACK);
 			else 
-				setFacing(FRONT);
+				setFacing(RIGHT_ATTACK);*/
 		}
 	}
 

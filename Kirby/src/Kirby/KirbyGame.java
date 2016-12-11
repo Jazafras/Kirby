@@ -267,7 +267,6 @@ public class KirbyGame extends StateBasedGame {
 	
 	
 	Poacher poacher;
-	ArrayList<Cub> cubs;
 	Set<Underbrush> underbrushes;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
