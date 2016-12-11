@@ -4,6 +4,12 @@ import jig.Collision;
 import jig.ResourceManager;
 import jig.Vector;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -24,7 +30,7 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  * Transitions From StartUpState
  * Transitions To GameOverState
  */
-class PlayingState extends BasicGameState {
+class PlayingState extends BasicGameState{
 	
 	public static final int GROUND = 0;
 	public static final int AIR = 1;
@@ -34,7 +40,7 @@ class PlayingState extends BasicGameState {
 	
 	public static final float gravity = 0.0015f;
 	
-	int lives;
+	static int lives;
 	Image background;
 	Tile[][] tileMap;
 	Set<Tile> groundTiles;
@@ -43,22 +49,36 @@ class PlayingState extends BasicGameState {
 	int topX;
 	int topY;
 	float yOffset;
+
+	
+	private KirbyClient client = null;
+	static int port = 7777;
+	
+	ArrayList<Kirby> players;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		KirbyGame bg = (KirbyGame)game;
+		
+		//client = new KirbyClient("localhost", 7777);
+		//client.connect();
+		
 		lives = 3;
 		background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
 		groundTiles = new HashSet<Tile>();
 		tileFetch = new HashMap<String, Tile>();
 		loadTiles(bg);
+		
+		
+
 	}
 
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.setSoundOn(true);
 		KirbyGame bg = (KirbyGame)game;
+		
 		float xOffset = getXOffset(bg);
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
@@ -73,6 +93,11 @@ class PlayingState extends BasicGameState {
 		
 		float xOffset = getXOffset(bg);
 		
+		//players = client.getKirbyPositions();
+		
+		//System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
+		
+		
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
 		
@@ -84,6 +109,7 @@ class PlayingState extends BasicGameState {
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
 		
+
 		bg.kirby.render(g, xOffset, yOffset);
 
 		/*for (Bonkers bonk : bg.bonkers)
@@ -112,6 +138,7 @@ class PlayingState extends BasicGameState {
 			swordk.render(g, xOffset, yOffset);
 		for (Twister twist : bg.twister)
 			twist.render(g, xOffset, yOffset);
+
 		
 		for (WaddleDee wdee : bg.waddledee)
 			wdee.render(g, xOffset, yOffset);
@@ -121,6 +148,17 @@ class PlayingState extends BasicGameState {
 		for (MovingEnemy e : bg.enemies) { 
 			e.render(g, xOffset, yOffset);
 		}
+		
+		
+		//for(int i = 0; i < players.size(); i++){
+			//players.get(i).render(g, xOffset, yOffset);
+			//bg.kirby.render(g, xOffset, yOffset);
+		//}
+
+		
+		g.drawString("Lives: " + lives, 10, 50);
+		g.drawString("Level: " + bg.level, 10, 30);
+		
 
 	}
 	
@@ -194,10 +232,13 @@ class PlayingState extends BasicGameState {
 
 		// Control user input
 		if (input.isKeyDown(Input.KEY_LEFT) && move != LEFT) {
+			//client.update();
 			bg.kirby.setVelocity(new Vector(-.2f, bg.kirby.getVelocity().getY()));
 		} else if (input.isKeyDown(Input.KEY_RIGHT) && move != RIGHT) { 
+			//client.update();
 			bg.kirby.setVelocity(new Vector(.2f, bg.kirby.getVelocity().getY()));
 		} else {
+
 			bg.kirby.setVelocity(new Vector(0.f, bg.kirby.getVelocity().getY()));
 		}
 		
@@ -234,12 +275,20 @@ class PlayingState extends BasicGameState {
 			bg.kirby.swallow();
 		}
 		
-		if (move == LEFT)
+		if (move == LEFT){
+			//client.update();
 			bg.kirby.translate(new Vector(.2f, bg.kirby.getVelocity().getY()).scale(delta));
-		else if (move == RIGHT)
+		}
+			
+		else if (move == RIGHT){
+			//client.update();
 			bg.kirby.translate(new Vector(-.2f, bg.kirby.getVelocity().getY()).scale(delta));
-		
+		}
 		// if space pressed, kirby drops cub
+	}
+	
+	public static int amountLives(){
+		return lives;
 	}
 	
 	private void checkLives(StateBasedGame game, KirbyGame bg) {
