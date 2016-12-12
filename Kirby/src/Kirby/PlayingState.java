@@ -154,6 +154,7 @@ class PlayingState extends BasicGameState{
 			for (Tile t : e.surroundingTiles(tileMap))
 				t.render(g, xOffset, yOffset);
 				e.render(g, xOffset, yOffset);
+				//e.setVelocity(new Vector(-.07f, 0f));
 		}
 
 		
@@ -232,18 +233,22 @@ class PlayingState extends BasicGameState{
 		
 		//waddledee movement updates
 		for (WaddleDee wdee : bg.waddledee){
-			wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+			if (wdee.getVelocity().getY() == 0 && wdee.getVelocity().getX() == 0){
+				wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+			}
 			if (wdee.sideCollision(tileMap)) {
-				System.out.println("waddledee wall collision");
-				/*if (wdee.getVelocity().getX() < 0) {
+				//System.out.println("waddledee wall collision");
+				if (wdee.getVelocity().getX() < 0) {
 					System.out.println("left waddledee collision");
-					wdee.translate(new Vector(0f, 0f));
-					//wdee.setVelocity(new Vector(.07f, 0f)); //move right
-				} */
-				/*else if (wdee.getVelocity().getX() > 0){
+					wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));
+					//wdee.translate(new Vector(0f, 0f));
+					wdee.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (wdee.getVelocity().getX() > 0){
 					System.out.println("right waddledee collision");
+					wdee.translate(new Vector(-.2f, wdee.getVelocity().getY()).scale(delta));
 					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
-				}*/
+				}
 			}
 			
 			wdee.update(delta);
