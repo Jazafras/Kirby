@@ -232,7 +232,7 @@ class PlayingState extends BasicGameState{
 		
 		//waddledee movement updates
 		for (WaddleDee wdee : bg.waddledee){
-			//wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+			wdee.setVelocity(new Vector(-.07f, 0f)); //move left
 			if (wdee.sideCollision(tileMap)) {
 				System.out.println("waddledee wall collision");
 				/*if (wdee.getVelocity().getX() < 0) {
