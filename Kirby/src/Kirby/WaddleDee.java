@@ -35,7 +35,7 @@ import jig.Vector;
 		waitTime = rand.nextInt(200);
 	}
 	
-	public void setMoving(KirbyGame bg) {
+	/*public void setMoving(KirbyGame bg) {
 		if ((hasPassed() || firstPath) && waitTime <= 0) {
 			if (firstPath)
 				firstPath = false;
@@ -82,7 +82,7 @@ import jig.Vector;
 		}
 		return false;
 	}
-	
+	*/
 	@Override
 	public int getEnemyType() {
 		return WADDLEDEE;

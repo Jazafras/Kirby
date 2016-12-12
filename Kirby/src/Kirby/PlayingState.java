@@ -50,7 +50,6 @@ class PlayingState extends BasicGameState{
 	int topY;
 	float yOffset;
 
-	
 	private KirbyClient client = null;
 	static int port = 7777;
 	
@@ -69,9 +68,6 @@ class PlayingState extends BasicGameState{
 		groundTiles = new HashSet<Tile>();
 		tileFetch = new HashMap<String, Tile>();
 		loadTiles(bg);
-		
-		
-
 	}
 
 	@Override
@@ -97,7 +93,6 @@ class PlayingState extends BasicGameState{
 		
 		//System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
 		
-		
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
 		
@@ -109,7 +104,6 @@ class PlayingState extends BasicGameState{
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
 		
-
 		bg.kirby.render(g, xOffset, yOffset);
 
 		/*for (Bonkers bonk : bg.bonkers)
@@ -138,8 +132,6 @@ class PlayingState extends BasicGameState{
 			swordk.render(g, xOffset, yOffset);
 		for (Twister twist : bg.twister)
 			twist.render(g, xOffset, yOffset);
-
-		
 		for (WaddleDee wdee : bg.waddledee)
 			wdee.render(g, xOffset, yOffset);
 		for (WaddleDoo wdoo : bg.waddledoo)
@@ -147,19 +139,17 @@ class PlayingState extends BasicGameState{
 		
 		for (MovingEnemy e : bg.enemies) { 
 			e.render(g, xOffset, yOffset);
+			/*for (Tile t : e.surroundingTiles(tileMap))
+				t.render(g, xOffset, yOffset);*/
 		}
-		
 		
 		//for(int i = 0; i < players.size(); i++){
 			//players.get(i).render(g, xOffset, yOffset);
 			//bg.kirby.render(g, xOffset, yOffset);
 		//}
-
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
-		
-
 	}
 	
 	private float getXOffset(KirbyGame bg) {
@@ -227,7 +217,6 @@ class PlayingState extends BasicGameState{
 			e.update(delta);
 
 	}
-	
 
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	
 		// System.out.println(move);

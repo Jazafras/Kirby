@@ -579,8 +579,5 @@ public class KirbyGame extends StateBasedGame {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-
 	}
-
-	
 }

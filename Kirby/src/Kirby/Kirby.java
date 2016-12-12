@@ -214,6 +214,7 @@ import jig.Vector;
 		}
 	}
 	
+	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i = new Image(defaultKirbyImages[RIGHT_WALK]);
 		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
@@ -270,7 +271,7 @@ import jig.Vector;
 	}
 	
 	public void applyGravity(float gravity, Tile[][] tileMap){
-        if(super.getVelocity().getY() < maximumFallSpeed) {
+        if (super.getVelocity().getY() < maximumFallSpeed) {
             setVelocity(new Vector(super.getVelocity().getX(), super.getVelocity().getY() + gravity));
             if (super.getVelocity().getY() > maximumFallSpeed) 
             	setVelocity(new Vector(super.getVelocity().getX(), maximumFallSpeed));
