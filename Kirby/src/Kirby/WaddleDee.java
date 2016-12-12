@@ -45,8 +45,9 @@ import jig.Vector;
 		waitTime = rand.nextInt(1);
 	}
 	
-	public void setMoving(KirbyGame bg) {
-		if (waitTime <= 0) {
+
+	/*public void setMoving(KirbyGame bg) {
+		if ((hasPassed() || firstPath) && waitTime <= 0) {
 			if (firstPath)
 				firstPath = false;
 			Vertex v = bg.vPos.get(vPos.toString());
@@ -67,15 +68,28 @@ import jig.Vector;
 				direction = "below";
 			} else {
 				setVelocity(new Vector(0f, -.07f));
-				direction = "above";*/
+				direction = "above";
 			}
 			waitTime = rand.nextInt(1);
 		}
 		if (waitTime > 0)
 			waitTime--;
-	}	
+	}	*/
 	
-	
+	private boolean hasPassed() {
+		if (direction != null && nextPos != null) {
+			if (direction.equals("left"))
+				return getPosition().getX() <= nextPos.getX();
+			else if (direction.equals("right"))
+				return getPosition().getX() >= nextPos.getX();
+			else if (direction.equals("above"))
+				return getPosition().getY() <= nextPos.getY();
+			else
+				return getPosition().getY() >= nextPos.getY();
+		}
+		return false;
+	}
+
 	@Override
 	public int getEnemyType() {
 		return WADDLEDEE;

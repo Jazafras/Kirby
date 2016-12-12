@@ -11,7 +11,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class MovingEnemy extends Entity {
+ class MovingEnemy extends MovingEntity {
 	 
 	public static final int BONKERS = 0;
 	public static final int BRONTOBURT = 1;
@@ -53,7 +53,7 @@ import jig.Vector;
 	 */
 	public MovingEnemy(final float x, final float y, String[] facingImages,
 			int facing) {
-		super(x, y);
+		super(x, y, facingImages, facing);
 		this.facing = -1;
 		this.facingImages = facingImages;
 		setFacing(facing);
@@ -65,7 +65,8 @@ import jig.Vector;
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i = new Image(curImage);
-		i.draw(super.getX() - offsetX, super.getY() - 8);
+		
+		i.draw(super.getX() + 8 - offsetX, super.getY() + 8 - offsetY);
 	}
 	
 	/**
@@ -220,5 +221,13 @@ import jig.Vector;
 	public int getEnemyType() {
 		return -1;
 	}
+	
+	public void applyGravity(float gravity, Tile[][] tileMap){
+        if (super.getVelocity().getY() < maximumFallSpeed) {
+            setVelocity(new Vector(super.getVelocity().getX(), super.getVelocity().getY() + gravity));
+            if (super.getVelocity().getY() > maximumFallSpeed) 
+            	setVelocity(new Vector(super.getVelocity().getX(), maximumFallSpeed));
+        }
+    }
 }
 
