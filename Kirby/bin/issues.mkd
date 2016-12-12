@@ -19,6 +19,7 @@
 - Jasmine
 	- **[1]** Base skeleton for enemies
 	- **[2]** Infrastructure for Kirby state images
+	- **[3]** WaddleDee movement
 
 - Audrey
 
@@ -31,7 +32,7 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[3]** Render enemies for a scrolling map
+	- **[4]** Brontoburt movement
 
 - Audrey
 	- **[1]** Skeleton for kirby

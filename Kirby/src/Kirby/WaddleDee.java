@@ -12,14 +12,23 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
+/* order of image arrays should go:
+ * left walk
+ * right walk
+ * left attack
+ * right attack
+ */
+
  class WaddleDee extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
-			KirbyGame.WADDLEDEE_RIGHT,
 			KirbyGame.WADDLEDEE_LEFT,
+			KirbyGame.WADDLEDEE_RIGHT
 			//KirbyGame.WADDLEDEE_ATTACK_R,
 			//KirbyGame.WADDLEDEE_ATTACK_L
 		};
+	
+	private boolean sucked;
 	
 	private Vertex nextPos;
 	private Vector movingDir;
@@ -31,12 +40,13 @@ import jig.Vector;
 	public WaddleDee(final float x, final float y) {
 		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
+		sucked = false;
 		firstPath = true;
-		waitTime = rand.nextInt(200);
+		waitTime = rand.nextInt(1);
 	}
 	
 	public void setMoving(KirbyGame bg) {
-		if ((hasPassed() || firstPath) && waitTime <= 0) {
+		if (waitTime <= 0) {
 			if (firstPath)
 				firstPath = false;
 			Vertex v = bg.vPos.get(vPos.toString());
@@ -52,36 +62,19 @@ import jig.Vector;
 			} else if (nextPos.getX() < vPos.getX()) {
 				setVelocity(new Vector(-.07f, 0f));
 				direction = "left";
-			} else if (nextPos.getY() > vPos.getY()) {
+			/*} else if (nextPos.getY() > vPos.getY()) {
 				setVelocity(new Vector(0f, .07f));
 				direction = "below";
 			} else {
 				setVelocity(new Vector(0f, -.07f));
-				direction = "above";
+				direction = "above";*/
 			}
 			waitTime = rand.nextInt(1);
-		}
-		if (hasPassed()) {
-			setVelocity(new Vector(0f, 0f));
-			vPos = nextPos;
 		}
 		if (waitTime > 0)
 			waitTime--;
 	}	
 	
-	private boolean hasPassed() {
-		if (direction != null && nextPos != null) {
-			if (direction.equals("left"))
-				return getPosition().getX() <= nextPos.getX();
-			else if (direction.equals("right"))
-				return getPosition().getX() >= nextPos.getX();
-			else if (direction.equals("above"))
-				return getPosition().getY() <= nextPos.getY();
-			else
-				return getPosition().getY() >= nextPos.getY();
-		}
-		return false;
-	}
 	
 	@Override
 	public int getEnemyType() {
