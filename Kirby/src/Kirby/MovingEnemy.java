@@ -28,6 +28,7 @@ import jig.Vector;
 	public static final int UFO = 12;
 	public static final int WADDLEDEE = 13;
 	public static final int WADDLEDOO = 14;
+	public static final int STAR = 15;
 	 
 	// facing directions 
 	public static final int LEFT_WALK = 0;

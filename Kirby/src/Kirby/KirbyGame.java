@@ -34,6 +34,7 @@ public class KirbyGame extends StateBasedGame {
 	public static final int UFO = 12;
 	public static final int WADDLEDEE = 13;
 	public static final int WADDLEDOO = 14;
+	public static final int STAR = 15;
 	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
@@ -288,6 +289,8 @@ public class KirbyGame extends StateBasedGame {
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
 	Nest nest;
+	
+	static KirbyServer server;
 	
 	/**
 	 * Create the KirbyGame frame, saving the width and height for later use.
@@ -561,11 +564,15 @@ public class KirbyGame extends StateBasedGame {
 	
 	public static void main(String[] args) {
 		AppGameContainer app;
+		int port = 7777;
 		try {
+			//server = new KirbyServer(port);
+			
 			app = new AppGameContainer(new KirbyGame("Kirby"));
 			app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
 			app.setVSync(true);
 			app.start();
+			
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
