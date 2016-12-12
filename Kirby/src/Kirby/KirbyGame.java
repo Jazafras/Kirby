@@ -332,13 +332,13 @@ public class KirbyGame extends StateBasedGame {
 		
 		kirby = new Kirby(90, 422);
 		
-		/*Bonkers ebonkers = new Bonkers(650, 520);
-		enemies.add(ebonkers);
-		bonkers.add(ebonkers);
-		Brontoburt ebrontoburt = new Brontoburt(600, 420);
-		enemies.add(ebrontoburt);
-		brontoburt.add(ebrontoburt);
-		Cappy ecappy = new Cappy(650, 520);
+		//Bonkers ebonkers = new Bonkers(650, 520);
+		//enemies.add(ebonkers);
+		//bonkers.add(ebonkers);
+		Brontoburt brontoburt1 = new Brontoburt(600, 220);
+		enemies.add(brontoburt1);
+		brontoburt.add(brontoburt1);
+		/*Cappy ecappy = new Cappy(650, 520);
 		cappy.add(ecappy);
 		enemies.add(ecappy);
 		HotHead ehothead = new HotHead(650, 520);
@@ -371,9 +371,9 @@ public class KirbyGame extends StateBasedGame {
 		UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
-		WaddleDee ewaddledee = new WaddleDee(628, 422);
-		waddledee.add(ewaddledee);
-		enemies.add(ewaddledee);
+		WaddleDee waddledee1 = new WaddleDee(628, 422);
+		waddledee.add(waddledee1);
+		enemies.add(waddledee1);
 		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
 		waddledoo.add(ewaddledoo);
 		enemies.add(ewaddledoo);*/

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.newdawn.slick.GameContainer;
@@ -31,6 +32,10 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  * Transitions To GameOverState
  */
 class PlayingState extends BasicGameState{
+	
+	private int waitTimeUp = -1;
+	private int waitTimeDown = -1;
+	Random rand = new Random();
 	
 	public static final int GROUND = 0;
 	public static final int AIR = 1;
@@ -105,40 +110,12 @@ class PlayingState extends BasicGameState{
 				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
 		bg.kirby.render(g, xOffset, yOffset);
-
-		/*for (Bonkers bonk : bg.bonkers)
-			bonk.render(g, xOffset, yOffset);
-		for (Brontoburt bronto : bg.brontoburt)
-			bronto.render(g, xOffset, yOffset);
-		for (Cappy cap : bg.cappy)
-			cap.render(g, xOffset, yOffset);
-		for (HotHead hot : bg.hothead)
-			hot.render(g, xOffset, yOffset);
-		for (KnuckleJoe knuckj : bg.knucklejoe)
-			knuckj.render(g, xOffset, yOffset);
-		for (Noddy ndy : bg.noddy)
-			ndy.render(g, xOffset, yOffset);
-		for (Noddy ndy : bg.noddy)
-			ndy.render(g, xOffset, yOffset);
-		for (PoppyJr popjr : bg.poppy)
-			popjr.render(g, xOffset, yOffset);
-		for (Scarfy scarf : bg.scarfy)
-			scarf.render(g, xOffset, yOffset);
-		for (SirKibble sirkib : bg.sirkibble)
-			sirkib.render(g, xOffset, yOffset);
-		for (Sparky spark : bg.sparky)
-			spark.render(g, xOffset, yOffset);
-		for (SwordKnight swordk : bg.swordknight)
-			swordk.render(g, xOffset, yOffset);
-		for (Twister twist : bg.twister)
-			twist.render(g, xOffset, yOffset);
-		for (WaddleDee wdee : bg.waddledee)
-			wdee.render(g, xOffset, yOffset);
-		for (WaddleDoo wdoo : bg.waddledoo)
-			wdoo.render(g, xOffset, yOffset);*/
 		
 		for (MovingEnemy e : bg.enemies) { 
-			e.render(g, xOffset, yOffset);
+			for (Tile t : e.surroundingTiles(tileMap)){
+				t.render(g, xOffset, yOffset);
+				e.render(g, xOffset, yOffset);
+			}
 		}
 		
 		//for(int i = 0; i < players.size(); i++){
@@ -231,12 +208,59 @@ class PlayingState extends BasicGameState{
 					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
 				}
 			}
+		}
+		
+		//brontoburt movement updates
+		for (Brontoburt burt : bg.brontoburt){
 			
-			wdee.update(delta);
+			if (burt.getVelocity().getY() == 0 && burt.getVelocity().getX() == 0){
+				burt.setVelocity(new Vector(-.07f, -.02f)); //move up and left
+				waitTimeUp = 200;
+				//System.out.println("brontoburt up time: " + waitTimeUp);
+			}
+			//System.out.println("brontoburt position: " + burt.getPosition().getX());
+			if (burt.getPosition().getX() < 30){ //brontoburt reached left end of screen
+				burt.setVelocity(new Vector(.07f, -.02f)); //move up and right
+				waitTimeUp = 200;
+			}
+			if (burt.getPosition().getX() > 2350){ //brontoburt reached right end of screen
+				burt.setVelocity(new Vector(-.07f, .02f)); //move down and left
+				waitTimeUp = 200;
+			}
+			if (burt.getVelocity().getX() < 0){ //brontoburt is moving left
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					burt.setVelocity(new Vector(-.07f, .02f)); //move down
+					waitTimeDown = 200;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					burt.setVelocity(new Vector(-.07f, -.02f)); //move up
+					waitTimeUp = 200;
+				}
+			}
+			else if (burt.getVelocity().getX() > 0) { //brontoburt is moving right
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					burt.setVelocity(new Vector(.07f, .02f)); //move down
+					waitTimeDown = 200;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					burt.setVelocity(new Vector(.07f, -.02f)); //move up
+					waitTimeUp = 200;
+				}
+			}
 		}
 
-		/*for (MovingEnemy e : bg.enemies)
-			e.update(delta);*/
+		for (MovingEnemy e : bg.enemies){
+			e.update(delta);
+			waitTimeUp--;
+			waitTimeDown--;
+			//System.out.println("brontoburt up time: " + waitTimeUp);
+		}
 
 	}
 
