@@ -153,6 +153,7 @@ class PlayingState extends BasicGameState{
 		for (MovingEnemy e : bg.enemies) { 
 			for (Tile t : e.surroundingTiles(tileMap))
 				t.render(g, xOffset, yOffset);
+				e.render(g, xOffset, yOffset);
 		}
 
 		
