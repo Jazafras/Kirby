@@ -28,10 +28,10 @@ import jig.Vector;
 		public static final int STAR = 15;
 	 
 	// facing directions 
-	public static final int LEFT_WALK = 0;
-	public static final int RIGHT_WALK = 1;
-	public static final int LEFT_ATTACK = 2;
-	public static final int RIGHT_ATTACK = 3;
+	public static final int RIGHT_WALK = 0;
+	public static final int LEFT_WALK = 1;
+	public static final int RIGHT_ATTACK = 2;
+	public static final int LEFT_ATTACK = 3;
 	
 	private String[] facingImages;
 
@@ -140,6 +140,10 @@ import jig.Vector;
 	
 	public void setvPos(int x, int y) {
 		vPos = new Vertex(x, y);
+	}
+	
+	public boolean facingRight() {
+		return (getFacing() % 2 == 0);
 	}
 
 	/**

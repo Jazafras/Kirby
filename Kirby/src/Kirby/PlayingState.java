@@ -201,17 +201,13 @@ class PlayingState extends BasicGameState{
 		}
 		
 		if (bg.kirby.isOnGround(tileMap)) {
-			bg.kirby.jumps = 0;
-			bg.kirby.floating = false;
-			bg.kirby.maximumFallSpeed = 1.f;
-			bg.kirby.jumpTime = 0;
+			bg.kirby.hitGround();
 		}
 		if (bg.kirby.jumps == 2) {
-			bg.kirby.floating = true;
-			bg.kirby.maximumFallSpeed = .09f;	
-			if (bg.kirby.getVelocity().getY() > bg.kirby.maximumFallSpeed) 
-				bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), bg.kirby.maximumFallSpeed));
+			bg.kirby.setFlying();
 		}
+		
+		System.out.println(bg.kirby.getCurImage());
 		bg.kirby.jumpTime--;
 		
 		if (!bg.kirby.isOnGround(tileMap) || bg.kirby.getVelocity().getY() < 0) {

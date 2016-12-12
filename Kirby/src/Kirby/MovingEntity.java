@@ -68,6 +68,10 @@ import jig.Vector;
 		onGround = true;
 	}
 	
+	public boolean facingRight() {
+		return (getFacing() % 2 == 0);
+	}
+	
 	/**
 	 * Sets the current facing images for the entity.
 	 * @param images: list of images to set as
@@ -100,6 +104,11 @@ import jig.Vector;
 	 * unless the velocity is 0 and it's not moving.
 	 * @param v: velocity to set.
 	 */
+    
+    public void justSetVelocity(final Vector v) {
+    	velocity = v;
+    }
+    
 	public void setVelocity(final Vector v) {
 		velocity = v;
 		
