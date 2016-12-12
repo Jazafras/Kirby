@@ -121,6 +121,11 @@ class PlayingState extends BasicGameState {
 		for (MovingEnemy e : bg.enemies) { 
 			e.render(g, xOffset, yOffset);
 		}
+		
+		for (MovingEnemy e : bg.enemies) { 
+			for (Tile t : e.surroundingTiles(tileMap))
+				t.render(g, xOffset, yOffset);
+		}
 
 	}
 	
@@ -185,12 +190,27 @@ class PlayingState extends BasicGameState {
 		keyPresses(input, bg, delta, move);
 		checkLives(game, bg);
 		bg.kirby.update(delta);
-
+		
+		//waddledee movement updates
+		for (WaddleDee wdee : bg.waddledee){
+			//wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+			if (wdee.sideCollision(tileMap)) {
+				System.out.println("waddledee wall collision");
+				/*if (wdee.getVelocity().getX() < 0) {
+					System.out.println("left waddledee collision");
+					wdee.translate(new Vector(0f, 0f));
+					//wdee.setVelocity(new Vector(.07f, 0f)); //move right
+				} */
+				/*else if (wdee.getVelocity().getX() > 0){
+					System.out.println("right waddledee collision");
+					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+				}*/
+			}
+			
+			wdee.update(delta);
+		}
 	}
-	/*
-	private void waddledeeMovement(KirbyGame bg, int delta, int move){
-		bg.waddledee.setVelocity(new Vector(-.2f, bg.kirby.getVelocity().getY()));
-	}*/
+	
 
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	
 		// System.out.println(move);
@@ -237,12 +257,11 @@ class PlayingState extends BasicGameState {
 			bg.kirby.swallow();
 		}
 		
+		//move kirby back if he hits a wall
 		if (move == LEFT)
 			bg.kirby.translate(new Vector(.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		else if (move == RIGHT)
 			bg.kirby.translate(new Vector(-.2f, bg.kirby.getVelocity().getY()).scale(delta));
-		
-		// if space pressed, kirby drops cub
 	}
 	
 	private void checkLives(StateBasedGame game, KirbyGame bg) {

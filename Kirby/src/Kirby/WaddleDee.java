@@ -12,11 +12,18 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
+/* order of image arrays should go:
+ * left walk
+ * right walk
+ * left attack
+ * right attack
+ */
+
  class WaddleDee extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
-			KirbyGame.WADDLEDEE_RIGHT,
 			KirbyGame.WADDLEDEE_LEFT,
+			KirbyGame.WADDLEDEE_RIGHT
 			//KirbyGame.WADDLEDEE_ATTACK_R,
 			//KirbyGame.WADDLEDEE_ATTACK_L
 		};
@@ -35,11 +42,11 @@ import jig.Vector;
 		setVelocity(new Vector(0, 0));
 		sucked = false;
 		firstPath = true;
-		waitTime = rand.nextInt(200);
+		waitTime = rand.nextInt(1);
 	}
 	
 	public void setMoving(KirbyGame bg) {
-		if ((hasPassed() || firstPath) && waitTime <= 0) {
+		if (waitTime <= 0) {
 			if (firstPath)
 				firstPath = false;
 			Vertex v = bg.vPos.get(vPos.toString());
@@ -64,27 +71,10 @@ import jig.Vector;
 			}
 			waitTime = rand.nextInt(1);
 		}
-		if (hasPassed()) {
-			setVelocity(new Vector(0f, 0f));
-			vPos = nextPos;
-		}
 		if (waitTime > 0)
 			waitTime--;
 	}	
 	
-	private boolean hasPassed() {
-		if (direction != null && nextPos != null) {
-			if (direction.equals("left"))
-				return getPosition().getX() <= nextPos.getX();
-			else if (direction.equals("right"))
-				return getPosition().getX() >= nextPos.getX();
-			else if (direction.equals("above"))
-				return getPosition().getY() <= nextPos.getY();
-			else
-				return getPosition().getY() >= nextPos.getY();
-		}
-		return false;
-	}
 	
 	@Override
 	public int getEnemyType() {
