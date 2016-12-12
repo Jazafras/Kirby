@@ -337,7 +337,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(/*128*/90, 422);
+		kirby = new Kirby(90, 422);
 		
 		/*Bonkers ebonkers = new Bonkers(650, 520);
 		enemies.add(ebonkers);
@@ -378,7 +378,7 @@ public class KirbyGame extends StateBasedGame {
 		UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
-		WaddleDee ewaddledee = new WaddleDee(628, 520);
+		WaddleDee ewaddledee = new WaddleDee(628, 422);
 		waddledee.add(ewaddledee);
 		enemies.add(ewaddledee);
 		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
