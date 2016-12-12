@@ -364,11 +364,11 @@ public class KirbyGame extends StateBasedGame {
 		enemies.add(esparky);
 		SwordKnight eswordknight = new SwordKnight(628, 520);
 		swordknight.add(eswordknight);
-		enemies.add(eswordknight);
-		Twister etwister = new Twister(628, 420);
-		twister.add(etwister);
-		enemies.add(etwister);
-		UFO eufo = new UFO(628, 420);
+		enemies.add(eswordknight);*/
+		Twister twister1 = new Twister(628, 420);
+		twister.add(twister1);
+		enemies.add(twister1);
+		/*UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
 		WaddleDee waddledee1 = new WaddleDee(628, 422);

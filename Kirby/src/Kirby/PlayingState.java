@@ -257,10 +257,10 @@ class PlayingState extends BasicGameState{
 
 		for (MovingEnemy e : bg.enemies){
 			e.update(delta);
-			waitTimeUp--;
-			waitTimeDown--;
 			//System.out.println("brontoburt up time: " + waitTimeUp);
 		}
+		waitTimeUp--;
+		waitTimeDown--;
 
 	}
 
