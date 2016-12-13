@@ -109,6 +109,9 @@ class PlayingState extends BasicGameState{
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
+		for (Tile t : bg.kirby.getGroundTiles(tileMap))
+			t.render(g, xOffset, yOffset);
+		
 		bg.kirby.render(g, xOffset, yOffset);
 		
 		for (MovingEnemy e : bg.enemies) { 
@@ -157,25 +160,14 @@ class PlayingState extends BasicGameState{
 		int move = -1;
 		if (bg.kirby.sideCollision(tileMap)) {
 			if (bg.kirby.getVelocity().getX() < 0) {
-				System.out.println("left collision");
 				move = LEFT;
 			} else if (bg.kirby.getVelocity().getX() > 0){
 				move = RIGHT;
-				System.out.println("right collision");
 			}
 		}
 		
-		if (bg.kirby.isOnGround(tileMap)) {
-			bg.kirby.jumps = 0;
-			bg.kirby.floating = false;
-			bg.kirby.maximumFallSpeed = 1.f;
-			bg.kirby.jumpTime = 0;
-		}
-		if (bg.kirby.jumps == 2) {
-			bg.kirby.floating = true;
-			bg.kirby.maximumFallSpeed = .09f;	
-			if (bg.kirby.getVelocity().getY() > bg.kirby.maximumFallSpeed) 
-				bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), bg.kirby.maximumFallSpeed));
+		if (bg.kirby.jumps == 2 && !bg.kirby.floating) {
+			bg.kirby.setFlying();
 		}
 		bg.kirby.jumpTime--;
 		
@@ -183,6 +175,7 @@ class PlayingState extends BasicGameState{
 	     	bg.kirby.applyGravity(gravity * delta, tileMap);
 		} else {
 			bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), 0.f));
+			bg.kirby.hitGround();
 		}
 		
 		keyPresses(input, bg, delta, move);
@@ -195,7 +188,6 @@ class PlayingState extends BasicGameState{
 				wdee.setVelocity(new Vector(-.07f, 0f)); //move left
 			}
 			if (wdee.sideCollision(tileMap)) {
-				//System.out.println("waddledee wall collision");
 				if (wdee.getVelocity().getX() < 0) {
 					System.out.println("left waddledee collision");
 					wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));
@@ -275,7 +267,6 @@ class PlayingState extends BasicGameState{
 			//client.update();
 			bg.kirby.setVelocity(new Vector(.2f, bg.kirby.getVelocity().getY()));
 		} else {
-
 			bg.kirby.setVelocity(new Vector(0.f, bg.kirby.getVelocity().getY()));
 		}
 		
@@ -286,7 +277,6 @@ class PlayingState extends BasicGameState{
 		// z is succ
 		if (input.isKeyDown(Input.KEY_Z)) {
 			int distApart = 50;
-			System.out.println("suck");
 			bg.kirby.setSuck(true);
 			MovingEnemy sucked = null;
 			for (MovingEnemy e : bg.enemies) {

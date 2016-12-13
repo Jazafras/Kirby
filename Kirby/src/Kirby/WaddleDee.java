@@ -22,8 +22,12 @@ import jig.Vector;
  class WaddleDee extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
+			KirbyGame.WADDLEDEE_RIGHT,
 			KirbyGame.WADDLEDEE_LEFT,
-			KirbyGame.WADDLEDEE_RIGHT
+			KirbyGame.WADDLEDEE_RIGHT,
+			KirbyGame.WADDLEDEE_LEFT,
+			KirbyGame.WADDLEDEE_RIGHT,
+			KirbyGame.WADDLEDEE_LEFT
 			//KirbyGame.WADDLEDEE_ATTACK_R,
 			//KirbyGame.WADDLEDEE_ATTACK_L
 		};

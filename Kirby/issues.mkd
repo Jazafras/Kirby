@@ -13,6 +13,7 @@
 	- **[10]** fixed rendering issue on all enemies
 	- **[11]** got kirby to suck an enemy good
 	- **[12]** got kirby to spit a shining star after a good suck
+	- **[13]** started changing kirby's animations still need to get his flying one
 
 - Priya
 
