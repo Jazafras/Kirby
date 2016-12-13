@@ -9,17 +9,17 @@ import jig.ResourceManager;
 import jig.Vector;
 
 /* order of image arrays should go:
- * left walk
  * right walk
- * left attack
+ * left walk
  * right attack
+ * left attack
  */
 
  class Brontoburt extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
-			KirbyGame.BRONTOBURT_LEFT,
 			KirbyGame.BRONTOBURT_RIGHT,
+			KirbyGame.BRONTOBURT_LEFT,
 			//KirbyGame.BRONTOBURT_ATTACK_R,
 			//KirbyGame.BRONTOBURT_ATTACK_L
 		};

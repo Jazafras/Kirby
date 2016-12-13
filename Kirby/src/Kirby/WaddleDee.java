@@ -13,17 +13,21 @@ import jig.ResourceManager;
 import jig.Vector;
 
 /* order of image arrays should go:
- * left walk
  * right walk
- * left attack
+ * left walk
  * right attack
+ * left attack
  */
 
  class WaddleDee extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
+			KirbyGame.WADDLEDEE_RIGHT,
 			KirbyGame.WADDLEDEE_LEFT,
-			KirbyGame.WADDLEDEE_RIGHT
+			KirbyGame.WADDLEDEE_RIGHT,
+			KirbyGame.WADDLEDEE_LEFT,
+			KirbyGame.WADDLEDEE_RIGHT,
+			KirbyGame.WADDLEDEE_LEFT
 			//KirbyGame.WADDLEDEE_ATTACK_R,
 			//KirbyGame.WADDLEDEE_ATTACK_L
 		};
