@@ -8,7 +8,7 @@ import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
- class Star extends MovingEnemy {
+ class Star extends Attack {
 	public static final String[] facingImages = 
 		{
 			KirbyGame.STAR_IMG_RSC,
@@ -30,7 +30,7 @@ import jig.Vector;
 	}
 	
 	@Override
-	public int getEnemyType() {
+	public int getAttackType() {
 		return STAR;
 	}
 }

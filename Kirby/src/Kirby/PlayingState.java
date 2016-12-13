@@ -115,11 +115,11 @@ class PlayingState extends BasicGameState{
 		bg.kirby.render(g, xOffset, yOffset);
 		
 		for (MovingEnemy e : bg.enemies) { 
-			for (Tile t : e.surroundingTiles(tileMap)){
-				t.render(g, xOffset, yOffset);
-				e.render(g, xOffset, yOffset);
-			}
+			e.render(g, xOffset, yOffset);
 		}
+		
+		for (Attack a : bg.attacks)
+			a.render(g, xOffset, yOffset);
 		
 		//for(int i = 0; i < players.size(); i++){
 			//players.get(i).render(g, xOffset, yOffset);
@@ -176,6 +176,17 @@ class PlayingState extends BasicGameState{
 		} else {
 			bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), 0.f));
 			bg.kirby.hitGround();
+		}
+		
+		for (Attack a : bg.attacks) {
+			for (MovingEnemy e : bg.enemies) {
+				Collision c = e.collides(a);
+				if (c != null) {
+					bg.enemies.remove(e);
+					bg.attacks.remove(a);
+					break;
+				}
+			}
 		}
 		
 		keyPresses(input, bg, delta, move);
@@ -251,6 +262,10 @@ class PlayingState extends BasicGameState{
 			e.update(delta);
 			//System.out.println("brontoburt up time: " + waitTimeUp);
 		}
+		
+		for (Attack a : bg.attacks)
+			a.update(delta);
+		
 		waitTimeUp--;
 		waitTimeDown--;
 
@@ -275,22 +290,30 @@ class PlayingState extends BasicGameState{
 		}
 		
 		// z is succ
+		// spitfire for fire kirby
 		if (input.isKeyDown(Input.KEY_Z)) {
-			int distApart = 50;
-			bg.kirby.setSuck(true);
-			MovingEnemy sucked = null;
-			for (MovingEnemy e : bg.enemies) {
-				if ((e.getX() < bg.kirby.getX() && bg.kirby.getFacing() == LEFT &&
-						bg.kirby.getX() - e.getX() < distApart) ||
-						(e.getX() > bg.kirby.getX() && bg.kirby.getFacing() == RIGHT &&
-						e.getX() - bg.kirby.getX() < distApart)) {
-					sucked = e;
-					break;
+			if (bg.kirby.getType() == bg.kirby.NONE) {
+				int distApart = 50;
+				bg.kirby.setSuck(true);
+				MovingEnemy sucked = null;
+				for (MovingEnemy e : bg.enemies) {
+					if ((e.getX() < bg.kirby.getX() && bg.kirby.getFacing() == LEFT &&
+							bg.kirby.getX() - e.getX() < distApart) ||
+							(e.getX() > bg.kirby.getX() && bg.kirby.getFacing() == RIGHT &&
+							e.getX() - bg.kirby.getX() < distApart)) {
+						sucked = e;
+						break;
+					}
 				}
+	 			bg.kirby.succ(sucked, bg);
+			} else if (bg.kirby.getType() == bg.kirby.FIRE) {
+				FireKirby k = (FireKirby) bg.kirby;
+				k.spitFire(bg);
+				
 			}
- 			bg.kirby.succ(sucked, bg);
 		} else {
 			bg.kirby.setSuck(false);
+			bg.attacks.clear();
 		}
 		
 		// up arrow is spit
@@ -298,8 +321,9 @@ class PlayingState extends BasicGameState{
 			bg.kirby.spit(bg);
 		
 		//down arrow is swallow
-		} else if (input.isKeyDown(Input.KEY_RIGHT) && move != RIGHT) { 
-			bg.kirby.swallow();
+		} else if (input.isKeyDown(Input.KEY_DOWN)) { 
+			System.out.println("swallow");
+			bg.kirby.swallow(bg);
 		}
 		
 

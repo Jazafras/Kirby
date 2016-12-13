@@ -23,6 +23,9 @@ import jig.Vector;
 	 * left attack
 	 */
 	 
+	 public static final int NONE = 0;
+	 public static final int FIRE = 1;
+	 
 	 public static final int NORMAL = 0;
 	 public static final int FLYING = 2;
 	 
@@ -100,7 +103,6 @@ import jig.Vector;
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i = new Image(super.getCurImage());
-		System.out.println(super.getCurImage());
 		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
 	}
 	
@@ -132,7 +134,6 @@ import jig.Vector;
     }
     
     public void setFlying() {
-    	System.out.println("set flying");
 		floating = true;
 		maximumFallSpeed = .09f;	
 		if (getVelocity().getY() > maximumFallSpeed) {
@@ -149,8 +150,15 @@ import jig.Vector;
 		}
 	}
 	
-	public void swallow() { 
+	public void swallow(KirbyGame bg) { 
 		if (enemySucking != null) {
+			int enemyType = enemySucking.getEnemyType();
+			if (enemyType == HOTHEAD) {
+				System.out.println("hothead");
+				float xPos = super.getX();
+				float yPos = super.getY();
+				bg.kirby = new FireKirby(xPos, yPos);
+			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
 	}
@@ -160,7 +168,7 @@ import jig.Vector;
 			float xPos = 30;
 			if (!super.facingRight()) //left
 				xPos = -30;
-			bg.enemies.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
+			bg.attacks.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
 			enemySucking = null;
 		}
 	}
@@ -185,6 +193,10 @@ import jig.Vector;
         }
     }
 	
+	public int getType() {
+		return NONE;
+	}
+	
 	public static final String[] boomerangKirbyImages = 
 		{
 			KirbyGame.KIRBY_RIGHTBOOMERANG,
@@ -207,18 +219,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTFIGHT_FLY,
 			KirbyGame.KIRBY_RIGHTFIGHT_ATTACK,
 			KirbyGame.KIRBY_LEFTFIGHT_ATTACK,
-		};
-	
-	public static final String[] fireKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTFIRE,
-			KirbyGame.KIRBY_LEFTFIRE,
-			KirbyGame.KIRBY_RIGHTFIRE_SUCC,
-			KirbyGame.KIRBY_LEFTFIRE_SUCC,
-			KirbyGame.KIRBY_RIGHTFIRE_FLY,
-			KirbyGame.KIRBY_LEFTFIRE_FLY,
-			KirbyGame.KIRBY_RIGHTFIRE_ATTACK,
-			KirbyGame.KIRBY_LEFTFIRE_ATTACK,
 		};
 	
 	public static final String[] hammerKirbyImages = 
