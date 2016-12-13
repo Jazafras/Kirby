@@ -117,7 +117,6 @@ import jig.Vector;
 				setFacing(LEFT_WALK);
 			else if (v.getX() > 0) {
 				setFacing(RIGHT_WALK);
-				System.out.println("sdfseresr");
 			}
 			/*else if (v.getY() > 0 && v.getX() < 0) 
 				setFacing(LEFT_FLY);

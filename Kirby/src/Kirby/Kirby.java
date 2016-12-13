@@ -23,10 +23,16 @@ import jig.Vector;
 	 * left attack
 	 */
 	 
+	 public static final int NONE = 0;
+	 public static final int FIRE = 1;
+	 public static final int KTWISTER = 2;
+	 public static final int KSPARKY = 3;
+	 
 	 public static final int NORMAL = 0;
+	 public static final int SUCKING = 1;
 	 public static final int FLYING = 2;
 	 
-	 public static final int SUCKING = 1;
+	 
 	 public static final int MOUTHFUL = 3;
 	 public static final int SPITTING = 4;
 	 public static final int SWALLOWING = 5;
@@ -99,9 +105,8 @@ import jig.Vector;
 	}
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
-		Image i = new Image(super.getCurImage());
-		System.out.println(super.getCurImage());
-		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
+		Image i = new Image(defaultKirbyImages[super.getFacing()]);
+		i.draw(super.getX() - 4 - offsetX, super.getY() + 4 - offsetY);
 	}
 	
 	public void moveLeft(int delta, float speed){
@@ -119,6 +124,10 @@ import jig.Vector;
     
     public void setSuck(boolean b) {
     	actionImage = b ? SUCKING : NORMAL;
+    	if (b && super.facingRight())
+    		super.setFacing(RIGHT_SUCC);
+    	else if (b)
+    		super.setFacing(LEFT_SUCC);
 		super.setCurImage(defaultKirbyImages[(2*actionImage) + retFacing()]);
     	sucking = b;
     }
@@ -132,7 +141,6 @@ import jig.Vector;
     }
     
     public void setFlying() {
-    	System.out.println("set flying");
 		floating = true;
 		maximumFallSpeed = .09f;	
 		if (getVelocity().getY() > maximumFallSpeed) {
@@ -149,8 +157,22 @@ import jig.Vector;
 		}
 	}
 	
-	public void swallow() { 
+	public void swallow(KirbyGame bg) { 
 		if (enemySucking != null) {
+			int enemyType = enemySucking.getEnemyType();
+			System.out.println(enemyType);
+			float xPos = super.getX();
+			float yPos = super.getY();
+			if (enemyType == HOTHEAD) {
+				System.out.println("hothead");
+				bg.kirby = new FireKirby(xPos, yPos);
+			} else if (enemyType == TWISTER) {
+				System.out.println("twister");
+				bg.kirby = new TwisterKirby(xPos, yPos);
+			} else if (enemyType == SPARKY) {
+				System.out.println("sparky");
+				bg.kirby = new SparkyKirby(xPos, yPos);
+			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
 	}
@@ -160,7 +182,7 @@ import jig.Vector;
 			float xPos = 30;
 			if (!super.facingRight()) //left
 				xPos = -30;
-			bg.enemies.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
+			bg.attacks.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
 			enemySucking = null;
 		}
 	}
@@ -185,6 +207,10 @@ import jig.Vector;
         }
     }
 	
+	public int getType() {
+		return NONE;
+	}
+	
 	public static final String[] boomerangKirbyImages = 
 		{
 			KirbyGame.KIRBY_RIGHTBOOMERANG,
@@ -207,18 +233,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTFIGHT_FLY,
 			KirbyGame.KIRBY_RIGHTFIGHT_ATTACK,
 			KirbyGame.KIRBY_LEFTFIGHT_ATTACK,
-		};
-	
-	public static final String[] fireKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTFIRE,
-			KirbyGame.KIRBY_LEFTFIRE,
-			KirbyGame.KIRBY_RIGHTFIRE_SUCC,
-			KirbyGame.KIRBY_LEFTFIRE_SUCC,
-			KirbyGame.KIRBY_RIGHTFIRE_FLY,
-			KirbyGame.KIRBY_LEFTFIRE_FLY,
-			KirbyGame.KIRBY_RIGHTFIRE_ATTACK,
-			KirbyGame.KIRBY_LEFTFIRE_ATTACK,
 		};
 	
 	public static final String[] hammerKirbyImages = 
@@ -252,18 +266,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTPOPPY_ATTACK,
 		};
 	
-	public static final String[] sparkyKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTSPARKY,
-			KirbyGame.KIRBY_LEFTSPARKY,
-			KirbyGame.KIRBY_RIGHTSPARKY_SUCC,
-			KirbyGame.KIRBY_LEFTSPARKY_SUCC,
-			KirbyGame.KIRBY_RIGHTSPARKY_FLY,
-			KirbyGame.KIRBY_LEFTSPARKY_FLY,
-			KirbyGame.KIRBY_RIGHTSPARKY_ATTACK,
-			KirbyGame.KIRBY_LEFTSPARKY_ATTACK,
-		};
-	
 	public static final String[] swordKirbyImages = 
 		{
 			KirbyGame.KIRBY_RIGHTSWORD,
@@ -274,18 +276,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTSWORD_FLY,
 			KirbyGame.KIRBY_RIGHTSWORD_ATTACK,
 			KirbyGame.KIRBY_LEFTSWORD_ATTACK,
-		};
-	
-	public static final String[] twisterKirbyImages = 
-		{
-			KirbyGame.KIRBYTWIST_RIGHT,
-			KirbyGame.KIRBYTWIST_LEFT,
-			KirbyGame.KIRBYTWIST_RIGHT_SUCC,
-			KirbyGame.KIRBYTWIST_LEFT_SUCC,
-			KirbyGame.KIRBYTWIST_RIGHT_FLY,
-			KirbyGame.KIRBYTWIST_LEFT_FLY,
-			KirbyGame.KIRBYTWIST_ATTACK,
-			KirbyGame.KIRBYTWIST_ATTACK,
 		};
 	
 	//UFO is a special case with different controls

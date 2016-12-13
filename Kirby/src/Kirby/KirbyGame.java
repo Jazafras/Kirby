@@ -263,6 +263,7 @@ public class KirbyGame extends StateBasedGame {
 	Kirby kirby;
 	
 	Set<MovingEnemy> enemies;
+	Set<Attack> attacks;
 	
 	ArrayList<Bonkers> bonkers; //hammer state
 	ArrayList<Brontoburt> brontoburt;
@@ -298,6 +299,8 @@ public class KirbyGame extends StateBasedGame {
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		
 		enemies = new HashSet<MovingEnemy>();
+		attacks = new HashSet<Attack>();
+		
 		bonkers = new ArrayList<Bonkers>();
 		brontoburt = new ArrayList<Brontoburt>();
 		cappy = new ArrayList<Cappy>();
@@ -340,11 +343,11 @@ public class KirbyGame extends StateBasedGame {
 		brontoburt.add(brontoburt1);
 		/*Cappy ecappy = new Cappy(650, 520);
 		cappy.add(ecappy);
-		enemies.add(ecappy);
-		HotHead ehothead = new HotHead(650, 520);
+		enemies.add(ecappy);*/
+		HotHead ehothead = new HotHead(350, 422);
 		hothead.add(ehothead);
 		enemies.add(ehothead);
-		KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
+		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
 		knucklejoe.add(eknucklejoe);
 		enemies.add(ebonkers);
 		Noddy enoddy = new Noddy(650, 520);
@@ -356,13 +359,13 @@ public class KirbyGame extends StateBasedGame {
 		SirKibble esirkibble = new SirKibble(628, 520);
 		sirkibble.add(esirkibble);
 		enemies.add(esirkibble);*/
-		Scarfy escarfy = new Scarfy(990, 320);
-		scarfy.add(escarfy);
-		enemies.add(escarfy);
-		/*Sparky esparky = new Sparky(628, 520);
-		sparky.add(esparky);
-		enemies.add(esparky);
-		SwordKnight eswordknight = new SwordKnight(628, 520);
+		Scarfy scarfy1 = new Scarfy(990, 320);
+		scarfy.add(scarfy1);
+		enemies.add(scarfy1);
+		Sparky sparky1 = new Sparky(300, 422);
+		sparky.add(sparky1);
+		enemies.add(sparky1);
+		/*SwordKnight eswordknight = new SwordKnight(628, 520);
 		swordknight.add(eswordknight);
 		enemies.add(eswordknight);*/
 		Twister twister1 = new Twister(1328, 384);
