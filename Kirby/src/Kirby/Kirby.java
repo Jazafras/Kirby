@@ -75,18 +75,16 @@ import jig.Vector;
 	
 	@Override
 	public void setVelocity(final Vector v) {
-		super.justSetVelocity(v);
-		if (floating && (v.getX() != 0 || v.getY() != 0)) {
-			if (v.getX() < 0) 
+		if (floating) {
+			super.justSetVelocity(v);
+			if (v.getX() < 0) {
 				setFacing(LEFT_FLY);
-			else if (v.getX() > 0) 
+			} else if (v.getX() > 0) {
 				setFacing(RIGHT_FLY);
-			/*else if (v.getY() > 0 && v.getX() < 0) 
-				setFacing(LEFT_FLY);
-			else if (v.getY() > 0 && v.getX() > 0) 
-				setFacing(RIGHT_FLY);*/
+			}
+		} else {
+			super.setVelocity(v);
 		}
-		System.out.println("EHEHEHEHHE " + super.getCurImage());
 	}
 	
 	public void setVertex(KirbyGame bg) {
@@ -102,6 +100,7 @@ import jig.Vector;
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i = new Image(super.getCurImage());
+		System.out.println(super.getCurImage());
 		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
 	}
 	
@@ -120,10 +119,6 @@ import jig.Vector;
     
     public void setSuck(boolean b) {
     	actionImage = b ? SUCKING : NORMAL;
-    	if (super.getCurImage() != null) 
-			removeImage(ResourceManager.getImage(super.getCurImage()));
-		addImageWithBoundingBox(ResourceManager
-				.getImage(defaultKirbyImages[(2*actionImage) + retFacing()]));
 		super.setCurImage(defaultKirbyImages[(2*actionImage) + retFacing()]);
     	sucking = b;
     }
@@ -133,22 +128,16 @@ import jig.Vector;
 		floating = false;
 		maximumFallSpeed = 1.f;
 		jumpTime = 0;
-    	if (super.getCurImage() != null) 
-			removeImage(ResourceManager.getImage(super.getCurImage()));
-		addImageWithBoundingBox(ResourceManager
-				.getImage(defaultKirbyImages[retFacing()]));
 		super.setCurImage(defaultKirbyImages[retFacing()]);
     }
     
     public void setFlying() {
+    	System.out.println("set flying");
 		floating = true;
 		maximumFallSpeed = .09f;	
-		if (getVelocity().getY() > maximumFallSpeed) 
+		if (getVelocity().getY() > maximumFallSpeed) {
 			setVelocity(new Vector(getVelocity().getX(), maximumFallSpeed));
-		if (super.getCurImage() != null) 
-			removeImage(ResourceManager.getImage(super.getCurImage()));
-		addImageWithBoundingBox(ResourceManager
-				.getImage(defaultKirbyImages[2*FLYING+retFacing()]));
+		}
 		super.setCurImage(defaultKirbyImages[2*FLYING+retFacing()]);
     }
 	
@@ -169,9 +158,9 @@ import jig.Vector;
 	public void spit(KirbyGame bg) {
 		if (enemySucking != null) {
 			float xPos = 30;
-			if (super.getFacing() % 2 == 1) //left
+			if (!super.facingRight()) //left
 				xPos = -30;
-			bg.enemies.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY() + 100, super.getFacing()));
+			bg.enemies.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
 			enemySucking = null;
 		}
 	}

@@ -36,8 +36,8 @@ import jig.Vector;
 	public static final int RIGHT_ATTACK = 6;
 	public static final int LEFT_ATTACK = 7;
 	
-	public static final int LEFT = 1;
 	public static final int RIGHT = 0;
+	public static final int LEFT = 1;
 	
 	private String[] facingImages;
 
@@ -115,8 +115,10 @@ import jig.Vector;
 		if (v.getX() != 0 || v.getY() != 0) {
 			if (v.getX() < 0) 
 				setFacing(LEFT_WALK);
-			else if (v.getX() > 0) 
+			else if (v.getX() > 0) {
 				setFacing(RIGHT_WALK);
+				System.out.println("sdfseresr");
+			}
 			/*else if (v.getY() > 0 && v.getX() < 0) 
 				setFacing(LEFT_FLY);
 			else if (v.getY() > 0 && v.getX() > 0) 

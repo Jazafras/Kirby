@@ -50,7 +50,6 @@ class PlayingState extends BasicGameState{
 	int topY;
 	float yOffset;
 
-	
 	private KirbyClient client = null;
 	static int port = 7777;
 	
@@ -69,9 +68,6 @@ class PlayingState extends BasicGameState{
 		groundTiles = new HashSet<Tile>();
 		tileFetch = new HashMap<String, Tile>();
 		loadTiles(bg);
-		
-		
-
 	}
 
 	@Override
@@ -97,7 +93,6 @@ class PlayingState extends BasicGameState{
 		
 		//System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
 		
-		
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
 		
@@ -107,9 +102,11 @@ class PlayingState extends BasicGameState{
         		(bg.map.getHeight() * 32 - KirbyGame.SCREEN_HEIGHT) * -1.f);
 		
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
-				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
+				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
-
+		for (Tile t : bg.kirby.getGroundTiles(tileMap))
+			t.render(g, xOffset, yOffset);
+		
 		bg.kirby.render(g, xOffset, yOffset);
 
 		/*for (Bonkers bonk : bg.bonkers)
@@ -138,8 +135,6 @@ class PlayingState extends BasicGameState{
 			swordk.render(g, xOffset, yOffset);
 		for (Twister twist : bg.twister)
 			twist.render(g, xOffset, yOffset);
-
-		
 		for (WaddleDee wdee : bg.waddledee)
 			wdee.render(g, xOffset, yOffset);
 		for (WaddleDoo wdoo : bg.waddledoo)
@@ -149,36 +144,32 @@ class PlayingState extends BasicGameState{
 			e.render(g, xOffset, yOffset);
 		}
 		
-		
 		//for(int i = 0; i < players.size(); i++){
 			//players.get(i).render(g, xOffset, yOffset);
 			//bg.kirby.render(g, xOffset, yOffset);
 		//}
-
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
-		
-
 	}
 	
 	private float getXOffset(KirbyGame bg) {
 		float kXOffset = 0;
-		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2);
+		float maxXOffset = (bg.map.getWidth() * 32) - (KirbyGame.SCREEN_WIDTH / 2);
 		if (bg.kirby.getX() > maxXOffset)
-			kXOffset = maxXOffset - (bg.SCREEN_WIDTH / 2.f);
-		else if (bg.kirby.getX() >= bg.SCREEN_WIDTH / 2.f)
-			kXOffset = bg.kirby.getX() - (bg.SCREEN_WIDTH / 2.f);
+			kXOffset = maxXOffset - (KirbyGame.SCREEN_WIDTH / 2.f);
+		else if (bg.kirby.getX() >= KirbyGame.SCREEN_WIDTH / 2.f)
+			kXOffset = bg.kirby.getX() - (KirbyGame.SCREEN_WIDTH / 2.f);
 		return kXOffset;
 	}
 	
 	private float getYOffset(KirbyGame bg) {
 		float kYOffset = 0;
-		float maxYOffset = (bg.map.getHeight() * 32) - (bg.SCREEN_HEIGHT / 2.f);
+		float maxYOffset = (bg.map.getHeight() * 32) - (KirbyGame.SCREEN_HEIGHT / 2.f);
 		if (bg.kirby.getY() > maxYOffset)
-			kYOffset = maxYOffset - (bg.SCREEN_HEIGHT / 2.f);
-		else if (bg.kirby.getY() >= bg.SCREEN_HEIGHT / 2.f)
-			kYOffset = bg.kirby.getY() - (bg.SCREEN_HEIGHT / 2.f);
+			kYOffset = maxYOffset - (KirbyGame.SCREEN_HEIGHT / 2.f);
+		else if (bg.kirby.getY() >= KirbyGame.SCREEN_HEIGHT / 2.f)
+			kYOffset = bg.kirby.getY() - (KirbyGame.SCREEN_HEIGHT / 2.f);
 		return kYOffset;
 	}
 
@@ -192,38 +183,52 @@ class PlayingState extends BasicGameState{
 		int move = -1;
 		if (bg.kirby.sideCollision(tileMap)) {
 			if (bg.kirby.getVelocity().getX() < 0) {
-				System.out.println("left collision");
 				move = LEFT;
 			} else if (bg.kirby.getVelocity().getX() > 0){
 				move = RIGHT;
-				System.out.println("right collision");
 			}
 		}
 		
-		if (bg.kirby.isOnGround(tileMap)) {
-			bg.kirby.hitGround();
-		}
-		if (bg.kirby.jumps == 2) {
+		if (bg.kirby.jumps == 2 && !bg.kirby.floating) {
 			bg.kirby.setFlying();
 		}
-		
-		System.out.println(bg.kirby.getCurImage());
 		bg.kirby.jumpTime--;
 		
 		if (!bg.kirby.isOnGround(tileMap) || bg.kirby.getVelocity().getY() < 0) {
 	     	bg.kirby.applyGravity(gravity * delta, tileMap);
 		} else {
 			bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), 0.f));
+			bg.kirby.hitGround();
 		}
 		
 		keyPresses(input, bg, delta, move);
 		checkLives(game, bg);
 		bg.kirby.update(delta);
+		
+		//waddledee movement updates
+		for (WaddleDee wdee : bg.waddledee){
+			if (wdee.getVelocity().getY() == 0 && wdee.getVelocity().getX() == 0){
+				wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+			}
+			if (wdee.sideCollision(tileMap)) {
+				if (wdee.getVelocity().getX() < 0) {
+					System.out.println("left waddledee collision");
+					wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));
+					//wdee.translate(new Vector(0f, 0f));
+					wdee.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (wdee.getVelocity().getX() > 0){
+					System.out.println("right waddledee collision");
+					wdee.translate(new Vector(-.2f, wdee.getVelocity().getY()).scale(delta));
+					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
+			}
+		}
+
 		for (MovingEnemy e : bg.enemies)
 			e.update(delta);
 
 	}
-	
 
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	
 		// System.out.println(move);
@@ -236,7 +241,6 @@ class PlayingState extends BasicGameState{
 			//client.update();
 			bg.kirby.setVelocity(new Vector(.2f, bg.kirby.getVelocity().getY()));
 		} else {
-
 			bg.kirby.setVelocity(new Vector(0.f, bg.kirby.getVelocity().getY()));
 		}
 		
@@ -247,7 +251,6 @@ class PlayingState extends BasicGameState{
 		// z is succ
 		if (input.isKeyDown(Input.KEY_Z)) {
 			int distApart = 50;
-			System.out.println("suck");
 			bg.kirby.setSuck(true);
 			MovingEnemy sucked = null;
 			for (MovingEnemy e : bg.enemies) {
@@ -273,6 +276,8 @@ class PlayingState extends BasicGameState{
 			bg.kirby.swallow();
 		}
 		
+
+		//move kirby back if he hits a wall
 		if (move == LEFT){
 			//client.update();
 			bg.kirby.translate(new Vector(.2f, bg.kirby.getVelocity().getY()).scale(delta));
@@ -282,7 +287,6 @@ class PlayingState extends BasicGameState{
 			//client.update();
 			bg.kirby.translate(new Vector(-.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		}
-		// if space pressed, kirby drops cub
 	}
 	
 	public static int amountLives(){

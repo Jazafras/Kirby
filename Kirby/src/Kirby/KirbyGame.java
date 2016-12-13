@@ -243,12 +243,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String WADDLEDOO_ATTACK_R = "Kirby/resources/waddledoo_attackR.png";
 	public static final String WADDLEDOO_ATTACK_L = "Kirby/resources/waddledoo_attackL.png";	
 	
-	public static final String CUB_IMG_RSC = "Kirby/resources/cub.png";
-	
 	public static final String POACHER_LEFTIMG_RSC = "Kirby/resources/poacher-left.png";
 	
-	public static final String UNDERBRUSH_IMG_RSC = "Kirby/resources/underbrush.png";
-	public static final String NEST_IMG_RSC = "Kirby/resources/nest.png";
 	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
 	
 	public static final String TILE_IMG_RSC = "Kirby/resources/tile.png";
@@ -285,10 +281,8 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<WaddleDoo> waddledoo; //beam state
 	
 	Poacher poacher;
-	Set<Underbrush> underbrushes;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
-	Nest nest;
 	
 	static KirbyServer server;
 	
@@ -320,7 +314,6 @@ public class KirbyGame extends StateBasedGame {
 		waddledoo = new ArrayList<WaddleDoo>();
 		waddledee = new ArrayList<WaddleDee>();
 		
-		//underbrushes = new HashSet<Underbrush>();
 		vertices = new HashSet<Vertex>();
 		vPos = new HashMap<String, Vertex>();
 	}
@@ -337,7 +330,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(/*128*/90, 422);
+		kirby = new Kirby(90, 422);
 		
 		/*Bonkers ebonkers = new Bonkers(650, 520);
 		enemies.add(ebonkers);
@@ -378,7 +371,7 @@ public class KirbyGame extends StateBasedGame {
 		UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
-		WaddleDee ewaddledee = new WaddleDee(628, 520);
+		WaddleDee ewaddledee = new WaddleDee(628, 422);
 		waddledee.add(ewaddledee);
 		enemies.add(ewaddledee);
 		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
@@ -548,17 +541,14 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(WADDLEDOO_ATTACK_R);
 		ResourceManager.loadImage(WADDLEDOO_ATTACK_L);
 		
-		ResourceManager.loadImage(CUB_IMG_RSC);
-		
 		ResourceManager.loadImage(POACHER_LEFTIMG_RSC);
 		
 		ResourceManager.loadImage(TILE_IMG_RSC);
 		
 		ResourceManager.loadImage(STAR_IMG_RSC);
 		
-		ResourceManager.loadImage(UNDERBRUSH_IMG_RSC);
-		ResourceManager.loadImage(NEST_IMG_RSC);
 		ResourceManager.loadImage(VERTEX_IMG_RSC);
+		
 	}
 	
 	public void level1Setup() throws SlickException {
@@ -579,8 +569,5 @@ public class KirbyGame extends StateBasedGame {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-
 	}
-
-	
 }
