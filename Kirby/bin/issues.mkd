@@ -20,6 +20,7 @@
 	- **[1]** Base skeleton for enemies
 	- **[2]** Infrastructure for Kirby state images
 	- **[3]** WaddleDee movement
+	- **[4]** Brontoburt movement
 
 - Audrey
 
@@ -32,7 +33,7 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[4]** Brontoburt movement
+	- **[5]** Twister movement
 
 - Audrey
 	- **[1]** Skeleton for kirby
