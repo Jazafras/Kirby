@@ -1,6 +1,7 @@
 package Kirby;
 
 import jig.Collision;
+import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
@@ -197,15 +198,12 @@ class PlayingState extends BasicGameState{
 		
 		if (bg.kirby.getType() == bg.kirby.KTWISTER) {
 			TwisterKirby k = (TwisterKirby) bg.kirby;
-			if (k.getTwistState()) {
-				for (MovingEnemy e : bg.enemies) {
-					Collision c = e.collides(k);
-					if (c != null) {
-						bg.enemies.remove(e);
-						break;
-					}
-				}
-			}
+			if (k.getTwistState())
+				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
+			SparkyKirby k = (SparkyKirby) bg.kirby;
+			if (k.getSparkState())
+				enemyCollision(k, bg);
 		}
 			
 		
@@ -315,6 +313,16 @@ class PlayingState extends BasicGameState{
 		waitTimeDown--;
 
 	}
+	
+	public void enemyCollision(Entity toCollide, KirbyGame bg) {
+		for (MovingEnemy e : bg.enemies) {
+			Collision c = e.collides(toCollide);
+			if (c != null) {
+				bg.enemies.remove(e);
+				break;
+			}
+		}
+	}
 
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	
 		// System.out.println(move);
@@ -359,10 +367,18 @@ class PlayingState extends BasicGameState{
 			} else if (bg.kirby.getType() == bg.kirby.KTWISTER) {
 				TwisterKirby k = (TwisterKirby) bg.kirby;
 				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
+				SparkyKirby k = (SparkyKirby) bg.kirby;
+				k.attack(bg);
 			}
 		} else {
 			bg.kirby.setSuck(false);
 			bg.attacks.clear();
+			if (bg.kirby.getType() == bg.kirby.KSPARKY) {
+				SparkyKirby k = (SparkyKirby) bg.kirby;
+				k.setSparkState(false);
+			}
+				
 		}
 		
 		// up arrow is spit

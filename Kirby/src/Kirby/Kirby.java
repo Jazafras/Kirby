@@ -26,6 +26,7 @@ import jig.Vector;
 	 public static final int NONE = 0;
 	 public static final int FIRE = 1;
 	 public static final int KTWISTER = 2;
+	 public static final int KSPARKY = 3;
 	 
 	 public static final int NORMAL = 0;
 	 public static final int SUCKING = 1;
@@ -160,16 +161,17 @@ import jig.Vector;
 		if (enemySucking != null) {
 			int enemyType = enemySucking.getEnemyType();
 			System.out.println(enemyType);
+			float xPos = super.getX();
+			float yPos = super.getY();
 			if (enemyType == HOTHEAD) {
 				System.out.println("hothead");
-				float xPos = super.getX();
-				float yPos = super.getY();
 				bg.kirby = new FireKirby(xPos, yPos);
 			} else if (enemyType == TWISTER) {
 				System.out.println("twister");
-				float xPos = super.getX();
-				float yPos = super.getY();
 				bg.kirby = new TwisterKirby(xPos, yPos);
+			} else if (enemyType == SPARKY) {
+				System.out.println("sparky");
+				bg.kirby = new SparkyKirby(xPos, yPos);
 			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
@@ -262,18 +264,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTPOPPY_FLY,
 			KirbyGame.KIRBY_RIGHTPOPPY_ATTACK,
 			KirbyGame.KIRBY_LEFTPOPPY_ATTACK,
-		};
-	
-	public static final String[] sparkyKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTSPARKY,
-			KirbyGame.KIRBY_LEFTSPARKY,
-			KirbyGame.KIRBY_RIGHTSPARKY_SUCC,
-			KirbyGame.KIRBY_LEFTSPARKY_SUCC,
-			KirbyGame.KIRBY_RIGHTSPARKY_FLY,
-			KirbyGame.KIRBY_LEFTSPARKY_FLY,
-			KirbyGame.KIRBY_RIGHTSPARKY_ATTACK,
-			KirbyGame.KIRBY_LEFTSPARKY_ATTACK,
 		};
 	
 	public static final String[] swordKirbyImages = 
