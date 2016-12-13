@@ -35,6 +35,7 @@ class PlayingState extends BasicGameState{
 	
 	private int waitTimeUp = -1;
 	private int waitTimeDown = -1;
+	private int scarfyJumpTime = -1;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -237,6 +238,22 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		
+		//scarfy movement updates
+		for (Scarfy s : bg.scarfy){
+			//if (s.isOnGround(tileMap)){
+			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0){
+				s.setVelocity(new Vector(0f, -.2f));
+				scarfyJumpTime = 15;
+			}
+			if (scarfyJumpTime == 0 && !s.isOnGround(tileMap)){
+				s.setVelocity(new Vector(0f, .15f));
+			}
+			if (s.isOnGround(tileMap)){
+				s.setVelocity(new Vector(0f, -.2f));
+				scarfyJumpTime = 15;
+			}
+			
+		}
 		
 		//twister movement updates
 		for (Twister t : bg.twister){
@@ -284,7 +301,9 @@ class PlayingState extends BasicGameState{
 		}
 		waitTimeUp--;
 		waitTimeDown--;
-
+		if (scarfyJumpTime > 0){
+			scarfyJumpTime--;
+		}
 	}
 
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	

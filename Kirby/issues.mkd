@@ -22,6 +22,8 @@
 	- **[2]** Infrastructure for Kirby state images
 	- **[3]** WaddleDee movement
 	- **[4]** Brontoburt movement
+	- **[5]** Twister movement
+	- **[6]** scarfy movement
 
 - Audrey
 
@@ -34,9 +36,8 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[5]** Twister movement
-	- **[?]** organize enemy movement code
-
+	- **[?]** organize enemy movement code better
+	- **[?]** fix drain on fps with jumping enemies
 - Audrey
 	- **[1]** Skeleton for kirby
 
