@@ -16,6 +16,7 @@
 	- **[13]** started changing kirby's animations still need to get his flying one
 	- **[14]** fixed stuff
 	- **[15]** created kirby's fire state
+	- **[16]** created kirby's twister state
 
 - Priya
 
