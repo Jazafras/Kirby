@@ -11,8 +11,8 @@ import jig.Vector;
  class Twister extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
-			KirbyGame.TWISTER_RIGHT,
 			KirbyGame.TWISTER_LEFT,
+			KirbyGame.TWISTER_RIGHT,
 			//KirbyGame.TWISTER_ATTACK_R,
 			//KirbyGame.TWISTER_ATTACK_L
 		};

@@ -13,10 +13,10 @@ import jig.ResourceManager;
 import jig.Vector;
 
 /* order of image arrays should go:
- * left walk
  * right walk
- * left attack
+ * left walk
  * right attack
+ * left attack
  */
 
  class WaddleDee extends MovingEnemy {
@@ -40,6 +40,7 @@ import jig.Vector;
 	private boolean firstPath;
 	private int waitTime;
 	Random rand = new Random();
+	Tile[][] tileMap;
 
 	public WaddleDee(final float x, final float y) {
 		super(x, y, facingImages, LEFT_WALK);
@@ -50,49 +51,25 @@ import jig.Vector;
 	}
 	
 
-	/*public void setMoving(KirbyGame bg) {
-		if ((hasPassed() || firstPath) && waitTime <= 0) {
-			if (firstPath)
-				firstPath = false;
-			Vertex v = bg.vPos.get(vPos.toString());
-			int r = rand.nextInt(v.neighbors.size());
-			int c = 0;
-			for (Vertex n : v.getNeighbors()) {
-				if (c == r) nextPos = n;
-				c++;
+	public void setMoving(KirbyGame bg) {
+			if (getVelocity().getY() == 0 && getVelocity().getX() == 0){
+				setVelocity(new Vector(-.07f, 0f)); //move left
 			}
-			if (nextPos.getX() > vPos.getX()) {
-				setVelocity(new Vector(.07f, 0f));
-				direction = "right";
-			} else if (nextPos.getX() < vPos.getX()) {
-				setVelocity(new Vector(-.07f, 0f));
-				direction = "left";
-			/*} else if (nextPos.getY() > vPos.getY()) {
-				setVelocity(new Vector(0f, .07f));
-				direction = "below";
-			} else {
-				setVelocity(new Vector(0f, -.07f));
-				direction = "above";
+			if (sideCollision(tileMap)) {
+				System.out.println("waddledee wall collision");
+				/*if (getVelocity().getX() < 0) {
+					System.out.println("left waddledee collision");
+					//wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));
+					//wdee.translate(new Vector(0f, 0f));
+					setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (getVelocity().getX() > 0){
+					System.out.println("right waddledee collision");
+					//wdee.translate(new Vector(-.2f, wdee.getVelocity().getY()).scale(delta));
+					setVelocity(new Vector(-.07f, 0f)); //move left
+				}*/
 			}
-			waitTime = rand.nextInt(1);
-		}
-		if (waitTime > 0)
-			waitTime--;
-	}	*/
-	
-	private boolean hasPassed() {
-		if (direction != null && nextPos != null) {
-			if (direction.equals("left"))
-				return getPosition().getX() <= nextPos.getX();
-			else if (direction.equals("right"))
-				return getPosition().getX() >= nextPos.getX();
-			else if (direction.equals("above"))
-				return getPosition().getY() <= nextPos.getY();
-			else
-				return getPosition().getY() >= nextPos.getY();
-		}
-		return false;
-	}
+	}	
 
 	@Override
 	public int getEnemyType() {

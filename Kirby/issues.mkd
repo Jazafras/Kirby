@@ -35,6 +35,7 @@
 
 - Jasmine
 	- **[5]** Twister movement
+	- **[?]** organize enemy movement code
 
 - Audrey
 	- **[1]** Skeleton for kirby

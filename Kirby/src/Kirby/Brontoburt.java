@@ -9,17 +9,17 @@ import jig.ResourceManager;
 import jig.Vector;
 
 /* order of image arrays should go:
- * left walk
  * right walk
- * left attack
+ * left walk
  * right attack
+ * left attack
  */
 
  class Brontoburt extends MovingEnemy {
 	public static final String[] facingImages = 
 		{
-			KirbyGame.BRONTOBURT_LEFT,
 			KirbyGame.BRONTOBURT_RIGHT,
+			KirbyGame.BRONTOBURT_LEFT,
 			//KirbyGame.BRONTOBURT_ATTACK_R,
 			//KirbyGame.BRONTOBURT_ATTACK_L
 		};
@@ -28,64 +28,60 @@ import jig.Vector;
 	private Vector movingDir;
 	private String direction;
 	private boolean firstPath;
-	private int waitTime;
+	private int waitTimeUp = -1, waitTimeDown = -1;
 	Random rand = new Random();
 
 	public Brontoburt(final float x, final float y) {
 		super(x, y, facingImages, LEFT_WALK);
 		setVelocity(new Vector(0, 0));
 		firstPath = true;
-		waitTime = rand.nextInt(200);
+		//waitTime = rand.nextInt(200);
 	}
 
 	
 	public void setMoving(KirbyGame bg) {
-		if ((hasPassed() || firstPath) && waitTime <= 0) {
-			if (firstPath)
-				firstPath = false;
-			Vertex v = bg.vPos.get(vPos.toString());
-			int r = rand.nextInt(v.neighbors.size());
-			int c = 0;
-			for (Vertex n : v.getNeighbors()) {
-				if (c == r) nextPos = n;
-				c++;
+		//brontoburt movement updates
+			if (getVelocity().getY() == 0 && getVelocity().getX() == 0){
+				setVelocity(new Vector(-.07f, -.02f)); //move up and left
+				waitTimeUp = 200;
+				//System.out.println("brontoburt up time: " + waitTimeUp);
 			}
-			if (nextPos.getX() > vPos.getX()) {
-				setVelocity(new Vector(.07f, 0f));
-				direction = "right";
-			} else if (nextPos.getX() < vPos.getX()) {
-				setVelocity(new Vector(-.07f, 0f));
-				direction = "left";
-			} else if (nextPos.getY() > vPos.getY()) {
-				setVelocity(new Vector(0f, .07f));
-				direction = "below";
-			} else {
-				setVelocity(new Vector(0f, -.07f));
-				direction = "above";
+			//System.out.println("brontoburt position: " + burt.getPosition().getX());
+			if (getPosition().getX() < 30){ //brontoburt reached left end of screen
+				setVelocity(new Vector(.07f, -.02f)); //move up and right
+				waitTimeUp = 200;
 			}
-			waitTime = rand.nextInt(1);
-		}
-		if (hasPassed()) {
-			setVelocity(new Vector(0f, 0f));
-			vPos = nextPos;
-		}
-		if (waitTime > 0)
-			waitTime--;
+			if (getPosition().getX() > 2350){ //brontoburt reached right end of screen
+				setVelocity(new Vector(-.07f, .02f)); //move down and left
+				waitTimeUp = 200;
+			}
+			if (getVelocity().getX() < 0){ //brontoburt is moving left
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					setVelocity(new Vector(-.07f, .02f)); //move down
+					waitTimeDown = 200;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					setVelocity(new Vector(-.07f, -.02f)); //move up
+					waitTimeUp = 200;
+				}
+			}
+			else if (getVelocity().getX() > 0) { //brontoburt is moving right
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					setVelocity(new Vector(.07f, .02f)); //move down
+					waitTimeDown = 200;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					setVelocity(new Vector(.07f, -.02f)); //move up
+					waitTimeUp = 200;
+				}
+			}
 	}	
-	
-	private boolean hasPassed() {
-		if (direction != null && nextPos != null) {
-			if (direction.equals("left"))
-				return getPosition().getX() <= nextPos.getX();
-			else if (direction.equals("right"))
-				return getPosition().getX() >= nextPos.getX();
-			else if (direction.equals("above"))
-				return getPosition().getY() <= nextPos.getY();
-			else
-				return getPosition().getY() >= nextPos.getY();
-		}
-		return false;
-	}
 	
 	@Override
 	public int getEnemyType() {

@@ -120,6 +120,12 @@ class PlayingState extends BasicGameState{
 				e.render(g, xOffset, yOffset);
 			}
 		}
+		/*for (Brontoburt b : bg.brontoburt) {
+			b.setMoving(bg);
+		}*/
+		/*for (WaddleDee wd : bg.waddledee) {
+			wd.setMoving(bg);
+		}*/
 		
 		//for(int i = 0; i < players.size(); i++){
 			//players.get(i).render(g, xOffset, yOffset);
@@ -181,6 +187,75 @@ class PlayingState extends BasicGameState{
 		keyPresses(input, bg, delta, move);
 		checkLives(game, bg);
 		bg.kirby.update(delta);
+
+		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
+
+		//brontoburt movement updates
+		for (Brontoburt burt : bg.brontoburt){
+			
+			if (burt.getVelocity().getY() == 0 && burt.getVelocity().getX() == 0){
+				burt.setVelocity(new Vector(-.07f, -.02f)); //move up and left
+				waitTimeUp = 150;
+				//System.out.println("brontoburt up time: " + waitTimeUp);
+			}
+			//System.out.println("brontoburt position: " + burt.getPosition().getX());
+			if (burt.getPosition().getX() < 30){ //brontoburt reached left end of screen
+				burt.setVelocity(new Vector(.07f, .02f)); //move down and right
+				waitTimeDown = 150;
+				waitTimeUp = 0;
+			}
+			if (burt.getPosition().getX() > 2350){ //brontoburt reached right end of screen
+				burt.setVelocity(new Vector(-.07f, -.02f)); //move up and left
+				waitTimeDown = 0;
+				waitTimeUp = 150;
+			}
+			if (burt.getVelocity().getX() < 0){ //brontoburt is moving left
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					burt.setVelocity(new Vector(-.07f, .02f)); //move down
+					waitTimeDown = 150;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					burt.setVelocity(new Vector(-.07f, -.02f)); //move up
+					waitTimeUp = 150;
+				}
+			}
+			else if (burt.getVelocity().getX() > 0) { //brontoburt is moving right
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					burt.setVelocity(new Vector(.07f, .02f)); //move down
+					waitTimeDown = 150;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					burt.setVelocity(new Vector(.07f, -.02f)); //move up
+					waitTimeUp = 150;
+				}
+			}
+		}
+		
+		
+		//twister movement updates
+		for (Twister t : bg.twister){
+			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
+				t.setVelocity(new Vector(-.07f, 0f)); //move left
+			}
+			if (t.sideCollision(tileMap)) {
+				if (t.getVelocity().getX() < 0) {
+					System.out.println("left twister collision");
+					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
+					t.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (t.getVelocity().getX() > 0){
+					System.out.println("right twister collision");
+					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
+					t.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
+			}
+		}
 		
 		//waddledee movement updates
 		for (WaddleDee wdee : bg.waddledee){
@@ -188,6 +263,7 @@ class PlayingState extends BasicGameState{
 				wdee.setVelocity(new Vector(-.07f, 0f)); //move left
 			}
 			if (wdee.sideCollision(tileMap)) {
+				//System.out.println("waddledee wall collision");
 				if (wdee.getVelocity().getX() < 0) {
 					System.out.println("left waddledee collision");
 					wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));
@@ -198,51 +274,6 @@ class PlayingState extends BasicGameState{
 					System.out.println("right waddledee collision");
 					wdee.translate(new Vector(-.2f, wdee.getVelocity().getY()).scale(delta));
 					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
-				}
-			}
-		}
-		
-		//brontoburt movement updates
-		for (Brontoburt burt : bg.brontoburt){
-			
-			if (burt.getVelocity().getY() == 0 && burt.getVelocity().getX() == 0){
-				burt.setVelocity(new Vector(-.07f, -.02f)); //move up and left
-				waitTimeUp = 200;
-				//System.out.println("brontoburt up time: " + waitTimeUp);
-			}
-			//System.out.println("brontoburt position: " + burt.getPosition().getX());
-			if (burt.getPosition().getX() < 30){ //brontoburt reached left end of screen
-				burt.setVelocity(new Vector(.07f, -.02f)); //move up and right
-				waitTimeUp = 200;
-			}
-			if (burt.getPosition().getX() > 2350){ //brontoburt reached right end of screen
-				burt.setVelocity(new Vector(-.07f, .02f)); //move down and left
-				waitTimeUp = 200;
-			}
-			if (burt.getVelocity().getX() < 0){ //brontoburt is moving left
-				if (waitTimeUp == 0){
-					waitTimeUp = -1;
-					burt.setVelocity(new Vector(-.07f, .02f)); //move down
-					waitTimeDown = 200;
-					//System.out.println("brontoburt down time: " + waitTimeDown);
-				}
-				else if (waitTimeDown == 0){
-					waitTimeDown = -1;
-					burt.setVelocity(new Vector(-.07f, -.02f)); //move up
-					waitTimeUp = 200;
-				}
-			}
-			else if (burt.getVelocity().getX() > 0) { //brontoburt is moving right
-				if (waitTimeUp == 0){
-					waitTimeUp = -1;
-					burt.setVelocity(new Vector(.07f, .02f)); //move down
-					waitTimeDown = 200;
-					//System.out.println("brontoburt down time: " + waitTimeDown);
-				}
-				else if (waitTimeDown == 0){
-					waitTimeDown = -1;
-					burt.setVelocity(new Vector(.07f, -.02f)); //move up
-					waitTimeUp = 200;
 				}
 			}
 		}
