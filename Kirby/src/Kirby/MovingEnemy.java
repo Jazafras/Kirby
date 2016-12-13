@@ -40,7 +40,7 @@ import jig.Vector;
 		return -1;
 	}
 	
-	public void applyGravity(float gravity, Tile[][] tileMap){
+	public void applyGravity(float gravity, Tile[][] tileMap) {
         if (super.getVelocity().getY() < maximumFallSpeed) {
             setVelocity(new Vector(super.getVelocity().getX(), super.getVelocity().getY() + gravity));
             if (super.getVelocity().getY() > maximumFallSpeed) 

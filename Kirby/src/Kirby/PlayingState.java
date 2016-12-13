@@ -195,11 +195,25 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		
+		if (bg.kirby.getType() == bg.kirby.KTWISTER) {
+			TwisterKirby k = (TwisterKirby) bg.kirby;
+			if (k.getTwistState()) {
+				for (MovingEnemy e : bg.enemies) {
+					Collision c = e.collides(k);
+					if (c != null) {
+						bg.enemies.remove(e);
+						break;
+					}
+				}
+			}
+		}
+			
+		
 		keyPresses(input, bg, delta, move);
 		checkLives(game, bg);
 		bg.kirby.update(delta);
 
-		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
+		//System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
 		//brontoburt movement updates
 		for (Brontoburt burt : bg.brontoburt){
@@ -322,15 +336,16 @@ class PlayingState extends BasicGameState{
 		
 		// z is succ
 		// spitfire for fire kirby
+		// tornado mode for twister
 		if (input.isKeyDown(Input.KEY_Z)) {
 			if (bg.kirby.getType() == bg.kirby.NONE) {
 				int distApart = 50;
 				bg.kirby.setSuck(true);
 				MovingEnemy sucked = null;
 				for (MovingEnemy e : bg.enemies) {
-					if ((e.getX() < bg.kirby.getX() && bg.kirby.getFacing() == LEFT &&
+					if ((e.getX() < bg.kirby.getX() && !bg.kirby.facingRight() &&
 							bg.kirby.getX() - e.getX() < distApart) ||
-							(e.getX() > bg.kirby.getX() && bg.kirby.getFacing() == RIGHT &&
+							(e.getX() > bg.kirby.getX() && bg.kirby.facingRight() &&
 							e.getX() - bg.kirby.getX() < distApart)) {
 						sucked = e;
 						break;
@@ -341,6 +356,9 @@ class PlayingState extends BasicGameState{
 				FireKirby k = (FireKirby) bg.kirby;
 				k.spitFire(bg);
 				
+			} else if (bg.kirby.getType() == bg.kirby.KTWISTER) {
+				TwisterKirby k = (TwisterKirby) bg.kirby;
+				k.attack(bg);
 			}
 		} else {
 			bg.kirby.setSuck(false);
@@ -349,8 +367,13 @@ class PlayingState extends BasicGameState{
 		
 		// up arrow is spit
 		if (input.isKeyDown(Input.KEY_UP)) {
-			bg.kirby.spit(bg);
-		
+			if (bg.kirby.getType() == bg.kirby.NONE) {
+				bg.kirby.spit(bg);
+			} else {
+				float xPos = bg.kirby.getX();
+				float yPos = bg.kirby.getY();
+				bg.kirby = new Kirby(xPos, yPos);
+			}
 		//down arrow is swallow
 		} else if (input.isKeyDown(Input.KEY_DOWN)) { 
 			System.out.println("swallow");
