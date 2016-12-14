@@ -36,7 +36,7 @@ class StartUpState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game,
 			Graphics g) throws SlickException {
 		KirbyGame bg = (KirbyGame)game;
-		
+		//ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
 		/*g.drawImage(ResourceManager.getImage(TigressGame.BACKGROUND_IMG_RSC),
 				0, 0);	*/
 		

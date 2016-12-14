@@ -1,6 +1,7 @@
 package Kirby;
 
 import jig.Collision;
+import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.newdawn.slick.GameContainer;
@@ -31,6 +33,11 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  * Transitions To GameOverState
  */
 class PlayingState extends BasicGameState{
+	private int waitTimeUp = -1;
+	private int waitTimeDown = -1;
+	private int scarfyJumpTime = -1;
+	private int cappyJumpTime = -1;
+	Random rand = new Random();
 	
 	public static final int GROUND = 0;
 	public static final int AIR = 1;
@@ -50,7 +57,6 @@ class PlayingState extends BasicGameState{
 	int topY;
 	float yOffset;
 
-	
 	private KirbyClient client = null;
 	static int port = 7777;
 	
@@ -69,9 +75,6 @@ class PlayingState extends BasicGameState{
 		groundTiles = new HashSet<Tile>();
 		tileFetch = new HashMap<String, Tile>();
 		loadTiles(bg);
-		
-		
-
 	}
 
 	@Override
@@ -83,6 +86,8 @@ class PlayingState extends BasicGameState{
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
+		//ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
+
 	}
 	
 	@Override
@@ -96,8 +101,7 @@ class PlayingState extends BasicGameState{
 		//players = client.getKirbyPositions();
 		
 		//System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
-		
-		
+			
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
 		
@@ -107,78 +111,56 @@ class PlayingState extends BasicGameState{
         		(bg.map.getHeight() * 32 - KirbyGame.SCREEN_HEIGHT) * -1.f);
 		
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
-				(int)(xOffset / 32), (int)(yOffset / 32), bg.SCREEN_WIDTH / 32, bg.SCREEN_HEIGHT / 32);
+				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
-
+		for (Tile t : bg.kirby.getGroundTiles(tileMap))
+			t.render(g, xOffset, yOffset);
+		
 		bg.kirby.render(g, xOffset, yOffset);
-
-		/*for (Bonkers bonk : bg.bonkers)
-			bonk.render(g, xOffset, yOffset);
-		for (Brontoburt bronto : bg.brontoburt)
-			bronto.render(g, xOffset, yOffset);
-		for (Cappy cap : bg.cappy)
-			cap.render(g, xOffset, yOffset);
-		for (HotHead hot : bg.hothead)
-			hot.render(g, xOffset, yOffset);
-		for (KnuckleJoe knuckj : bg.knucklejoe)
-			knuckj.render(g, xOffset, yOffset);
-		for (Noddy ndy : bg.noddy)
-			ndy.render(g, xOffset, yOffset);
-		for (Noddy ndy : bg.noddy)
-			ndy.render(g, xOffset, yOffset);
-		for (PoppyJr popjr : bg.poppy)
-			popjr.render(g, xOffset, yOffset);
-		for (Scarfy scarf : bg.scarfy)
-			scarf.render(g, xOffset, yOffset);
-		for (SirKibble sirkib : bg.sirkibble)
-			sirkib.render(g, xOffset, yOffset);
-		for (Sparky spark : bg.sparky)
-			spark.render(g, xOffset, yOffset);
-		for (SwordKnight swordk : bg.swordknight)
-			swordk.render(g, xOffset, yOffset);
-		for (Twister twist : bg.twister)
-			twist.render(g, xOffset, yOffset);
-
 		
-		for (WaddleDee wdee : bg.waddledee)
-			wdee.render(g, xOffset, yOffset);
-		for (WaddleDoo wdoo : bg.waddledoo)
-			wdoo.render(g, xOffset, yOffset);*/
-		
+		//stop deleting the tile shit just comment it out >:K
 		for (MovingEnemy e : bg.enemies) { 
-			e.render(g, xOffset, yOffset);
+			for (Tile t : e.surroundingTiles(tileMap)){
+				t.render(g, xOffset, yOffset);
+				e.render(g, xOffset, yOffset);
+			}
 		}
+		/*for (Brontoburt b : bg.brontoburt) {
+			b.setMoving(bg);
+		}*/
+		/*for (WaddleDee wd : bg.waddledee) {
+			wd.setMoving(bg);
+		}*/
 		
+		for (Attack a : bg.attacks)
+			a.render(g, xOffset, yOffset);
 		
 		//for(int i = 0; i < players.size(); i++){
 			//players.get(i).render(g, xOffset, yOffset);
 			//bg.kirby.render(g, xOffset, yOffset);
 		//}
-
 		
 		g.drawString("Lives: " + lives, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
-		
-
 	}
 	
 	private float getXOffset(KirbyGame bg) {
 		float kXOffset = 0;
-		float maxXOffset = (bg.map.getWidth() * 32) - (bg.SCREEN_WIDTH / 2);
+		float maxXOffset = (bg.map.getWidth() * 32) - (KirbyGame.SCREEN_WIDTH / 2);
 		if (bg.kirby.getX() > maxXOffset)
-			kXOffset = maxXOffset - (bg.SCREEN_WIDTH / 2.f);
-		else if (bg.kirby.getX() >= bg.SCREEN_WIDTH / 2.f)
-			kXOffset = bg.kirby.getX() - (bg.SCREEN_WIDTH / 2.f);
+			kXOffset = maxXOffset - (KirbyGame.SCREEN_WIDTH / 2.f);
+		else if (bg.kirby.getX() >= KirbyGame.SCREEN_WIDTH / 2.f)
+			kXOffset = bg.kirby.getX() - (KirbyGame.SCREEN_WIDTH / 2.f);
 		return kXOffset;
 	}
 	
 	private float getYOffset(KirbyGame bg) {
 		float kYOffset = 0;
-		float maxYOffset = (bg.map.getHeight() * 32) - (bg.SCREEN_HEIGHT / 2.f);
+		float maxYOffset = (bg.map.getHeight() * 32) - (KirbyGame.SCREEN_HEIGHT / 2.f);
 		if (bg.kirby.getY() > maxYOffset)
-			kYOffset = maxYOffset - (bg.SCREEN_HEIGHT / 2.f);
-		else if (bg.kirby.getY() >= bg.SCREEN_HEIGHT / 2.f)
-			kYOffset = bg.kirby.getY() - (bg.SCREEN_HEIGHT / 2.f);
+			kYOffset = maxYOffset - (KirbyGame.SCREEN_HEIGHT / 2.f);
+		else if (bg.kirby.getY() >= KirbyGame.SCREEN_HEIGHT / 2.f)
+			kYOffset = bg.kirby.getY() - (KirbyGame.SCREEN_HEIGHT / 2.f);
 		return kYOffset;
 	}
 
@@ -192,25 +174,14 @@ class PlayingState extends BasicGameState{
 		int move = -1;
 		if (bg.kirby.sideCollision(tileMap)) {
 			if (bg.kirby.getVelocity().getX() < 0) {
-				System.out.println("left collision");
 				move = LEFT;
 			} else if (bg.kirby.getVelocity().getX() > 0){
 				move = RIGHT;
-				System.out.println("right collision");
 			}
 		}
 		
-		if (bg.kirby.isOnGround(tileMap)) {
-			bg.kirby.jumps = 0;
-			bg.kirby.floating = false;
-			bg.kirby.maximumFallSpeed = 1.f;
-			bg.kirby.jumpTime = 0;
-		}
-		if (bg.kirby.jumps == 2) {
-			bg.kirby.floating = true;
-			bg.kirby.maximumFallSpeed = .09f;	
-			if (bg.kirby.getVelocity().getY() > bg.kirby.maximumFallSpeed) 
-				bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), bg.kirby.maximumFallSpeed));
+		if (bg.kirby.jumps == 2 && !bg.kirby.floating) {
+			bg.kirby.setFlying();
 		}
 		bg.kirby.jumpTime--;
 		
@@ -218,14 +189,249 @@ class PlayingState extends BasicGameState{
 	     	bg.kirby.applyGravity(gravity * delta, tileMap);
 		} else {
 			bg.kirby.setVelocity(new Vector(bg.kirby.getVelocity().getX(), 0.f));
+			bg.kirby.hitGround();
 		}
+		
+		for (Attack a : bg.attacks) {
+			for (MovingEnemy e : bg.enemies) {
+				Collision c = e.collides(a);
+				if (c != null) {
+					bg.enemies.remove(e);
+					bg.attacks.remove(a);
+					break;
+				}
+			}
+		}
+		
+		if (bg.kirby.getType() == bg.kirby.KTWISTER) {
+			TwisterKirby k = (TwisterKirby) bg.kirby;
+			if (k.getTwistState())
+				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
+			SparkyKirby k = (SparkyKirby) bg.kirby;
+			if (k.getSparkState())
+				enemyCollision(k, bg);
+		}
+			
 		
 		keyPresses(input, bg, delta, move);
 		checkLives(game, bg);
 		bg.kirby.update(delta);
 
+		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
+
+		//brontoburt movement updates
+		for (Brontoburt burt : bg.brontoburt){
+			
+			if (burt.getVelocity().getY() == 0 && burt.getVelocity().getX() == 0){
+				burt.setVelocity(new Vector(-.07f, -.02f)); //move up and left
+				waitTimeUp = 150;
+				//System.out.println("brontoburt up time: " + waitTimeUp);
+			}
+			//System.out.println("brontoburt position: " + burt.getPosition().getX());
+			if (burt.getPosition().getX() < 30){ //brontoburt reached left end of screen
+				burt.setVelocity(new Vector(.07f, .02f)); //move down and right
+				waitTimeDown = 150;
+				waitTimeUp = 0;
+			}
+			if (burt.getPosition().getX() > 2350){ //brontoburt reached right end of screen
+				burt.setVelocity(new Vector(-.07f, -.02f)); //move up and left
+				waitTimeDown = 0;
+				waitTimeUp = 150;
+			}
+			if (burt.getVelocity().getX() < 0){ //brontoburt is moving left
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					burt.setVelocity(new Vector(-.07f, .02f)); //move down
+					waitTimeDown = 150;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					burt.setVelocity(new Vector(-.07f, -.02f)); //move up
+					waitTimeUp = 150;
+				}
+			}
+			else if (burt.getVelocity().getX() > 0) { //brontoburt is moving right
+				if (waitTimeUp == 0){
+					waitTimeUp = -1;
+					burt.setVelocity(new Vector(.07f, .02f)); //move down
+					waitTimeDown = 150;
+					//System.out.println("brontoburt down time: " + waitTimeDown);
+				}
+				else if (waitTimeDown == 0){
+					waitTimeDown = -1;
+					burt.setVelocity(new Vector(.07f, -.02f)); //move up
+					waitTimeUp = 150;
+				}
+			}
+		}
+		
+		//cappy movement updates
+		for (Cappy c : bg.cappy){
+			//if (s.isOnGround(tileMap)){
+			if (c.getVelocity().getX() == 0){
+				c.setVelocity(new Vector(-.09f, c.getVelocity().getY())); //go left
+			}
+			if (c.getVelocity().getY() == 0 && c.getVelocity().getX() == 0){
+				c.setVelocity(new Vector(c.getVelocity().getX(), -.1f));
+				cappyJumpTime = 8;
+			}
+			if (cappyJumpTime == 0 && !c.isOnGround(tileMap)){
+				c.setVelocity(new Vector(c.getVelocity().getX(), .1f));
+			}
+			if (c.isOnGround(tileMap)){
+				c.setVelocity(new Vector(c.getVelocity().getX(), -.1f));
+				cappyJumpTime = 8;
+			}
+			if (c.getPosition().getX() < 1394){
+				c.setVelocity(new Vector(.09f, c.getVelocity().getY()));
+			}
+			if (c.getPosition().getX() > 1895){
+				c.setVelocity(new Vector(-.09f, c.getVelocity().getY()));
+			}
+		}
+		
+		//Noddy movement updates
+		for (Noddy w : bg.noddy){
+			if(bg.kirby.getPosition().getX() < w.getPosition().getX() && !w.sideCollision(tileMap)){ //kirby is to the left of waddledoo
+				w.setVelocity(new Vector(-.05f, 0f)); //move left
+			}
+			else if (bg.kirby.getPosition().getX() > w.getPosition().getX()){ //kirby is to the right of waddledoo
+				w.setVelocity(new Vector(.05f, 0f)); //move right
+			}
+			if (w.sideCollision(tileMap)) {
+				//System.out.println("waddledoo wall collision");			
+				if (w.getVelocity().getX() < 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("left waddledoo collision");
+					w.setVelocity(new Vector(-.05f, -2f)); //jump
+					w.translate(new Vector(w.getVelocity().getX(), -2f));
+				}
+				if (w.getVelocity().getX() > 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("RIGHT waddledoo collision");
+					w.setVelocity(new Vector(.05f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+			}
+			if (!w.isOnGround(tileMap) && !w.sideCollision(tileMap)){
+				w.setVelocity(new Vector(w.getVelocity().getX(), .07f));
+			}
+
+		}
+		
+		//scarfy movement updates
+		for (Scarfy s : bg.scarfy){
+			//if (s.isOnGround(tileMap)){
+			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0){
+				s.setVelocity(new Vector(0f, -.2f));
+				scarfyJumpTime = 15;
+			}
+			if (scarfyJumpTime == 0 && !s.isOnGround(tileMap)){
+				s.setVelocity(new Vector(0f, .15f));
+			}
+			if (s.isOnGround(tileMap)){
+				s.setVelocity(new Vector(0f, -.2f));
+				scarfyJumpTime = 15;
+			}
+			
+		}
+		
+		//twister movement updates
+		for (Twister t : bg.twister){
+			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
+				t.setVelocity(new Vector(-.07f, 0f)); //move left
+			}
+			if (t.sideCollision(tileMap)) {
+				if (t.getVelocity().getX() < 0) {
+					System.out.println("left twister collision");
+					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
+					t.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (t.getVelocity().getX() > 0){
+					System.out.println("right twister collision");
+					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
+					t.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
+			}
+		}
+		
+		//waddledee movement updates
+		for (WaddleDee wdee : bg.waddledee){
+			if (wdee.getVelocity().getY() == 0 && wdee.getVelocity().getX() == 0){
+				wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+			}
+			if (wdee.sideCollision(tileMap)) {
+				//System.out.println("waddledee wall collision");
+				if (wdee.getVelocity().getX() < 0) {
+					System.out.println("left waddledee collision");
+					wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));
+					//wdee.translate(new Vector(0f, 0f));
+					wdee.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (wdee.getVelocity().getX() > 0){
+					System.out.println("right waddledee collision");
+					wdee.translate(new Vector(-.2f, wdee.getVelocity().getY()).scale(delta));
+					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
+			}
+		}
+		
+		//waddledoo movement updates
+		for (WaddleDoo w : bg.waddledoo){
+			if(bg.kirby.getPosition().getX() < w.getPosition().getX() && !w.sideCollision(tileMap)){ //kirby is to the left of waddledoo
+				w.setVelocity(new Vector(-.09f, 0f)); //move left
+			}
+			else if (bg.kirby.getPosition().getX() > w.getPosition().getX()){ //kirby is to the right of waddledoo
+				w.setVelocity(new Vector(.09f, 0f)); //move right
+			}
+			if (w.sideCollision(tileMap)) {
+				//System.out.println("waddledoo wall collision");			
+				if (w.getVelocity().getX() < 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("left waddledoo collision");
+					w.setVelocity(new Vector(-.09f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+				if (w.getVelocity().getX() > 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("RIGHT waddledoo collision");
+					w.setVelocity(new Vector(.09f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+			}
+			if (!w.isOnGround(tileMap) && !w.sideCollision(tileMap)){
+				w.setVelocity(new Vector(w.getVelocity().getX(), .07f));
+			}
+
+		}
+
+		for (MovingEnemy e : bg.enemies){
+			e.update(delta);
+			//System.out.println("brontoburt up time: " + waitTimeUp);
+		}
+		
+		for (Attack a : bg.attacks)
+			a.update(delta);
+		
+		waitTimeUp--;
+		waitTimeDown--;
+		cappyJumpTime--;
+		if (scarfyJumpTime > 0){
+			scarfyJumpTime--;
+		}
 	}
 	
+	public void enemyCollision(Entity toCollide, KirbyGame bg) {
+		for (MovingEnemy e : bg.enemies) {
+			Collision c = e.collides(toCollide);
+			if (c != null) {
+				bg.enemies.remove(e);
+				break;
+			}
+		}
+	}
 
 	private void keyPresses(Input input, KirbyGame bg, int delta, int move) {	
 		// System.out.println(move);
@@ -238,7 +444,6 @@ class PlayingState extends BasicGameState{
 			//client.update();
 			bg.kirby.setVelocity(new Vector(.2f, bg.kirby.getVelocity().getY()));
 		} else {
-
 			bg.kirby.setVelocity(new Vector(0.f, bg.kirby.getVelocity().getY()));
 		}
 		
@@ -247,34 +452,61 @@ class PlayingState extends BasicGameState{
 		}
 		
 		// z is succ
+		// spitfire for fire kirby
+		// tornado mode for twister
 		if (input.isKeyDown(Input.KEY_Z)) {
-			int distApart = 50;
-			System.out.println("suck");
-			bg.kirby.setSuck(true);
-			MovingEnemy sucked = null;
-			for (MovingEnemy e : bg.enemies) {
-				if ((e.getX() < bg.kirby.getX() && bg.kirby.getFacing() == LEFT &&
-						bg.kirby.getX() - e.getX() < distApart) ||
-						(e.getX() > bg.kirby.getX() && bg.kirby.getFacing() == RIGHT &&
-						e.getX() - bg.kirby.getX() < distApart)) {
-					sucked = e;
-					break;
+			if (bg.kirby.getType() == bg.kirby.NONE) {
+				int distApart = 50;
+				bg.kirby.setSuck(true);
+				MovingEnemy sucked = null;
+				for (MovingEnemy e : bg.enemies) {
+					if ((e.getX() < bg.kirby.getX() && !bg.kirby.facingRight() &&
+							bg.kirby.getX() - e.getX() < distApart) ||
+							(e.getX() > bg.kirby.getX() && bg.kirby.facingRight() &&
+							e.getX() - bg.kirby.getX() < distApart)) {
+						sucked = e;
+						break;
+					}
 				}
+	 			bg.kirby.succ(sucked, bg);
+			} else if (bg.kirby.getType() == bg.kirby.FIRE) {
+				FireKirby k = (FireKirby) bg.kirby;
+				k.spitFire(bg);
+				
+			} else if (bg.kirby.getType() == bg.kirby.KTWISTER) {
+				TwisterKirby k = (TwisterKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
+				SparkyKirby k = (SparkyKirby) bg.kirby;
+				k.attack(bg);
 			}
- 			bg.kirby.succ(sucked, bg);
 		} else {
 			bg.kirby.setSuck(false);
+			bg.attacks.clear();
+			if (bg.kirby.getType() == bg.kirby.KSPARKY) {
+				SparkyKirby k = (SparkyKirby) bg.kirby;
+				k.setSparkState(false);
+			}
+				
 		}
 		
 		// up arrow is spit
 		if (input.isKeyDown(Input.KEY_UP)) {
-			bg.kirby.spit(bg);
-		
+			if (bg.kirby.getType() == bg.kirby.NONE) {
+				bg.kirby.spit(bg);
+			} else {
+				float xPos = bg.kirby.getX();
+				float yPos = bg.kirby.getY();
+				bg.kirby = new Kirby(xPos, yPos);
+			}
 		//down arrow is swallow
-		} else if (input.isKeyDown(Input.KEY_RIGHT) && move != RIGHT) { 
-			bg.kirby.swallow();
+		} else if (input.isKeyDown(Input.KEY_DOWN)) { 
+			System.out.println("swallow");
+			bg.kirby.swallow(bg);
 		}
 		
+
+		//move kirby back if he hits a wall
 		if (move == LEFT){
 			//client.update();
 			bg.kirby.translate(new Vector(.2f, bg.kirby.getVelocity().getY()).scale(delta));
@@ -284,7 +516,6 @@ class PlayingState extends BasicGameState{
 			//client.update();
 			bg.kirby.translate(new Vector(-.2f, bg.kirby.getVelocity().getY()).scale(delta));
 		}
-		// if space pressed, kirby drops cub
 	}
 	
 	public static int amountLives(){

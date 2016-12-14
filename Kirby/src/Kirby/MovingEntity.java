@@ -24,6 +24,7 @@ import jig.Vector;
 	public static final int UFO = 12;
 	public static final int WADDLEDEE = 13;
 	public static final int WADDLEDOO = 14;
+	public static final int STAR = 15;
 	 
 	// facing directions 
 	public static final int RIGHT_WALK = 0;
@@ -34,6 +35,9 @@ import jig.Vector;
 	public static final int LEFT_FLY = 5;
 	public static final int RIGHT_ATTACK = 6;
 	public static final int LEFT_ATTACK = 7;
+	
+	public static final int RIGHT = 0;
+	public static final int LEFT = 1;
 	
 	private String[] facingImages;
 
@@ -62,6 +66,10 @@ import jig.Vector;
 		addImageWithBoundingBox(ResourceManager
 				.getImage(facingImages[RIGHT_WALK]));
 		onGround = true;
+	}
+	
+	public boolean facingRight() {
+		return (getFacing() % 2 == 0);
 	}
 	
 	/**
@@ -96,14 +104,20 @@ import jig.Vector;
 	 * unless the velocity is 0 and it's not moving.
 	 * @param v: velocity to set.
 	 */
+    
+    public void justSetVelocity(final Vector v) {
+    	velocity = v;
+    }
+    
 	public void setVelocity(final Vector v) {
 		velocity = v;
 		
 		if (v.getX() != 0 || v.getY() != 0) {
 			if (v.getX() < 0) 
 				setFacing(LEFT_WALK);
-			else if (v.getX() > 0) 
+			else if (v.getX() > 0) {
 				setFacing(RIGHT_WALK);
+			}
 			/*else if (v.getY() > 0 && v.getX() < 0) 
 				setFacing(LEFT_FLY);
 			else if (v.getY() > 0 && v.getX() > 0) 

@@ -11,12 +11,26 @@
 	- **[8]** kirby flying
 	- **[9]** fixed rendering issue on waddle dee (need to implement for the rest of enemies)
 	- **[10]** fixed rendering issue on all enemies
+	- **[11]** got kirby to suck an enemy good
+	- **[12]** got kirby to spit a shining star after a good suck
+	- **[13]** started changing kirby's animations still need to get his flying one
+	- **[14]** fixed stuff
+	- **[15]** created kirby's fire state
+	- **[16]** created kirby's twister state
+	- **[16]** created kirby's sparky state
 
 - Priya
 
 - Jasmine
 	- **[1]** Base skeleton for enemies
 	- **[2]** Infrastructure for Kirby state images
+	- **[3]** WaddleDee movement
+	- **[4]** Brontoburt movement
+	- **[5]** Twister movement
+	- **[6]** Scarfy movement
+	- **[7]** WaddleDoo movement
+	- **[8]** Cappy movement
+	- **[9]** Noddy movement
 
 - Audrey
 
@@ -29,7 +43,13 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[3]** Render enemies for a scrolling map
+	- **[10]** Poppy Jr. movement
+	- **[?]** Finetune Noddy jumping
+	- **[?]** Finetune WaddleDoo jumping
+	- **[?]** WaddleDoo attacks
+	- **[?]** Twister attacks
+	- **[?]** organize enemy movement code better
+	- **[?]** fix drop in fps for jumping enemies
 
 - Audrey
 	- **[1]** Skeleton for kirby

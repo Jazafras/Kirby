@@ -34,6 +34,9 @@ public class KirbyGame extends StateBasedGame {
 	public static final int UFO = 12;
 	public static final int WADDLEDEE = 13;
 	public static final int WADDLEDOO = 14;
+	public static final int STAR = 15;
+	
+	public static final String THE_SOUND_OF_DEATH = "Kirby/resources/iwanttodie.wav";
 	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
@@ -242,12 +245,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String WADDLEDOO_ATTACK_R = "Kirby/resources/waddledoo_attackR.png";
 	public static final String WADDLEDOO_ATTACK_L = "Kirby/resources/waddledoo_attackL.png";	
 	
-	public static final String CUB_IMG_RSC = "Kirby/resources/cub.png";
-	
 	public static final String POACHER_LEFTIMG_RSC = "Kirby/resources/poacher-left.png";
 	
-	public static final String UNDERBRUSH_IMG_RSC = "Kirby/resources/underbrush.png";
-	public static final String NEST_IMG_RSC = "Kirby/resources/nest.png";
 	public static final String VERTEX_IMG_RSC = "Kirby/resources/vertex-r.png";
 	
 	public static final String TILE_IMG_RSC = "Kirby/resources/tile.png";
@@ -266,6 +265,7 @@ public class KirbyGame extends StateBasedGame {
 	Kirby kirby;
 	
 	Set<MovingEnemy> enemies;
+	Set<Attack> attacks;
 	
 	ArrayList<Bonkers> bonkers; //hammer state
 	ArrayList<Brontoburt> brontoburt;
@@ -284,10 +284,8 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<WaddleDoo> waddledoo; //beam state
 	
 	Poacher poacher;
-	Set<Underbrush> underbrushes;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
-	Nest nest;
 	
 	static KirbyServer server;
 	
@@ -303,6 +301,8 @@ public class KirbyGame extends StateBasedGame {
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		
 		enemies = new HashSet<MovingEnemy>();
+		attacks = new HashSet<Attack>();
+		
 		bonkers = new ArrayList<Bonkers>();
 		brontoburt = new ArrayList<Brontoburt>();
 		cappy = new ArrayList<Cappy>();
@@ -319,7 +319,6 @@ public class KirbyGame extends StateBasedGame {
 		waddledoo = new ArrayList<WaddleDoo>();
 		waddledee = new ArrayList<WaddleDee>();
 		
-		//underbrushes = new HashSet<Underbrush>();
 		vertices = new HashSet<Vertex>();
 		vPos = new HashMap<String, Vertex>();
 	}
@@ -336,57 +335,60 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(/*128*/90, 422);
+		kirby = new Kirby(90, 422);
 		
-		/*Bonkers ebonkers = new Bonkers(650, 520);
-		enemies.add(ebonkers);
-		bonkers.add(ebonkers);
-		Brontoburt ebrontoburt = new Brontoburt(600, 420);
-		enemies.add(ebrontoburt);
-		brontoburt.add(ebrontoburt);
-		Cappy ecappy = new Cappy(650, 520);
-		cappy.add(ecappy);
-		enemies.add(ecappy);
-		HotHead ehothead = new HotHead(650, 520);
-		hothead.add(ehothead);
-		enemies.add(ehothead);
-		KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
+		//Bonkers ebonkers = new Bonkers(650, 520);
+		//enemies.add(ebonkers);
+		//bonkers.add(ebonkers);
+		Brontoburt brontoburt1 = new Brontoburt(600, 220);
+		enemies.add(brontoburt1);
+		brontoburt.add(brontoburt1);
+		Cappy cappy1 = new Cappy(1494, 360);
+		//Cappy cappy1 = new Cappy(155, 422);
+		cappy.add(cappy1);
+		enemies.add(cappy1);
+		HotHead hothead1 = new HotHead(350, 422);
+		hothead.add(hothead1);
+		enemies.add(hothead1);
+		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
 		knucklejoe.add(eknucklejoe);
-		enemies.add(ebonkers);
-		Noddy enoddy = new Noddy(650, 520);
-		noddy.add(enoddy);
-		enemies.add(ebonkers);
-		PoppyJr epoppyjr = new PoppyJr(628, 520);
+		enemies.add(ebonkers);*/
+		Noddy noddy1 = new Noddy(2066, 390);
+		noddy.add(noddy1);
+		enemies.add(noddy1);
+		/*PoppyJr epoppyjr = new PoppyJr(628, 520);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
 		SirKibble esirkibble = new SirKibble(628, 520);
 		sirkibble.add(esirkibble);
-		enemies.add(esirkibble);
-		Scarfy escarfy = new Scarfy(628, 520);
-		scarfy.add(escarfy);
-		enemies.add(escarfy);
-		Sparky esparky = new Sparky(628, 520);
-		sparky.add(esparky);
-		enemies.add(esparky);
-		SwordKnight eswordknight = new SwordKnight(628, 520);
+		enemies.add(esirkibble);*/
+		Scarfy scarfy1 = new Scarfy(990, 320);
+		scarfy.add(scarfy1);
+		enemies.add(scarfy1);
+		/*Sparky sparky1 = new Sparky(300, 422);
+		sparky.add(sparky1);
+		enemies.add(sparky1);*/
+		/*SwordKnight eswordknight = new SwordKnight(628, 520);
 		swordknight.add(eswordknight);
-		enemies.add(eswordknight);
-		Twister etwister = new Twister(628, 420);
-		twister.add(etwister);
-		enemies.add(etwister);
-		UFO eufo = new UFO(628, 420);
+		enemies.add(eswordknight);*/
+		Twister twister1 = new Twister(1328, 384);
+		twister.add(twister1);
+		enemies.add(twister1);
+		/*UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
-		WaddleDee ewaddledee = new WaddleDee(628, 520);
-		waddledee.add(ewaddledee);
-		enemies.add(ewaddledee);
-		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
-		waddledoo.add(ewaddledoo);
-		enemies.add(ewaddledoo);*/
+		WaddleDee waddledee1 = new WaddleDee(628, 422);
+		waddledee.add(waddledee1);
+		enemies.add(waddledee1);
+		WaddleDoo waddledoo1 = new WaddleDoo(870, 420);
+		waddledoo.add(waddledoo1);
+		enemies.add(waddledoo1);
 		
 	}
 	
 	private void loadImages() {
+		ResourceManager.loadSound(THE_SOUND_OF_DEATH); 
+		
 		ResourceManager.loadImage(BACKGROUND_IMG_RSC);
 		ResourceManager.loadImage(STARTUP_IMG_RSC);
 		ResourceManager.loadImage(GAMEOVER_IMG_RSC);
@@ -547,17 +549,14 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(WADDLEDOO_ATTACK_R);
 		ResourceManager.loadImage(WADDLEDOO_ATTACK_L);
 		
-		ResourceManager.loadImage(CUB_IMG_RSC);
-		
 		ResourceManager.loadImage(POACHER_LEFTIMG_RSC);
 		
 		ResourceManager.loadImage(TILE_IMG_RSC);
 		
 		ResourceManager.loadImage(STAR_IMG_RSC);
 		
-		ResourceManager.loadImage(UNDERBRUSH_IMG_RSC);
-		ResourceManager.loadImage(NEST_IMG_RSC);
 		ResourceManager.loadImage(VERTEX_IMG_RSC);
+		
 	}
 	
 	public void level1Setup() throws SlickException {
@@ -578,8 +577,5 @@ public class KirbyGame extends StateBasedGame {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-
 	}
-
-	
 }
