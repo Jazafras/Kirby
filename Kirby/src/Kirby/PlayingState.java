@@ -33,7 +33,6 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  * Transitions To GameOverState
  */
 class PlayingState extends BasicGameState{
-	
 	private int waitTimeUp = -1;
 	private int waitTimeDown = -1;
 	private int scarfyJumpTime = -1;
@@ -86,6 +85,8 @@ class PlayingState extends BasicGameState{
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
+		ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
+
 	}
 	
 	@Override
@@ -99,7 +100,7 @@ class PlayingState extends BasicGameState{
 		//players = client.getKirbyPositions();
 		
 		//System.out.println("PlayingState: Rendering. ClientCount is " + KirbyServer.clientCount);
-		
+			
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
 		
@@ -116,8 +117,12 @@ class PlayingState extends BasicGameState{
 		
 		bg.kirby.render(g, xOffset, yOffset);
 		
+		//stop deleting the tile shit just comment it out >:K
 		for (MovingEnemy e : bg.enemies) { 
-			e.render(g, xOffset, yOffset);
+			for (Tile t : e.surroundingTiles(tileMap)){
+				t.render(g, xOffset, yOffset);
+				e.render(g, xOffset, yOffset);
+			}
 		}
 		/*for (Brontoburt b : bg.brontoburt) {
 			b.setMoving(bg);
@@ -316,6 +321,35 @@ class PlayingState extends BasicGameState{
 					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
 				}
 			}
+		}
+		
+		//waddledoo movement updates
+		for (WaddleDoo w : bg.waddledoo){
+			if(bg.kirby.getPosition().getX() < w.getPosition().getX() && !w.sideCollision(tileMap)){ //kirby is to the left of waddledoo
+				w.setVelocity(new Vector(-.09f, 0f)); //move left
+			}
+			else if (bg.kirby.getPosition().getX() > w.getPosition().getX()){ //kirby is to the right of waddledoo
+				w.setVelocity(new Vector(.09f, 0f)); //move right
+			}
+			if (w.sideCollision(tileMap)) {
+				//System.out.println("waddledoo wall collision");			
+				if (w.getVelocity().getX() < 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("left waddledoo collision");
+					w.setVelocity(new Vector(-.09f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+				if (w.getVelocity().getX() > 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("RIGHT waddledoo collision");
+					w.setVelocity(new Vector(.09f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+			}
+			if (!w.isOnGround(tileMap) && !w.sideCollision(tileMap)){
+				w.setVelocity(new Vector(w.getVelocity().getX(), .07f));
+			}
+
 		}
 
 		for (MovingEnemy e : bg.enemies){

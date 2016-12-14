@@ -36,6 +36,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final int WADDLEDOO = 14;
 	public static final int STAR = 15;
 	
+	public static final String THE_SOUND_OF_DEATH = "Kirby/resources/iwanttodie.wav";
+	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
 	public static final int PLAYINGSTATE = 1;
@@ -344,9 +346,9 @@ public class KirbyGame extends StateBasedGame {
 		/*Cappy ecappy = new Cappy(650, 520);
 		cappy.add(ecappy);
 		enemies.add(ecappy);*/
-		HotHead ehothead = new HotHead(350, 422);
-		hothead.add(ehothead);
-		enemies.add(ehothead);
+		HotHead hothead1 = new HotHead(350, 422);
+		hothead.add(hothead1);
+		enemies.add(hothead1);
 		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
 		knucklejoe.add(eknucklejoe);
 		enemies.add(ebonkers);
@@ -362,9 +364,9 @@ public class KirbyGame extends StateBasedGame {
 		Scarfy scarfy1 = new Scarfy(990, 320);
 		scarfy.add(scarfy1);
 		enemies.add(scarfy1);
-		Sparky sparky1 = new Sparky(300, 422);
+		/*Sparky sparky1 = new Sparky(300, 422);
 		sparky.add(sparky1);
-		enemies.add(sparky1);
+		enemies.add(sparky1);*/
 		/*SwordKnight eswordknight = new SwordKnight(628, 520);
 		swordknight.add(eswordknight);
 		enemies.add(eswordknight);*/
@@ -377,13 +379,15 @@ public class KirbyGame extends StateBasedGame {
 		WaddleDee waddledee1 = new WaddleDee(628, 422);
 		waddledee.add(waddledee1);
 		enemies.add(waddledee1);
-		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
-		waddledoo.add(ewaddledoo);
-		enemies.add(ewaddledoo);*/
+		WaddleDoo waddledoo1 = new WaddleDoo(870, 420);
+		waddledoo.add(waddledoo1);
+		enemies.add(waddledoo1);
 		
 	}
 	
 	private void loadImages() {
+		ResourceManager.loadSound(THE_SOUND_OF_DEATH); 
+		
 		ResourceManager.loadImage(BACKGROUND_IMG_RSC);
 		ResourceManager.loadImage(STARTUP_IMG_RSC);
 		ResourceManager.loadImage(GAMEOVER_IMG_RSC);

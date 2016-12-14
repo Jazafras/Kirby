@@ -27,7 +27,8 @@
 	- **[3]** WaddleDee movement
 	- **[4]** Brontoburt movement
 	- **[5]** Twister movement
-	- **[6]** scarfy movement
+	- **[6]** Scarfy movement
+	- **[7]** WaddleDoo movement
 
 - Audrey
 
@@ -40,8 +41,10 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
+	- **[7]** Cappy movement
+	- **[?]** WaddleDoo attacks
+	- **[?]** Twister attacks
 	- **[?]** organize enemy movement code better
-	- **[?]** fix drain on fps with jumping enemies
 - Audrey
 	- **[1]** Skeleton for kirby
 
