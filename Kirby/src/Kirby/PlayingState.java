@@ -36,6 +36,7 @@ class PlayingState extends BasicGameState{
 	private int waitTimeUp = -1;
 	private int waitTimeDown = -1;
 	private int scarfyJumpTime = -1;
+	private int cappyJumpTime = -1;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -85,7 +86,7 @@ class PlayingState extends BasicGameState{
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
-		ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
+		//ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
 
 	}
 	
@@ -217,7 +218,7 @@ class PlayingState extends BasicGameState{
 		checkLives(game, bg);
 		bg.kirby.update(delta);
 
-		//System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
+		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
 		//brontoburt movement updates
 		for (Brontoburt burt : bg.brontoburt){
@@ -263,6 +264,31 @@ class PlayingState extends BasicGameState{
 					burt.setVelocity(new Vector(.07f, -.02f)); //move up
 					waitTimeUp = 150;
 				}
+			}
+		}
+		
+		//cappy movement updates
+		for (Cappy c : bg.cappy){
+			//if (s.isOnGround(tileMap)){
+			if (c.getVelocity().getX() == 0){
+				c.setVelocity(new Vector(-.09f, c.getVelocity().getY())); //go left
+			}
+			if (c.getVelocity().getY() == 0 && c.getVelocity().getX() == 0){
+				c.setVelocity(new Vector(c.getVelocity().getX(), -.1f));
+				cappyJumpTime = 8;
+			}
+			if (cappyJumpTime == 0 && !c.isOnGround(tileMap)){
+				c.setVelocity(new Vector(c.getVelocity().getX(), .1f));
+			}
+			if (c.isOnGround(tileMap)){
+				c.setVelocity(new Vector(c.getVelocity().getX(), -.1f));
+				cappyJumpTime = 8;
+			}
+			if (c.getPosition().getX() < 1394){
+				c.setVelocity(new Vector(.09f, c.getVelocity().getY()));
+			}
+			if (c.getPosition().getX() > 1895){
+				c.setVelocity(new Vector(-.09f, c.getVelocity().getY()));
 			}
 		}
 		
@@ -362,6 +388,7 @@ class PlayingState extends BasicGameState{
 		
 		waitTimeUp--;
 		waitTimeDown--;
+		cappyJumpTime--;
 		if (scarfyJumpTime > 0){
 			scarfyJumpTime--;
 		}
