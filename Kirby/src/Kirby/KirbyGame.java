@@ -352,11 +352,11 @@ public class KirbyGame extends StateBasedGame {
 		enemies.add(hothead1);
 		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
 		knucklejoe.add(eknucklejoe);
-		enemies.add(ebonkers);
-		Noddy enoddy = new Noddy(650, 520);
-		noddy.add(enoddy);
-		enemies.add(ebonkers);
-		PoppyJr epoppyjr = new PoppyJr(628, 520);
+		enemies.add(ebonkers);*/
+		Noddy noddy1 = new Noddy(2066, 390);
+		noddy.add(noddy1);
+		enemies.add(noddy1);
+		/*PoppyJr epoppyjr = new PoppyJr(628, 520);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
 		SirKibble esirkibble = new SirKibble(628, 520);

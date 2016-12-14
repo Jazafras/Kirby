@@ -292,6 +292,35 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		
+		//Noddy movement updates
+		for (Noddy w : bg.noddy){
+			if(bg.kirby.getPosition().getX() < w.getPosition().getX() && !w.sideCollision(tileMap)){ //kirby is to the left of waddledoo
+				w.setVelocity(new Vector(-.05f, 0f)); //move left
+			}
+			else if (bg.kirby.getPosition().getX() > w.getPosition().getX()){ //kirby is to the right of waddledoo
+				w.setVelocity(new Vector(.05f, 0f)); //move right
+			}
+			if (w.sideCollision(tileMap)) {
+				//System.out.println("waddledoo wall collision");			
+				if (w.getVelocity().getX() < 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("left waddledoo collision");
+					w.setVelocity(new Vector(-.05f, -2f)); //jump
+					w.translate(new Vector(w.getVelocity().getX(), -2f));
+				}
+				if (w.getVelocity().getX() > 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("RIGHT waddledoo collision");
+					w.setVelocity(new Vector(.05f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+			}
+			if (!w.isOnGround(tileMap) && !w.sideCollision(tileMap)){
+				w.setVelocity(new Vector(w.getVelocity().getX(), .07f));
+			}
+
+		}
+		
 		//scarfy movement updates
 		for (Scarfy s : bg.scarfy){
 			//if (s.isOnGround(tileMap)){

@@ -30,6 +30,7 @@
 	- **[6]** Scarfy movement
 	- **[7]** WaddleDoo movement
 	- **[8]** Cappy movement
+	- **[9]** Noddy movement
 
 - Audrey
 
@@ -42,8 +43,9 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[9]** Noddy movement
-	- **[?]** Smooth out WaddleDoo jumping
+	- **[10]** Poppy Jr. movement
+	- **[?]** Finetune Noddy jumping
+	- **[?]** Finetune WaddleDoo jumping
 	- **[?]** WaddleDoo attacks
 	- **[?]** Twister attacks
 	- **[?]** organize enemy movement code better
