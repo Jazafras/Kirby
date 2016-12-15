@@ -87,7 +87,7 @@ class PlayingState extends BasicGameState{
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
-		//ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
+		ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
 
 	}
 	
