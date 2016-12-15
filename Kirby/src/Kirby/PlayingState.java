@@ -435,6 +435,26 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		
+		//Sword Knight movement updates
+		for (SwordKnight sw : bg.swordknight){
+			if (sw.getVelocity().getY() == 0 && sw.getVelocity().getX() == 0){
+				sw.setVelocity(new Vector(-.07f, 0f)); //move left
+			}
+			if (sw.sideCollision(tileMap)) {
+				if (sw.getVelocity().getX() < 0) {
+					sw.translate(new Vector(.2f, sw.getVelocity().getY()).scale(delta));
+					sw.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (sw.getVelocity().getX() > 0){
+					sw.translate(new Vector(-.2f, sw.getVelocity().getY()).scale(delta));
+					sw.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
+			}
+			if (sw.getPosition().getX() > 2350){ //sword knight reached right end of screen
+				sw.setVelocity(new Vector(-.07f, 0f)); //move left
+			}
+		}
+		
 		//twister movement updates
 		for (Twister t : bg.twister){
 			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){

@@ -35,7 +35,7 @@
 	- **[11]** Hot Head movement
 	- **[12]** Sir Kibble movement
 	- **[13]** Knuckle Joe movement
-
+	- **[14]** Bonkers movement
 - Audrey
 
 ####### Open Issues #######
@@ -47,7 +47,6 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[14]** Bonkers movement
 	- **[15]** Sword Knight movement
 	- **[?]** UFO movement
 	- **[?]** Sword Knight attacks
