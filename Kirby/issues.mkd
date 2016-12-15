@@ -17,7 +17,7 @@
 	- **[14]** fixed stuff
 	- **[15]** created kirby's fire state
 	- **[16]** created kirby's twister state
-	- **[17]** created kirby's sparky state
+	- **[17]** created kirby's sparky state and sword state
 
 - Priya
 
