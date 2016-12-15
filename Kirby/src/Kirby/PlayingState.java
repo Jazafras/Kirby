@@ -292,6 +292,23 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		
+		//Hot Head movement updates
+		for (HotHead h : bg.hothead){
+			if (h.getVelocity().getY() == 0 && h.getVelocity().getX() == 0){
+				h.setVelocity(new Vector(.07f, 0f)); //move right
+			}
+			if (h.sideCollision(tileMap)) {
+				if (h.getVelocity().getX() < 0) {
+					h.translate(new Vector(.2f, h.getVelocity().getY()).scale(delta));
+					h.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (h.getVelocity().getX() > 0){
+					h.translate(new Vector(-.2f, h.getVelocity().getY()).scale(delta));
+					h.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
+			}
+		}
+		
 		//Noddy movement updates
 		for (Noddy w : bg.noddy){
 			if (bg.kirby.collides(w) != null){

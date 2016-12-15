@@ -345,7 +345,7 @@ public class KirbyGame extends StateBasedGame {
 		Cappy cappy1 = new Cappy(1494, 360);
 		cappy.add(cappy1);
 		enemies.add(cappy1);
-		HotHead hothead1 = new HotHead(350, 422);
+		HotHead hothead1 = new HotHead(774, 422);
 		hothead.add(hothead1);
 		enemies.add(hothead1);
 		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
@@ -375,7 +375,7 @@ public class KirbyGame extends StateBasedGame {
 		/*UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
-		WaddleDee waddledee1 = new WaddleDee(628, 422);
+		WaddleDee waddledee1 = new WaddleDee(774, 422);
 		waddledee.add(waddledee1);
 		enemies.add(waddledee1);
 		WaddleDoo waddledoo1 = new WaddleDoo(870, 420);
