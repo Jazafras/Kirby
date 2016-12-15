@@ -283,7 +283,6 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<WaddleDee> waddledee;
 	ArrayList<WaddleDoo> waddledoo; //beam state
 	
-	Poacher poacher;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
 	
@@ -335,49 +334,48 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(90, 422);
+		kirby = new Kirby(1853, 422);
 		
-		//Bonkers ebonkers = new Bonkers(650, 520);
-		//enemies.add(ebonkers);
-		//bonkers.add(ebonkers);
+		Bonkers bonkers1 = new Bonkers(1258, 345);
+		enemies.add(bonkers1);
+		bonkers.add(bonkers1);
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
 		enemies.add(brontoburt1);
 		brontoburt.add(brontoburt1);
-		Cappy cappy1 = new Cappy(1494, 360);
-		//Cappy cappy1 = new Cappy(155, 422);
+		Cappy cappy1 = new Cappy(1669, 360);
 		cappy.add(cappy1);
 		enemies.add(cappy1);
-		HotHead hothead1 = new HotHead(350, 422);
+		HotHead hothead1 = new HotHead(774, 422);
 		hothead.add(hothead1);
 		enemies.add(hothead1);
-		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
-		knucklejoe.add(eknucklejoe);
-		enemies.add(ebonkers);*/
+		KnuckleJoe knucklejoe1 = new KnuckleJoe(1669, 345);
+		knucklejoe.add(knucklejoe1);
+		enemies.add(knucklejoe1);
 		Noddy noddy1 = new Noddy(2066, 390);
 		noddy.add(noddy1);
 		enemies.add(noddy1);
-		/*PoppyJr epoppyjr = new PoppyJr(628, 520);
+		PoppyJr epoppyjr = new PoppyJr(1940, 320);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
-		SirKibble esirkibble = new SirKibble(628, 520);
+		SirKibble esirkibble = new SirKibble(1085, 290);
 		sirkibble.add(esirkibble);
-		enemies.add(esirkibble);*/
+		enemies.add(esirkibble);
 		Scarfy scarfy1 = new Scarfy(990, 320);
 		scarfy.add(scarfy1);
 		enemies.add(scarfy1);
-		/*Sparky sparky1 = new Sparky(300, 422);
+		Sparky sparky1 = new Sparky(495, 330);
 		sparky.add(sparky1);
-		enemies.add(sparky1);*/
-		/*SwordKnight eswordknight = new SwordKnight(628, 520);
-		swordknight.add(eswordknight);
-		enemies.add(eswordknight);*/
-		Twister twister1 = new Twister(1328, 384);
+		enemies.add(sparky1);
+		SwordKnight swordknight1 = new SwordKnight(2162, 385);
+		swordknight.add(swordknight1);
+		enemies.add(swordknight1);
+		Twister twister1 = new Twister(1258, 384);
 		twister.add(twister1);
 		enemies.add(twister1);
 		/*UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
-		WaddleDee waddledee1 = new WaddleDee(628, 422);
+		WaddleDee waddledee1 = new WaddleDee(774, 422);
 		waddledee.add(waddledee1);
 		enemies.add(waddledee1);
 		WaddleDoo waddledoo1 = new WaddleDoo(870, 420);
