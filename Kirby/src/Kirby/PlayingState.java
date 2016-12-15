@@ -87,7 +87,7 @@ class PlayingState extends BasicGameState{
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
-		ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
+		//ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
 
 	}
 	
@@ -218,7 +218,7 @@ class PlayingState extends BasicGameState{
 		checkLives(game, bg);
 		bg.kirby.update(delta);
 
-		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
+		//System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
 		//Bonkers movement updates
 		for (Bonkers t : bg.bonkers){
