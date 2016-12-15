@@ -342,15 +342,15 @@ public class KirbyGame extends StateBasedGame {
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
 		enemies.add(brontoburt1);
 		brontoburt.add(brontoburt1);
-		Cappy cappy1 = new Cappy(1494, 360);
+		Cappy cappy1 = new Cappy(1669, 360);
 		cappy.add(cappy1);
 		enemies.add(cappy1);
 		HotHead hothead1 = new HotHead(774, 422);
 		hothead.add(hothead1);
 		enemies.add(hothead1);
-		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
-		knucklejoe.add(eknucklejoe);
-		enemies.add(ebonkers);*/
+		KnuckleJoe knucklejoe1 = new KnuckleJoe(1669, 345);
+		knucklejoe.add(knucklejoe1);
+		enemies.add(knucklejoe1);
 		Noddy noddy1 = new Noddy(2066, 390);
 		noddy.add(noddy1);
 		enemies.add(noddy1);

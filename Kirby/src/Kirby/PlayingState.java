@@ -309,6 +309,19 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		
+		//Knuckle Joe movement updates
+		for (KnuckleJoe w : bg.knucklejoe){
+			if (w.getVelocity().getX() == 0){
+				w.setVelocity(new Vector(.09f, 0f)); //go right
+			}
+			if (w.getPosition().getX() < 1394){
+				w.setVelocity(new Vector(.09f, 0f));
+			}
+			if (w.getPosition().getX() > 1865){
+				w.setVelocity(new Vector(-.09f, 0f));
+			}
+		}
+		
 		//Noddy movement updates
 		for (Noddy w : bg.noddy){
 			if (bg.kirby.collides(w) != null){

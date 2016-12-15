@@ -33,6 +33,8 @@
 	- **[9]** Noddy movement
 	- **[10]** Poppy Jr. movement
 	- **[11]** Hot Head movement
+	- **[12]** Sir Kibble movement
+	- **[13]** Knuckle Joe movement
 
 - Audrey
 
@@ -45,10 +47,8 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[12]** Sir Kibble movement
-	- **[13]** Knuckle Joe movement
 	- **[14]** Bonkers movement
-	- **[15]** UFO movement
+	- **[?]** UFO movement
 	- **[?]** Sir Kibble attacks
 	- **[?]** Knuckle Joe attacks
 	- **[?]** UFO attacks
