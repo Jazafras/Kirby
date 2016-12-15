@@ -334,9 +334,9 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(1853, 422);
+		kirby = new Kirby(90, 422);
 		
-		Bonkers bonkers1 = new Bonkers(1258, 345);
+		Bonkers bonkers1 = new Bonkers(1258, 365);
 		enemies.add(bonkers1);
 		bonkers.add(bonkers1);
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
