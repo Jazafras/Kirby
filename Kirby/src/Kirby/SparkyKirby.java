@@ -35,17 +35,21 @@ public class SparkyKirby extends Kirby {
 	@Override
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i;
-		if (getCurImage() != null) 
+		if (sparkState && getCurImage() != sparkyKirbyImages[SPARK_ATTACK + super.retFacing()]) {
 			removeImage(ResourceManager.getImage(getCurImage()));
-		if (sparkState) {
 			setCurImage(sparkyKirbyImages[SPARK_ATTACK + super.retFacing()]);
-			i = new Image(sparkyKirbyImages[SPARK_ATTACK + super.retFacing()]);
-		} else {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(getCurImage()));
+		} else if (!sparkState && getCurImage() == sparkyKirbyImages[SPARK_ATTACK + super.retFacing()]){
+			removeImage(ResourceManager.getImage(getCurImage()));
 			setCurImage(sparkyKirbyImages[super.getFacing()]);
-			i = new Image(sparkyKirbyImages[super.getFacing()]);
+			addImageWithBoundingBox(ResourceManager
+					.getImage(getCurImage()));
 		}
-		addImageWithBoundingBox(ResourceManager
-				.getImage(getCurImage()));
+		if (sparkState)
+			i = new Image(sparkyKirbyImages[SPARK_ATTACK + super.retFacing()]);
+		else
+			i = new Image(sparkyKirbyImages[super.getFacing()]);
 		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
 	}
 	

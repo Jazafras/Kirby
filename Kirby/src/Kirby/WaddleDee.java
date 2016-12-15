@@ -57,6 +57,7 @@ import jig.Vector;
 			}
 			if (sideCollision(tileMap)) {
 				System.out.println("waddledee wall collision");
+				//what am i doing why isnt the tilemap working :(
 				/*if (getVelocity().getX() < 0) {
 					System.out.println("left waddledee collision");
 					//wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));

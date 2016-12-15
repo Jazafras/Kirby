@@ -23,11 +23,14 @@ import jig.Vector;
 	 * left attack
 	 */
 	 
+	 // kirby clone ability types
 	 public static final int NONE = 0;
 	 public static final int FIRE = 1;
-	 public static final int KTWISTER = 2;
+	 public static final int KTWISTER = 2; 
 	 public static final int KSPARKY = 3;
+	 public static final int KSWORD = 4;
 	 
+	 // kirby states for images
 	 public static final int NORMAL = 0;
 	 public static final int SUCKING = 1;
 	 public static final int FLYING = 2;
@@ -172,6 +175,9 @@ import jig.Vector;
 			} else if (enemyType == SPARKY) {
 				System.out.println("sparky");
 				bg.kirby = new SparkyKirby(xPos, yPos);
+			} else if (enemyType == SWORDKNIGHT) {
+				System.out.println("swordnight");
+				bg.kirby = new SwordKirby(xPos, yPos);
 			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
@@ -264,18 +270,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTPOPPY_FLY,
 			KirbyGame.KIRBY_RIGHTPOPPY_ATTACK,
 			KirbyGame.KIRBY_LEFTPOPPY_ATTACK,
-		};
-	
-	public static final String[] swordKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTSWORD,
-			KirbyGame.KIRBY_LEFTSWORD,
-			KirbyGame.KIRBY_RIGHTSWORD_SUCC,
-			KirbyGame.KIRBY_LEFTSWORD_SUCC,
-			KirbyGame.KIRBY_RIGHTSWORD_FLY,
-			KirbyGame.KIRBY_LEFTSWORD_FLY,
-			KirbyGame.KIRBY_RIGHTSWORD_ATTACK,
-			KirbyGame.KIRBY_LEFTSWORD_ATTACK,
 		};
 	
 	//UFO is a special case with different controls

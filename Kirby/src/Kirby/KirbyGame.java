@@ -36,6 +36,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final int WADDLEDOO = 14;
 	public static final int STAR = 15;
 	
+	public static final String THE_SOUND_OF_DEATH = "Kirby/resources/iwanttodie.wav";
+	
 	// states of the game
 	public static final int STARTUPSTATE = 0;
 	public static final int PLAYINGSTATE = 1;
@@ -281,7 +283,6 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<WaddleDee> waddledee;
 	ArrayList<WaddleDoo> waddledoo; //beam state
 	
-	Poacher poacher;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
 	
@@ -335,55 +336,57 @@ public class KirbyGame extends StateBasedGame {
 		
 		kirby = new Kirby(90, 422);
 		
-		//Bonkers ebonkers = new Bonkers(650, 520);
-		//enemies.add(ebonkers);
-		//bonkers.add(ebonkers);
+		Bonkers bonkers1 = new Bonkers(1258, 365);
+		enemies.add(bonkers1);
+		bonkers.add(bonkers1);
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
 		enemies.add(brontoburt1);
 		brontoburt.add(brontoburt1);
-		/*Cappy ecappy = new Cappy(650, 520);
-		cappy.add(ecappy);
-		enemies.add(ecappy);*/
-		HotHead ehothead = new HotHead(350, 422);
-		hothead.add(ehothead);
-		enemies.add(ehothead);
-		/*KnuckleJoe eknucklejoe = new KnuckleJoe(650, 520);
-		knucklejoe.add(eknucklejoe);
-		enemies.add(ebonkers);
-		Noddy enoddy = new Noddy(650, 520);
-		noddy.add(enoddy);
-		enemies.add(ebonkers);
-		PoppyJr epoppyjr = new PoppyJr(628, 520);
+		Cappy cappy1 = new Cappy(1669, 360);
+		cappy.add(cappy1);
+		enemies.add(cappy1);
+		HotHead hothead1 = new HotHead(774, 422);
+		hothead.add(hothead1);
+		enemies.add(hothead1);
+		KnuckleJoe knucklejoe1 = new KnuckleJoe(1669, 345);
+		knucklejoe.add(knucklejoe1);
+		enemies.add(knucklejoe1);
+		Noddy noddy1 = new Noddy(2066, 390);
+		noddy.add(noddy1);
+		enemies.add(noddy1);
+		PoppyJr epoppyjr = new PoppyJr(1940, 320);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
-		SirKibble esirkibble = new SirKibble(628, 520);
+		SirKibble esirkibble = new SirKibble(1085, 290);
 		sirkibble.add(esirkibble);
 		enemies.add(esirkibble);
-		Scarfy escarfy = new Scarfy(628, 520);
-		scarfy.add(escarfy);
-		enemies.add(escarfy);*/
-		Sparky esparky = new Sparky(300, 422);
-		sparky.add(esparky);
-		enemies.add(esparky);
-		/*SwordKnight eswordknight = new SwordKnight(628, 520);
-		swordknight.add(eswordknight);
-		enemies.add(eswordknight);*/
-		Twister twister1 = new Twister(1328, 384);
+		Scarfy scarfy1 = new Scarfy(990, 320);
+		scarfy.add(scarfy1);
+		enemies.add(scarfy1);
+		Sparky sparky1 = new Sparky(495, 330);
+		sparky.add(sparky1);
+		enemies.add(sparky1);
+		SwordKnight swordknight1 = new SwordKnight(2162, 385);
+		swordknight.add(swordknight1);
+		enemies.add(swordknight1);
+		Twister twister1 = new Twister(1258, 384);
 		twister.add(twister1);
 		enemies.add(twister1);
 		/*UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
-		WaddleDee waddledee1 = new WaddleDee(628, 422);
+		WaddleDee waddledee1 = new WaddleDee(774, 422);
 		waddledee.add(waddledee1);
 		enemies.add(waddledee1);
-		/*WaddleDoo ewaddledoo = new WaddleDoo(628, 520);
-		waddledoo.add(ewaddledoo);
-		enemies.add(ewaddledoo);*/
+		WaddleDoo waddledoo1 = new WaddleDoo(870, 420);
+		waddledoo.add(waddledoo1);
+		enemies.add(waddledoo1);
 		
 	}
 	
 	private void loadImages() {
+		ResourceManager.loadSound(THE_SOUND_OF_DEATH); 
+		
 		ResourceManager.loadImage(BACKGROUND_IMG_RSC);
 		ResourceManager.loadImage(STARTUP_IMG_RSC);
 		ResourceManager.loadImage(GAMEOVER_IMG_RSC);
