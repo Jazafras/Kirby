@@ -41,6 +41,7 @@ import jig.Vector;
 	
 	public void setMoving(KirbyGame bg) {
 		//brontoburt movement updates
+		
 			if (getVelocity().getY() == 0 && getVelocity().getX() == 0){
 				setVelocity(new Vector(-.07f, -.02f)); //move up and left
 				waitTimeUp = 200;
@@ -80,6 +81,12 @@ import jig.Vector;
 					setVelocity(new Vector(.07f, -.02f)); //move up
 					waitTimeUp = 200;
 				}
+			}
+			if(waitTimeUp > 0){
+				waitTimeUp--;
+			}
+			if(waitTimeDown > 0){
+				waitTimeDown--;
 			}
 	}	
 	
