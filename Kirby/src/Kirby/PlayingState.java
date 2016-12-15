@@ -125,9 +125,9 @@ class PlayingState extends BasicGameState{
 				e.render(g, xOffset, yOffset);
 			}
 		}
-		/*for (Brontoburt b : bg.brontoburt) {
+		for (Brontoburt b : bg.brontoburt) {
 			b.setMoving(bg);
-		}*/
+		}
 		/*for (WaddleDee wd : bg.waddledee) {
 			wd.setMoving(bg);
 		}*/
@@ -240,7 +240,7 @@ class PlayingState extends BasicGameState{
 		}
 		
 		//brontoburt movement updates
-		for (Brontoburt burt : bg.brontoburt){
+		/*for (Brontoburt burt : bg.brontoburt){
 			
 			if (burt.getVelocity().getY() == 0 && burt.getVelocity().getX() == 0){
 				burt.setVelocity(new Vector(-.07f, -.02f)); //move up and left
@@ -285,7 +285,7 @@ class PlayingState extends BasicGameState{
 				}
 			}
 		}
-		
+		*/
 		//cappy movement updates
 		for (Cappy c : bg.cappy){
 			//if (s.isOnGround(tileMap)){
