@@ -17,7 +17,7 @@
 	- **[14]** fixed stuff
 	- **[15]** created kirby's fire state
 	- **[16]** created kirby's twister state
-	- **[16]** created kirby's sparky state
+	- **[17]** created kirby's sparky state
 
 - Priya
 
@@ -48,7 +48,9 @@
 
 - Jasmine
 	- **[14]** Bonkers movement
+	- **[15]** Sword Knight movement
 	- **[?]** UFO movement
+	- **[?]** Sword Knight attacks
 	- **[?]** Sir Kibble attacks
 	- **[?]** Knuckle Joe attacks
 	- **[?]** UFO attacks
@@ -69,6 +71,7 @@
 - Kelly
 	- **[9]** - start kirby sucking enemies
 	- **[?]** - fix Poppy Jr's image rendering alignment
+	- **[?]** - fix Bonkers' image rendering alignment
 	- **[?]** - fine tune collisions
 	- **[?]** - finish drawing level, make tunnels ?
 	

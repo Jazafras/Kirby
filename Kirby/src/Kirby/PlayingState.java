@@ -220,6 +220,25 @@ class PlayingState extends BasicGameState{
 
 		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
+		//Bonkers movement updates
+		for (Bonkers t : bg.bonkers){
+			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
+				t.setVelocity(new Vector(.07f, 0f)); //move right
+			}
+			if (t.sideCollision(tileMap)) {
+				if (t.getVelocity().getX() < 0) {
+					System.out.println("left twister collision");
+					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
+					t.setVelocity(new Vector(.07f, 0f)); //move right
+				}
+				else if (t.getVelocity().getX() > 0){
+					System.out.println("right twister collision");
+					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
+					t.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
+			}
+		}
+		
 		//brontoburt movement updates
 		for (Brontoburt burt : bg.brontoburt){
 			

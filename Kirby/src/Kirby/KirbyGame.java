@@ -336,9 +336,9 @@ public class KirbyGame extends StateBasedGame {
 		
 		kirby = new Kirby(90, 422);
 		
-		//Bonkers ebonkers = new Bonkers(650, 520);
-		//enemies.add(ebonkers);
-		//bonkers.add(ebonkers);
+		Bonkers bonkers1 = new Bonkers(1258, 345);
+		enemies.add(bonkers1);
+		bonkers.add(bonkers1);
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
 		enemies.add(brontoburt1);
 		brontoburt.add(brontoburt1);
@@ -369,7 +369,7 @@ public class KirbyGame extends StateBasedGame {
 		/*SwordKnight eswordknight = new SwordKnight(628, 520);
 		swordknight.add(eswordknight);
 		enemies.add(eswordknight);*/
-		Twister twister1 = new Twister(1328, 384);
+		Twister twister1 = new Twister(1258, 384);
 		twister.add(twister1);
 		enemies.add(twister1);
 		/*UFO eufo = new UFO(628, 420);
