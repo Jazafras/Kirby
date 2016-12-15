@@ -120,10 +120,10 @@ class PlayingState extends BasicGameState{
 		
 		//stop deleting the tile shit just comment it out >:K
 		for (MovingEnemy e : bg.enemies) { 
-			for (Tile t : e.surroundingTiles(tileMap)){
-				t.render(g, xOffset, yOffset);
+			//for (Tile t : e.surroundingTiles(tileMap)){
+			//	t.render(g, xOffset, yOffset);
 				e.render(g, xOffset, yOffset);
-			}
+			//}
 		}
 		for (Brontoburt b : bg.brontoburt) {
 			b.setMoving(bg);
@@ -612,6 +612,9 @@ class PlayingState extends BasicGameState{
 				k.attack(bg);
 			} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 				SparkyKirby k = (SparkyKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
+				SwordKirby k = (SwordKirby) bg.kirby;
 				k.attack(bg);
 			}
 		} else {
