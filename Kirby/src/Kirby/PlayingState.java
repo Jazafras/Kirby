@@ -380,6 +380,29 @@ class PlayingState extends BasicGameState{
 			
 		}
 		
+		//Sir Kibble movement updates
+		for (SirKibble s : bg.sirkibble){
+			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0){
+				s.setVelocity(new Vector(-.05f, 0f)); //move left
+			}
+			if (s.getPosition().getX() > 1086){
+				s.setVelocity(new Vector(-.05f, 0f)); //move left
+			}
+			if (s.getPosition().getX() < 1018){
+				s.setVelocity(new Vector(.05f, 0f)); //move right
+			}
+		}
+		
+		//Sparky movement updates
+		for (Sparky s : bg.sparky){
+			if(bg.kirby.getPosition().getX() < s.getPosition().getX()){
+				s.setFacing(LEFT);
+			}
+			else {
+				s.setFacing(RIGHT);
+			}
+		}
+		
 		//twister movement updates
 		for (Twister t : bg.twister){
 			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){

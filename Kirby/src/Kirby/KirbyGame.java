@@ -357,15 +357,15 @@ public class KirbyGame extends StateBasedGame {
 		PoppyJr epoppyjr = new PoppyJr(1940, 320);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
-		/*SirKibble esirkibble = new SirKibble(628, 520);
+		SirKibble esirkibble = new SirKibble(1085, 290);
 		sirkibble.add(esirkibble);
-		enemies.add(esirkibble);*/
+		enemies.add(esirkibble);
 		Scarfy scarfy1 = new Scarfy(990, 320);
 		scarfy.add(scarfy1);
 		enemies.add(scarfy1);
-		/*Sparky sparky1 = new Sparky(300, 422);
+		Sparky sparky1 = new Sparky(495, 330);
 		sparky.add(sparky1);
-		enemies.add(sparky1);*/
+		enemies.add(sparky1);
 		/*SwordKnight eswordknight = new SwordKnight(628, 520);
 		swordknight.add(eswordknight);
 		enemies.add(eswordknight);*/
