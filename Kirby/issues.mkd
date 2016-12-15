@@ -31,6 +31,7 @@
 	- **[7]** WaddleDoo movement
 	- **[8]** Cappy movement
 	- **[9]** Noddy movement
+	- **[10]** Poppy Jr. movement
 
 - Audrey
 
@@ -43,11 +44,12 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[10]** Poppy Jr. movement
-	- **[?]** Finetune Noddy jumping
-	- **[?]** Finetune WaddleDoo jumping
+	- **[11]** Hot Head movement
+	- **[?]** Poppy Jr. attacks
 	- **[?]** WaddleDoo attacks
 	- **[?]** Twister attacks
+	- **[?]** Finetune Noddy jumping
+	- **[?]** Finetune WaddleDoo jumping
 	- **[?]** organize enemy movement code better
 	- **[?]** fix drop in fps for jumping enemies
 
@@ -56,6 +58,7 @@
 
 - Kelly
 	- **[9]** - start kirby sucking enemies
+	- **[?]** - fix Poppy Jr's image rendering alignment
 	- **[?]** - fine tune collisions
 	- **[?]** - finish drawing level, make tunnels ?
 	

@@ -283,7 +283,6 @@ public class KirbyGame extends StateBasedGame {
 	ArrayList<WaddleDee> waddledee;
 	ArrayList<WaddleDoo> waddledoo; //beam state
 	
-	Poacher poacher;
 	Set<Vertex> vertices;
 	Map<String, Vertex> vPos;
 	
@@ -344,7 +343,6 @@ public class KirbyGame extends StateBasedGame {
 		enemies.add(brontoburt1);
 		brontoburt.add(brontoburt1);
 		Cappy cappy1 = new Cappy(1494, 360);
-		//Cappy cappy1 = new Cappy(155, 422);
 		cappy.add(cappy1);
 		enemies.add(cappy1);
 		HotHead hothead1 = new HotHead(350, 422);
@@ -356,10 +354,10 @@ public class KirbyGame extends StateBasedGame {
 		Noddy noddy1 = new Noddy(2066, 390);
 		noddy.add(noddy1);
 		enemies.add(noddy1);
-		/*PoppyJr epoppyjr = new PoppyJr(628, 520);
+		PoppyJr epoppyjr = new PoppyJr(1940, 320);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
-		SirKibble esirkibble = new SirKibble(628, 520);
+		/*SirKibble esirkibble = new SirKibble(628, 520);
 		sirkibble.add(esirkibble);
 		enemies.add(esirkibble);*/
 		Scarfy scarfy1 = new Scarfy(990, 320);
