@@ -204,6 +204,10 @@ class PlayingState extends BasicGameState{
 			SparkyKirby k = (SparkyKirby) bg.kirby;
 			if (k.getSparkState())
 				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
+			SwordKirby k = (SwordKirby) bg.kirby;
+			if (k.getSwordState())
+				enemyCollision(k, bg);
 		}
 			
 		
