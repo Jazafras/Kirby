@@ -70,7 +70,7 @@ import jig.Vector;
 //		super.setPosition(super.getX(), super.getY());
 		
 		attackState = true;
-		attackTime = 200;
+		attackTime = 20;
 		
 	}
 
