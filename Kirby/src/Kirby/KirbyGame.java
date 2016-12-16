@@ -272,7 +272,8 @@ public class KirbyGame extends StateBasedGame {
 	Kirby kirby;
 	
 	Set<MovingEnemy> enemies;
-	Set<Attack> attacks;
+	Set<Attack> kirbyAttacks;
+	Set<Attack> enemyAttacks;
 	
 	ArrayList<Bonkers> bonkers; //hammer state
 	ArrayList<Brontoburt> brontoburt;
@@ -307,7 +308,8 @@ public class KirbyGame extends StateBasedGame {
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
 		
 		enemies = new HashSet<MovingEnemy>();
-		attacks = new HashSet<Attack>();
+		kirbyAttacks = new HashSet<Attack>();
+		enemyAttacks = new HashSet<Attack>();
 		
 		bonkers = new ArrayList<Bonkers>();
 		brontoburt = new ArrayList<Brontoburt>();

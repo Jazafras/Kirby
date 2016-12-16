@@ -30,7 +30,6 @@ import jig.Vector;
 
 	private int attackTime;
 	private boolean attackState;
-	Random rand = new Random();
 
 	public WaddleDoo(final float x, final float y) {
 		super(x, y, facingImages, LEFT_WALK);
@@ -49,7 +48,7 @@ import jig.Vector;
 		Image i;
 		if (attackState){
 			i = new Image(attackingImages[super.getFacing()]);
-			setVelocity(new Vector(0f, 0f));
+			//setVelocity(new Vector(0f, 0f));
 			i.draw(super.getX() - 40 - offsetX, super.getY() + 4 - offsetY);
 		}
 		else{
