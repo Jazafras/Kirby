@@ -30,6 +30,7 @@ import jig.Vector;
 	 public static final int KSPARKY = 3;
 	 public static final int KSWORD = 4;
 	 public static final int KBEAM = 5;
+	 public static final int KHAMMER = 6;
 	 
 	 // kirby states for images
 	 public static final int NORMAL = 0;
@@ -182,6 +183,8 @@ import jig.Vector;
 			} else if (enemyType == WADDLEDOO) {
 				System.out.println("waddledoo");
 				bg.kirby = new BeamKirby(xPos, yPos);
+			} else if (enemyType == BONKERS) {
+				bg.kirby = new HammerKirby(xPos, yPos);
 			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
@@ -243,18 +246,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTFIGHT_FLY,
 			KirbyGame.KIRBY_RIGHTFIGHT_ATTACK,
 			KirbyGame.KIRBY_LEFTFIGHT_ATTACK,
-		};
-	
-	public static final String[] hammerKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTHAMMER,
-			KirbyGame.KIRBY_LEFTHAMMER,
-			KirbyGame.KIRBY_RIGHTHAMMER_SUCC,
-			KirbyGame.KIRBY_LEFTHAMMER_SUCC,
-			KirbyGame.KIRBY_RIGHTHAMMER_FLY,
-			KirbyGame.KIRBY_LEFTHAMMER_FLY,
-			KirbyGame.KIRBY_RIGHTHAMMER_ATTACK,
-			KirbyGame.KIRBY_LEFTHAMMER_ATTACK,
 		};
 	
 	//Sleepy Kirby is a special case with only one image
