@@ -21,6 +21,8 @@
 	- **[18]** created kirby's beam state
 	- **[19]** created kirby's hammer state
 	- **[20]** created kirby's fighter state
+	- **[21]** created kirby's cutter state (me)
+	- **[22]** created kirby's bomb state
 
 - Priya
 	- **[1]** Socket base program
@@ -47,6 +49,7 @@
 	- **[14]** Bonkers movement
 	- **[15]** Sword Knight movement
 	- **[16]** Sparky attacks
+	- **[17]** Twister attacks
 	
 - Audrey
 
@@ -57,18 +60,17 @@
 	- **[8]** Poppy Jr. attacks
 
 - Jasmine
-
+	- **[18]** Sword Knight attacks
 	- **[?]** UFO movement
-	- **[?]** Sword Knight attacks
 	- **[?]** Sir Kibble attacks
 	- **[?]** Knuckle Joe attacks
 	- **[?]** UFO attacks
-	- **[?]** Twister attacks
-	- **[?]** Sparky attacks
+	- **[?]** Bonkers attacks
+	- **[?]** Hot Head attacks
+	- **[?]** Poppy Jr. attacks
 	- **[?]** Finetune Noddy jumping
 	- **[?]** Finetune WaddleDoo jumping
 	- **[?]** organize enemy movement code better
-	- **[?]** fix drop in fps for jumping enemies
 
 - Audrey
 	- **[1]** Skeleton for kirby

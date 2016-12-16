@@ -38,8 +38,6 @@ import jig.Vector;
 	
 	public static final int RIGHT = 0;
 	public static final int LEFT = 1;
-	public static final int RIGHTA = 2;
-	public static final int LEFTA = 3;
 	
 	private String[] facingImages;
 
@@ -223,5 +221,13 @@ import jig.Vector;
         }
         super.setPosition(super.getX(), super.getY() - 15);    
         return false;
+    }
+	
+	public void applyGravity(float gravity, Tile[][] tileMap){
+        if(getVelocity().getY() < maximumFallSpeed) {
+            setVelocity(new Vector(getVelocity().getX(), getVelocity().getY() + gravity));
+            if (getVelocity().getY() > maximumFallSpeed) 
+            	setVelocity(new Vector(getVelocity().getX(), maximumFallSpeed));
+        }
     }
 }

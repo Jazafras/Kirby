@@ -56,6 +56,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_LEFT_SUCC = "Kirby/resources/kirby_left_succ.png";
 	public static final String KIRBY_RIGHT_FLY = "Kirby/resources/kirby_right_fly.png";
 	public static final String KIRBY_LEFT_FLY = "Kirby/resources/kirby_left_fly.png";
+	public static final String KIRBY_LEFT_FULL = "Kirby/resources/kirby_full_left.png";
+	public static final String KIRBY_RIGHT_FULL = "Kirby/resources/kirby_full_right.png";
 	
 	//boomerang kirby
 	public static final String KIRBY_LEFTBOOMERANG = "Kirby/resources/boomerangkirby/kirby_left.png";
@@ -116,6 +118,7 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_LEFTPOPPY_ATTACK = "Kirby/resources/poppykirby/kirby_left_attack.png";
 	//bomb
 	public static final String BOMB_RSC = "Kirby/resources/bomb.png";
+	public static final String EXPLOSION_RSC = "Kirby/resources/explosion.png";
 	
 	//sparky kirby
 	public static final String KIRBY_LEFTSPARKY = "Kirby/resources/sparkykirby/kirby_left.png";
@@ -354,7 +357,8 @@ public class KirbyGame extends StateBasedGame {
 		Noddy noddy1 = new Noddy(2066, 390);
 		noddy.add(noddy1);
 		enemies.add(noddy1);
-		PoppyJr epoppyjr = new PoppyJr(1940, 320);
+		//PoppyJr epoppyjr = new PoppyJr(1940, 320);
+		PoppyJr epoppyjr = new PoppyJr(200, 320);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
 		SirKibble esirkibble = new SirKibble(1085, 290);
@@ -397,6 +401,8 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(KIRBY_LEFT_SUCC);
 		ResourceManager.loadImage(KIRBY_RIGHT_FLY);
 		ResourceManager.loadImage(KIRBY_LEFT_FLY);
+		ResourceManager.loadImage(KIRBY_LEFT_FULL);
+		ResourceManager.loadImage(KIRBY_RIGHT_FULL);
 		
 		ResourceManager.loadImage(KIRBY_LEFTBOOMERANG);
 		ResourceManager.loadImage(KIRBY_RIGHTBOOMERANG);
@@ -449,6 +455,7 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(KIRBY_LEFTPOPPY_ATTACK);
 		
 		ResourceManager.loadImage(BOMB_RSC);
+		ResourceManager.loadImage(EXPLOSION_RSC);
 		
 		ResourceManager.loadImage(KIRBY_LEFTSPARKY);
 		ResourceManager.loadImage(KIRBY_RIGHTSPARKY);

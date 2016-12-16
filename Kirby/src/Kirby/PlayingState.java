@@ -39,6 +39,8 @@ class PlayingState extends BasicGameState{
 	private int cappyJumpTime = -1;
 	private int poppyJumpTime = -1;
 	private int sparkyDistance = 40;
+	private int twisterDistance = 80;
+	private int swordDistance = 100;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -133,9 +135,10 @@ class PlayingState extends BasicGameState{
 			wd.setMoving(bg);
 		}*/
 		
-		for (Attack a : bg.attacks)
+		for (Attack a : bg.attacks) {
 			a.render(g, xOffset, yOffset);
-		
+		}
+			
 		//for(int i = 0; i < players.size(); i++){
 			//players.get(i).render(g, xOffset, yOffset);
 			//bg.kirby.render(g, xOffset, yOffset);
@@ -178,6 +181,16 @@ class PlayingState extends BasicGameState{
 				move = LEFT;
 			} else if (bg.kirby.getVelocity().getX() > 0){
 				move = RIGHT;
+			}
+		}
+		
+		if (bg.kirby.getType() == bg.kirby.KCUTTER) {
+			CutterKirby k = (CutterKirby) bg.kirby;
+			if (k.b != null) {
+				Collision c = k.b.collides(k);
+				if (c != null && k.cutterTime < CutterKirby.CUTTER_TIME - 5) {
+					bg.attacks.remove(k.b);
+				}
 			}
 		}
 		
@@ -228,6 +241,19 @@ class PlayingState extends BasicGameState{
 			FighterKirby k = (FighterKirby) bg.kirby;
 			if (k.getFighterState())
 				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KBOMB) {
+			BombKirby k = (BombKirby) bg.kirby;
+			if (k.b != null) {
+				k.b.applyGravity(gravity * delta, tileMap);
+		        float x = k.b.getX();
+		        float y = k.b.getY();
+				if (k.b.isOnGround(tileMap)) {
+					k.b = null;
+					bg.attacks.clear();
+					bg.attacks.add(new Explosion(x, y, 1));
+				}
+			}
+			//k.attack(bg);
 		}
 			
 		
@@ -235,7 +261,7 @@ class PlayingState extends BasicGameState{
 		checkLives(game, bg);
 		bg.kirby.update(delta);
 
-		//System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
+		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
 		//Bonkers movement updates
 		for (Bonkers t : bg.bonkers){
@@ -418,41 +444,68 @@ class PlayingState extends BasicGameState{
 		//Sword Knight movement updates
 		for (SwordKnight sw : bg.swordknight){
 			if (sw.getVelocity().getY() == 0 && sw.getVelocity().getX() == 0){
-				sw.setVelocity(new Vector(-.07f, 0f)); //move left
+				sw.setVelocity(new Vector(-.04f, 0f)); //move left
+			}
+			if(Math.abs(bg.kirby.getPosition().getX() - sw.getPosition().getX()) < sparkyDistance){
+				if(Math.abs(bg.kirby.getPosition().getY() - sw.getPosition().getY()) < sparkyDistance){
+					if(bg.kirby.retFacing() == 1 && sw.retFacing() == 0){ //kirby facing left
+						//sw.attack(bg);
+						sw.setVelocity(new Vector(sw.getVelocity().getX()*2, 0f));
+						sw.attack(bg);
+					}
+					else if(bg.kirby.retFacing() == 0 && sw.retFacing() == 1){ //kirby facing right
+						sw.attack(bg);
+						sw.setVelocity(new Vector(sw.getVelocity().getX()*2, 0f));
+					}
+				}
+			}
+			
+			//return speed to normal after passing kirby
+			if(Math.abs(bg.kirby.getPosition().getX() - sw.getPosition().getX()) > sparkyDistance){
+				if(sw.getVelocity().getX() > .04f || sw.getVelocity().getX() < -.04f){
+					sw.setVelocity(new Vector(sw.getVelocity().getX()/2, 0f));
+				}
 			}
 			if (sw.sideCollision(tileMap)) {
 				if (sw.getVelocity().getX() < 0) {
-					sw.translate(new Vector(.2f, sw.getVelocity().getY()).scale(delta));
-					sw.setVelocity(new Vector(.07f, 0f)); //move right
+					sw.setPosition(2000,sw.getPosition().getY());
+					sw.setVelocity(new Vector(.04f, 0f)); //move right
 				}
 				else if (sw.getVelocity().getX() > 0){
-					sw.translate(new Vector(-.2f, sw.getVelocity().getY()).scale(delta));
-					sw.setVelocity(new Vector(-.07f, 0f)); //move left
+					sw.setPosition(2350,sw.getPosition().getY());
+					sw.setVelocity(new Vector(-.04f, 0f)); //move left
 				}
 			}
 			if (sw.getPosition().getX() > 2350){ //sword knight reached right end of screen
-				sw.setVelocity(new Vector(-.07f, 0f)); //move left
+				sw.setPosition(2350,sw.getPosition().getY());
+				sw.setVelocity(new Vector(-.04f, 0f)); //move left
 			}
 		}
 		
 		//twister movement updates
 		for (Twister t : bg.twister){
 			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
-				t.setVelocity(new Vector(-.07f, 0f)); //move left
+				t.setVelocity(new Vector(-.04f, 0f)); //move left
+			}
+			if(Math.abs(bg.kirby.getPosition().getX() - t.getPosition().getX()) < sparkyDistance){
+				if(Math.abs(bg.kirby.getPosition().getY() - t.getPosition().getY()) < sparkyDistance){
+					t.setVelocity(new Vector(t.getVelocity().getX()*2, 0f));
+				}
 			}
 			if (t.sideCollision(tileMap)) {
 				if (t.getVelocity().getX() < 0) {
-					System.out.println("left twister collision");
-					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(.07f, 0f)); //move right
+					//System.out.println("left twister collision");
+					t.setPosition(1160, t.getPosition().getY());
+					t.setVelocity(new Vector(.04f, 0f)); //move right
 				}
 				else if (t.getVelocity().getX() > 0){
-					System.out.println("right twister collision");
-					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(-.07f, 0f)); //move left
+					//System.out.println("right twister collision");
+					t.setPosition(1353, t.getPosition().getY());
+					t.setVelocity(new Vector(-.04f, 0f)); //move left
 				}
 			}
 		}
+
 		
 		//waddledee movement updates
 		for (WaddleDee wdee : bg.waddledee){
@@ -519,8 +572,24 @@ class PlayingState extends BasicGameState{
 			//System.out.println("brontoburt up time: " + waitTimeUp);
 		}
 		
-		for (Attack a : bg.attacks)
+		Attack toRem = null;
+		for (Attack a : bg.attacks) {
+			if (a.getAttackType() == Attack.EXPLOSION) {
+				Explosion e = (Explosion) a;
+				e.bombtime--;
+				if (e.bombtime <= 0) {
+					System.out.println(a);
+					toRem = a;
+				}
+			}
+		}
+		if (toRem != null) {
+			bg.attacks.clear();
+		}
+		
+		for (Attack a : bg.attacks) {
 			a.update(delta);
+		}
 		
 		if (cappyJumpTime > 0){
 			cappyJumpTime--;
@@ -610,11 +679,18 @@ class PlayingState extends BasicGameState{
 			} else if (bg.kirby.getType() == bg.kirby.KFIGHTER) {
 				FighterKirby k = (FighterKirby) bg.kirby;
 				k.attack(bg);
-
+			} else if (bg.kirby.getType() == bg.kirby.KCUTTER) {
+				CutterKirby k = (CutterKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KBOMB) {
+				BombKirby k = (BombKirby) bg.kirby;
+				k.attack(bg);
 			}
 		} else {
 			bg.kirby.setSuck(false);
-			bg.attacks.clear();
+			if (bg.kirby.getType() == bg.kirby.FIRE) {
+				bg.attacks.clear();
+			}
 			if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 				SparkyKirby k = (SparkyKirby) bg.kirby;
 				k.setSparkState(false);
