@@ -77,7 +77,7 @@ class PlayingState extends BasicGameState{
 			throws SlickException {
 		KirbyGame bg = (KirbyGame)game;
 		
-		bg.level=2;
+
 		//client = new KirbyClient("localhost", 7777);
 		//client.connect();
 		
