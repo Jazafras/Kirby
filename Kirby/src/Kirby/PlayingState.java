@@ -450,18 +450,21 @@ class PlayingState extends BasicGameState{
 		
 		//waddledoo movement updates
 		for (WaddleDoo w : bg.waddledoo){
+			float distance = Math.abs(w.getPosition().getX() - bg.kirby.getPosition().getX());
 			if (bg.kirby.collides(w) != null){
 				w.setVelocity(new Vector(0f, 0f));
 			}
 			else if(bg.kirby.getPosition().getX() < w.getPosition().getX() && bg.kirby.getPosition().getX() != w.getPosition().getX()){ //kirby is to the left of waddledoo
 				w.setVelocity(new Vector(-.09f, 0f)); //move left
-				float distance = Math.abs(w.getPosition().getX() - bg.kirby.getPosition().getX());
-				if(distance <= 40){
+				if(distance <= 60){
 					w.attack(bg);
 				}
 			}
 			else if (bg.kirby.getPosition().getX() > w.getPosition().getX() && bg.kirby.getPosition().getX() != w.getPosition().getX()){ //kirby is to the right of waddledoo
 				w.setVelocity(new Vector(.09f, 0f)); //move right
+				if(distance <= 60){
+					w.attack(bg);
+				}
 			}
 			if (w.sideCollision(tileMap)) {
 				//System.out.println("waddledoo wall collision");			
