@@ -1,10 +1,15 @@
 package Kirby;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import jig.ConvexPolygon;
 import jig.ResourceManager;
+import jig.Shape;
+
 
 public class BeamKirby extends Kirby {
 
@@ -29,7 +34,7 @@ public class BeamKirby extends Kirby {
 		super(x, y);
 		super.setFacingImages(waddleKirbyImages);
 		super.setCurImage(waddleKirbyImages[super.getFacing()]);
-		super.setPosition(super.getX(), super.getY() - 10);
+		super.setPosition(super.getX(), super.getY());
 		beamTime = 0;
 		beamState = false;
 	}
@@ -37,25 +42,18 @@ public class BeamKirby extends Kirby {
 	@Override
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i;
-		if (beamState && getCurImage() != waddleKirbyImages[BEAM_ATTACK + super.retFacing()]) {
-			removeImage(ResourceManager.getImage(getCurImage()));
-			setCurImage(waddleKirbyImages[BEAM_ATTACK + super.retFacing()]);
-			addImageWithBoundingBox(ResourceManager
-					.getImage(getCurImage()));
-			
-		} else if (!beamState && getCurImage() == waddleKirbyImages[BEAM_ATTACK + super.retFacing()]){
-			removeImage(ResourceManager.getImage(getCurImage()));
-			setCurImage(waddleKirbyImages[super.getFacing()]);
-			addImageWithBoundingBox(ResourceManager
-					.getImage(getCurImage()));
-		}
+		removeShapes();
 		int add = 0;
 		if (beamState) {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(waddleKirbyImages[BEAM_ATTACK + retFacing()]));
 			i = new Image(waddleKirbyImages[BEAM_ATTACK + retFacing()]);
 			if (retFacing() == 1) {
 				add = -40;
 			}
 		} else {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(waddleKirbyImages[super.getFacing()]));
 			i = new Image(waddleKirbyImages[super.getFacing()]);
 		}
 		i.draw(super.getX() - 4 - offsetX + add, super.getY() - 4 - offsetY);

@@ -242,6 +242,8 @@ public class KirbyGame extends StateBasedGame {
 	//ufo beam
 	public static final String UFO_BEAM_RSC = "Kirby/resources/beam.png";
 	
+	public static final String HURT_RSC = "Kirby/resources/hurt.png";
+	
 	//WaddleDee images
 	public static final String WADDLEDEE_LEFT = "Kirby/resources/waddledee_left.png";
 	public static final String WADDLEDEE_RIGHT = "Kirby/resources/waddledee_right.png";
@@ -344,7 +346,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(90, 422);
+		kirby = new Kirby(90, 400);
 		
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
 		enemies.add(brontoburt1);
@@ -359,7 +361,10 @@ public class KirbyGame extends StateBasedGame {
 		noddy.add(noddy1);
 		enemies.add(noddy1);
 		//PoppyJr epoppyjr = new PoppyJr(1940, 320);
-		
+
+		PoppyJr epoppyjr = new PoppyJr(200, 320);
+		poppy.add(epoppyjr);
+		enemies.add(epoppyjr);
 		Sparky sparky1 = new Sparky(495, 330);
 		sparky.add(sparky1);
 		enemies.add(sparky1);
@@ -445,6 +450,7 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(KIRBY_LEFTPOPPY_ATTACK);
 		
 		ResourceManager.loadImage(BOMB_RSC);
+		ResourceManager.loadImage(HURT_RSC);
 		ResourceManager.loadImage(EXPLOSION_RSC);
 		
 		ResourceManager.loadImage(KIRBY_LEFTSPARKY);
