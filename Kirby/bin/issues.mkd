@@ -23,7 +23,13 @@
 	- **[20]** created kirby's fighter state
 
 - Priya
-
+	- **[1]** Socket base program
+	- **[2]** Client
+	- **[3]** Server
+	- **[4]** Coordination from Client to Server
+	- **[5]** WaddleDoo attacks
+	- **[6]** Bonkers attacks
+	
 - Jasmine
 	- **[1]**  Base skeleton for enemies
 	- **[2]**  Infrastructure for Kirby state images
@@ -47,10 +53,8 @@
 ####### Open Issues #######
 
 - Priya
-	- **[1]** Socket base program
-	- **[2]** Client
-	- **[3]** Server
-	- **[4]** Coordination from Client to Server
+	- **[7]** Hot Head attacks
+	- **[8]** Poppy Jr. attacks
 
 - Jasmine
 
@@ -59,11 +63,8 @@
 	- **[?]** Sir Kibble attacks
 	- **[?]** Knuckle Joe attacks
 	- **[?]** UFO attacks
-	- **[?]** Bonkers attacks
-	- **[?]** Hot Head attacks
-	- **[?]** Poppy Jr. attacks
-	- **[?]** WaddleDoo attacks
 	- **[?]** Twister attacks
+	- **[?]** Sparky attacks
 	- **[?]** Finetune Noddy jumping
 	- **[?]** Finetune WaddleDoo jumping
 	- **[?]** organize enemy movement code better
