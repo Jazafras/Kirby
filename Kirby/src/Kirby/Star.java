@@ -22,7 +22,6 @@ import jig.Vector;
 
 	public Star(final float x, final float y, int facingDir) {
 		super(x, y, facingImages, 0);
-		System.out.println("STAR: "+facingDir);
 		if (facingDir % 2 == 0) // right
 			setVelocity(new Vector(.5f, 0));
 		else

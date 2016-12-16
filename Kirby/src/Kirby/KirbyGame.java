@@ -42,6 +42,7 @@ public class KirbyGame extends StateBasedGame {
 	public static final int STARTUPSTATE = 0;
 	public static final int PLAYINGSTATE = 1;
 	public static final int GAMEOVERSTATE = 2;
+	public static final int TRANSITIONSTATE = 3;
 	
 	// background
 	public static final String BACKGROUND_IMG_RSC = "Kirby/resources/background.png";
@@ -58,6 +59,9 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_LEFT_FLY = "Kirby/resources/kirby_left_fly.png";
 	public static final String KIRBY_LEFT_FULL = "Kirby/resources/kirby_full_left.png";
 	public static final String KIRBY_RIGHT_FULL = "Kirby/resources/kirby_full_right.png";
+	public static final String KIRBY_LEFT_HURT = "Kirby/resources/kirby_hurt_left.png";
+	public static final String KIRBY_RIGHT_HURT = "Kirby/resources/kirby_hurt_right.png";
+	public static final String KIRBY_BEHIND = "Kirby/resources/kirby_behind.png";
 	
 	//boomerang kirby
 	public static final String KIRBY_LEFTBOOMERANG = "Kirby/resources/boomerangkirby/kirby_left.png";
@@ -331,6 +335,7 @@ public class KirbyGame extends StateBasedGame {
 		addState(new StartUpState());
 		addState(new GameOverState());
 		addState(new PlayingState());
+		addState(new TransitionState());
 		loadImages();
 		
 		level = 1;
@@ -339,9 +344,6 @@ public class KirbyGame extends StateBasedGame {
 		
 		kirby = new Kirby(90, 422);
 		
-		Bonkers bonkers1 = new Bonkers(1669, 320);
-		enemies.add(bonkers1);
-		bonkers.add(bonkers1);
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
 		enemies.add(brontoburt1);
 		brontoburt.add(brontoburt1);
@@ -351,31 +353,19 @@ public class KirbyGame extends StateBasedGame {
 		HotHead hothead1 = new HotHead(774, 422);
 		hothead.add(hothead1);
 		enemies.add(hothead1);
-		KnuckleJoe knucklejoe1 = new KnuckleJoe(1258, 380);
-		knucklejoe.add(knucklejoe1);
-		enemies.add(knucklejoe1);
 		Noddy noddy1 = new Noddy(2066, 390);
 		noddy.add(noddy1);
 		enemies.add(noddy1);
 		//PoppyJr epoppyjr = new PoppyJr(1940, 320);
-		PoppyJr epoppyjr = new PoppyJr(200, 320);
-		poppy.add(epoppyjr);
-		enemies.add(epoppyjr);
 		SirKibble esirkibble = new SirKibble(1085, 290);
 		sirkibble.add(esirkibble);
 		enemies.add(esirkibble);
-		Scarfy scarfy1 = new Scarfy(990, 320);
-		scarfy.add(scarfy1);
-		enemies.add(scarfy1);
 		Sparky sparky1 = new Sparky(495, 330);
 		sparky.add(sparky1);
 		enemies.add(sparky1);
 		SwordKnight swordknight1 = new SwordKnight(2162, 385);
 		swordknight.add(swordknight1);
 		enemies.add(swordknight1);
-		Twister twister1 = new Twister(1258, 384);
-		twister.add(twister1);
-		enemies.add(twister1);
 		/*UFO eufo = new UFO(628, 420);
 		ufo.add(eufo);
 		enemies.add(eufo);*/
