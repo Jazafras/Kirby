@@ -339,7 +339,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		kirby = new Kirby(90, 422);
 		
-		Bonkers bonkers1 = new Bonkers(1258, 365);
+		Bonkers bonkers1 = new Bonkers(1669, 320);
 		enemies.add(bonkers1);
 		bonkers.add(bonkers1);
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
@@ -351,7 +351,7 @@ public class KirbyGame extends StateBasedGame {
 		HotHead hothead1 = new HotHead(774, 422);
 		hothead.add(hothead1);
 		enemies.add(hothead1);
-		KnuckleJoe knucklejoe1 = new KnuckleJoe(1669, 345);
+		KnuckleJoe knucklejoe1 = new KnuckleJoe(1258, 380);
 		knucklejoe.add(knucklejoe1);
 		enemies.add(knucklejoe1);
 		Noddy noddy1 = new Noddy(2066, 390);

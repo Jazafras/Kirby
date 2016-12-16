@@ -264,29 +264,30 @@ class PlayingState extends BasicGameState{
 		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
 		//Bonkers movement updates
+		int attackTime = 0;
 		for (Bonkers t : bg.bonkers){
-			float distance = Math.abs(t.getPosition().getX() - bg.kirby.getPosition().getX());
-			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
-				t.setVelocity(new Vector(.07f, 0f)); //move right
+			
+			if (t.getVelocity().getX() == 0){
+				t.setVelocity(new Vector(.09f, 0f)); //go right
+				attackTime = 20;
 			}
-			if (t.sideCollision(tileMap)) {
-				if (t.getVelocity().getX() < 0) {
-					System.out.println("left Bonker collision");
-					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(.07f, 0f)); //move right
-					if(distance <= 20){
-						t.attack(bg);
-					}
-				}
-				else if (t.getVelocity().getX() > 0){
-					System.out.println("right Bonker collision");
-					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(-.07f, 0f)); //move left
-					if(distance <= 20){
-						t.attack(bg);
-					}
-				}
+			if (t.getPosition().getX() < 1394){
+				 t.setVelocity(new Vector(.09f, 0f));
+				 attackTime--;
+				 if(attackTime <= 0){
+				 	t.attack(bg);
+				 	attackTime = 20;
+				 }
 			}
+			if (t.getPosition().getX() > 1865){
+ 				t.setVelocity(new Vector(-.09f, 0f));
+ 				attackTime--;
+ 				if(attackTime <= 0){
+ 					t.attack(bg);
+ 					attackTime = 20;
+ 				}
+			}
+			
 		}
 		
 		//cappy movement updates
@@ -334,56 +335,25 @@ class PlayingState extends BasicGameState{
 		//Knuckle Joe movement updates
 		for (KnuckleJoe w : bg.knucklejoe){
 			float distance = Math.abs(w.getPosition().getX() - bg.kirby.getPosition().getX());
-			if (bg.kirby.collides(w) != null){
-				w.setVelocity(new Vector(0f, 0f));
+			if (w.getVelocity().getY() == 0 && w.getVelocity().getX() == 0){
+				w.setVelocity(new Vector(.07f, 0f)); //move right
 			}
-			if(bg.kirby.getPosition().getX() < w.getPosition().getX() && bg.kirby.getPosition().getX() != w.getPosition().getX()){ //kirby is to the left of waddledoo
-				w.setVelocity(new Vector(-.09f, 0f)); //move left
-				if(distance <= 60){
-					w.attack(bg);
-				}
+			if(distance <= 20){
+				w.attack(bg);
 			}
-			if (bg.kirby.getPosition().getX() > w.getPosition().getX() && bg.kirby.getPosition().getX() != w.getPosition().getX()){ //kirby is to the right of waddledoo
-				w.setVelocity(new Vector(.09f, 0f)); //move right
-				if(distance <= 60){
-					w.attack(bg);
-				}
-			}
-			
 			if (w.sideCollision(tileMap)) {
-				//System.out.println("waddledoo wall collision");			
 				if (w.getVelocity().getX() < 0) {
-					w.translate(new Vector(0f, -0.1f));
-					//System.out.println("left waddledoo collision");
-					w.setVelocity(new Vector(-.09f, -2f)); //jump
-					w.translate(new Vector(0f, -2f));
+					System.out.println("left Bonker collision");
+					w.translate(new Vector(.2f, w.getVelocity().getY()).scale(delta));
+					w.setVelocity(new Vector(.07f, 0f)); //move right
+					
 				}
-				if (w.getVelocity().getX() > 0) {
-					w.translate(new Vector(0f, -0.1f));
-					//System.out.println("RIGHT waddledoo collision");
-					w.setVelocity(new Vector(.09f, -2f)); //jump
-					w.translate(new Vector(0f, -2f));
+				else if (w.getVelocity().getX() > 0){
+					System.out.println("right Bonker collision");
+					w.translate(new Vector(-.2f, w.getVelocity().getY()).scale(delta));
+					w.setVelocity(new Vector(-.07f, 0f)); //move left
 				}
 			}
-			if (!w.isOnGround(tileMap) && !w.sideCollision(tileMap)){
-				w.setVelocity(new Vector(w.getVelocity().getX(), .07f));
-			}
-						
-//			if (w.getVelocity().getX() == 0){
-//				w.setVelocity(new Vector(.09f, 0f)); //go right
-//			}
-//			if (w.getPosition().getX() < 1394){
-//				w.setVelocity(new Vector(.09f, 0f));
-//				if(distance <= 40){
-//					w.attack(bg);
-//				}
-//			}
-//			if (w.getPosition().getX() > 1865){
-//				w.setVelocity(new Vector(-.09f, 0f));
-//				if(distance <= 40){
-//					w.attack(bg);
-//				}
-//			}
 		}
 		
 		//Noddy movement updates
