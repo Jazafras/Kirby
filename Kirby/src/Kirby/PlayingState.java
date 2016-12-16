@@ -39,6 +39,7 @@ class PlayingState extends BasicGameState{
 	private int cappyJumpTime = -1;
 	private int poppyJumpTime = -1;
 	private int sparkyDistance = 40;
+	private int twisterDistance = 80;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -235,7 +236,7 @@ class PlayingState extends BasicGameState{
 		checkLives(game, bg);
 		bg.kirby.update(delta);
 
-		//System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
+		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
 		//Bonkers movement updates
 		for (Bonkers t : bg.bonkers){
@@ -438,18 +439,23 @@ class PlayingState extends BasicGameState{
 		//twister movement updates
 		for (Twister t : bg.twister){
 			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
-				t.setVelocity(new Vector(-.07f, 0f)); //move left
+				t.setVelocity(new Vector(-.04f, 0f)); //move left
+			}
+			if(Math.abs(bg.kirby.getPosition().getX() - t.getPosition().getX()) < sparkyDistance){
+				if(Math.abs(bg.kirby.getPosition().getY() - t.getPosition().getY()) < sparkyDistance){
+					t.setVelocity(new Vector(t.getVelocity().getX()*2, 0f));
+				}
 			}
 			if (t.sideCollision(tileMap)) {
 				if (t.getVelocity().getX() < 0) {
-					System.out.println("left twister collision");
-					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(.07f, 0f)); //move right
+					//System.out.println("left twister collision");
+					t.setPosition(1160, t.getPosition().getY());
+					t.setVelocity(new Vector(.04f, 0f)); //move right
 				}
 				else if (t.getVelocity().getX() > 0){
-					System.out.println("right twister collision");
-					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(-.07f, 0f)); //move left
+					//System.out.println("right twister collision");
+					t.setPosition(1353, t.getPosition().getY());
+					t.setVelocity(new Vector(-.04f, 0f)); //move left
 				}
 			}
 		}
