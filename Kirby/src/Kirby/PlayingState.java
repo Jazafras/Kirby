@@ -195,9 +195,6 @@ class PlayingState extends BasicGameState{
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
-		for (Tile t : bg.kirby.surroundingTiles(tileMap))
-			t.render(g, xOffset, yOffset);
-		
 		bg.kirby.render(g, xOffset, yOffset);
 		
 		//stop deleting the tile shit just comment it out >:K
