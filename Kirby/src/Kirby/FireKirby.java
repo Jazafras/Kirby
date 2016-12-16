@@ -37,7 +37,7 @@ public class FireKirby extends Kirby {
 		float xPos = 30;
 		if (!super.facingRight()) //left
 			xPos = -50;
-		bg.kirbyAttacks.add(new Attack_SpitFire(bg.kirby.getX() + xPos, bg.kirby.getY() + 10, super.getFacing()));
+		bg.kirbyAttacks.add(new Attack_SpitFire(bg.kirby.getX() + xPos, bg.kirby.getY() + 10, super.retFacing()));
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class HammerKirby extends Kirby {
 	
 	@Override
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
-		Image i;
+		/*Image i;
 		if (hammerState && getCurImage() != hammerKirbyImages[HAMMER_ATTACK + super.retFacing()]) {
 			removeImage(ResourceManager.getImage(getCurImage()));
 			setCurImage(hammerKirbyImages[HAMMER_ATTACK + super.retFacing()]);
@@ -54,6 +54,24 @@ public class HammerKirby extends Kirby {
 		else
 			i = new Image(hammerKirbyImages[super.getFacing()]);
 		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
+		
+		*/
+		Image i;
+		removeShapes();
+		int add = 0;
+		if (hammerState) {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(hammerKirbyImages[HAMMER_ATTACK + retFacing()]));
+			i = new Image(hammerKirbyImages[HAMMER_ATTACK + retFacing()]);
+			if (retFacing() == 1) {
+				add = -40;
+			}
+		} else {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(hammerKirbyImages[super.getFacing()]));
+			i = new Image(hammerKirbyImages[super.getFacing()]);
+		}
+		i.draw(super.getX() - 4 - offsetX + add, super.getY() - 4 - offsetY);
 	}
 	
 	public void attack(KirbyGame bg) {

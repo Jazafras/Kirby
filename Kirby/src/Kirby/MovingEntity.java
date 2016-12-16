@@ -1,10 +1,12 @@
 package Kirby;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import jig.Entity;
 import jig.ResourceManager;
+import jig.Shape;
 import jig.Vector;
 
  class MovingEntity extends Entity {
@@ -222,6 +224,16 @@ import jig.Vector;
         super.setPosition(super.getX(), super.getY() - 15);    
         return false;
     }
+	
+	public void removeShapes() {
+		ArrayList<Shape> theseShapes = new ArrayList<Shape>();
+		for (Shape s : getShapes()) {
+			theseShapes.add(s);
+		}
+		for (Shape s : theseShapes) {
+			removeShape(s);
+		}
+	}
 	
 	public void applyGravity(float gravity, Tile[][] tileMap){
         if(getVelocity().getY() < maximumFallSpeed) {
