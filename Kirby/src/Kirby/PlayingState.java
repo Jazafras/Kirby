@@ -238,19 +238,26 @@ class PlayingState extends BasicGameState{
 
 		//Bonkers movement updates
 		for (Bonkers t : bg.bonkers){
+			float distance = Math.abs(t.getPosition().getX() - bg.kirby.getPosition().getX());
 			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
 				t.setVelocity(new Vector(.07f, 0f)); //move right
 			}
 			if (t.sideCollision(tileMap)) {
 				if (t.getVelocity().getX() < 0) {
-					System.out.println("left twister collision");
+					System.out.println("left Bonker collision");
 					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
 					t.setVelocity(new Vector(.07f, 0f)); //move right
+					if(distance <= 20){
+						t.attack(bg);
+					}
 				}
 				else if (t.getVelocity().getX() > 0){
-					System.out.println("right twister collision");
+					System.out.println("right Bonker collision");
 					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
 					t.setVelocity(new Vector(-.07f, 0f)); //move left
+					if(distance <= 20){
+						t.attack(bg);
+					}
 				}
 			}
 		}
