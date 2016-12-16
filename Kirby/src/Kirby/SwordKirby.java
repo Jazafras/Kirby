@@ -4,6 +4,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import jig.ResourceManager;
+
 public class SwordKirby extends Kirby {
 
 	public static final String[] swordKirbyImages = 
@@ -36,6 +38,17 @@ public class SwordKirby extends Kirby {
 	@Override
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i;
+		if (swordState && getCurImage() != swordKirbyImages[SWORD_ATTACK + super.retFacing()]) {
+			removeImage(ResourceManager.getImage(getCurImage()));
+			setCurImage(swordKirbyImages[SWORD_ATTACK + super.retFacing()]);
+			addImageWithBoundingBox(ResourceManager
+					.getImage(getCurImage()));
+		} else if (!swordState && getCurImage() == swordKirbyImages[SWORD_ATTACK + super.retFacing()]){
+			removeImage(ResourceManager.getImage(getCurImage()));
+			setCurImage(swordKirbyImages[super.getFacing()]);
+			addImageWithBoundingBox(ResourceManager
+					.getImage(getCurImage()));
+		}
 		if (swordState)
 			i = new Image(swordKirbyImages[SWORD_ATTACK + retFacing()]);
 		else

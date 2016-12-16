@@ -40,9 +40,9 @@ public class SparkyKirby extends Kirby {
 			setCurImage(sparkyKirbyImages[SPARK_ATTACK + super.retFacing()]);
 			addImageWithBoundingBox(ResourceManager
 					.getImage(getCurImage()));
-		} else if (!sparkState && getCurImage() == sparkyKirbyImages[SPARK_ATTACK + super.retFacing()]){
+		} else if (getCurImage().equals(sparkyKirbyImages[SPARK_ATTACK + super.retFacing()])){
 			removeImage(ResourceManager.getImage(getCurImage()));
-			setCurImage(sparkyKirbyImages[super.getFacing()]);
+			setCurImage(sparkyKirbyImages[super.retFacing()]);
 			addImageWithBoundingBox(ResourceManager
 					.getImage(getCurImage()));
 		}
