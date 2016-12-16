@@ -223,6 +223,10 @@ class PlayingState extends BasicGameState{
 			HammerKirby k = (HammerKirby) bg.kirby;
 			if (k.getHammerState())
 				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KFIGHTER) {
+			FighterKirby k = (FighterKirby) bg.kirby;
+			if (k.getFighterState())
+				enemyCollision(k, bg);
 		}
 			
 		
@@ -629,6 +633,9 @@ class PlayingState extends BasicGameState{
 				k.attack(bg);
 			} else if (bg.kirby.getType() == bg.kirby.KHAMMER) {
 				HammerKirby k = (HammerKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KFIGHTER) {
+				FighterKirby k = (FighterKirby) bg.kirby;
 				k.attack(bg);
 			}
 		} else {
