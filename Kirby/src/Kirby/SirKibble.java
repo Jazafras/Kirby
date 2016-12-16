@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import jig.Collision;
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -31,6 +32,7 @@ import jig.Vector;
 	private boolean attackState;
 	public Boomerang b;
 	private boolean velChanged = false;
+	private int kibblePause;
 	
 	public SirKibble(final float x, final float y) {
 		super(x, y, facingImages, LEFT_WALK);
@@ -42,6 +44,60 @@ import jig.Vector;
 
 	
 	public void setMoving(KirbyGame bg) {
+		if (getVelocity().getY() == 0 && getVelocity().getX() == 0 && kibblePause == 0){
+			if(retFacing() == 0){ //facing right
+				setVelocity(new Vector(.05f, 0f)); //move left
+			}
+			else{
+				setVelocity(new Vector(-.05f, 0f)); //move left
+			}
+		}
+		if (getPosition().getX() > 1086){
+			setPosition(1085,getPosition().getY());
+			setVelocity(new Vector(-.05f, 0f)); //move left
+		}
+		if (getPosition().getX() < 1050){
+			setPosition(1051,getPosition().getY());
+			setVelocity(new Vector(.05f, 0f)); //move right
+		}
+		if(Math.abs(bg.kirby.getPosition().getX() - getPosition().getX()) < 200){
+			if(Math.abs(bg.kirby.getPosition().getY() - getPosition().getY()) < 40){
+				if(bg.kirby.getPosition().getX() < 1066 && retFacing() == 1 && kibblePause == 0){ //left of kibble and kibble is facing left
+					setVelocity(new Vector(0f, 0f)); 
+					kibblePause = 35;
+					attack(bg);
+				}
+				else if(bg.kirby.getPosition().getX() > 1066 && retFacing() == 0 && kibblePause == 0){ //right of kibble and kibble is facing right 
+					setVelocity(new Vector(0f, 0f)); 
+					kibblePause = 35;
+					attack(bg);
+				}
+
+			}
+			if (getPosition().getX() > 1086){
+				setPosition(1085,getPosition().getY());
+				setVelocity(new Vector(-.05f, 0f)); //move left
+			}
+			if (getPosition().getX() < 1050){
+				setPosition(1051,getPosition().getY());
+				setVelocity(new Vector(.05f, 0f)); //move right
+			}
+		}
+		if (b != null) {
+			Collision c = b.collides(bg.kirby);
+			//kirby collides with boomerang
+			if (c != null && attackTime < CutterKirby.CUTTER_TIME - 5) {
+				bg.enemyAttacks.remove(b);
+			}
+			//kirby does not collide with boomerang
+			else if (c == null && attackTime ==0){
+				bg.enemyAttacks.remove(b);
+			}
+		}
+		if (kibblePause > 0){
+			kibblePause--;
+		}
+		
 	}	
 	
 	@Override
