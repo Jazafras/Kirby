@@ -378,7 +378,7 @@ public class KirbyGame extends StateBasedGame {
 		WaddleDee waddledee1 = new WaddleDee(774, 422);
 		waddledee.add(waddledee1);
 		enemies.add(waddledee1);
-		WaddleDoo waddledoo1 = new WaddleDoo(870, 420);
+		WaddleDoo waddledoo1 = new WaddleDoo(300, 420);
 		waddledoo.add(waddledoo1);
 		enemies.add(waddledoo1);
 		
@@ -467,6 +467,15 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(KIRBY_LEFTSWORD_FLY);
 		ResourceManager.loadImage(KIRBY_RIGHTSWORD_ATTACK);
 		ResourceManager.loadImage(KIRBY_LEFTSWORD_ATTACK);
+		
+		ResourceManager.loadImage(KIRBYWADDLE_RIGHT);
+		ResourceManager.loadImage(KIRBYWADDLE_LEFT);
+		ResourceManager.loadImage(KIRBYWADDLE_RIGHT_SUCC);
+		ResourceManager.loadImage(KIRBYWADDLE_LEFT_SUCC);
+		ResourceManager.loadImage(KIRBYWADDLE_RIGHT_FLY);
+		ResourceManager.loadImage(KIRBYWADDLE_LEFT_FLY);
+		ResourceManager.loadImage(KIRBYWADDLE_RIGHT_ATTACK);
+		ResourceManager.loadImage(KIRBYWADDLE_LEFT_ATTACK);
 		
 		ResourceManager.loadImage(KIRBYTWIST_LEFT);
 		ResourceManager.loadImage(KIRBYTWIST_RIGHT);

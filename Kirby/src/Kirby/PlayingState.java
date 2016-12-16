@@ -113,17 +113,17 @@ class PlayingState extends BasicGameState{
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
-		for (Tile t : bg.kirby.getGroundTiles(tileMap))
+		for (Tile t : bg.kirby.surroundingTiles(tileMap))
 			t.render(g, xOffset, yOffset);
 		
 		bg.kirby.render(g, xOffset, yOffset);
 		
 		//stop deleting the tile shit just comment it out >:K
 		for (MovingEnemy e : bg.enemies) { 
-			for (Tile t : e.surroundingTiles(tileMap)){
-				t.render(g, xOffset, yOffset);
+			//for (Tile t : e.surroundingTiles(tileMap)){
+			//	t.render(g, xOffset, yOffset);
 				e.render(g, xOffset, yOffset);
-			}
+			//}
 		}
 		for (Brontoburt b : bg.brontoburt) {
 			b.setMoving(bg);
@@ -210,6 +210,22 @@ class PlayingState extends BasicGameState{
 		} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 			SparkyKirby k = (SparkyKirby) bg.kirby;
 			if (k.getSparkState())
+				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
+			SwordKirby k = (SwordKirby) bg.kirby;
+			if (k.getSwordState())
+				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KBEAM) {
+			BeamKirby k = (BeamKirby) bg.kirby;
+			if (k.getBeamState())
+				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KHAMMER) {
+			HammerKirby k = (HammerKirby) bg.kirby;
+			if (k.getHammerState())
+				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KFIGHTER) {
+			FighterKirby k = (FighterKirby) bg.kirby;
+			if (k.getFighterState())
 				enemyCollision(k, bg);
 		}
 			
@@ -568,7 +584,22 @@ class PlayingState extends BasicGameState{
 				k.attack(bg);
 			} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 				SparkyKirby k = (SparkyKirby) bg.kirby;
+
 				k.spark(bg);
+
+			} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
+				SwordKirby k = (SwordKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KBEAM) {
+				BeamKirby k = (BeamKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KHAMMER) {
+				HammerKirby k = (HammerKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KFIGHTER) {
+				FighterKirby k = (FighterKirby) bg.kirby;
+				k.attack(bg);
+
 			}
 		} else {
 			bg.kirby.setSuck(false);
