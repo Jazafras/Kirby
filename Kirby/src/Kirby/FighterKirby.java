@@ -38,22 +38,21 @@ public class FighterKirby extends Kirby {
 	@Override
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
 		Image i;
-		if (fighterState && getCurImage() != fighterKirbyImages[FIGHTER_ATTACK + super.retFacing()]) {
-			removeImage(ResourceManager.getImage(getCurImage()));
-			setCurImage(fighterKirbyImages[FIGHTER_ATTACK + super.retFacing()]);
+		removeShapes();
+		int add = 0;
+		if (fighterState) {
 			addImageWithBoundingBox(ResourceManager
-					.getImage(getCurImage()));
-		} else if (!fighterState && getCurImage() == fighterKirbyImages[FIGHTER_ATTACK + super.retFacing()]){
-			removeImage(ResourceManager.getImage(getCurImage()));
-			setCurImage(fighterKirbyImages[super.getFacing()]);
-			addImageWithBoundingBox(ResourceManager
-					.getImage(getCurImage()));
-		}
-		if (fighterState)
+					.getImage(fighterKirbyImages[FIGHTER_ATTACK + retFacing()]));
 			i = new Image(fighterKirbyImages[FIGHTER_ATTACK + retFacing()]);
-		else
+			if (retFacing() == 1) {
+				add = -40;
+			}
+		} else {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(fighterKirbyImages[super.getFacing()]));
 			i = new Image(fighterKirbyImages[super.getFacing()]);
-		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
+		}
+		i.draw(super.getX() - 4 - offsetX + add, super.getY() - 4 - offsetY);
 	}
 	
 	public void attack(KirbyGame bg) {

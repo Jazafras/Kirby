@@ -73,6 +73,7 @@ import jig.Vector;
 	public int jumpTime;
 	public float maximumFallSpeed = 1;
 	public int actionImage;
+	public boolean hurt;
 	
 	public int health = 5;
 
@@ -86,6 +87,7 @@ import jig.Vector;
 		state3 = false;
 		floating = false;
 		jumps = 0;
+		hurt = false;
 		jumpTime = 0;
 		sucking = false;
 		enemySucking = null;
@@ -220,10 +222,6 @@ import jig.Vector;
         	super.setVelocity(new Vector(super.getVelocity().getX(), -0.4f));
         }
     }
-	
-	public void level() {
-		
-	}
 	 
 	public String toString() {
 		return "Kirby ~ x: " + super.getX() + ", y: " + super.getY();
