@@ -142,7 +142,7 @@ class PlayingState extends BasicGameState{
 			WaddleDee waddledee1 = new WaddleDee(774, 422);
 			bg.waddledee.add(waddledee1);
 			bg.enemies.add(waddledee1);
-			KnuckleJoe knucklejoe1 = new KnuckleJoe(1669, 345);
+			KnuckleJoe knucklejoe1 = new KnuckleJoe(1258, 380);
 			bg.knucklejoe.add(knucklejoe1);
 			bg.enemies.add(knucklejoe1);
 			Twister twister1 = new Twister(1258, 384);
@@ -154,7 +154,7 @@ class PlayingState extends BasicGameState{
 			PoppyJr epoppyjr = new PoppyJr(200, 320);
 			bg.poppy.add(epoppyjr);
 			bg.enemies.add(epoppyjr);
-			Bonkers bonkers1 = new Bonkers(1258, 365);
+			Bonkers bonkers1 = new Bonkers(1669, 320);
 			bg.enemies.add(bonkers1);
 			bg.bonkers.add(bonkers1);
 			SirKibble esirkibble = new SirKibble(1085, 290);
