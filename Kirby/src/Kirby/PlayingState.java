@@ -40,6 +40,7 @@ class PlayingState extends BasicGameState{
 	private int poppyJumpTime = -1;
 	private int sparkyDistance = 40;
 	private int twisterDistance = 80;
+	private int swordDistance = 100;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -263,29 +264,30 @@ class PlayingState extends BasicGameState{
 		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
 
 		//Bonkers movement updates
+		int attackTime = 0;
 		for (Bonkers t : bg.bonkers){
-			float distance = Math.abs(t.getPosition().getX() - bg.kirby.getPosition().getX());
-			if (t.getVelocity().getY() == 0 && t.getVelocity().getX() == 0){
-				t.setVelocity(new Vector(.07f, 0f)); //move right
+			
+			if (t.getVelocity().getX() == 0){
+				t.setVelocity(new Vector(.09f, 0f)); //go right
+				attackTime = 20;
 			}
-			if (t.sideCollision(tileMap)) {
-				if (t.getVelocity().getX() < 0) {
-					System.out.println("left Bonker collision");
-					t.translate(new Vector(.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(.07f, 0f)); //move right
-					if(distance <= 20){
-						t.attack(bg);
-					}
-				}
-				else if (t.getVelocity().getX() > 0){
-					System.out.println("right Bonker collision");
-					t.translate(new Vector(-.2f, t.getVelocity().getY()).scale(delta));
-					t.setVelocity(new Vector(-.07f, 0f)); //move left
-					if(distance <= 20){
-						t.attack(bg);
-					}
-				}
+			if (t.getPosition().getX() < 1394){
+				 t.setVelocity(new Vector(.09f, 0f));
+				 attackTime--;
+				 if(attackTime <= 0){
+				 	t.attack(bg);
+				 	attackTime = 20;
+				 }
 			}
+			if (t.getPosition().getX() > 1865){
+ 				t.setVelocity(new Vector(-.09f, 0f));
+ 				attackTime--;
+ 				if(attackTime <= 0){
+ 					t.attack(bg);
+ 					attackTime = 20;
+ 				}
+			}
+			
 		}
 		
 		//cappy movement updates
@@ -332,14 +334,25 @@ class PlayingState extends BasicGameState{
 		
 		//Knuckle Joe movement updates
 		for (KnuckleJoe w : bg.knucklejoe){
-			if (w.getVelocity().getX() == 0){
-				w.setVelocity(new Vector(.09f, 0f)); //go right
+			float distance = Math.abs(w.getPosition().getX() - bg.kirby.getPosition().getX());
+			if (w.getVelocity().getY() == 0 && w.getVelocity().getX() == 0){
+				w.setVelocity(new Vector(.07f, 0f)); //move right
 			}
-			if (w.getPosition().getX() < 1394){
-				w.setVelocity(new Vector(.09f, 0f));
+			if(distance <= 20){
+				w.attack(bg);
 			}
-			if (w.getPosition().getX() > 1865){
-				w.setVelocity(new Vector(-.09f, 0f));
+			if (w.sideCollision(tileMap)) {
+				if (w.getVelocity().getX() < 0) {
+					System.out.println("left Bonker collision");
+					w.translate(new Vector(.2f, w.getVelocity().getY()).scale(delta));
+					w.setVelocity(new Vector(.07f, 0f)); //move right
+					
+				}
+				else if (w.getVelocity().getX() > 0){
+					System.out.println("right Bonker collision");
+					w.translate(new Vector(-.2f, w.getVelocity().getY()).scale(delta));
+					w.setVelocity(new Vector(-.07f, 0f)); //move left
+				}
 			}
 		}
 		
@@ -443,20 +456,41 @@ class PlayingState extends BasicGameState{
 		//Sword Knight movement updates
 		for (SwordKnight sw : bg.swordknight){
 			if (sw.getVelocity().getY() == 0 && sw.getVelocity().getX() == 0){
-				sw.setVelocity(new Vector(-.07f, 0f)); //move left
+				sw.setVelocity(new Vector(-.04f, 0f)); //move left
+			}
+			if(Math.abs(bg.kirby.getPosition().getX() - sw.getPosition().getX()) < sparkyDistance){
+				if(Math.abs(bg.kirby.getPosition().getY() - sw.getPosition().getY()) < sparkyDistance){
+					if(bg.kirby.retFacing() == 1 && sw.retFacing() == 0){ //kirby facing left
+						//sw.attack(bg);
+						sw.setVelocity(new Vector(sw.getVelocity().getX()*2, 0f));
+						sw.attack(bg);
+					}
+					else if(bg.kirby.retFacing() == 0 && sw.retFacing() == 1){ //kirby facing right
+						sw.attack(bg);
+						sw.setVelocity(new Vector(sw.getVelocity().getX()*2, 0f));
+					}
+				}
+			}
+			
+			//return speed to normal after passing kirby
+			if(Math.abs(bg.kirby.getPosition().getX() - sw.getPosition().getX()) > sparkyDistance){
+				if(sw.getVelocity().getX() > .04f || sw.getVelocity().getX() < -.04f){
+					sw.setVelocity(new Vector(sw.getVelocity().getX()/2, 0f));
+				}
 			}
 			if (sw.sideCollision(tileMap)) {
 				if (sw.getVelocity().getX() < 0) {
-					sw.translate(new Vector(.2f, sw.getVelocity().getY()).scale(delta));
-					sw.setVelocity(new Vector(.07f, 0f)); //move right
+					sw.setPosition(2000,sw.getPosition().getY());
+					sw.setVelocity(new Vector(.04f, 0f)); //move right
 				}
 				else if (sw.getVelocity().getX() > 0){
-					sw.translate(new Vector(-.2f, sw.getVelocity().getY()).scale(delta));
-					sw.setVelocity(new Vector(-.07f, 0f)); //move left
+					sw.setPosition(2350,sw.getPosition().getY());
+					sw.setVelocity(new Vector(-.04f, 0f)); //move left
 				}
 			}
 			if (sw.getPosition().getX() > 2350){ //sword knight reached right end of screen
-				sw.setVelocity(new Vector(-.07f, 0f)); //move left
+				sw.setPosition(2350,sw.getPosition().getY());
+				sw.setVelocity(new Vector(-.04f, 0f)); //move left
 			}
 		}
 		
@@ -483,6 +517,7 @@ class PlayingState extends BasicGameState{
 				}
 			}
 		}
+
 		
 		//waddledee movement updates
 		for (WaddleDee wdee : bg.waddledee){

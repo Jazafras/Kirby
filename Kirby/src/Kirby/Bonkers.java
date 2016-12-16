@@ -99,7 +99,6 @@ import jig.Vector;
 		Image i;
 		if (attackState){
 			i = new Image(attackingImages[super.getFacing()]);
-			setVelocity(new Vector(0f, 0f));
 			i.draw(super.getX() - 40 - offsetX, super.getY() + 4 - offsetY);
 		}
 		else{

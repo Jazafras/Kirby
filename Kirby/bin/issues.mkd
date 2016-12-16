@@ -31,6 +31,7 @@
 	- **[4]** Coordination from Client to Server
 	- **[5]** WaddleDoo attacks
 	- **[6]** Bonkers attacks
+	- **[7]** Knuckle Joe attacks
 	
 - Jasmine
 	- **[1]**  Base skeleton for enemies
@@ -56,14 +57,15 @@
 ####### Open Issues #######
 
 - Priya
-	- **[7]** Hot Head attacks
-	- **[8]** Poppy Jr. attacks
+	- **[8]** Hot Head attacks
+	- **[9]** Poppy Jr. attacks
+	
 
 - Jasmine
 	- **[18]** Sword Knight attacks
 	- **[?]** UFO movement
 	- **[?]** Sir Kibble attacks
-	- **[?]** Knuckle Joe attacks
+
 	- **[?]** UFO attacks
 	- **[?]** Bonkers attacks
 	- **[?]** Hot Head attacks

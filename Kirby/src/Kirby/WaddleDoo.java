@@ -16,7 +16,7 @@ import jig.Vector;
 	public static final String[] facingImages = 
 		{
 			KirbyGame.WADDLEDOO_RIGHT,
-			KirbyGame.WADDLEDOO_LEFT,
+			KirbyGame.WADDLEDOO_LEFT
 
 		};
 	
@@ -65,12 +65,8 @@ import jig.Vector;
 
 
 	public void attack(KirbyGame bg) {
-//		super.setFacingImages(attackingImages);
-//		super.setCurImage(attackingImages[super.getFacing()]);
-//		super.setPosition(super.getX(), super.getY());
-		
 		attackState = true;
-		attackTime = 200;
+		attackTime = 20;
 		
 	}
 
