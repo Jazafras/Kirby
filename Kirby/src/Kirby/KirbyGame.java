@@ -56,6 +56,8 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_LEFT_SUCC = "Kirby/resources/kirby_left_succ.png";
 	public static final String KIRBY_RIGHT_FLY = "Kirby/resources/kirby_right_fly.png";
 	public static final String KIRBY_LEFT_FLY = "Kirby/resources/kirby_left_fly.png";
+	public static final String KIRBY_LEFT_FULL = "Kirby/resources/kirby_full_left.png";
+	public static final String KIRBY_RIGHT_FULL = "Kirby/resources/kirby_full_right.png";
 	
 	//boomerang kirby
 	public static final String KIRBY_LEFTBOOMERANG = "Kirby/resources/boomerangkirby/kirby_left.png";
@@ -399,6 +401,8 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(KIRBY_LEFT_SUCC);
 		ResourceManager.loadImage(KIRBY_RIGHT_FLY);
 		ResourceManager.loadImage(KIRBY_LEFT_FLY);
+		ResourceManager.loadImage(KIRBY_LEFT_FULL);
+		ResourceManager.loadImage(KIRBY_RIGHT_FULL);
 		
 		ResourceManager.loadImage(KIRBY_LEFTBOOMERANG);
 		ResourceManager.loadImage(KIRBY_RIGHTBOOMERANG);

@@ -55,6 +55,8 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFT_FLY,
 			KirbyGame.KIRBY_RIGHT_SUCC,
 			KirbyGame.KIRBY_LEFT_SUCC,
+			KirbyGame.KIRBY_RIGHT_FULL,
+			KirbyGame.KIRBY_LEFT_FULL
 		};
 	
 	private static final int MAX_JUMP = 5;
@@ -113,7 +115,11 @@ import jig.Vector;
 	}
 	
 	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
-		Image i = new Image(defaultKirbyImages[super.getFacing()]);
+		Image i;
+		if (enemySucking != null)
+			i = new Image(defaultKirbyImages[8 + retFacing()]);
+		else
+			i = new Image(defaultKirbyImages[super.getFacing()]);
 		i.draw(super.getX() - 4 - offsetX, super.getY() + 4 - offsetY);
 	}
 	
@@ -149,12 +155,14 @@ import jig.Vector;
     }
     
     public void setFlying() {
-		floating = true;
-		maximumFallSpeed = .09f;	
-		if (getVelocity().getY() > maximumFallSpeed) {
-			setVelocity(new Vector(getVelocity().getX(), maximumFallSpeed));
-		}
-		super.setCurImage(defaultKirbyImages[2*FLYING+retFacing()]);
+    	if (enemySucking == null) {
+			floating = true;
+			maximumFallSpeed = .09f;	
+			if (getVelocity().getY() > maximumFallSpeed) {
+				setVelocity(new Vector(getVelocity().getX(), maximumFallSpeed));
+			}
+			super.setCurImage(defaultKirbyImages[2*FLYING+retFacing()]);
+    	}
     }
 	
 	public void succ(MovingEnemy sucked, KirbyGame bg) {
@@ -191,6 +199,7 @@ import jig.Vector;
 			} else if (enemyType == POPPYJR) {
 				bg.kirby = new BombKirby(xPos, yPos);
 			}
+			enemySucking = null;
 		}
 	}
 	
