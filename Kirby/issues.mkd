@@ -58,12 +58,13 @@
 - Priya
 	- **[7]** Hot Head attacks
 	- **[8]** Poppy Jr. attacks
+	- **[9]** Knuckle Joe attacks
 
 - Jasmine
 	- **[18]** Sword Knight attacks
 	- **[?]** UFO movement
 	- **[?]** Sir Kibble attacks
-	- **[?]** Knuckle Joe attacks
+
 	- **[?]** UFO attacks
 	- **[?]** Bonkers attacks
 	- **[?]** Hot Head attacks
