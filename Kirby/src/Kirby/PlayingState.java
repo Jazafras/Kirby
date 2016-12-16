@@ -113,7 +113,7 @@ class PlayingState extends BasicGameState{
 		bg.map.render((int)(-1 * (xOffset % 32)), (int)(-1 * (yOffset % 32)), 
 				(int)(xOffset / 32), (int)(yOffset / 32), KirbyGame.SCREEN_WIDTH / 32, KirbyGame.SCREEN_HEIGHT / 32);
 		
-		for (Tile t : bg.kirby.getGroundTiles(tileMap))
+		for (Tile t : bg.kirby.surroundingTiles(tileMap))
 			t.render(g, xOffset, yOffset);
 		
 		bg.kirby.render(g, xOffset, yOffset);
@@ -214,6 +214,10 @@ class PlayingState extends BasicGameState{
 		} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
 			SwordKirby k = (SwordKirby) bg.kirby;
 			if (k.getSwordState())
+				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KBEAM) {
+			BeamKirby k = (BeamKirby) bg.kirby;
+			if (k.getBeamState())
 				enemyCollision(k, bg);
 		}
 			
@@ -615,6 +619,9 @@ class PlayingState extends BasicGameState{
 				k.attack(bg);
 			} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
 				SwordKirby k = (SwordKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KBEAM) {
+				BeamKirby k = (BeamKirby) bg.kirby;
 				k.attack(bg);
 			}
 		} else {

@@ -29,6 +29,7 @@ import jig.Vector;
 	 public static final int KTWISTER = 2; 
 	 public static final int KSPARKY = 3;
 	 public static final int KSWORD = 4;
+	 public static final int KBEAM = 5;
 	 
 	 // kirby states for images
 	 public static final int NORMAL = 0;
@@ -178,6 +179,9 @@ import jig.Vector;
 			} else if (enemyType == SWORDKNIGHT) {
 				System.out.println("swordnight");
 				bg.kirby = new SwordKirby(xPos, yPos);
+			} else if (enemyType == WADDLEDOO) {
+				System.out.println("waddledoo");
+				bg.kirby = new BeamKirby(xPos, yPos);
 			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
@@ -285,18 +289,6 @@ import jig.Vector;
 			//KirbyGame.KIRBY_LEFTSWORD_FLY,
 			KirbyGame.KIRBY_RIGHTUFO_ATTACK,
 			KirbyGame.KIRBY_LEFTUFO_ATTACK,
-		};
-	
-	public static final String[] waddleKirbyImages = 
-		{
-			KirbyGame.KIRBYWADDLE_RIGHT,
-			KirbyGame.KIRBYWADDLE_LEFT,
-			KirbyGame.KIRBYWADDLE_RIGHT_SUCC,
-			KirbyGame.KIRBYWADDLE_LEFT_SUCC,
-			KirbyGame.KIRBYWADDLE_RIGHT_FLY,
-			KirbyGame.KIRBYWADDLE_LEFT_FLY,
-			KirbyGame.KIRBYWADDLE_RIGHT_ATTACK,
-			KirbyGame.KIRBYWADDLE_LEFT_ATTACK,
 		};
 
 }
