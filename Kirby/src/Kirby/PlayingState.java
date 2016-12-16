@@ -43,7 +43,7 @@ class PlayingState extends BasicGameState{
 	private int twisterDistance = 80;
 	private int swordDistance = 100;
 	private int kibbleDistance = 40;
-	private int poppyDistance = 40;
+	private int poppyDistance = 125;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -77,6 +77,7 @@ class PlayingState extends BasicGameState{
 			throws SlickException {
 		KirbyGame bg = (KirbyGame)game;
 		
+		bg.level=2;
 		//client = new KirbyClient("localhost", 7777);
 		//client.connect();
 		
@@ -400,7 +401,14 @@ class PlayingState extends BasicGameState{
 		
 		//Hot Head movement updates
 		for (HotHead h : bg.hothead){
-			bg.enemyAttacks.clear();
+			
+			Attack rem = null;
+			for (Attack a : bg.enemyAttacks) {
+				if (a.getAttackType() == Attack.SPITFIRE)
+					rem = a;
+			}
+			bg.enemyAttacks.remove(rem);
+			
 			if (h.getVelocity().getY() == 0 && h.getVelocity().getX() == 0){
 				h.setVelocity(new Vector(.07f, 0f)); //move right
 			}
@@ -509,8 +517,13 @@ class PlayingState extends BasicGameState{
 		        float y = s.b.getY();
 				if (s.b.isOnGround(tileMap)) {
 					s.b = null;
-					bg.kirbyAttacks.clear();
-					bg.kirbyAttacks.add(new Explosion(x, y, 1));
+					Attack rem = null;
+					for (Attack a : bg.enemyAttacks) {
+						if (a.getAttackType() == Attack.BOMB)
+							rem = a;
+					}
+					bg.enemyAttacks.remove(rem);
+					bg.enemyAttacks.add(new Explosion(x, y, 1));
 				}
 			}
 		}
@@ -751,22 +764,51 @@ class PlayingState extends BasicGameState{
 				}
 			}
 		}
+
+		Attack rem = null;
+		for (Attack a : bg.enemyAttacks) {
+			
+			Collision c = a.collides(bg.kirby);
+			if (c != null) {
+				rem = a;
+				this.kirbyHurtTime = HURTTIME;
+				bg.kirby.hurt = true;
+				
+				if (bg.kirby.getX() > a.getX())
+					bg.kirby.setPosition(bg.kirby.getX() + 40, bg.kirby.getY());
+				else
+					bg.kirby.setPosition(bg.kirby.getX() - 40, bg.kirby.getY());
+				hurt = new Hurt(bg.kirby.getX(), bg.kirby.getY());
+				bg.kirby.health--;
+				break;
+			}
+		}
+		bg.enemyAttacks.remove(rem);
+		
+		if (toRem != null) {
+			bg.kirbyAttacks.clear();
+		}
+		
+		Attack toRem2 = null;
 		for (Attack a : bg.enemyAttacks) {
 			if (a.getAttackType() == Attack.EXPLOSION) {
 				Explosion e = (Explosion) a;
 				e.bombtime--;
 				if (e.bombtime <= 0) {
 
-					toRem = a;
+					toRem2 = a;
 				}
 			}
 		}
-		if (toRem != null) {
-			bg.kirbyAttacks.clear();
-			bg.enemyAttacks.clear();
-		}
+		if (toRem2 != null)
+			bg.enemyAttacks.remove(toRem2);
+		
 		
 		for (Attack a : bg.kirbyAttacks) {
+			a.update(delta);
+		}
+		
+		for (Attack a : bg.enemyAttacks) {
 			a.update(delta);
 		}
 		
