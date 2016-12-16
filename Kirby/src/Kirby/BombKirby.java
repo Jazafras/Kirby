@@ -68,7 +68,7 @@ public class BombKirby extends Kirby {
 			if (!super.facingRight()) //left
 				xPos = -30;
 			b = new Bomb(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing());
-			bg.attacks.add(b);
+			bg.kirbyAttacks.add(b);
 		}
 	}
 	

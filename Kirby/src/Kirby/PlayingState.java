@@ -38,9 +38,11 @@ class PlayingState extends BasicGameState{
 	private int scarfyJumpTime = -1;
 	private int cappyJumpTime = -1;
 	private int poppyJumpTime = -1;
+	private int kibblePause = 0;
 	private int sparkyDistance = 40;
 	private int twisterDistance = 80;
 	private int swordDistance = 100;
+	private int kibbleDistance = 40;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -51,7 +53,6 @@ class PlayingState extends BasicGameState{
 	
 	public static final float gravity = 0.0015f;
 	
-	static int lives;
 	Image background;
 	Tile[][] tileMap;
 	Set<Tile> groundTiles;
@@ -74,22 +75,53 @@ class PlayingState extends BasicGameState{
 		//client = new KirbyClient("localhost", 7777);
 		//client.connect();
 		
-		lives = 3;
-		background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
+		//if (bg.level == 1)
+			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
+		//else if (bg.level == 2)
+		//	background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains2.png"));
 		groundTiles = new HashSet<Tile>();
 		tileFetch = new HashMap<String, Tile>();
-		loadTiles(bg);
+		loadTiles(bg); 
 	}
 
 	@Override
-	public void enter(GameContainer container, StateBasedGame game) {
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
 		container.setSoundOn(true);
 		KirbyGame bg = (KirbyGame)game;
+		
+		if (bg.level == 2) { 
+			bg.enemies.clear();
+			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains2.png"));
+			Brontoburt brontoburt1 = new Brontoburt(600, 220);
+			bg.enemies.add(brontoburt1);
+			bg.brontoburt.add(brontoburt1);
+			WaddleDee waddledee1 = new WaddleDee(774, 422);
+			bg.waddledee.add(waddledee1);
+			bg.enemies.add(waddledee1);
+			KnuckleJoe knucklejoe1 = new KnuckleJoe(1669, 345);
+			bg.knucklejoe.add(knucklejoe1);
+			bg.enemies.add(knucklejoe1);
+			Twister twister1 = new Twister(1258, 384);
+			bg.twister.add(twister1);
+			bg.enemies.add(twister1);
+			Scarfy scarfy1 = new Scarfy(990, 320);
+			bg.scarfy.add(scarfy1);
+			bg.enemies.add(scarfy1);
+			PoppyJr epoppyjr = new PoppyJr(200, 320);
+			bg.poppy.add(epoppyjr);
+			bg.enemies.add(epoppyjr);
+			Bonkers bonkers1 = new Bonkers(1258, 365);
+			bg.enemies.add(bonkers1);
+			bg.bonkers.add(bonkers1);
+		}
 		
 		float xOffset = getXOffset(bg);
 		yOffset = getYOffset(bg);
 		topX = (int)(-1 * (xOffset % 32));
 		topY = (int)(-1 * (yOffset % 32));
+		
+		bg.kirby.setPosition(90, 422);
+		
 		//ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
 
 	}
@@ -135,7 +167,11 @@ class PlayingState extends BasicGameState{
 			wd.setMoving(bg);
 		}*/
 		
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
+			a.render(g, xOffset, yOffset);
+		}
+		
+		for (Attack a : bg.enemyAttacks) {
 			a.render(g, xOffset, yOffset);
 		}
 			
@@ -144,7 +180,7 @@ class PlayingState extends BasicGameState{
 			//bg.kirby.render(g, xOffset, yOffset);
 		//}
 		
-		g.drawString("Lives: " + lives, 10, 50);
+		g.drawString("Health: " + bg.kirby.health, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
 	}
 	
@@ -189,7 +225,7 @@ class PlayingState extends BasicGameState{
 			if (k.b != null) {
 				Collision c = k.b.collides(k);
 				if (c != null && k.cutterTime < CutterKirby.CUTTER_TIME - 5) {
-					bg.attacks.remove(k.b);
+					bg.kirbyAttacks.remove(k.b);
 				}
 			}
 		}
@@ -206,12 +242,12 @@ class PlayingState extends BasicGameState{
 			bg.kirby.hitGround();
 		}
 		
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
 			for (MovingEnemy e : bg.enemies) {
 				Collision c = e.collides(a);
 				if (c != null) {
 					bg.enemies.remove(e);
-					bg.attacks.remove(a);
+					bg.kirbyAttacks.remove(a);
 					break;
 				}
 			}
@@ -221,26 +257,38 @@ class PlayingState extends BasicGameState{
 			TwisterKirby k = (TwisterKirby) bg.kirby;
 			if (k.getTwistState())
 				enemyCollision(k, bg);
+			else
+				kirbyCollision(k, bg);
 		} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 			SparkyKirby k = (SparkyKirby) bg.kirby;
 			if (k.getSparkState())
 				enemyCollision(k, bg);
+			else
+				kirbyCollision(k, bg);
 		} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
 			SwordKirby k = (SwordKirby) bg.kirby;
 			if (k.getSwordState())
 				enemyCollision(k, bg);
+			else
+				kirbyCollision(k, bg);
 		} else if (bg.kirby.getType() == bg.kirby.KBEAM) {
 			BeamKirby k = (BeamKirby) bg.kirby;
 			if (k.getBeamState())
 				enemyCollision(k, bg);
+			else
+				kirbyCollision(k, bg);
 		} else if (bg.kirby.getType() == bg.kirby.KHAMMER) {
 			HammerKirby k = (HammerKirby) bg.kirby;
 			if (k.getHammerState())
 				enemyCollision(k, bg);
+			else
+				kirbyCollision(k, bg);
 		} else if (bg.kirby.getType() == bg.kirby.KFIGHTER) {
 			FighterKirby k = (FighterKirby) bg.kirby;
 			if (k.getFighterState())
 				enemyCollision(k, bg);
+			else
+				kirbyCollision(k, bg);
 		} else if (bg.kirby.getType() == bg.kirby.KBOMB) {
 			BombKirby k = (BombKirby) bg.kirby;
 			if (k.b != null) {
@@ -249,11 +297,13 @@ class PlayingState extends BasicGameState{
 		        float y = k.b.getY();
 				if (k.b.isOnGround(tileMap)) {
 					k.b = null;
-					bg.attacks.clear();
-					bg.attacks.add(new Explosion(x, y, 1));
+					bg.kirbyAttacks.clear();
+					bg.kirbyAttacks.add(new Explosion(x, y, 1));
 				}
 			}
 			//k.attack(bg);
+		} else {
+			kirbyCollision(bg.kirby, bg);
 		}
 			
 		
@@ -261,12 +311,9 @@ class PlayingState extends BasicGameState{
 		checkLives(game, bg);
 		bg.kirby.update(delta);
 
-		System.out.println("kirby position ("+ bg.kirby.getPosition().getX() +", "+ bg.kirby.getPosition().getY()+")");
-
 		//Bonkers movement updates
 		int attackTime = 0;
 		for (Bonkers t : bg.bonkers){
-			
 			if (t.getVelocity().getX() == 0){
 				t.setVelocity(new Vector(.09f, 0f)); //go right
 				attackTime = 20;
@@ -426,14 +473,55 @@ class PlayingState extends BasicGameState{
 		
 		//Sir Kibble movement updates
 		for (SirKibble s : bg.sirkibble){
-			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0){
-				s.setVelocity(new Vector(-.05f, 0f)); //move left
+			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0 && kibblePause == 0){
+				if(s.retFacing() == 0){ //facing right
+					s.setVelocity(new Vector(.05f, 0f)); //move left
+				}
+				else{
+					s.setVelocity(new Vector(-.05f, 0f)); //move left
+				}
 			}
 			if (s.getPosition().getX() > 1086){
+				s.setPosition(1085,s.getPosition().getY());
 				s.setVelocity(new Vector(-.05f, 0f)); //move left
 			}
-			if (s.getPosition().getX() < 1018){
+			if (s.getPosition().getX() < 1050){
+				s.setPosition(1051,s.getPosition().getY());
 				s.setVelocity(new Vector(.05f, 0f)); //move right
+			}
+			if(Math.abs(bg.kirby.getPosition().getX() - s.getPosition().getX()) < 200){
+				if(Math.abs(bg.kirby.getPosition().getY() - s.getPosition().getY()) < kibbleDistance){
+					if(bg.kirby.getPosition().getX() < 1066 && s.retFacing() == 1 && kibblePause == 0){ //left of kibble and kibble is facing left
+						s.setVelocity(new Vector(0f, 0f)); 
+						kibblePause = 35;
+						s.attack(bg);
+					}
+					else if(bg.kirby.getPosition().getX() > 1066 && s.retFacing() == 0 && kibblePause == 0){ //right of kibble and kibble is facing right 
+						s.setVelocity(new Vector(0f, 0f)); 
+						kibblePause = 35;
+						s.attack(bg);
+					}
+
+				}
+				if (s.getPosition().getX() > 1086){
+					s.setPosition(1085,s.getPosition().getY());
+					s.setVelocity(new Vector(-.05f, 0f)); //move left
+				}
+				if (s.getPosition().getX() < 1050){
+					s.setPosition(1051,s.getPosition().getY());
+					s.setVelocity(new Vector(.05f, 0f)); //move right
+				}
+			}
+			if (s.b != null) {
+				Collision c = s.b.collides(bg.kirby);
+				//kirby collides with boomerang
+				if (c != null && s.attackTime < CutterKirby.CUTTER_TIME - 5) {
+					bg.enemyAttacks.remove(s.b);
+				}
+				//kirby does not collide with boomerang
+				else if (c == null && s.attackTime ==0){
+					bg.enemyAttacks.remove(s.b);
+				}
 			}
 		}
 		
@@ -527,13 +615,13 @@ class PlayingState extends BasicGameState{
 			if (wdee.sideCollision(tileMap)) {
 				//System.out.println("waddledee wall collision");
 				if (wdee.getVelocity().getX() < 0) {
-					System.out.println("left waddledee collision");
+
 					wdee.translate(new Vector(.2f, wdee.getVelocity().getY()).scale(delta));
 					//wdee.translate(new Vector(0f, 0f));
 					wdee.setVelocity(new Vector(.07f, 0f)); //move right
 				}
 				else if (wdee.getVelocity().getX() > 0){
-					System.out.println("right waddledee collision");
+
 					wdee.translate(new Vector(-.2f, wdee.getVelocity().getY()).scale(delta));
 					wdee.setVelocity(new Vector(-.07f, 0f)); //move left
 				}
@@ -585,26 +673,29 @@ class PlayingState extends BasicGameState{
 		}
 		
 		Attack toRem = null;
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
 			if (a.getAttackType() == Attack.EXPLOSION) {
 				Explosion e = (Explosion) a;
 				e.bombtime--;
 				if (e.bombtime <= 0) {
-					System.out.println(a);
+
 					toRem = a;
 				}
 			}
 		}
 		if (toRem != null) {
-			bg.attacks.clear();
+			bg.kirbyAttacks.clear();
 		}
 		
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
 			a.update(delta);
 		}
 		
 		if (cappyJumpTime > 0){
 			cappyJumpTime--;
+		}
+		if (kibblePause > 0){
+			kibblePause--;
 		}
 		if (poppyJumpTime > 0){
 			poppyJumpTime--;
@@ -625,6 +716,16 @@ class PlayingState extends BasicGameState{
 			Collision c = e.collides(toCollide);
 			if (c != null) {
 				bg.enemies.remove(e);
+				break;
+			}
+		}
+	}
+	
+	public void kirbyCollision(Kirby k, KirbyGame bg) {
+		for (MovingEnemy e : bg.enemies) {
+			Collision c = e.collides(k);
+			if (c != null) {
+				k.health--;
 				break;
 			}
 		}
@@ -670,15 +771,12 @@ class PlayingState extends BasicGameState{
 			} else if (bg.kirby.getType() == bg.kirby.FIRE) {
 				FireKirby k = (FireKirby) bg.kirby;
 				k.spitFire(bg);
-				
 			} else if (bg.kirby.getType() == bg.kirby.KTWISTER) {
 				TwisterKirby k = (TwisterKirby) bg.kirby;
 				k.attack(bg);
 			} else if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 				SparkyKirby k = (SparkyKirby) bg.kirby;
-
 				k.spark(bg);
-
 			} else if (bg.kirby.getType() == bg.kirby.KSWORD) {
 				SwordKirby k = (SwordKirby) bg.kirby;
 				k.attack(bg);
@@ -701,7 +799,7 @@ class PlayingState extends BasicGameState{
 		} else {
 			bg.kirby.setSuck(false);
 			if (bg.kirby.getType() == bg.kirby.FIRE) {
-				bg.attacks.clear();
+				bg.kirbyAttacks.clear();
 			}
 			if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 				SparkyKirby k = (SparkyKirby) bg.kirby;
@@ -711,17 +809,23 @@ class PlayingState extends BasicGameState{
 		}
 		
 		// up arrow is spit
+		// if at door, go thru door
 		if (input.isKeyDown(Input.KEY_UP)) {
-			if (bg.kirby.getType() == bg.kirby.NONE) {
-				bg.kirby.spit(bg);
+			if (bg.kirby.getX() >= (bg.map.getWidth()*32) - (32*3) && bg.kirby.getX() <= (bg.map.getWidth()*32) - (32*2) &&
+					bg.kirby.getY() >= 11*32 && bg.kirby.getY() <= 13*32) {
+				bg.level++;
+				bg.enterState(KirbyGame.TRANSITIONSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
 			} else {
-				float xPos = bg.kirby.getX();
-				float yPos = bg.kirby.getY();
-				bg.kirby = new Kirby(xPos, yPos);
+				if (bg.kirby.getType() == bg.kirby.NONE) {
+					bg.kirby.spit(bg);
+				} else {
+					float xPos = bg.kirby.getX();
+					float yPos = bg.kirby.getY();
+					bg.kirby = new Kirby(xPos, yPos);
+				}
 			}
 		//down arrow is swallow
 		} else if (input.isKeyDown(Input.KEY_DOWN)) { 
-			System.out.println("swallow");
 			bg.kirby.swallow(bg);
 		}
 		
@@ -738,18 +842,16 @@ class PlayingState extends BasicGameState{
 		}
 	}
 	
-	public static int amountLives(){
-		return lives;
-	}
+
 	
 	private void checkLives(StateBasedGame game, KirbyGame bg) {
 		// Game over state if no lives left
-		if (lives <= 0) {
+		/*if (lives <= 0) {
 			//((GameOverState)game.getState(kirbyGame.GAMEOVERSTATE)).setUserScore(bounces);
 			bg.level = 1;
 			lives = 3;
 			game.enterState(KirbyGame.GAMEOVERSTATE);
-		}
+		}*/
 	}
 	
 	private void loadTiles(KirbyGame bg) {

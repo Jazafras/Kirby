@@ -73,6 +73,8 @@ import jig.Vector;
 	public int jumpTime;
 	public float maximumFallSpeed = 1;
 	public int actionImage;
+	
+	public int health = 5;
 
 	public Kirby(final float x, final float y) {
 		super(x, y, defaultKirbyImages, RIGHT_WALK);
@@ -185,10 +187,8 @@ import jig.Vector;
 			} else if (enemyType == SPARKY) {
 				bg.kirby = new SparkyKirby(xPos, yPos);
 			} else if (enemyType == SWORDKNIGHT) {
-				System.out.println("swordnight");
 				bg.kirby = new SwordKirby(xPos, yPos);
 			} else if (enemyType == WADDLEDOO) {
-				System.out.println("waddledoo");
 				bg.kirby = new BeamKirby(xPos, yPos);
 			} else if (enemyType == BONKERS) {
 				bg.kirby = new HammerKirby(xPos, yPos);
@@ -208,7 +208,7 @@ import jig.Vector;
 			float xPos = 30;
 			if (!super.facingRight()) //left
 				xPos = -30;
-			bg.attacks.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
+			bg.kirbyAttacks.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
 			enemySucking = null;
 		}
 	}
@@ -220,6 +220,10 @@ import jig.Vector;
         	super.setVelocity(new Vector(super.getVelocity().getX(), -0.4f));
         }
     }
+	
+	public void level() {
+		
+	}
 	 
 	public String toString() {
 		return "Kirby ~ x: " + super.getX() + ", y: " + super.getY();
