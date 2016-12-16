@@ -240,6 +240,19 @@ class PlayingState extends BasicGameState{
 			FighterKirby k = (FighterKirby) bg.kirby;
 			if (k.getFighterState())
 				enemyCollision(k, bg);
+		} else if (bg.kirby.getType() == bg.kirby.KBOMB) {
+			BombKirby k = (BombKirby) bg.kirby;
+			if (k.b != null) {
+				k.b.applyGravity(gravity * delta, tileMap);
+		        float x = k.b.getX();
+		        float y = k.b.getY();
+				if (k.b.isOnGround(tileMap)) {
+					k.b = null;
+					bg.attacks.clear();
+					bg.attacks.add(new Explosion(x, y, 1));
+				}
+			}
+			//k.attack(bg);
 		}
 			
 		
@@ -536,6 +549,21 @@ class PlayingState extends BasicGameState{
 			//System.out.println("brontoburt up time: " + waitTimeUp);
 		}
 		
+		Attack toRem = null;
+		for (Attack a : bg.attacks) {
+			if (a.getAttackType() == Attack.EXPLOSION) {
+				Explosion e = (Explosion) a;
+				e.bombtime--;
+				if (e.bombtime <= 0) {
+					System.out.println(a);
+					toRem = a;
+				}
+			}
+		}
+		if (toRem != null) {
+			bg.attacks.clear();
+		}
+		
 		for (Attack a : bg.attacks) {
 			a.update(delta);
 		}
@@ -630,6 +658,9 @@ class PlayingState extends BasicGameState{
 				k.attack(bg);
 			} else if (bg.kirby.getType() == bg.kirby.KCUTTER) {
 				CutterKirby k = (CutterKirby) bg.kirby;
+				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KBOMB) {
+				BombKirby k = (BombKirby) bg.kirby;
 				k.attack(bg);
 			}
 		} else {
