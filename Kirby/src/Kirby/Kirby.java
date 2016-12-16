@@ -32,6 +32,7 @@ import jig.Vector;
 	 public static final int KBEAM = 5;
 	 public static final int KHAMMER = 6;
 	 public static final int KFIGHTER = 7;
+	 public static final int KCUTTER = 8;
 	 
 	 // kirby states for images
 	 public static final int NORMAL = 0;
@@ -188,6 +189,8 @@ import jig.Vector;
 				bg.kirby = new HammerKirby(xPos, yPos);
 			} else if (enemyType == KNUCKLEJOE) {
 				bg.kirby = new FighterKirby(xPos, yPos);
+			} else if (enemyType == SIRKIBBLE) {
+				bg.kirby = new CutterKirby(xPos, yPos);
 			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
@@ -226,18 +229,6 @@ import jig.Vector;
 	public int getType() {
 		return NONE;
 	}
-	
-	public static final String[] boomerangKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTBOOMERANG,
-			KirbyGame.KIRBY_LEFTBOOMERANG,
-			KirbyGame.KIRBY_RIGHTBOOMERANG_SUCC,
-			KirbyGame.KIRBY_LEFTBOOMERANG_SUCC,
-			KirbyGame.KIRBY_RIGHTBOOMERANG_FLY,
-			KirbyGame.KIRBY_LEFTBOOMERANG_FLY,
-			KirbyGame.KIRBY_RIGHTBOOMERANG_ATTACK,
-			KirbyGame.KIRBY_LEFTBOOMERANG_ATTACK,
-		};
 	
 	//Sleepy Kirby is a special case with only one image
 	//Kirby loses if he switches to this state

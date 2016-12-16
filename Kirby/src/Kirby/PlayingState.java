@@ -132,9 +132,10 @@ class PlayingState extends BasicGameState{
 			wd.setMoving(bg);
 		}*/
 		
-		for (Attack a : bg.attacks)
+		for (Attack a : bg.attacks) {
 			a.render(g, xOffset, yOffset);
-		
+		}
+			
 		//for(int i = 0; i < players.size(); i++){
 			//players.get(i).render(g, xOffset, yOffset);
 			//bg.kirby.render(g, xOffset, yOffset);
@@ -177,6 +178,16 @@ class PlayingState extends BasicGameState{
 				move = LEFT;
 			} else if (bg.kirby.getVelocity().getX() > 0){
 				move = RIGHT;
+			}
+		}
+		
+		if (bg.kirby.getType() == bg.kirby.KCUTTER) {
+			CutterKirby k = (CutterKirby) bg.kirby;
+			if (k.b != null) {
+				Collision c = k.b.collides(k);
+				if (c != null && k.cutterTime < CutterKirby.CUTTER_TIME - 5) {
+					bg.attacks.remove(k.b);
+				}
 			}
 		}
 		
@@ -548,8 +559,9 @@ class PlayingState extends BasicGameState{
 			//System.out.println("brontoburt up time: " + waitTimeUp);
 		}
 		
-		for (Attack a : bg.attacks)
+		for (Attack a : bg.attacks) {
 			a.update(delta);
+		}
 		
 		if (cappyJumpTime > 0){
 			cappyJumpTime--;
@@ -637,10 +649,15 @@ class PlayingState extends BasicGameState{
 			} else if (bg.kirby.getType() == bg.kirby.KFIGHTER) {
 				FighterKirby k = (FighterKirby) bg.kirby;
 				k.attack(bg);
+			} else if (bg.kirby.getType() == bg.kirby.KCUTTER) {
+				CutterKirby k = (CutterKirby) bg.kirby;
+				k.attack(bg);
 			}
 		} else {
 			bg.kirby.setSuck(false);
-			bg.attacks.clear();
+			if (bg.kirby.getType() == bg.kirby.FIRE) {
+				bg.attacks.clear();
+			}
 			if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 				SparkyKirby k = (SparkyKirby) bg.kirby;
 				k.setSparkState(false);
