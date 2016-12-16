@@ -45,7 +45,7 @@ import jig.Vector;
 		Image i;
 		if (attackState){
 			i = new Image(attackingImages[super.getFacing()]);
-			i.draw(super.getX() - 40 - offsetX, super.getY() + 4 - offsetY);
+			i.draw(super.getX() - 4 - offsetX, super.getY() + 4 - offsetY);
 		}
 		else{
 			i = new Image(facingImages[super.getFacing()]);
@@ -58,6 +58,16 @@ import jig.Vector;
 		attackState = true;
 		attackTime = 20;
 		
+	}
+	
+	public void spitFire(KirbyGame bg) {
+		bg.enemyAttacks.clear();
+		float xPos = 30;
+		if (!super.facingRight()) //left
+			xPos = -50;
+		for(HotHead h: bg.hothead){
+			bg.enemyAttacks.add(new Attack_SpitFire(h.getX() + xPos, h.getY() + 10, super.getFacing()));
+		}
 	}
 
 	@Override

@@ -113,6 +113,9 @@ class PlayingState extends BasicGameState{
 			Bonkers bonkers1 = new Bonkers(1258, 365);
 			bg.enemies.add(bonkers1);
 			bg.bonkers.add(bonkers1);
+			SirKibble esirkibble = new SirKibble(1085, 290);
+			bg.sirkibble.add(esirkibble);
+			bg.enemies.add(esirkibble);
 		}
 		
 		float xOffset = getXOffset(bg);
@@ -163,6 +166,10 @@ class PlayingState extends BasicGameState{
 		for (Brontoburt b : bg.brontoburt) {
 			b.setMoving(bg);
 		}
+		for (SirKibble k : bg.sirkibble) {
+			k.setMoving(bg);
+		}
+		
 		/*for (WaddleDee wd : bg.waddledee) {
 			wd.setMoving(bg);
 		}*/
@@ -364,9 +371,17 @@ class PlayingState extends BasicGameState{
 		
 		//Hot Head movement updates
 		for (HotHead h : bg.hothead){
+			bg.enemyAttacks.clear();
 			if (h.getVelocity().getY() == 0 && h.getVelocity().getX() == 0){
 				h.setVelocity(new Vector(.07f, 0f)); //move right
 			}
+			float distance = Math.abs(h.getPosition().getX() - bg.kirby.getPosition().getX());
+			if(distance <= 20){
+				h.attack(bg);
+				h.spitFire(bg);
+				
+			}
+			
 			if (h.sideCollision(tileMap)) {
 				if (h.getVelocity().getX() < 0) {
 					h.translate(new Vector(.2f, h.getVelocity().getY()).scale(delta));
@@ -472,6 +487,7 @@ class PlayingState extends BasicGameState{
 		}
 		
 		//Sir Kibble movement updates
+		/*
 		for (SirKibble s : bg.sirkibble){
 			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0 && kibblePause == 0){
 				if(s.retFacing() == 0){ //facing right
@@ -524,7 +540,7 @@ class PlayingState extends BasicGameState{
 				}
 			}
 		}
-		
+		*/
 		//Sparky movement updates
 		for (Sparky s : bg.sparky){
 			if(bg.kirby.getPosition().getX() < s.getPosition().getX()){
