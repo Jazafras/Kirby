@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -13,6 +17,11 @@ import jig.Vector;
 		{
 			KirbyGame.WADDLEDOO_RIGHT,
 			KirbyGame.WADDLEDOO_LEFT,
+
+		};
+	
+	public static final String[] attackingImages = 
+		{
 			KirbyGame.WADDLEDOO_ATTACK_R,
 			KirbyGame.WADDLEDOO_ATTACK_L
 		};
@@ -84,4 +93,15 @@ import jig.Vector;
 	public int getEnemyType() {
 		return WADDLEDOO;
 	}
+
+
+	public void attack(KirbyGame bg) {
+		super.setFacingImages(attackingImages);
+		super.setCurImage(attackingImages[super.getFacing()]);
+		super.setPosition(super.getX(), super.getY());
+		
+	}
+
+
+	
 }
