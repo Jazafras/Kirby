@@ -38,9 +38,11 @@ class PlayingState extends BasicGameState{
 	private int scarfyJumpTime = -1;
 	private int cappyJumpTime = -1;
 	private int poppyJumpTime = -1;
+	private int kibblePause = 0;
 	private int sparkyDistance = 40;
 	private int twisterDistance = 80;
 	private int swordDistance = 100;
+	private int kibbleDistance = 40;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -111,6 +113,9 @@ class PlayingState extends BasicGameState{
 			Bonkers bonkers1 = new Bonkers(1258, 365);
 			bg.enemies.add(bonkers1);
 			bg.bonkers.add(bonkers1);
+			SirKibble esirkibble = new SirKibble(1085, 290);
+			bg.sirkibble.add(esirkibble);
+			bg.enemies.add(esirkibble);
 		}
 		
 		float xOffset = getXOffset(bg);
@@ -161,11 +166,19 @@ class PlayingState extends BasicGameState{
 		for (Brontoburt b : bg.brontoburt) {
 			b.setMoving(bg);
 		}
+		for (SirKibble k : bg.sirkibble) {
+			k.setMoving(bg);
+		}
+		
 		/*for (WaddleDee wd : bg.waddledee) {
 			wd.setMoving(bg);
 		}*/
 		
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
+			a.render(g, xOffset, yOffset);
+		}
+		
+		for (Attack a : bg.enemyAttacks) {
 			a.render(g, xOffset, yOffset);
 		}
 			
@@ -219,7 +232,7 @@ class PlayingState extends BasicGameState{
 			if (k.b != null) {
 				Collision c = k.b.collides(k);
 				if (c != null && k.cutterTime < CutterKirby.CUTTER_TIME - 5) {
-					bg.attacks.remove(k.b);
+					bg.kirbyAttacks.remove(k.b);
 				}
 			}
 		}
@@ -236,12 +249,12 @@ class PlayingState extends BasicGameState{
 			bg.kirby.hitGround();
 		}
 		
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
 			for (MovingEnemy e : bg.enemies) {
 				Collision c = e.collides(a);
 				if (c != null) {
 					bg.enemies.remove(e);
-					bg.attacks.remove(a);
+					bg.kirbyAttacks.remove(a);
 					break;
 				}
 			}
@@ -291,8 +304,8 @@ class PlayingState extends BasicGameState{
 		        float y = k.b.getY();
 				if (k.b.isOnGround(tileMap)) {
 					k.b = null;
-					bg.attacks.clear();
-					bg.attacks.add(new Explosion(x, y, 1));
+					bg.kirbyAttacks.clear();
+					bg.kirbyAttacks.add(new Explosion(x, y, 1));
 				}
 			}
 			//k.attack(bg);
@@ -358,9 +371,17 @@ class PlayingState extends BasicGameState{
 		
 		//Hot Head movement updates
 		for (HotHead h : bg.hothead){
+			bg.enemyAttacks.clear();
 			if (h.getVelocity().getY() == 0 && h.getVelocity().getX() == 0){
 				h.setVelocity(new Vector(.07f, 0f)); //move right
 			}
+			float distance = Math.abs(h.getPosition().getX() - bg.kirby.getPosition().getX());
+			if(distance <= 20){
+				h.attack(bg);
+				h.spitFire(bg);
+				
+			}
+			
 			if (h.sideCollision(tileMap)) {
 				if (h.getVelocity().getX() < 0) {
 					h.translate(new Vector(.2f, h.getVelocity().getY()).scale(delta));
@@ -466,18 +487,60 @@ class PlayingState extends BasicGameState{
 		}
 		
 		//Sir Kibble movement updates
+		/*
 		for (SirKibble s : bg.sirkibble){
-			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0){
-				s.setVelocity(new Vector(-.05f, 0f)); //move left
+			if (s.getVelocity().getY() == 0 && s.getVelocity().getX() == 0 && kibblePause == 0){
+				if(s.retFacing() == 0){ //facing right
+					s.setVelocity(new Vector(.05f, 0f)); //move left
+				}
+				else{
+					s.setVelocity(new Vector(-.05f, 0f)); //move left
+				}
 			}
 			if (s.getPosition().getX() > 1086){
+				s.setPosition(1085,s.getPosition().getY());
 				s.setVelocity(new Vector(-.05f, 0f)); //move left
 			}
-			if (s.getPosition().getX() < 1018){
+			if (s.getPosition().getX() < 1050){
+				s.setPosition(1051,s.getPosition().getY());
 				s.setVelocity(new Vector(.05f, 0f)); //move right
 			}
+			if(Math.abs(bg.kirby.getPosition().getX() - s.getPosition().getX()) < 200){
+				if(Math.abs(bg.kirby.getPosition().getY() - s.getPosition().getY()) < kibbleDistance){
+					if(bg.kirby.getPosition().getX() < 1066 && s.retFacing() == 1 && kibblePause == 0){ //left of kibble and kibble is facing left
+						s.setVelocity(new Vector(0f, 0f)); 
+						kibblePause = 35;
+						s.attack(bg);
+					}
+					else if(bg.kirby.getPosition().getX() > 1066 && s.retFacing() == 0 && kibblePause == 0){ //right of kibble and kibble is facing right 
+						s.setVelocity(new Vector(0f, 0f)); 
+						kibblePause = 35;
+						s.attack(bg);
+					}
+
+				}
+				if (s.getPosition().getX() > 1086){
+					s.setPosition(1085,s.getPosition().getY());
+					s.setVelocity(new Vector(-.05f, 0f)); //move left
+				}
+				if (s.getPosition().getX() < 1050){
+					s.setPosition(1051,s.getPosition().getY());
+					s.setVelocity(new Vector(.05f, 0f)); //move right
+				}
+			}
+			if (s.b != null) {
+				Collision c = s.b.collides(bg.kirby);
+				//kirby collides with boomerang
+				if (c != null && s.attackTime < CutterKirby.CUTTER_TIME - 5) {
+					bg.enemyAttacks.remove(s.b);
+				}
+				//kirby does not collide with boomerang
+				else if (c == null && s.attackTime ==0){
+					bg.enemyAttacks.remove(s.b);
+				}
+			}
 		}
-		
+		*/
 		//Sparky movement updates
 		for (Sparky s : bg.sparky){
 			if(bg.kirby.getPosition().getX() < s.getPosition().getX()){
@@ -626,7 +689,7 @@ class PlayingState extends BasicGameState{
 		}
 		
 		Attack toRem = null;
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
 			if (a.getAttackType() == Attack.EXPLOSION) {
 				Explosion e = (Explosion) a;
 				e.bombtime--;
@@ -637,15 +700,18 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		if (toRem != null) {
-			bg.attacks.clear();
+			bg.kirbyAttacks.clear();
 		}
 		
-		for (Attack a : bg.attacks) {
+		for (Attack a : bg.kirbyAttacks) {
 			a.update(delta);
 		}
 		
 		if (cappyJumpTime > 0){
 			cappyJumpTime--;
+		}
+		if (kibblePause > 0){
+			kibblePause--;
 		}
 		if (poppyJumpTime > 0){
 			poppyJumpTime--;
@@ -749,7 +815,7 @@ class PlayingState extends BasicGameState{
 		} else {
 			bg.kirby.setSuck(false);
 			if (bg.kirby.getType() == bg.kirby.FIRE) {
-				bg.attacks.clear();
+				bg.kirbyAttacks.clear();
 			}
 			if (bg.kirby.getType() == bg.kirby.KSPARKY) {
 				SparkyKirby k = (SparkyKirby) bg.kirby;

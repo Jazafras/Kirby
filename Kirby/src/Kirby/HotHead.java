@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import jig.Entity;
 import jig.ResourceManager;
 import jig.Vector;
@@ -12,7 +16,10 @@ import jig.Vector;
 	public static final String[] facingImages = 
 		{
 			KirbyGame.HOTHEAD_RIGHT,
-			KirbyGame.HOTHEAD_LEFT,
+			KirbyGame.HOTHEAD_LEFT
+		};
+	public static final String[] attackingImages = 
+		{
 			KirbyGame.HOTHEAD_ATTACK_R,
 			KirbyGame.HOTHEAD_ATTACK_L
 		};
@@ -22,6 +29,8 @@ import jig.Vector;
 	private String direction;
 	private boolean firstPath;
 	private int waitTime;
+	private int attackTime;
+	private boolean attackState;
 	Random rand = new Random();
 
 	public HotHead(final float x, final float y) {
@@ -31,55 +40,45 @@ import jig.Vector;
 		waitTime = rand.nextInt(200);
 	}
 
-	
-	public void setMoving(KirbyGame bg) {
-		if ((hasPassed() || firstPath) && waitTime <= 0) {
-			if (firstPath)
-				firstPath = false;
-			Vertex v = bg.vPos.get(vPos.toString());
-			int r = rand.nextInt(v.neighbors.size());
-			int c = 0;
-			for (Vertex n : v.getNeighbors()) {
-				if (c == r) nextPos = n;
-				c++;
-			}
-			if (nextPos.getX() > vPos.getX()) {
-				setVelocity(new Vector(.07f, 0f));
-				direction = "right";
-			} else if (nextPos.getX() < vPos.getX()) {
-				setVelocity(new Vector(-.07f, 0f));
-				direction = "left";
-			} else if (nextPos.getY() > vPos.getY()) {
-				setVelocity(new Vector(0f, .07f));
-				direction = "below";
-			} else {
-				setVelocity(new Vector(0f, -.07f));
-				direction = "above";
-			}
-			waitTime = rand.nextInt(1);
+	@Override
+	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
+		Image i;
+		if (attackState){
+			i = new Image(attackingImages[super.getFacing()]);
+			i.draw(super.getX() - 4 - offsetX, super.getY() + 4 - offsetY);
 		}
-		if (hasPassed()) {
-			setVelocity(new Vector(0f, 0f));
-			vPos = nextPos;
+		else{
+			i = new Image(facingImages[super.getFacing()]);
+			i.draw(super.getX() - 4 - offsetX, super.getY() + 4 - offsetY);
 		}
-		if (waitTime > 0)
-			waitTime--;
-	}	
-	
-	private boolean hasPassed() {
-		if (direction != null && nextPos != null) {
-			if (direction.equals("left"))
-				return getPosition().getX() <= nextPos.getX();
-			else if (direction.equals("right"))
-				return getPosition().getX() >= nextPos.getX();
-			else if (direction.equals("above"))
-				return getPosition().getY() <= nextPos.getY();
-			else
-				return getPosition().getY() >= nextPos.getY();
-		}
-		return false;
 	}
 	
+	public void attack(KirbyGame bg) {
+
+		attackState = true;
+		attackTime = 20;
+		
+	}
+	
+	public void spitFire(KirbyGame bg) {
+		bg.enemyAttacks.clear();
+		float xPos = 30;
+		if (!super.facingRight()) //left
+			xPos = -50;
+		for(HotHead h: bg.hothead){
+			bg.enemyAttacks.add(new Attack_SpitFire(h.getX() + xPos, h.getY() + 10, super.getFacing()));
+		}
+	}
+
+	@Override
+	public void update(final int delta) {
+		translate(super.getVelocity().scale(delta));
+		if (attackTime > 0) {
+			attackTime--;
+		} else {
+			attackState = false;
+		}
+	}	
 	@Override
 	public int getEnemyType() {
 		return HOTHEAD;

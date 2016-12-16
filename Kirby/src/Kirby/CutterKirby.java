@@ -70,7 +70,7 @@ public class CutterKirby extends Kirby {
 			if (!super.facingRight()) //left
 				xPos = -30;
 			b = new Boomerang(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing());
-			bg.attacks.add(b);
+			bg.kirbyAttacks.add(b);
 		}
 	}
 	
