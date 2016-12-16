@@ -31,7 +31,6 @@
 	- **[4]** Coordination from Client to Server
 	- **[5]** WaddleDoo attacks
 	- **[6]** Bonkers attacks
-	- **[7]** Knuckle Joe attacks
 	
 - Jasmine
 	- **[1]**  Base skeleton for enemies
@@ -52,23 +51,23 @@
 	- **[16]** Sparky attacks
 	- **[17]** Twister attacks
 	- **[18]** Sword Knight attacks
+	- **[19]** Sir Kibble attacks
 	
 - Audrey
 
 ####### Open Issues #######
 
 - Priya
-	- **[8]** Hot Head attacks
-	- **[9]** Poppy Jr. attacks
-	
+	- **[7]** Hot Head attacks
+	- **[8]** Poppy Jr. attacks
+	- **[9]** Knuckle Joe attacks
 
 - Jasmine
+	- **[20]** Poppy Jr. attacks
 	- **[?]** UFO movement
-	- **[?]** Sir Kibble attacks
 	- **[?]** UFO attacks
 	- **[?]** Bonkers attacks
 	- **[?]** Hot Head attacks
-	- **[?]** Poppy Jr. attacks
 	- **[?]** Finetune Noddy jumping
 	- **[?]** Finetune WaddleDoo jumping
 	- **[?]** organize enemy movement code better

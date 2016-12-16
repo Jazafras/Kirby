@@ -28,13 +28,7 @@ import jig.Vector;
 			
 		};
 	
-	private boolean inNest;
-	private Vertex nextPos;
-	private Vector movingDir;
-	private String direction;
-	private boolean firstPath;
-	private int waitTime;
-	Random rand = new Random();
+
 	
 	private int attackTime;
 	private boolean attackState;
