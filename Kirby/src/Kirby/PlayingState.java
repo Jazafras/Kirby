@@ -307,15 +307,57 @@ class PlayingState extends BasicGameState{
 		
 		//Knuckle Joe movement updates
 		for (KnuckleJoe w : bg.knucklejoe){
-			if (w.getVelocity().getX() == 0){
-				w.setVelocity(new Vector(.09f, 0f)); //go right
+			float distance = Math.abs(w.getPosition().getX() - bg.kirby.getPosition().getX());
+			if (bg.kirby.collides(w) != null){
+				w.setVelocity(new Vector(0f, 0f));
 			}
-			if (w.getPosition().getX() < 1394){
-				w.setVelocity(new Vector(.09f, 0f));
+			if(bg.kirby.getPosition().getX() < w.getPosition().getX() && bg.kirby.getPosition().getX() != w.getPosition().getX()){ //kirby is to the left of waddledoo
+				w.setVelocity(new Vector(-.09f, 0f)); //move left
+				if(distance <= 60){
+					w.attack(bg);
+				}
 			}
-			if (w.getPosition().getX() > 1865){
-				w.setVelocity(new Vector(-.09f, 0f));
+			if (bg.kirby.getPosition().getX() > w.getPosition().getX() && bg.kirby.getPosition().getX() != w.getPosition().getX()){ //kirby is to the right of waddledoo
+				w.setVelocity(new Vector(.09f, 0f)); //move right
+				if(distance <= 60){
+					w.attack(bg);
+				}
 			}
+			
+			if (w.sideCollision(tileMap)) {
+				//System.out.println("waddledoo wall collision");			
+				if (w.getVelocity().getX() < 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("left waddledoo collision");
+					w.setVelocity(new Vector(-.09f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+				if (w.getVelocity().getX() > 0) {
+					w.translate(new Vector(0f, -0.1f));
+					//System.out.println("RIGHT waddledoo collision");
+					w.setVelocity(new Vector(.09f, -2f)); //jump
+					w.translate(new Vector(0f, -2f));
+				}
+			}
+			if (!w.isOnGround(tileMap) && !w.sideCollision(tileMap)){
+				w.setVelocity(new Vector(w.getVelocity().getX(), .07f));
+			}
+						
+//			if (w.getVelocity().getX() == 0){
+//				w.setVelocity(new Vector(.09f, 0f)); //go right
+//			}
+//			if (w.getPosition().getX() < 1394){
+//				w.setVelocity(new Vector(.09f, 0f));
+//				if(distance <= 40){
+//					w.attack(bg);
+//				}
+//			}
+//			if (w.getPosition().getX() > 1865){
+//				w.setVelocity(new Vector(-.09f, 0f));
+//				if(distance <= 40){
+//					w.attack(bg);
+//				}
+//			}
 		}
 		
 		//Noddy movement updates
