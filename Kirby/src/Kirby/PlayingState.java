@@ -102,6 +102,7 @@ class PlayingState extends BasicGameState{
 		
 		if (bg.level == 1) {
 			bg.enemies.clear();
+			bg.enemyAttacks.clear();
 			bg.kirby = new Kirby(90, 422);
 			Brontoburt brontoburt1 = new Brontoburt(600, 220);
 			bg.enemies.add(brontoburt1);
@@ -135,6 +136,7 @@ class PlayingState extends BasicGameState{
 			
 		} else if (bg.level == 2) { 
 			bg.enemies.clear();
+			bg.enemyAttacks.clear();
 			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains2.png"));
 			Brontoburt brontoburt1 = new Brontoburt(600, 220);
 			bg.enemies.add(brontoburt1);
