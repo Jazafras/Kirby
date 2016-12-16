@@ -19,6 +19,11 @@ import jig.Vector;
 	public static final int RIGHT_ATTACK = 2;
 	public static final int LEFT_ATTACK = 3;
 
+	public static final int RIGHT = 0;
+	public static final int LEFT = 1;
+	public static final int RIGHTA = 2;
+	public static final int LEFTA = 3;
+	
 	/**
 	 * Constructs the moving entity.
 	 * @param x: position's x coordinate

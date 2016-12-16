@@ -53,7 +53,7 @@ public class SparkyKirby extends Kirby {
 		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
 	}
 	
-	public void attack(KirbyGame bg) {
+	public void spark(KirbyGame bg) {
 		sparkState = true;
 	}
 	

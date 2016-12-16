@@ -23,49 +23,52 @@
 	- **[20]** created kirby's fighter state
 
 - Priya
-
+	- **[1]** Socket base program
+	- **[2]** Client
+	- **[3]** Server
+	- **[4]** Coordination from Client to Server
+	- **[5]** WaddleDoo attacks
+	- **[6]** Bonkers attacks
+	
 - Jasmine
-	- **[1]** Base skeleton for enemies
-	- **[2]** Infrastructure for Kirby state images
-	- **[3]** WaddleDee movement
-	- **[4]** Brontoburt movement
-	- **[5]** Twister movement
-	- **[6]** Scarfy movement
-	- **[7]** WaddleDoo movement
-	- **[8]** Cappy movement
-	- **[9]** Noddy movement
+	- **[1]**  Base skeleton for enemies
+	- **[2]**  Infrastructure for Kirby state images
+	- **[3]**  WaddleDee movement
+	- **[4]**  Brontoburt movement
+	- **[5]**  Twister movement
+	- **[6]**  Scarfy movement
+	- **[7]**  WaddleDoo movement
+	- **[8]**  Cappy movement
+	- **[9]**  Noddy movement
 	- **[10]** Poppy Jr. movement
 	- **[11]** Hot Head movement
 	- **[12]** Sir Kibble movement
 	- **[13]** Knuckle Joe movement
 	- **[14]** Bonkers movement
+	- **[15]** Sword Knight movement
+	- **[16]** Sparky attacks
+	- **[17]** Twister attacks
+	
 - Audrey
 
 ####### Open Issues #######
 
 - Priya
-	- **[1]** Socket base program
-	- **[2]** Client
-	- **[3]** Server
-	- **[4]** Coordination from Client to Server
+	- **[7]** Hot Head attacks
+	- **[8]** Poppy Jr. attacks
 
 - Jasmine
-	- **[15]** Sword Knight movement
+	- **[18]** Sword Knight attacks
 	- **[?]** UFO movement
-	- **[?]** Sword Knight attacks
 	- **[?]** Sir Kibble attacks
 	- **[?]** Knuckle Joe attacks
 	- **[?]** UFO attacks
-	- **[?]** Sparky attacks
 	- **[?]** Bonkers attacks
 	- **[?]** Hot Head attacks
 	- **[?]** Poppy Jr. attacks
-	- **[?]** WaddleDoo attacks
-	- **[?]** Twister attacks
 	- **[?]** Finetune Noddy jumping
 	- **[?]** Finetune WaddleDoo jumping
 	- **[?]** organize enemy movement code better
-	- **[?]** fix drop in fps for jumping enemies
 
 - Audrey
 	- **[1]** Skeleton for kirby
