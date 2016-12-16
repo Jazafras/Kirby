@@ -38,6 +38,7 @@ class PlayingState extends BasicGameState{
 	private int scarfyJumpTime = -1;
 	private int cappyJumpTime = -1;
 	private int poppyJumpTime = -1;
+	private int sparkyDistance = 40;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -321,17 +322,14 @@ class PlayingState extends BasicGameState{
 			else if (bg.kirby.getPosition().getX() > w.getPosition().getX() && bg.kirby.getPosition().getX() != w.getPosition().getX()){ //kirby is to the right of waddledoo
 				w.setVelocity(new Vector(.05f, 0f)); //move right
 			}
-			if (w.sideCollision(tileMap)) {
-				//System.out.println("waddledoo wall collision");			
+			if (w.sideCollision(tileMap)) {		
 				if (w.getVelocity().getX() < 0) {
 					w.translate(new Vector(0f, -0.1f));
-					//System.out.println("left waddledoo collision");
 					w.setVelocity(new Vector(-.05f, -2f)); //jump
 					w.translate(new Vector(w.getVelocity().getX(), -2f));
 				}
 				if (w.getVelocity().getX() > 0) {
 					w.translate(new Vector(0f, -0.1f));
-					//System.out.println("RIGHT waddledoo collision");
 					w.setVelocity(new Vector(.05f, -2f)); //jump
 					w.translate(new Vector(0f, -2f));
 				}
@@ -401,6 +399,12 @@ class PlayingState extends BasicGameState{
 			}
 			else {
 				s.setFacing(RIGHT);
+				//s.attack(bg);
+			}
+			if(Math.abs(bg.kirby.getPosition().getX() - s.getPosition().getX()) < sparkyDistance){
+				if(Math.abs(bg.kirby.getPosition().getY() - s.getPosition().getY()) < sparkyDistance){
+					s.attack(bg);
+				}
 			}
 		}
 		

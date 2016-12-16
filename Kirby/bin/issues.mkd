@@ -25,20 +25,23 @@
 - Priya
 
 - Jasmine
-	- **[1]** Base skeleton for enemies
-	- **[2]** Infrastructure for Kirby state images
-	- **[3]** WaddleDee movement
-	- **[4]** Brontoburt movement
-	- **[5]** Twister movement
-	- **[6]** Scarfy movement
-	- **[7]** WaddleDoo movement
-	- **[8]** Cappy movement
-	- **[9]** Noddy movement
+	- **[1]**  Base skeleton for enemies
+	- **[2]**  Infrastructure for Kirby state images
+	- **[3]**  WaddleDee movement
+	- **[4]**  Brontoburt movement
+	- **[5]**  Twister movement
+	- **[6]**  Scarfy movement
+	- **[7]**  WaddleDoo movement
+	- **[8]**  Cappy movement
+	- **[9]**  Noddy movement
 	- **[10]** Poppy Jr. movement
 	- **[11]** Hot Head movement
 	- **[12]** Sir Kibble movement
 	- **[13]** Knuckle Joe movement
 	- **[14]** Bonkers movement
+	- **[15]** Sword Knight movement
+	- **[16]** Sparky attacks
+	
 - Audrey
 
 ####### Open Issues #######
@@ -50,13 +53,12 @@
 	- **[4]** Coordination from Client to Server
 
 - Jasmine
-	- **[15]** Sword Knight movement
+
 	- **[?]** UFO movement
 	- **[?]** Sword Knight attacks
 	- **[?]** Sir Kibble attacks
 	- **[?]** Knuckle Joe attacks
 	- **[?]** UFO attacks
-	- **[?]** Sparky attacks
 	- **[?]** Bonkers attacks
 	- **[?]** Hot Head attacks
 	- **[?]** Poppy Jr. attacks
