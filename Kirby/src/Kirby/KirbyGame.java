@@ -344,7 +344,7 @@ public class KirbyGame extends StateBasedGame {
 		
 		level1Setup();
 		
-		kirby = new Kirby(90, 422);
+		kirby = new Kirby(90, 400);
 		
 		Brontoburt brontoburt1 = new Brontoburt(600, 220);
 		enemies.add(brontoburt1);
@@ -359,6 +359,9 @@ public class KirbyGame extends StateBasedGame {
 		noddy.add(noddy1);
 		enemies.add(noddy1);
 		//PoppyJr epoppyjr = new PoppyJr(1940, 320);
+		PoppyJr epoppyjr = new PoppyJr(200, 320);
+		poppy.add(epoppyjr);
+		enemies.add(epoppyjr);
 		SirKibble esirkibble = new SirKibble(1085, 290);
 		sirkibble.add(esirkibble);
 		enemies.add(esirkibble);
