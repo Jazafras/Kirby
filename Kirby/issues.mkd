@@ -50,6 +50,7 @@
 	- **[15]** Sword Knight movement
 	- **[16]** Sparky attacks
 	- **[17]** Twister attacks
+	- **[18]** Sword Knight attacks
 	
 - Audrey
 
@@ -61,10 +62,8 @@
 	- **[9]** Knuckle Joe attacks
 
 - Jasmine
-	- **[18]** Sword Knight attacks
 	- **[?]** UFO movement
 	- **[?]** Sir Kibble attacks
-
 	- **[?]** UFO attacks
 	- **[?]** Bonkers attacks
 	- **[?]** Hot Head attacks

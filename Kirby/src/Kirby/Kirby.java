@@ -208,7 +208,7 @@ import jig.Vector;
 			float xPos = 30;
 			if (!super.facingRight()) //left
 				xPos = -30;
-			bg.attacks.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
+			bg.kirbyAttacks.add(new Star(bg.kirby.getX() + xPos, bg.kirby.getY(), super.getFacing()));
 			enemySucking = null;
 		}
 	}
