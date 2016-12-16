@@ -29,8 +29,8 @@ import jig.Vector;
 	private String direction;
 	private boolean firstPath;
 	private int waitTime;
-	private int attackTime;
-	private boolean attackState;
+	public int attackTime;
+	public boolean attackState;
 	Random rand = new Random();
 
 	public HotHead(final float x, final float y) {
@@ -61,7 +61,6 @@ import jig.Vector;
 	}
 	
 	public void spitFire(KirbyGame bg) {
-		bg.enemyAttacks.clear();
 		float xPos = 30;
 		if (!super.facingRight()) //left
 			xPos = -50;
