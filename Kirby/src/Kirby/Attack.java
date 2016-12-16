@@ -9,6 +9,8 @@ public class Attack extends MovingEntity {
 	public static final int STAR = 0;
 	public static final int SPITFIRE = 1;
 	public static final int BOOMERANG = 2;
+	public static final int BOMB = 3;
+	public static final int EXPLOSION = 4;
 
 	public Attack(float x, float y, String[] facingImages, int facing) {
 		super(x, y, facingImages, facing);

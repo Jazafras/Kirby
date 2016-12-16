@@ -116,6 +116,7 @@ public class KirbyGame extends StateBasedGame {
 	public static final String KIRBY_LEFTPOPPY_ATTACK = "Kirby/resources/poppykirby/kirby_left_attack.png";
 	//bomb
 	public static final String BOMB_RSC = "Kirby/resources/bomb.png";
+	public static final String EXPLOSION_RSC = "Kirby/resources/explosion.png";
 	
 	//sparky kirby
 	public static final String KIRBY_LEFTSPARKY = "Kirby/resources/sparkykirby/kirby_left.png";
@@ -354,7 +355,8 @@ public class KirbyGame extends StateBasedGame {
 		Noddy noddy1 = new Noddy(2066, 390);
 		noddy.add(noddy1);
 		enemies.add(noddy1);
-		PoppyJr epoppyjr = new PoppyJr(1940, 320);
+		//PoppyJr epoppyjr = new PoppyJr(1940, 320);
+		PoppyJr epoppyjr = new PoppyJr(200, 320);
 		poppy.add(epoppyjr);
 		enemies.add(epoppyjr);
 		SirKibble esirkibble = new SirKibble(1085, 290);
@@ -449,6 +451,7 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(KIRBY_LEFTPOPPY_ATTACK);
 		
 		ResourceManager.loadImage(BOMB_RSC);
+		ResourceManager.loadImage(EXPLOSION_RSC);
 		
 		ResourceManager.loadImage(KIRBY_LEFTSPARKY);
 		ResourceManager.loadImage(KIRBY_RIGHTSPARKY);

@@ -224,4 +224,12 @@ import jig.Vector;
         super.setPosition(super.getX(), super.getY() - 15);    
         return false;
     }
+	
+	public void applyGravity(float gravity, Tile[][] tileMap){
+        if(getVelocity().getY() < maximumFallSpeed) {
+            setVelocity(new Vector(getVelocity().getX(), getVelocity().getY() + gravity));
+            if (getVelocity().getY() > maximumFallSpeed) 
+            	setVelocity(new Vector(getVelocity().getX(), maximumFallSpeed));
+        }
+    }
 }
