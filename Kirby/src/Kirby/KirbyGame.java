@@ -43,11 +43,13 @@ public class KirbyGame extends StateBasedGame {
 	public static final int PLAYINGSTATE = 1;
 	public static final int GAMEOVERSTATE = 2;
 	public static final int TRANSITIONSTATE = 3;
+	public static final int YOUWINSTATE = 4;
 	
 	// background
 	public static final String BACKGROUND_IMG_RSC = "Kirby/resources/background.png";
 	public static final String STARTUP_IMG_RSC = "Kirby/resources/startup.png";
 	public static final String GAMEOVER_IMG_RSC = "Kirby/resources/GAMEOVER.png";
+	public static final String YOUWIN_IMG_RSC = "Kirby/resources/YOUWIN.png";
 	
 	/***Kirby images***/
 	//default
@@ -340,46 +342,15 @@ public class KirbyGame extends StateBasedGame {
 		addState(new GameOverState());
 		addState(new PlayingState());
 		addState(new TransitionState());
+		addState(new YouWinState());
 		loadImages();
 		
 		level = 1;
 		
 		level1Setup();
 		
-		kirby = new Kirby(90, 400);
+		kirby = new Kirby(90, 422);
 		
-		Brontoburt brontoburt1 = new Brontoburt(600, 220);
-		enemies.add(brontoburt1);
-		brontoburt.add(brontoburt1);
-		Cappy cappy1 = new Cappy(1669, 360);
-		cappy.add(cappy1);
-		enemies.add(cappy1);
-		HotHead hothead1 = new HotHead(774, 422);
-		hothead.add(hothead1);
-		enemies.add(hothead1);
-		Noddy noddy1 = new Noddy(2066, 390);
-		noddy.add(noddy1);
-		enemies.add(noddy1);
-		//PoppyJr epoppyjr = new PoppyJr(1940, 320);
-
-		PoppyJr epoppyjr = new PoppyJr(200, 320);
-		poppy.add(epoppyjr);
-		enemies.add(epoppyjr);
-		Sparky sparky1 = new Sparky(495, 330);
-		sparky.add(sparky1);
-		enemies.add(sparky1);
-		SwordKnight swordknight1 = new SwordKnight(2162, 385);
-		swordknight.add(swordknight1);
-		enemies.add(swordknight1);
-		/*UFO eufo = new UFO(628, 420);
-		ufo.add(eufo);
-		enemies.add(eufo);*/
-		WaddleDee waddledee1 = new WaddleDee(774, 422);
-		waddledee.add(waddledee1);
-		enemies.add(waddledee1);
-		WaddleDoo waddledoo1 = new WaddleDoo(300, 420);
-		waddledoo.add(waddledoo1);
-		enemies.add(waddledoo1);
 		
 	}
 	
@@ -389,6 +360,7 @@ public class KirbyGame extends StateBasedGame {
 		ResourceManager.loadImage(BACKGROUND_IMG_RSC);
 		ResourceManager.loadImage(STARTUP_IMG_RSC);
 		ResourceManager.loadImage(GAMEOVER_IMG_RSC);
+		ResourceManager.loadImage(YOUWIN_IMG_RSC);
 		
 		ResourceManager.loadImage(KIRBY_LEFTIMG_RSC);
 		ResourceManager.loadImage(KIRBY_RIGHTIMG_RSC);

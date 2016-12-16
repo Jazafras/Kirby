@@ -95,7 +95,45 @@ class PlayingState extends BasicGameState{
 		container.setSoundOn(true);
 		KirbyGame bg = (KirbyGame)game;
 		
-		if (bg.level == 2) { 
+		if (bg.level == 1)
+			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
+		else if (bg.level == 2)
+			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains2.png"));
+		
+		if (bg.level == 1) {
+			bg.enemies.clear();
+			bg.kirby = new Kirby(90, 422);
+			Brontoburt brontoburt1 = new Brontoburt(600, 220);
+			bg.enemies.add(brontoburt1);
+			bg.brontoburt.add(brontoburt1);
+			Cappy cappy1 = new Cappy(1669, 360);
+			bg.cappy.add(cappy1);
+			bg.enemies.add(cappy1);
+			HotHead hothead1 = new HotHead(774, 422);
+			bg.hothead.add(hothead1);
+			bg.enemies.add(hothead1);
+			Noddy noddy1 = new Noddy(2066, 390);
+			bg.noddy.add(noddy1);
+			bg.enemies.add(noddy1);
+			//PoppyJr epoppyjr = new PoppyJr(1940, 320);
+
+			Sparky sparky1 = new Sparky(495, 330);
+			bg.sparky.add(sparky1);
+			bg.enemies.add(sparky1);
+			SwordKnight swordknight1 = new SwordKnight(2162, 385);
+			bg.swordknight.add(swordknight1);
+			bg.enemies.add(swordknight1);
+			/*UFO eufo = new UFO(628, 420);
+			ufo.add(eufo);
+			enemies.add(eufo);*/
+			WaddleDee waddledee1 = new WaddleDee(774, 422);
+			bg.waddledee.add(waddledee1);
+			bg.enemies.add(waddledee1);
+			WaddleDoo waddledoo1 = new WaddleDoo(300, 420);
+			bg.waddledoo.add(waddledoo1);
+			bg.enemies.add(waddledoo1);
+			
+		} else if (bg.level == 2) { 
 			bg.enemies.clear();
 			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains2.png"));
 			Brontoburt brontoburt1 = new Brontoburt(600, 220);
@@ -131,7 +169,7 @@ class PlayingState extends BasicGameState{
 		
 		bg.kirby.setPosition(90, 422);
 		
-		//ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
+		ResourceManager.getSound(KirbyGame.THE_SOUND_OF_DEATH).play();
 
 	}
 	
@@ -401,14 +439,6 @@ class PlayingState extends BasicGameState{
 		
 		//Hot Head movement updates
 		for (HotHead h : bg.hothead){
-			
-			Attack rem = null;
-			for (Attack a : bg.enemyAttacks) {
-				if (a.getAttackType() == Attack.SPITFIRE)
-					rem = a;
-			}
-			bg.enemyAttacks.remove(rem);
-			
 			if (h.getVelocity().getY() == 0 && h.getVelocity().getX() == 0){
 				h.setVelocity(new Vector(.07f, 0f)); //move right
 			}
@@ -601,6 +631,22 @@ class PlayingState extends BasicGameState{
 			}
 		}
 		*/
+		
+		boolean hothead = false;
+		for (MovingEnemy e : bg.enemies) {
+			if (e.getEnemyType() == MovingEnemy.HOTHEAD)
+				hothead = true;
+		}
+		if (!hothead) {
+			ArrayList<Attack> rem = new ArrayList<Attack>();
+			for (Attack a : bg.enemyAttacks) {
+				if (a.getAttackType() == Attack.SPITFIRE)
+					rem.add(a);
+			}
+			for (Attack a : rem)
+				bg.enemyAttacks.remove(a);
+		}
+		
 		//Sparky movement updates
 		for (Sparky s : bg.sparky){
 			if(bg.kirby.getPosition().getX() < s.getPosition().getX()){
@@ -952,8 +998,12 @@ class PlayingState extends BasicGameState{
 			if (input.isKeyDown(Input.KEY_UP)) {
 				if (bg.kirby.getX() >= (bg.map.getWidth()*32) - (32*3) && bg.kirby.getX() <= (bg.map.getWidth()*32) - (32*2) &&
 						bg.kirby.getY() >= 11*32 && bg.kirby.getY() <= 13*32) {
-					bg.level++;
-					bg.enterState(KirbyGame.TRANSITIONSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+					if (bg.level == 1) {
+						bg.level++;
+						bg.enterState(KirbyGame.TRANSITIONSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+					} else {
+						bg.enterState(KirbyGame.YOUWINSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+					}
 				} else {
 					if (bg.kirby.getType() == bg.kirby.NONE) {
 						bg.kirby.spit(bg);
@@ -985,13 +1035,12 @@ class PlayingState extends BasicGameState{
 
 	
 	private void checkLives(StateBasedGame game, KirbyGame bg) {
-		// Game over state if no lives left
-		/*if (lives <= 0) {
+		if (bg.kirby.health <= 0) {
 			//((GameOverState)game.getState(kirbyGame.GAMEOVERSTATE)).setUserScore(bounces);
 			bg.level = 1;
-			lives = 3;
+			bg.kirby.health = 5;
 			game.enterState(KirbyGame.GAMEOVERSTATE);
-		}*/
+		}
 	}
 	
 	private void loadTiles(KirbyGame bg) {

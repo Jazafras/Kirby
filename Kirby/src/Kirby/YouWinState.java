@@ -23,11 +23,10 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
  * 
  * Transitions To StartUpState
  */
-class GameOverState extends BasicGameState {
+class YouWinState extends BasicGameState {
 	
 
 	private int timer;
-	private int lastKnownTigresss; // the user's score, to be displayed, but not updated.
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -44,7 +43,7 @@ class GameOverState extends BasicGameState {
 			Graphics g) throws SlickException {
 
 		KirbyGame bg = (KirbyGame)game;
-		g.drawImage(ResourceManager.getImage(KirbyGame.GAMEOVER_IMG_RSC),
+		g.drawImage(ResourceManager.getImage(KirbyGame.YOUWIN_IMG_RSC),
 				0, 0);	
 	}
 
@@ -65,7 +64,7 @@ class GameOverState extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return KirbyGame.GAMEOVERSTATE;
+		return KirbyGame.YOUWINSTATE;
 	}
 	
 }
