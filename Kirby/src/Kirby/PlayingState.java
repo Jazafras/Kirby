@@ -95,13 +95,17 @@ class PlayingState extends BasicGameState{
 		container.setSoundOn(true);
 		KirbyGame bg = (KirbyGame)game;
 		
+		bg.enemies.clear();
+		bg.enemyAttacks.clear();
+		bg.kirbyAttacks.clear();
+		
 		if (bg.level == 1)
 			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains.png"));
 		else if (bg.level == 2)
 			background = new Image("Kirby/resources/" + bg.map.getMapProperty("background", "grassy_mountains2.png"));
 		
 		if (bg.level == 1) {
-			bg.enemies.clear();
+			
 			bg.kirby = new Kirby(90, 422);
 			Brontoburt brontoburt1 = new Brontoburt(600, 220);
 			bg.enemies.add(brontoburt1);
@@ -436,6 +440,17 @@ class PlayingState extends BasicGameState{
 		
 		//Hot Head movement updates
 		for (HotHead h : bg.hothead){
+			
+			if (h.attackTime <= 0) {
+				ArrayList<Attack> rem = new ArrayList<Attack>();
+				for (Attack a : bg.enemyAttacks) {
+					if (a.getAttackType() == Attack.SPITFIRE)
+						rem.add(a);
+				}
+				for (Attack a : rem)
+					bg.enemyAttacks.remove(a);
+			}
+			
 			if (h.getVelocity().getY() == 0 && h.getVelocity().getX() == 0){
 				h.setVelocity(new Vector(.07f, 0f)); //move right
 			}
