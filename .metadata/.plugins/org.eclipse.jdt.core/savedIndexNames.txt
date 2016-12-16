@@ -1,0 +1,7 @@
+INDEX VERSION 1.129+C:\Users\jasmine\Documents\college\senior\CS447_Computer_game_design\kirby\.metadata\.plugins\org.eclipse.jdt.core
+2520387277.index
+3922975648.index
+2330248317.index
+2478937133.index
+3248368291.index
+2184578533.index

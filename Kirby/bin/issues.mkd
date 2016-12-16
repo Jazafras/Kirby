@@ -1,0 +1,87 @@
+####### Resolved Issues #######
+
+- Kelly
+	- **[1]** basic tiled map render
+	- **[2]** implement basic kirby movement for testing map
+	- **[3]** make screen scroll along with kirby
+	- **[4]** paralax scrolling for the background
+	- **[5]** create actual maps, prep for collision detection work
+	- **[6]** make kirby able to jump
+	- **[7]** basic collision detection between kirby and ground blocks
+	- **[8]** kirby flying
+	- **[9]** fixed rendering issue on waddle dee (need to implement for the rest of enemies)
+	- **[10]** fixed rendering issue on all enemies
+	- **[11]** got kirby to suck an enemy good
+	- **[12]** got kirby to spit a shining star after a good suck
+	- **[13]** started changing kirby's animations still need to get his flying one
+	- **[14]** fixed stuff
+	- **[15]** created kirby's fire state
+	- **[16]** created kirby's twister state
+	- **[17]** created kirby's sparky state and sword state
+	- **[18]** created kirby's beam state
+	- **[19]** created kirby's hammer state
+	- **[20]** created kirby's fighter state
+	- **[21]** created kirby's cutter state (me)
+	- **[22]** created kirby's bomb state
+
+- Priya
+	- **[1]** Socket base program
+	- **[2]** Client
+	- **[3]** Server
+	- **[4]** Coordination from Client to Server
+	- **[5]** WaddleDoo attacks
+	- **[6]** Bonkers attacks
+	- **[7]** Knuckle Joe attacks
+	- **[8]** Hot Head attacks
+	
+- Jasmine
+	- **[1]**  Base skeleton for enemies
+	- **[2]**  Infrastructure for Kirby state images
+	- **[3]**  WaddleDee movement
+	- **[4]**  Brontoburt movement
+	- **[5]**  Twister movement
+	- **[6]**  Scarfy movement
+	- **[7]**  WaddleDoo movement
+	- **[8]**  Cappy movement
+	- **[9]**  Noddy movement
+	- **[10]** Poppy Jr. movement
+	- **[11]** Hot Head movement
+	- **[12]** Sir Kibble movement
+	- **[13]** Knuckle Joe movement
+	- **[14]** Bonkers movement
+	- **[15]** Sword Knight movement
+	- **[16]** Sparky attacks
+	- **[17]** Twister attacks
+	- **[18]** Sword Knight attacks
+	- **[19]** Sir Kibble attacks
+	
+- Audrey
+
+####### Open Issues #######
+
+- Priya
+
+
+- Jasmine
+	- **[20]** Poppy Jr. attacks
+	- **[?]** UFO movement
+	- **[?]** UFO attacks
+	- **[?]** Bonkers attacks
+	- **[?]** Hot Head attacks
+	- **[?]** Finetune Noddy jumping
+	- **[?]** Finetune WaddleDoo jumping
+	- **[?]** organize enemy movement code better
+
+- Audrey
+	- **[1]** Skeleton for kirby
+
+- Kelly
+	- **[9]** - start kirby sucking enemies
+	- **[?]** - fix Poppy Jr's image rendering alignment
+	- **[?]** - fix Bonkers' image rendering alignment
+	- **[?]** - fine tune collisions
+	- **[?]** - finish drawing level, make tunnels ?
+	
+
+- Undecided
+	- **[6]** level 1 design
