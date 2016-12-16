@@ -4432,7 +4432,7 @@
   </tile>
   <tile id="375">
    <properties>
-    <property name="tileType" value="air"/>
+    <property name="tileType" value="door"/>
    </properties>
   </tile>
   <tile id="376">
@@ -4747,7 +4747,7 @@
   </tile>
   <tile id="438">
    <properties>
-    <property name="tileType" value="air"/>
+    <property name="tileType" value="door"/>
    </properties>
   </tile>
   <tile id="439">
@@ -5708,7 +5708,7 @@
  </tileset>
  <layer name="TileMap" width="75" height="20" offsetx="16" offsety="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2UzU7DMAyA0zbPgpDoxGmbNPEevMEuOeyE4KGQQBxA4oX4ObBy2ZB2YVZryXWdxmm3AmOHT1kyJ7G/eCtSYwrC8oiXwsNP5/UbkRwdncV5W6aH42qItz+E3pJ+K/ty95dd+fx0rel6yw2ZbwZwFXPmRaaL27Dz+f/ILlw9bnki9z0nu3GlrTHoQHnO1Or6KcbVF7sbXE2rtaus6aorE9vPGe4LucJ+oq669BP3AszYmeDqISvv3Ierie22HxyBLxxD/cRdcU+h+7gXcMfX1pUrcISu1jtyBTUG+8sY8769szBNV5Q2VxuPK95jGlfYXzDnrsANuvqsRmDqya/Wq6ZZI3WFUGfc00lacs76OcYVonpHT87ohY6SK+qIssrqgCfICee3SVkjj1tldVcIj4H96ApYkLO4K1iDOj8SP28K8F14LjPbHGcsZ8kRMrZ18P1wjrUuhFjJFfTXWNhPaXPBY/vwmsTz0gNtjUPUPgRnArln3fc9zOeBPVK8Zs88IrbL+TFckhEdOHIfrtGcHXPmSF5SfM7WXdqsJRc+5+wcrVt6/ohxb+tzzG3ERn7vaeUIccJnx2J88aG1tnO63K1Bk58T7ttHLv+NO3tEyzeGED0UcBcAAA==
+   H4sIAAAAAAAAA+2UzUoDMRCAs7t5FhHc4g+0C8X38A16yaEn0YcSKoIVfCF/Du0K0gq9mGF3YHY2aX7arlp7+IiJk8zMt6NlKkRJmB+wUlr46bp+IyZHB2dh3ubp/rjq4tvvw2yZ/lZ25e4vu7L5ienpUXOjuSVnqw5chbx5mfnFrdj7/P9IjKsznftcc6H51Pup5onke06248q3R6cDz3cK6TdPIa7GOvekBl0VdT3XWdtVLAO5mTO853KF80RdxczTlyFPLtuuHrIq5y5cDWTcfXAEvnB1zRN3xT258g3ZfXDHXS1rV+AIXS235Ap6dM6XEOJd5yxF2xVlnauVxRWfMR9XOF+w567ADbr6qFegsNTXmFXR7pG6Qqgz7ukorThl8xziCvH6jpaa0RVdwdWMuaKOKIusCXiCmnB/l1Q98rhF1nSF8Bi4j66AMXmLu4Iz6HOW2HnzAL8Lr2Uo2yu46smmKxt92QS/H+6x17Eh1uQK5qtvuE9Z54LHbsJrEs7LBvj22EXvXXBiILec234P+5Hjjine584oIDbm/RCuyIoOFMmHZ7RmxZwpUpcpPmfnKm33kht+ztk7vm7p+z3GvWzusbYeW3ne49oRogw/KxZji3edrXsnJrcPPvUpQ75d1PLfmMgDvnwD7sxuJXAXAAA=
   </data>
  </layer>
 </map>

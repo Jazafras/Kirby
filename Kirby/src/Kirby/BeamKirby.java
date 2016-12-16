@@ -28,7 +28,6 @@ public class BeamKirby extends Kirby {
 	public BeamKirby(float x, float y) {
 		super(x, y);
 		super.setFacingImages(waddleKirbyImages);
-		System.out.println("Beamkirby");
 		super.setCurImage(waddleKirbyImages[super.getFacing()]);
 		super.setPosition(super.getX(), super.getY() - 10);
 		beamTime = 0;
@@ -43,17 +42,23 @@ public class BeamKirby extends Kirby {
 			setCurImage(waddleKirbyImages[BEAM_ATTACK + super.retFacing()]);
 			addImageWithBoundingBox(ResourceManager
 					.getImage(getCurImage()));
+			
 		} else if (!beamState && getCurImage() == waddleKirbyImages[BEAM_ATTACK + super.retFacing()]){
 			removeImage(ResourceManager.getImage(getCurImage()));
 			setCurImage(waddleKirbyImages[super.getFacing()]);
 			addImageWithBoundingBox(ResourceManager
 					.getImage(getCurImage()));
 		}
-		if (beamState)
+		int add = 0;
+		if (beamState) {
 			i = new Image(waddleKirbyImages[BEAM_ATTACK + retFacing()]);
-		else
+			if (retFacing() == 1) {
+				add = -40;
+			}
+		} else {
 			i = new Image(waddleKirbyImages[super.getFacing()]);
-		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
+		}
+		i.draw(super.getX() - 4 - offsetX + add, super.getY() - 4 - offsetY);
 	}
 	
 	public void attack(KirbyGame bg) {

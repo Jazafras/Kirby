@@ -56,7 +56,7 @@ import jig.Vector;
 				setVelocity(new Vector(-.07f, 0f)); //move left
 			}
 			if (sideCollision(tileMap)) {
-				System.out.println("waddledee wall collision");
+
 				//what am i doing why isnt the tilemap working :(
 				/*if (getVelocity().getX() < 0) {
 					System.out.println("left waddledee collision");
