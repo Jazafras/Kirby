@@ -21,6 +21,7 @@
 	- **[18]** created kirby's beam state
 	- **[19]** created kirby's hammer state
 	- **[20]** created kirby's fighter state
+	- **[21]** created kirby's cutter state (me)
 
 - Priya
 	- **[1]** Socket base program
