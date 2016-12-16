@@ -12,10 +12,6 @@ import jig.Vector;
 	public static final String[] facingImages = 
 		{
 			KirbyGame.RIGHTFIRE_ATTACK,
-			KirbyGame.LEFTFIRE_ATTACK,
-			KirbyGame.RIGHTFIRE_ATTACK,
-			KirbyGame.LEFTFIRE_ATTACK,
-			KirbyGame.RIGHTFIRE_ATTACK,
 			KirbyGame.LEFTFIRE_ATTACK
 		};
 

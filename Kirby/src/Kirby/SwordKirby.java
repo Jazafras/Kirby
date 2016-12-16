@@ -1,0 +1,83 @@
+package Kirby;
+
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import jig.ResourceManager;
+
+public class SwordKirby extends Kirby {
+
+	public static final String[] swordKirbyImages = 
+		{
+			KirbyGame.KIRBY_RIGHTSWORD,
+			KirbyGame.KIRBY_LEFTSWORD,
+			KirbyGame.KIRBY_RIGHTSWORD_SUCC,
+			KirbyGame.KIRBY_LEFTSWORD_SUCC,
+			KirbyGame.KIRBY_RIGHTSWORD_FLY,
+			KirbyGame.KIRBY_LEFTSWORD_FLY,
+			KirbyGame.KIRBY_RIGHTSWORD_ATTACK,
+			KirbyGame.KIRBY_LEFTSWORD_ATTACK,
+		};
+	
+	public static final int SWORD_ATTACK = 6;
+	public static final int SWORD_TIME = 10;
+	private int swordTime;
+	private boolean swordState;
+	
+	public SwordKirby(float x, float y) {
+		super(x, y);
+		super.setFacingImages(swordKirbyImages);
+		System.out.println("Swordkirby");
+		super.setCurImage(swordKirbyImages[super.getFacing()]);
+		super.setPosition(super.getX(), super.getY() - 10);
+		swordTime = 0;
+		swordState = false;
+	}
+	
+	@Override
+	public void render(Graphics g, float offsetX, float offsetY) throws SlickException {
+		Image i;
+		if (swordState && getCurImage() != swordKirbyImages[SWORD_ATTACK + super.retFacing()]) {
+			removeImage(ResourceManager.getImage(getCurImage()));
+			setCurImage(swordKirbyImages[SWORD_ATTACK + super.retFacing()]);
+			addImageWithBoundingBox(ResourceManager
+					.getImage(getCurImage()));
+		} else if (!swordState && getCurImage() == swordKirbyImages[SWORD_ATTACK + super.retFacing()]){
+			removeImage(ResourceManager.getImage(getCurImage()));
+			setCurImage(swordKirbyImages[super.getFacing()]);
+			addImageWithBoundingBox(ResourceManager
+					.getImage(getCurImage()));
+		}
+		if (swordState)
+			i = new Image(swordKirbyImages[SWORD_ATTACK + retFacing()]);
+		else
+			i = new Image(swordKirbyImages[super.getFacing()]);
+		i.draw(super.getX() - 4 - offsetX, super.getY() - 4 - offsetY);
+	}
+	
+	public void attack(KirbyGame bg) {
+		swordTime = SWORD_TIME;
+		swordState = true;
+	}
+	
+	@Override
+	public void update(final int delta) {
+		translate(super.getVelocity().scale(delta));
+		if (swordTime > 0) {
+			swordTime--;
+		} else {
+			swordState = false;
+		}
+	}
+	
+	public boolean getSwordState() {
+		return swordState;
+	}
+
+	@Override
+	public int getType() {
+		return KSWORD;
+	}
+	
+}

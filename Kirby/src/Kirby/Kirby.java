@@ -23,11 +23,17 @@ import jig.Vector;
 	 * left attack
 	 */
 	 
+	 // kirby clone ability types
 	 public static final int NONE = 0;
 	 public static final int FIRE = 1;
-	 public static final int KTWISTER = 2;
+	 public static final int KTWISTER = 2; 
 	 public static final int KSPARKY = 3;
+	 public static final int KSWORD = 4;
+	 public static final int KBEAM = 5;
+	 public static final int KHAMMER = 6;
+	 public static final int KFIGHTER = 7;
 	 
+	 // kirby states for images
 	 public static final int NORMAL = 0;
 	 public static final int SUCKING = 1;
 	 public static final int FLYING = 2;
@@ -172,6 +178,16 @@ import jig.Vector;
 			} else if (enemyType == SPARKY) {
 				System.out.println("sparky");
 				bg.kirby = new SparkyKirby(xPos, yPos);
+			} else if (enemyType == SWORDKNIGHT) {
+				System.out.println("swordnight");
+				bg.kirby = new SwordKirby(xPos, yPos);
+			} else if (enemyType == WADDLEDOO) {
+				System.out.println("waddledoo");
+				bg.kirby = new BeamKirby(xPos, yPos);
+			} else if (enemyType == BONKERS) {
+				bg.kirby = new HammerKirby(xPos, yPos);
+			} else if (enemyType == KNUCKLEJOE) {
+				bg.kirby = new FighterKirby(xPos, yPos);
 			}
 			// PUT KIRBY STATE CHANGE SHIT HERE
 		}
@@ -223,30 +239,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTBOOMERANG_ATTACK,
 		};
 	
-	public static final String[] fighterKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTFIGHT,
-			KirbyGame.KIRBY_LEFTFIGHT,
-			KirbyGame.KIRBY_RIGHTFIGHT_SUCC,
-			KirbyGame.KIRBY_LEFTFIGHT_SUCC,
-			KirbyGame.KIRBY_RIGHTFIGHT_FLY,
-			KirbyGame.KIRBY_LEFTFIGHT_FLY,
-			KirbyGame.KIRBY_RIGHTFIGHT_ATTACK,
-			KirbyGame.KIRBY_LEFTFIGHT_ATTACK,
-		};
-	
-	public static final String[] hammerKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTHAMMER,
-			KirbyGame.KIRBY_LEFTHAMMER,
-			KirbyGame.KIRBY_RIGHTHAMMER_SUCC,
-			KirbyGame.KIRBY_LEFTHAMMER_SUCC,
-			KirbyGame.KIRBY_RIGHTHAMMER_FLY,
-			KirbyGame.KIRBY_LEFTHAMMER_FLY,
-			KirbyGame.KIRBY_RIGHTHAMMER_ATTACK,
-			KirbyGame.KIRBY_LEFTHAMMER_ATTACK,
-		};
-	
 	//Sleepy Kirby is a special case with only one image
 	//Kirby loses if he switches to this state
 	public static final String[] noddyKirbyImages = 
@@ -266,18 +258,6 @@ import jig.Vector;
 			KirbyGame.KIRBY_LEFTPOPPY_ATTACK,
 		};
 	
-	public static final String[] swordKirbyImages = 
-		{
-			KirbyGame.KIRBY_RIGHTSWORD,
-			KirbyGame.KIRBY_LEFTSWORD,
-			KirbyGame.KIRBY_RIGHTSWORD_SUCC,
-			KirbyGame.KIRBY_LEFTSWORD_SUCC,
-			KirbyGame.KIRBY_RIGHTSWORD_FLY,
-			KirbyGame.KIRBY_LEFTSWORD_FLY,
-			KirbyGame.KIRBY_RIGHTSWORD_ATTACK,
-			KirbyGame.KIRBY_LEFTSWORD_ATTACK,
-		};
-	
 	//UFO is a special case with different controls
 	//Kirby cannot absorb other enemies in this state, only attack
 	//if Kirby wants to switch out of UFO state, the player must drop the state first
@@ -291,18 +271,6 @@ import jig.Vector;
 			//KirbyGame.KIRBY_LEFTSWORD_FLY,
 			KirbyGame.KIRBY_RIGHTUFO_ATTACK,
 			KirbyGame.KIRBY_LEFTUFO_ATTACK,
-		};
-	
-	public static final String[] waddleKirbyImages = 
-		{
-			KirbyGame.KIRBYWADDLE_RIGHT,
-			KirbyGame.KIRBYWADDLE_LEFT,
-			KirbyGame.KIRBYWADDLE_RIGHT_SUCC,
-			KirbyGame.KIRBYWADDLE_LEFT_SUCC,
-			KirbyGame.KIRBYWADDLE_RIGHT_FLY,
-			KirbyGame.KIRBYWADDLE_LEFT_FLY,
-			KirbyGame.KIRBYWADDLE_RIGHT_ATTACK,
-			KirbyGame.KIRBYWADDLE_LEFT_ATTACK,
 		};
 
 }
