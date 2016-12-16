@@ -19,6 +19,7 @@
 	- **[16]** created kirby's twister state
 	- **[17]** created kirby's sparky state and sword state
 	- **[18]** created kirby's beam state
+	- **[19]** created kirby's hammer state
 
 - Priya
 
