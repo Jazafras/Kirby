@@ -43,6 +43,7 @@ class PlayingState extends BasicGameState{
 	private int twisterDistance = 80;
 	private int swordDistance = 100;
 	private int kibbleDistance = 40;
+	private int poppyDistance = 40;
 	Random rand = new Random();
 	
 	public static final int GROUND = 0;
@@ -491,9 +492,26 @@ class PlayingState extends BasicGameState{
 			}
 			if(bg.kirby.getPosition().getX() < s.getPosition().getX()){
 				s.setFacing(LEFT);
+				if(Math.abs(bg.kirby.getPosition().getX() - s.getPosition().getX()) < poppyDistance){
+					s.attack(bg);
+				}
 			}
 			else {
 				s.setFacing(RIGHT);
+				if(Math.abs(bg.kirby.getPosition().getX() - s.getPosition().getX()) < poppyDistance){
+					s.attack(bg);
+					//System.out.println("Bomb velocity: ("+s.b.getVelocity().getX()+","+s.b.getVelocity().getY()+")");
+				}
+			}
+			if (s.b != null) {
+				s.b.applyGravity(gravity * delta, tileMap);
+		        float x = s.b.getX();
+		        float y = s.b.getY();
+				if (s.b.isOnGround(tileMap)) {
+					s.b = null;
+					bg.kirbyAttacks.clear();
+					bg.kirbyAttacks.add(new Explosion(x, y, 1));
+				}
 			}
 		}
 		
@@ -560,6 +578,7 @@ class PlayingState extends BasicGameState{
 				Collision c = s.b.collides(bg.kirby);
 				//kirby collides with boomerang
 				if (c != null && s.attackTime < CutterKirby.CUTTER_TIME - 5) {
+					bg.kirby.health--;
 					bg.enemyAttacks.remove(s.b);
 				}
 				//kirby does not collide with boomerang
@@ -732,8 +751,19 @@ class PlayingState extends BasicGameState{
 				}
 			}
 		}
+		for (Attack a : bg.enemyAttacks) {
+			if (a.getAttackType() == Attack.EXPLOSION) {
+				Explosion e = (Explosion) a;
+				e.bombtime--;
+				if (e.bombtime <= 0) {
+
+					toRem = a;
+				}
+			}
+		}
 		if (toRem != null) {
 			bg.kirbyAttacks.clear();
+			bg.enemyAttacks.clear();
 		}
 		
 		for (Attack a : bg.kirbyAttacks) {
