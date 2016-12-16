@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -235,6 +236,7 @@ class PlayingState extends BasicGameState{
 		if (hurt != null)
 			hurt.render(g, xOffset, yOffset);
 		
+		g.setColor(Color.red);
 		g.drawString("Health: " + bg.kirby.health, 10, 50);
 		g.drawString("Level: " + bg.level, 10, 30);
 	}
